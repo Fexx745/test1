@@ -1,0 +1,151 @@
+:root {
+    --bs-blue: #0d6efd;
+    --bs-indigo: #6610f2;
+    --bs-purple: #6f42c1;
+    --bs-pink: #d63384;
+    --bs-red: #dc3545;
+    --bs-orange: #fd7e14;
+    --bs-yellow: #ffc107;
+    --bs-green: #198754;
+    --bs-teal: #20c997;
+    --bs-cyan: #0dcaf0;
+    --bs-black: #000;
+    --bs-white: #fff;
+    --bs-gray: #6c757d;
+    --bs-gray-dark: #343a40;
+    --bs-gray-100: #f8f9fa;
+    --bs-gray-200: #e9ecef;
+    --bs-gray-300: #dee2e6;
+    --bs-gray-400: #ced4da;
+    --bs-gray-500: #adb5bd;
+    --bs-gray-600: #6c757d;
+    --bs-gray-700: #495057;
+    --bs-gray-800: #343a40;
+    --bs-gray-900: #212529;
+    --bs-primary: #0d6efd;
+    --bs-secondary: #6c757d;
+    --bs-success: #198754;
+    --bs-info: #0dcaf0;
+    --bs-warning: #ffc107;
+    --bs-danger: #dc3545;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+    --bs-link-color: #0d6efd;
+    --bs-link-hover-color: #0a58ca;
+    --bs-code-color: #d63384;
+    --bs-highlight-bg: #fff3cd;
+  }
+
+  
+  @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+  
+  * {
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: 'K2D', sans-serif;
+  }
+
+
+.card-head {
+    display: flex;
+    position: relative;
+    height: 70px;
+
+    .card-icons {
+        width: 70px;
+        height: 100%;
+        background: var(--bs-cyan);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+
+        & i.bx.bx-menu {
+            font-size: 50px; /* ปรับขนาดตามที่ต้องการ */
+        }
+    }
+
+    .card-details {
+        width: 100%;
+        border-bottom: 5px solid var(--bs-cyan);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 0 0 30px;
+        background: var(--bs-gray-200);
+    }
+
+}
+
+.card-head-2 {
+    display: flex;
+    position: relative;
+    height: 70px;
+
+    .card-icons-2 {
+        width: 70px;
+        height: 100%;
+        background: var(--bs-warning);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+
+        & i {
+            font-size: 50px; /* ปรับขนาดตามที่ต้องการ */
+        }
+    }
+
+    .card-details-2 {
+        width: 100%;
+        border-bottom: 5px solid var(--bs-warning);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 0 0 30px;
+        background: var(--bs-gray-200);
+    }
+
+}
+
+.card-body-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: var(--bs-gray-100);
+}
+
+.card-body-details > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5px;
+    width: 30%; /* ปรับความกว้างตามความต้องการ */
+    margin-bottom: 10px; /* ปรับตามความต้องการ */
+
+    & i {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column; 
+        font-size: 100px;
+        color: var(--bs-gray-800);
+    }
+    & i:hover {
+        color: var(--bs-gray-600);
+    }
+    & a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-decoration: none;
+        color: var(--bs-gray-800);
+    }
+
+    & a:hover {
+        color: var(--bs-gray-600);
+        transition: .2s;
+    }
+}

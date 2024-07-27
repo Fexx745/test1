@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: 'K2D', sans-serif;
+}
+
+:root {
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink: #d63384;
+  --bs-red: #dc3545;
+  --bs-orange: #fd7e14;
+  --bs-yellow: #ffc107;
+  --bs-green: #198754;
+  --bs-teal: #20c997;
+  --bs-cyan: #0dcaf0;
+  --bs-black: #000;
+  --bs-white: #fff;
+  --bs-gray: #6c757d;
+  --bs-gray-dark: #343a40;
+  --bs-gray-100: #f8f9fa;
+  --bs-gray-200: #e9ecef;
+  --bs-gray-300: #dee2e6;
+  --bs-gray-400: #ced4da;
+  --bs-gray-500: #adb5bd;
+  --bs-gray-600: #6c757d;
+  --bs-gray-700: #495057;
+  --bs-gray-800: #343a40;
+  --bs-gray-900: #212529;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
+  --bs-success: #198754;
+  --bs-info: #0dcaf0;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+  --bs-link-color: #0d6efd;
+  --bs-link-hover-color: #0a58ca;
+  --bs-code-color: #f05da6;
+  --bs-highlight-bg: #fff3cd;
+}
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 90px;
+  position: fixed;
+  z-index: 100;
+  background-color: #fff;
+  box-shadow: 0 0 40px rgb(0, 0, 0, 0.2);
+  top: 0;
+
+  .container-nav {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    & .logo {
+      height: auto;
+      padding: 1rem;
+      margin-top: 10px 0 10px 10px;
+
+      & img {
+        width: 180px;
+        height: 90px;
+        object-fit: contain;
+      }
+    }
+
+    & .search {
+      width: 600px;
+      height: 60px;
+
+      & i {
+        font-size: 35px;
+      }
+    }
+
+    & .authme-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: auto;
+      padding: 3rem;
+      position: relative;
+      margin-right: 40px;
+
+      .logo-login {
+        & a {
+          text-decoration: none;
+          color: #000000;
+          margin: 5px;
+        }
+        & i {
+          font-size: 40px;
+        }
+      }
+      .authme {
+        display: flex;
+        flex-direction: column;
+
+        .login {
+          font-size: 15px;
+          margin-top: 10px;
+          width: 100px;
+          & a {
+            text-decoration: none;
+            color: #727272;
+          }
+        }
+
+        .reg {
+          font-size: 17px;
+          margin-top: -20px;
+          & a {
+            text-decoration: none;
+            color: #000000;
+          }
+        }
+      }
+    }
+
+    & .cart-form {
+      display: flex;
+      width: 200px;
+      height: auto;
+      padding: 1.5rem;
+
+      .logo-cart {
+        position: relative;
+      }
+      .cart-icon {
+        position: absolute;
+        top: 13px;
+        left: -55px;
+        font-size: 30px;
+        width: 45px; /* ขนาดของไอคอน */
+        height: 45px; /* ขนาดของไอคอน */
+        border-radius: 50%; /* ทำให้มีรูปร่างเป็นวงกลม */
+        background-color: #9e9e9e; /* สีพื้นหลัง */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .cart-amount {
+        position: absolute;
+        background-color: #db4b4b;
+        width: 23px;
+        height: 23px;
+        border-radius: 50%;
+        top: -7px;
+        right: -7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & b {
+          position: absolute;
+          color: #fff;
+          font-size: 17px;
+        }
+      }
+
+      .cart {
+        display: flex;
+        flex-direction: column;
+
+        .cart-product {
+          font-size: 15px;
+          margin-top: 10px;
+          & a {
+            text-decoration: none;
+            color: #727272;
+          }
+        }
+
+        .cart-price {
+          font-size: 17px;
+          margin-top: -20px;
+          & a {
+            text-decoration: none;
+            color: #000000;
+          }
+        }
+      }
+    }
+
+    .dropdown {
+      margin-left: -60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      #homepage {
+        width: 110px;
+        
+        & a {
+          text-decoration: none;
+          color: #fff;
+        }
+      }
+
+    }
+    
+  } /* container-nav */
+}
+
+@media screen and (max-width: 768px) {
+
+  nav {
+    width: 100%;
+  }
+  
+}
