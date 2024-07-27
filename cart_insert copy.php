@@ -16,7 +16,7 @@ $sql_insert_order = "INSERT INTO tb_order(total_price, order_status, member_id)
                     VALUES('" . $_SESSION["sum_price"] . "', '1', '$memberID')";
 mysqli_query($conn, $sql_insert_order);
 $orderID = mysqli_insert_id($conn);
-$_SESSION["order_id"] = $orderIDs;
+$_SESSION["order_id"] = $orderID;
 
 // เพิ่มข้อมูลการชำระเงิน
 $slip_image = $_FILES['slip_image']['name']; // ชื่อไฟล์สลิป
