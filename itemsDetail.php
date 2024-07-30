@@ -60,7 +60,7 @@ include('condb.php');
                             <p>ชิ้น</p>
                         </div>
                         <div class="btn-control-buy">
-                            <button class="btn btn-cart">เพิ่มใส่ตกร้า</button>
+                            <button class="btn btn-cart">เพิ่มใส่ตะกร้า</button>
                             <button class="btn btn-buy">ซื้อสินค้า</button>
                         </div>
                     </div>

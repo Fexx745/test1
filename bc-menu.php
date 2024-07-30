@@ -5,7 +5,7 @@
         $result = mysqli_query($conn, $sql);
         ?>
         <div class="bc-menu-category">
-            <i class='bx bx-category'></i>
+        <i class='bx bxs-category-alt' ></i>
             <h2>หมวดหมู่สินค้า</h2>
         </div>
         <ul>
