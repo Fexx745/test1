@@ -16,149 +16,44 @@ $row = mysqli_fetch_array($result);
 </head>
 
 <body>
-    
-    <nav>
-        <div class="container-nav">
-            <div class="logo">
-                <a href="index.php"><img src="assets/images/other/logo.png" alt="" width="100%"></a>
-            </div> <!-- logo -->
-            <div class="search">
-                <form action="index_search.php" method="POST" class="p-3"
-                    style="position: relative; margin-top: -15px;">
-                    <div class="input-group">
 
-                        <div class="form-floating">
-                            <input type="text" class="form-control" name="search" id="search"
-                                placeholder="ค้นหาสินค้า..." autocomplete="off" style="border: none; border-bottom: 1px solid grey;" required>
-                            <label for="floatingInputGroup1">ค้นหาสินค้า ...</label>
-                        </div>
-                        <button type="submit" name="submit" class="btn"
-                            style="background: #198754; color: #fff; width: 50px; display: flex; justify-content: center; align-items: center;">
-                            <i class='bx bx-search-alt'></i>
-                        </button>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="list-group" style="position: absolute; width: 490px;" id="show-list"></div>
-                    </div>
+    <header class="p-3 mb-3 border-bottom">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
+                </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
                 </form>
 
-            </div>
-
-
-            <div class="authme-form">
-                <div class="logo-login">
-                    <a href="index.php"><i class='bx bxs-user-circle'></i></a>
-                    <!-- <a href="index.php"><i class='bx bxs-user-circle'
-                            style="position: absolute; top: 70px; left: 15px; font-size: 30px; color: #363949;"></i></a> -->
-                </div>
-                <div class="authme">
-                    <?php
-                    if (session_status() === PHP_SESSION_NONE) {
-                        session_start();
-                    }
-                    if (isset($_SESSION['username'])) {
-                        // เข้าสู่ระบบแล้ว
-                        ?>
-                        <div class="login">
-                            <p>ยินดีต้อนรับ
-                                <?php echo $_SESSION['username']; ?>
-                            </p>
-                        </div>
-                        <?php
-                    } else {
-                        // ยังไม่ได้เข้าสู่ระบบ
-                        ?>
-                        <div class="login">
-                            <a href="login.php">
-                                <p>เข้าสู่ระบบ</p>
-                            </a>
-                        </div>
-                        <div class="reg">
-                            <a href="login.php">
-                                <p>หน้าสมาชิก</p>
-                            </a>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                </div>
-
-            </div> <!-- authme-form -->
-
-            <div class="cart-form">
-                <div class="logo-cart">
-                    <div class="cart-icon">
-                        <div class="cart-amount">
-                            <b><?php
-                            if (isset($_SESSION['inPro']) && !empty($_SESSION['inPro'])){
-                                echo $_SESSION['inPro']; 
-                            } else {
-                                echo "0";
-                            }
-                            ?></b>
-                        </div>
-                        <i class='bx bxs-cart' style='color: #363949;'></i>
-                    </div>
-                </div>
-                <div class="cart">
-                    <div class="cart-product">
-                        <a href="cart.php">
-                            <p>ตะกร้าสินค้า</p>
-                        </a>
-                    </div>
-                    <div class="cart-price">
-                        <a href="cart.php">
-                            <p>
-                                <div class="cart-price">
-                                    <?php
-                                    if (isset($_SESSION["sum_price"]) && !empty($_SESSION["sum_price"])) {
-                                        echo number_format($_SESSION["sum_price"], 2) . " ฿";
-                                    } else {
-                                        echo "0.00 ฿";
-                                    }
-                                    ?>
-                                </div>
-
-                            </p>
-                        </a>
-                    </div>
-
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
                 </div>
             </div>
-
-            <div class="dropdown">
-                <button id="homepage" class="btn btn-secondary rounded-5" type="button">
-                    <a href="index.php"><i class='bx bx-home'></i> หน้าหลัก</a>
-                </button>
-                &nbsp;&nbsp;&nbsp;
-                <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php
-                    // ตรวจสอบว่าเซสชันยังไม่ได้เปิดหรือไม่
-                    if (session_status() === PHP_SESSION_NONE) {
-                        session_start();
-                    }
-                    if (isset($_SESSION['username'])) {
-                        echo "<i class='bx bx-caret-down'></i>";
-                    } else {
-                        echo "" . " " . "<i class='bx bxs-chevron-down'></i>"; // ถ้ายังไม่มี session 'username' ให้แสดงข้อความ "เข้าสู่ระบบ"
-                    }
-                    ?>
-                </button>
-                <ul class="dropdown-menu">
-                    <?php
-                    if (isset($_SESSION['username'])) {
-                        // echo '<li><a class="dropdown-item" href="Edit-Profile.php"><i class="bx bx-edit-alt"></i>&nbsp;แก้ไขข้อมูลส่วนตัว</a></li>';
-                        echo '<li><a class="dropdown-item" href="Logout.php"><i class="bx bx-log-out"></i>&nbsp;ออกจากระบบ</a></li>';
-                    } else {
-                        echo "<li><a class='dropdown-item' href='Logout.php'><i class='bx bx-log-in' ></i>&nbsp;เข้าสู่ระบบ</a></li>";
-                    }
-                    ?>
-                </ul>
-            </div> <!-- dropdown -->
         </div>
-    </nav>
-
-
+    </header>
 </body>
 
 </html>

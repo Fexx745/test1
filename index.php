@@ -21,8 +21,6 @@ include ('condb.php');
         <?php include ('index_slideimg.php'); ?>
 
         <div class="row">
-
-
             <div class="col-md-12">
                 <div class="category-box">
                     <div class="cate1">
