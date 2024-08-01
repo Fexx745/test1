@@ -3,11 +3,11 @@
 
 
     <div class="bc-menu-profile">
-        <i class='bx bx-category'></i>
+        <i class='bx bxs-user-detail' ></i>
         <h2>โปรไฟล์</h2>
     </div>
     <ul style="margin-bottom: 20px;">
-        <li><a href="edit-profile.php?id=<?php echo $_SESSION['user_id']; ?>"><i class='bx bxs-user-circle' ></i>&nbsp;ตั้งค่าผู้ใช้</a></li>
+        <li><a href=""><i class='bx bxs-user-circle' ></i>&nbsp;ตั้งค่าผู้ใช้</a></li>
         <li><a href="view-order-history.php"><i class='bx bx-history' ></i>&nbsp;ดูประวัติการสั่งซื้อ</a></li>
     </ul>
 
