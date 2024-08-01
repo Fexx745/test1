@@ -83,21 +83,48 @@
                 border: 1px solid #e5e5e5;
                 color: #333;
                 font-size: 1rem;
-                font-weight: 600;
+                font-weight: 300;
                 cursor: pointer;
                 transition: .3s ease;
             }
+
         }
     }
 
     .bc-menu ul li:first-child a {
-        border-top: 3px solid var(--bs-orange);
+        border-top: 3px solid var(--bs-danger);
     }
 
     .bc-menu ul li a:hover {
-        background: #f7f7f7;
-        color: var(--bs-orange);
+        background: linear-gradient(90deg, #f7f7f7, #eaeaea);
+        color: var(--bs-danger);
+        /* border-bottom: 2px solid var(--bs-danger); */
+        transition: background 0.3s ease, color 0.3s ease, border-bottom 0.3s ease, transform 0.3s ease;
+        transform: scale(1.05);
+        position: relative;
     }
+
+    .bc-menu ul li a:hover::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 2px;
+        background: var(--bs-gray-700);
+        animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 100%;
+        }
+    }
+
 
     /* bc-show */
     .bc-show {
@@ -106,7 +133,7 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(auto-fill, 380px);
-        grid-gap: 20px;
+        grid-gap: 15px;
 
         .bc-show-items-img {
             width: 100%;
@@ -143,11 +170,13 @@
                 justify-content: flex-start;
                 align-items: center;
                 padding: 0 10px;
+
                 & span {
-                    font-size: 14px;
+                    font-size: 13px;
                     font-weight: 200;
                     color: var(--bs-gray-600);
                 }
+
                 & b {
                     font-size: 13px;
                     font-weight: 700;
@@ -160,23 +189,27 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 5px 10px;
+
                 .bc-show-items-view-product {
-                    font-size: 13px;
+                    font-size: 10px;
                     font-weight: 100;
                     color: var(--bs-gray-600);
                 }
             }
 
             & h5 {
-                color: var(--bs-orange);
-                font-size: 1.3rem;
+                color: var(--bs-danger);
+                font-size: 1.2rem;
                 text-align: end;
             }
         }
 
         .bc-show-items:hover {
-            border: 1px solid var(--bs-orange);
+            border: 1px solid var(--bs-danger);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            /* เพิ่ม box-shadow ที่นี่ */
         }
+
 
     }
 }
@@ -215,7 +248,7 @@
         padding: 20px;
         margin: 20px 0;
         background: #f7f7f7;
-        color: var(--bs-orange);
+        color: var(--bs-danger);
         font-size: 1rem;
 
         & h1:first-child {
@@ -250,6 +283,19 @@
     }
 }
 
+
+.txt {
+    padding: 3px 10px;
+    font-size: 1rem;
+    border: 1px solid #e5e5e5;
+    margin: 0 10px;
+}
+
+.txt-count {
+    width: 100px;
+
+}
+
 .btn {
     display: flex;
     transition: .3s ease;
@@ -264,29 +310,19 @@
     opacity: .8;
 }
 
-.txt {
-    padding: 3px 10px;
-    font-size: 1rem;
-    border: 1px solid #e5e5e5;
-    margin: 0 10px;
-}
-
-.txt-count {
-    width: 100px;
-
-}
 
 .btn-buy {
-    background: var(--bs-orange);
+    background: var(--bs-danger);
     color: #fff;
     font-size: 1rem;
 }
 
 .btn-cart {
     background: #fff0ed;
-    border: 1px solid var(--bs-orange);
+    border: 1px solid var(--bs-danger);
     margin-right: 10px;
 }
+
 
 .pagination {
     /* text-align: center; */
@@ -303,7 +339,7 @@
     margin: 0 4px;
     border: none;
     outline: none;
-    background-color: var(--bs-orange);
+    background-color: var(--bs-danger);
     border-radius: 3px;
 }
 
@@ -311,4 +347,69 @@
     /* background-color: #36a06f; */
     opacity: 0.6;
     transition: 0.3s ease;
+}
+
+/* slideshow-container */
+
+.slideshow-container {
+    /* width: 100%; */
+    max-width: 1200px;
+    height: 600px;
+    margin: auto auto 20px auto;
+    position: relative;
+
+    .mySlides {
+        width: 100%;
+        height: 600px;
+
+        & img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+    }
+
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 45%;
+        width: auto;
+        margin-top: -22px;
+        /* padding: 2px; */
+        color: var(--bs-gray-100);
+        font-weight: bold;
+        font-size: 40px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        background-color: rgb(0, 0, 0, 0.5);
+    }
+
+    .next {
+        right: 0px;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover,
+    .next:hover {
+        opacity: 0.8;
+    }
+}
+
+/* Darken the carousel control icons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: brightness(0%);
+}
+
+/* Hover effect to make icons fully visible on hover */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    filter: brightness(100%);
+}
+
+.carousel-item {
+    height: 300px;
+    object-fit: contain;
 }

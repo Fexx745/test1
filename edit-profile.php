@@ -118,7 +118,7 @@ if (isset($_GET['id'])) {
         </div> <!-- end container-card2 -->
     </div> <!-- end container -->
 
-    <?php include('footer.php'); ?>
+    <?php //include('footer.php'); ?>
 
 </body>
 

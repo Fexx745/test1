@@ -1,5 +1,5 @@
 <?php
-include('condb.php');
+include ('condb.php');
 $sql = "SELECT * FROM tb_member";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
@@ -14,99 +14,103 @@ $row = mysqli_fetch_array($result);
     <title>Navbar</title>
     <link rel="stylesheet" href="./assets/css/index.css">
     <link rel="stylesheet" href="./assets/css/nav.css">
+    <style>
+        /* ซ่อนเมนูตั้งแต่แรกด้วย CSS */
+        #navUserToggle {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-
-
     <nav>
-
         <div class="nav-container">
-            <!-- if not login -->
-            <div class="nav-top">
-                <div class="nav-top-contract">
-                    <ul>
-                        <li><a href="index.php">หน้าหลัก</a></li>
-                        <li><a href="">ติดต่อ</a></li>
-                    </ul>
-                </div>
-                <div class="nav-top-user">
-                    <a href="reg.php">สมัครสมาชิก</a>
-                    <a href="login.php">เข้าสู่ระบบ</a>
-                </div>
-            </div>
-            <div class="nav-bottom">
-                <a href="index.php">RMUTI</a>
-            </div>
-
-
-            <!-- if login -->
-            <div class="nav-top">
-                <div class="nav-top-contract">
-                    <ul>
-                        <li><a href="index.php">หน้าหลัก</a></li>
-                        <li><a href="">ติดต่อ</a></li>
-                    </ul>
-                </div>
-                <div class="nav-top-user">
-                    <div class="nav-top-user-profile">
-                        <img src="" alt="">
+            <?php
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (isset($_SESSION['username'])) {
+                ?>
+                <!-- if login -->
+                <div class="nav-top">
+                    <div class="nav-top-contract">
+                        <ul>
+                            <li><a href="index.php">หน้าหลัก</a></li>
+                            <li><a href="">ติดต่อ</a></li>
+                        </ul>
                     </div>
-                    <p id="navToggleProfile">Chatupon Singkrajom</p>
-                    <div id="navUserToggle" class="nav-top-user-toggle">
-                        <a href="#">ตั้งค่าผู้ใช้</a>
-                        <a href="#">ออกจากระบบ</a>
-                    </div>
-                </div>
-            </div>
-            <div class="nav-bottom">
-                <a href="index.php">RMUTI</a>
-
-                <div class="nav-bottom-cart">
-                    <div class="cart-shop">
-                        <div class="cart-count">1</div>
-                        <i class='bx bxs-cart-alt'></i>
-                        <div class="cart-shop-items">
-                            <div class="cart-shop-toggle-items">
-                                <div class="cart-shop-toggle-items-img">
-                                    <img src="./assets/images/product/3.jpg" alt="">
-                                </div>
-                                <p>1 ชิ้น</p>
-                                <p>500.0</p>
-                            </div>
+                    <div class="nav-top-user">
+                        <div class="nav-top-user-profile">
+                            <img src="assets/images/other/User-Profile-PNG.png" alt="">
+                        </div>
+                        <p id="navToggleProfile"><?php echo $_SESSION['username']; ?> <i class='bx bxs-chevron-down'></i></p>
+                        <div id="navUserToggle" class="nav-top-user-toggle">
+                            <a href="edit-profile.php?id=<?php echo $_SESSION['user_id']; ?>"><i class='bx bx-user-circle'></i>&nbsp;ตั้งค่าผู้ใช้</a>
+                            <a href="view-order-history.php"><i class='bx bx-history' ></i>&nbsp;ดูประวัติการสั่งซื้อ</a>
+                            <a href=""></a>
+                            <a href="logout.php"><i class='bx bx-log-out-circle' ></i>&nbsp;ออกจากระบบ</a>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="nav-bottom">
+                    <a href="index.php">RMUTI</a>
+                    <div class="nav-bottom-cart">
+                        <div class="cart-shop">
+                            <div class="cart-count">
+                                <?php
+                                if (isset($_SESSION['inPro']) && is_array($_SESSION['inPro'])) {
+                                    echo count($_SESSION['inPro']);
+                                } else {
+                                    echo "0";
+                                }
+                                ?>
+                            </div>
+                            <i class='bx bxs-cart-alt'></i>
+                        </div>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <!-- if not login -->
+                <div class="nav-top">
+                    <div class="nav-top-contract">
+                        <ul>
+                            <li><a href="index.php">หน้าหลัก</a></li>
+                            <li><a href="">ติดต่อ</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-top-user">
+                        <a href="reg.php">สมัครสมาชิก</a>
+                        <a href="login.php">เข้าสู่ระบบ</a>
+                    </div>
+                </div>
+                <div class="nav-bottom">
+                    <a href="index.php">RMUTI</a>
+                </div>
+                <?php
+            }
+            ?>
         </div>
     </nav>
-
-
-    <!-- Bootrap -->
-    <!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="bootstrap/js/bootstrap.bundle.min.js"> </script> -->
 
     <!-- Add your scripts at the bottom -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="search.js"></script>
 
+    <script>
+        $(document).ready(function () {
+            $("#navUserToggle").hide();
+
+            $("#navToggleProfile").click(function () {
+                $("#navUserToggle").slideToggle();
+            });
+            $("#navUserToggle").mouseleave(function () {
+                $(this).slideUp();
+            });
+        });
+    </script>
 </body>
 
 </html>
-
-<script>
-    $(document).ready(function() {
-        $("#navUserToggle").hide();
-
-        $("#navToggleProfile").click(function() {
-            $("#navUserToggle").slideToggle();
-        });
-        $("#navUserToggle").mouseleave(function() {
-            $(this).slideUp();
-        });
-    });
-</script>

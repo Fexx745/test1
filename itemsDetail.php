@@ -60,7 +60,7 @@ include('condb.php');
                             <p>ชิ้น</p>
                         </div>
                         <div class="btn-control-buy">
-                            <button class="btn btn-cart">เพิ่มใส่ตะกร้า</button>
+                            <a href="order.php?id=<?php echo $row['p_id']; ?>" class="btn btn-cart" style="text-decoration: none; color: #333; font-size: 13px;">เพิ่มใส่ตะกร้า</a>
                             <button class="btn btn-buy">ซื้อสินค้า</button>
                         </div>
                     </div>

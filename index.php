@@ -16,6 +16,8 @@ include('condb.php');
 <body>
     <?php include('nav.php'); ?>
 
+    <?php include('index_slideimg.php'); ?>
+
     <section class="body-container">
         <?php
         include('bc-menu.php');
