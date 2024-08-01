@@ -1,5 +1,4 @@
-<butt?php include ('condb.php'); $sql="SELECT * FROM tb_member" ; $result=mysqli_query($conn, $sql);
-    $row=mysqli_fetch_array($result); ?>
+<butt?php include ('condb.php'); $sql="SELECT * FROM tb_member" ; $result=mysqli_query($conn, $sql); $row=mysqli_fetch_array($result); ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -8,8 +7,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Navbar</title>
-        <link rel="stylesheet" href="./assets/css/index.css">
         <link rel="stylesheet" href="./assets/css/nav.css">
+
         <style>
             /* ซ่อนเมนูตั้งแต่แรกด้วย CSS */
             #navUserToggle {
@@ -26,7 +25,7 @@
                     session_start();
                 }
                 if (isset($_SESSION['username'])) {
-                    ?>
+                ?>
                     <!-- if login -->
                     <div class="nav-top">
                         <div class="nav-top-contract">
@@ -39,8 +38,7 @@
                             <div class="nav-top-user-profile">
                                 <img src="assets/images/other/User-Profile-PNG.png" alt="">
                             </div>
-                            <p id="navToggleProfile"><?php echo $_SESSION['username']; ?> <i
-                                    class='bx bxs-chevron-down'></i>
+                            <p id="navToggleProfile"><?php echo $_SESSION['username']; ?> <i class='bx bxs-chevron-down'></i>
                             </p>
                             <div id="navUserToggle" class="nav-top-user-toggle">
                                 <a href="edit-profile.php?id=<?php echo $_SESSION['user_id']; ?>">ตั้งค่าผู้ใช้</a>
@@ -51,11 +49,22 @@
                         </div>
                     </div>
                     <div class="nav-bottom">
-                        <a href="index.php">RMUTI</a>
-                        <div class="nav-bottom-search">
-                            <input type="text" placeholder="Search...">
-                            <button type="button">ค้นหา</button>
+                        <div class="nav-bottom-logo">
+                            <a href="index.php">RMUTI</a>
                         </div>
+                        <div class="nav-bottom-search">
+                            <form action="index_search.php" method="POST" class="nav-bottom-search" style="position: relative;">
+                                <input type="text" placeholder="Search..." id="search" name="search" autocomplete="off" required>
+                                <button type="submit" name="submit"><i class='bx bx-search-alt'></i></button>
+                                <div class="list-group" id="show-list"></div>
+                            </form>
+                            <div class="col-md-5">
+                                <div class="list-group" style="position: absolute; width: 490px;" id="show-list"></div>
+                            </div>
+                        </div>
+
+
+
                         <div class="nav-bottom-cart">
                             <div class="cart-shop">
                                 <div class="cart-count">
@@ -86,21 +95,20 @@
                         </div>
                     </div>
                     <div class="nav-bottom">
-                        <a href="index.php">RMUTI</a>
+                        <div class="nav-bottom-logo">
+                            <a href="index.php">RMUTI</a>
+                        </div>
                         <div class="nav-bottom-search">
                             <input type="text" placeholder="Search...">
-                            <button type="button">ค้นหา</button>
+                            <button type="button"><i class='bx bx-search-alt'></i></button>
                         </div>
                         <div class="nav-bottom-cart">
                             <div class="cart-shop">
-                                <div class="cart-count">
-                                    0
-                                </div>
                                 <i class='bx bxs-cart-alt'></i>
                             </div>
                         </div>
                     </div>
-                    <?php
+                <?php
                 }
                 ?>
             </div>
@@ -114,13 +122,13 @@
         <script src="search.js"></script>
 
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $("#navUserToggle").hide();
 
-                $("#navToggleProfile").click(function () {
+                $("#navToggleProfile").click(function() {
                     $("#navUserToggle").slideToggle();
                 });
-                $("#navUserToggle").mouseleave(function () {
+                $("#navUserToggle").mouseleave(function() {
                     $(this).slideUp();
                 });
             });

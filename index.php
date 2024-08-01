@@ -12,11 +12,9 @@ include('condb.php');
     <title>สวัสดี</title>
     <?php include('script-css.php'); ?>
 </head>
-
-<body>
     <?php include('nav.php'); ?>
 
-    <?php //include('index_slideimg.php'); ?>
+    <?php include('index_slideimg.php'); ?>
 
     <section class="body-container">
         <?php
@@ -25,7 +23,7 @@ include('condb.php');
 
         <div class="bc-show">
             <?php
-            $limit = 20; // จำนวนสินค้าที่แสดงในแต่ละหน้า
+            $limit = 16; // จำนวนสินค้าที่แสดงในแต่ละหน้า
             $page = isset($_GET['page']) ? $_GET['page'] : 1; // หมายเลขหน้าที่ต้องการแสดง
             $start = ($page - 1) * $limit; // คำนวณเริ่มต้นแสดงผลสินค้า
             $sql = "SELECT p.*, ph.price, u.unit_name,
@@ -64,7 +62,7 @@ include('condb.php');
             <div class="pagination">
                 <?php
                 include('condb.php');
-                $limit = 20; // จำนวนสินค้าที่แสดงในแต่ละหน้า
+                $limit = 16; // จำนวนสินค้าที่แสดงในแต่ละหน้า
                 $page = isset($_GET['page']) ? $_GET['page'] : 1; // หมายเลขหน้าที่ต้องการแสดง
                 $start = ($page - 1) * $limit; // คำนวณเริ่มต้นแสดงผลสินค้า
 
@@ -102,7 +100,7 @@ include('condb.php');
 
 
 
-
+    <?php include('footer.php'); ?>
 
 </body>
 
