@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Results</title>
-    <?php include('script-css.php'); ?>
+    <?php include ('script-css.php'); ?>
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/nav.css">
 </head>
@@ -14,16 +16,17 @@
     <div class="container">
 
         <?php
-        include('nav.php');
-        include('bc-menu.php');
+        include ('condb.php');
+        include ('nav.php');
+        include ('bc-menu.php');
         // กำหนดจำนวนสินค้าที่แสดงในแต่ละหน้า
-        $limit = 20; 
-        $page = isset($_GET['page']) ? $_GET['page'] : 1; 
-        $start = ($page - 1) * $limit; 
-        
+        $limit = 20;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $start = ($page - 1) * $limit;
+
         // Fetching product type ID from GET request
         $type_id = isset($_GET['type_id']) ? intval($_GET['type_id']) : 0;
-        
+
         // Prepare and bind
         $stmt = $conn->prepare("
         SELECT 
@@ -49,11 +52,11 @@
         LIMIT ?, ?
         ");
         $stmt->bind_param("iii", $type_id, $start, $limit);
-        
+
         $stmt->execute();
         $result = $stmt->get_result();
         ?>
-        
+
         <div class="bc-show">
             <?php
             // Check if any results are returned
@@ -76,9 +79,9 @@
             $conn->close();
             ?>
         </div>
-        
+
         <a class="btn btn-info" href="index.php">Back to index</a>
-        
+
     </div>
 </body>
 

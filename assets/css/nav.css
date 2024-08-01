@@ -56,7 +56,6 @@ nav {
     padding: 5px 0;
     background-color: var(--bs-danger);
     margin-bottom: 50px;
-
     display: flex;
     justify-content: center;
 
@@ -184,6 +183,29 @@ nav {
             align-items: center;
             padding: 0 10px;
             margin: 20px 0;
+    
+            .nav-bottom-search input[type="text"] {
+                width: 600px;
+                padding: 10px;
+                border: 2px solid #ccc;
+                border-radius: 5px 0 0 5px;
+                outline: none;
+                /* margin-right: -5px; */
+            }
+    
+            .nav-bottom-search button {
+                padding: 10px;
+                border: none;
+                background-color: #333;
+                color: #dfdfdf;
+                border-radius: 0 5px 5px 0;
+                cursor: pointer;
+                font-size: 16px;
+            }
+    
+            .nav-bottom-search button:hover {
+                background-color: #212529;
+            }
 
             & a {
                 color: #fff;

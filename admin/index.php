@@ -77,7 +77,7 @@ $row4 = mysqli_fetch_array($result4);
                 </ol>
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #DE3163;">
+                        <div class="card text-white mb-4" style="background: #dc3545;">
                             <div class="card-body">ลูกค้า<h4>
                                     <?= $row['customer'] ?> คน
                                 </h4>
@@ -91,7 +91,7 @@ $row4 = mysqli_fetch_array($result4);
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #DE3163;">
+                        <div class="card text-white mb-4" style="background: #6f42c1;">
                             <div class="card-body">ยอดขายทั้งหมด<h4>
                                     <?= number_format($row2['total_price'], 2, '.', ',') ?> บาท
                             </div>
@@ -104,7 +104,7 @@ $row4 = mysqli_fetch_array($result4);
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #DE3163;">
+                        <div class="card text-white mb-4" style="background: #198754;">
                             <div class="card-body">สั่งซื้อทั้งหมด<h4>
                                     <?= $row3['order_yes'] ?> รายการ</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
@@ -116,7 +116,7 @@ $row4 = mysqli_fetch_array($result4);
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #DE3163;">
+                        <div class="card text-white mb-4" style="background: #0d6efd;">
                             <div class="card-body">จำนวนสินค้าทั้งหมด<h4>
                                     <?= $row4['all_pd'] ?> รายการ
                                 </h4>

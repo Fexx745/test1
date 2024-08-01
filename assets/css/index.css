@@ -57,6 +57,29 @@
         width: 20%;
         /* background-color: #0a58ca; */
 
+        .bc-menu-profile {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            
+
+             & i {
+                font-size: 25px;
+                margin-right: 20px;
+            }
+
+            & h2 {
+                font-weight: 600;
+                /* margin-bottom: 10px; */
+            }
+        }
+
+        & ul li a {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
         .bc-menu-category {
             display: flex;
             justify-content: start;

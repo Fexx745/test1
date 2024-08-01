@@ -16,7 +16,7 @@ include('condb.php');
 <body>
     <?php include('nav.php'); ?>
 
-    <?php include('index_slideimg.php'); ?>
+    <?php //include('index_slideimg.php'); ?>
 
     <section class="body-container">
         <?php
@@ -25,7 +25,6 @@ include('condb.php');
 
         <div class="bc-show">
             <?php
-            // คำสั่ง SQL เพื่อดึงข้อมูลสินค้าจากตารางต่าง ๆ
             $limit = 20; // จำนวนสินค้าที่แสดงในแต่ละหน้า
             $page = isset($_GET['page']) ? $_GET['page'] : 1; // หมายเลขหน้าที่ต้องการแสดง
             $start = ($page - 1) * $limit; // คำนวณเริ่มต้นแสดงผลสินค้า
