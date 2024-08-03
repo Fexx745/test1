@@ -1,7 +1,7 @@
 <div class="bc-menu">
     <div class="bc-menu-profile">
-        <i class='bx bxs-user-detail'></i>
-        <h5>ข้อมูลส่วนตัว</h5>
+        <i class='bx bx-menu-alt-left'></i>
+        <h5>เมนูทั่วไป</h5>
     </div>
     <ul style="margin-bottom: 20px;">
         <?php
@@ -44,4 +44,46 @@
             ?>
         </ul>
     </form>
+    <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (isset($_SESSION['username'])) {
+    ?>
+        <div class="bc-menu-logout">
+            <i class='bx bxs-log-out'></i>
+            <h5>ออกจากระบบ</h5>
+        </div>
+        <ul style="margin-bottom: 20px;">
+
+            <li><a href="logout.php" onclick="confirmLogout(event)"><i class='bx bx-log-out'></i>&nbsp;ออกจากระบบ</a></li>
+
+
+        <?php } else {  ?>
+
+        <?php
+    } ?>
+        </ul>
 </div>
+
+<script>
+    function confirmLogout(event) {
+        event.preventDefault(); // ป้องกันการโหลดหน้าต่อไปทันที
+        Swal.fire({
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณต้องการออกจากระบบหรือไม่?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ใช่, ออกจากระบบ!',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'logout.php';
+            }
+        });
+    }
+</script>
+
+<?php include('script-js.php'); ?>

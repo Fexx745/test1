@@ -23,7 +23,7 @@ $_SESSION["order_id"] = $orderID;
 $sToken = "oUuMDZ2et5SgODlfhImzTIQ6rGAkybpRc4Bp1n63TY7";
 $sMessage = "มีรายการสั่งซื้อเข้าใหม่!\n";
 $sMessage .= "เลขที่สั่งซื้อ: " . sprintf("%010d", $_SESSION["order_id"]) . "\n";
-$sMessage .= "ชื่อผู้สั่งซื้อ: " . $member_id . " " . $lname . "\n";
+$sMessage .= "ชื่อผู้สั่งซื้อ: " . $fname . " " . $lname . "\n";
 $sMessage .= "ราคาสุทธิ: " . number_format($_SESSION["sum_price"], 2) . " บาท\n";
 
 $chOne = curl_init();
@@ -79,7 +79,7 @@ $target_dir = "assets/images/slip_images/";
 $target_file = $target_dir . basename($_FILES["slip_image"]["name"]);
 move_uploaded_file($_FILES["slip_image"]["tmp_name"], $target_file);
 
-// เพิ่มข้อมูลการชำระเงินลงในตาราง tb_payment_slip
+// เพิ่มข้อมูลการชำระเงินลงในตาราง tb_payment
 $sql_payment = "INSERT INTO tb_payment (orderID, payment_method, slip_image)
                 VALUES ('$orderID', 'Transfer', '$slip_image')";
 if (mysqli_query($conn, $sql_payment)) {
@@ -110,9 +110,6 @@ for ($i = 0; $i <= (int) $_SESSION["intLine"]; $i++) {
                 $sql_update_stock = "UPDATE product SET amount = amount - '" . $_SESSION["strQty"][$i] . "'
                     WHERE p_id = '" . $_SESSION["strProductID"][$i] . "'";
                 mysqli_query($conn, $sql_update_stock);
-                $_SESSION['cart-success'] = "สั่งซื้อสินค้าสำเร็จ";
-                header('Location: cart.php');
-                exit();
             } else {
                 echo "<script> alert('Error: Unable to insert order details.'); </script>";
             }
@@ -129,4 +126,8 @@ unset($_SESSION["strQty"]);
 unset($_SESSION["sum_price"]);
 // unset($_SESSION["dePro"]);
 // session_destroy(); // ถ้าใส่มันจะทำลาย SESSION ทั้งหมด ไม่ให้ส่งไปหน้าอื่น
+
+$_SESSION['cart-success'] = "สั่งซื้อสินค้าสำเร็จ";
+header('Location: cart.php');
+exit();
 ?>

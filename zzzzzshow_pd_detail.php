@@ -23,8 +23,6 @@ include('condb.php');
 <body>
     <?php include('nav.php'); ?>
     <div class="container" style="margin: 150px auto 200px auto;">
-
-
         <?php
         $p_id = $_GET['id'];
         $sql = "SELECT *,
@@ -42,9 +40,6 @@ include('condb.php');
         $result2 = mysqli_query($conn, $sql2);
         // $row2 = mysqli_fetch_array($result2); 
         ?>
-
-
-
 
         <div class="row">
             <div class="col-md-12">
@@ -126,7 +121,7 @@ include('condb.php');
                                         </span></span>
                                 </div>
                                 <div class="mt-1">
-                                    <span style="color: "><i class='bx bxs-plane-take-off'></i> ค่าจัดส่ง : 30฿</span>
+                                    <span style="color: #000;"><i class='bx bxs-plane-take-off'></i> ค่าจัดส่ง : 30฿</span>
                                 </div>
                                 <div><span style="font-size: 20px;">ราคา</span><b style="color: red; font-size: 30px;">
                                         <?= number_format($row['price'], 2) ?>

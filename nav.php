@@ -38,13 +38,13 @@
                             <div class="nav-top-user-profile">
                                 <img src="assets/images/other/User-Profile-PNG.png" alt="">
                             </div>
-                            <p id="navToggleProfile"><?php echo $_SESSION['username']; ?> <i class='bx bxs-chevron-down'></i>
+                            <p id="navToggleProfile"><?php echo $_SESSION['fname'] . " " . $_SESSION['lname']; ?> <i class='bx bxs-chevron-down'></i>
                             </p>
                             <div id="navUserToggle" class="nav-top-user-toggle">
                                 <a href="edit-profile.php?id=<?php echo $_SESSION['user_id']; ?>">ตั้งค่าผู้ใช้</a>
                                 <!-- <a href="view-order-history.php">ดูประวัติการสั่งซื้อ</a> -->
                                 <a href=""></a>
-                                <a href="logout.php">ออกจากระบบ</a>
+                                <a href="logout.php" onclick="confirmLogout(event)">ออกจากระบบ</a>
                             </div>
                         </div>
                     </div>
@@ -66,18 +66,18 @@
 
 
                         <div class="nav-bottom-cart">
-                            <div class="cart-shop">
+                            <a href="cart.php" class="cart-shop">
                                 <div class="cart-count">
                                     <?php
-                                    if (isset($_SESSION['inPro']) && is_array($_SESSION['inPro'])) {
-                                        echo count($_SESSION['inPro']);
+                                    if (isset($_SESSION['inPro'])) {
+                                        echo $_SESSION['inPro'];
                                     } else {
                                         echo "0";
                                     }
                                     ?>
                                 </div>
                                 <i class='bx bxs-cart-alt'></i>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 <?php } else { ?>
@@ -136,3 +136,24 @@
     </body>
 
     </html>
+
+
+    <script>
+    function confirmLogout(event) {
+        event.preventDefault(); // ป้องกันการโหลดหน้าต่อไปทันที
+        Swal.fire({
+            title: 'คุณแน่ใจหรือไม่?',
+            text: "คุณต้องการออกจากระบบหรือไม่?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ใช่, ออกจากระบบ!',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'logout.php';
+            }
+        });
+    }
+</script>

@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phone = $_POST['phone'];
     $address = $_POST['address'];
     $email = $_POST['email'];
-    $username = $_POST['username'];
 
     // Validate and sanitize inputs
     $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
@@ -24,18 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phone = filter_var($phone, FILTER_SANITIZE_STRING);
     $address = filter_var($address, FILTER_SANITIZE_STRING);
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    $username = filter_var($username, FILTER_SANITIZE_STRING);
-
-    // Ensure required fields are not empty
-    // if (empty($id) || empty($prefix) || empty($fname) || empty($lname) || empty($phone) || empty($address) || empty($email) || empty($username)) {
-    //     echo "All fields are required!";
-    //     exit();
-    // }
 
     // Update the user data in the database using prepared statements
-    $sql = "UPDATE tb_member SET prefix=?, firstname=?, lastname=?, telephone=?, address=?, email=?, username=? WHERE id=?";
+    $sql = "UPDATE tb_member SET prefix=?, firstname=?, lastname=?, telephone=?, address=?, email=? WHERE id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssssi", $prefix, $fname, $lname, $phone, $address, $email, $username, $id);
+    $stmt->bind_param("ssssssi", $prefix, $fname, $lname, $phone, $address, $email, $id);
 
     if ($stmt->execute()) {
         // Update session variables
@@ -45,9 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['phone'] = $phone;
         $_SESSION['address'] = $address;
         $_SESSION['email'] = $email;
-        $_SESSION['username'] = $username;
 
-        $message = "Account updated successfully!";
+        // Store custom session variable
+        $_SESSION['submit_edit_profile'] = true;
+
+        // Redirect to edit-profile.php
+        header("Location: edit-profile.php?id=" . htmlspecialchars($id));
+        exit();
     } else {
         $message = "Error updating record: " . $conn->error;
     }
@@ -62,16 +58,13 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Account</title>
-    <script>
-        window.onload = function() {
-            var message = "<?php echo $message; ?>";
-            if (message) {
-                alert(message);
-                window.location.href = "edit-profile.php?id=<?php echo htmlspecialchars($id); ?>";
-            }
-        }
-    </script>
 </head>
 <body>
+<?php
+    // Display error message if any
+    if ($message) {
+        echo "<script>alert('$message');</script>";
+    }
+?>
 </body>
 </html>

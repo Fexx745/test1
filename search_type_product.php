@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+session_start();
+include('condb.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,80 +10,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Results</title>
-    <?php include ('script-css.php'); ?>
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/nav.css">
+    <?php include('script-css.php'); ?>
 </head>
 
 <body>
-    <div class="container">
+
+    <?php include('nav.php'); ?>
+    <div class="body-container">
 
         <?php
-        include ('condb.php');
-        include ('nav.php');
-        include ('bc-menu.php');
-        // กำหนดจำนวนสินค้าที่แสดงในแต่ละหน้า
-        $limit = 20;
-        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $start = ($page - 1) * $limit;
+        include('bc-menu.php');
 
-        // Fetching product type ID from GET request
         $type_id = isset($_GET['type_id']) ? intval($_GET['type_id']) : 0;
 
-        // Prepare and bind
-        $stmt = $conn->prepare("
-        SELECT 
-            p.p_id, 
-            p.p_name, 
-            p.detail, 
-            p.amount, 
-            p.p_view, 
-            p.image, 
-            ph.price, 
-            pt.type_name 
-        FROM 
-            product p 
-        JOIN 
-            price_history ph ON p.p_id = ph.p_id 
-        JOIN 
-            product_type pt ON p.type_id = pt.type_id 
-        WHERE 
-            p.type_id = ? 
-            AND ph.to_date IS NULL 
-        ORDER BY 
-            p.p_name
-        LIMIT ?, ?
-        ");
-        $stmt->bind_param("iii", $type_id, $start, $limit);
-
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $query = "
+            SELECT 
+                p.p_id, 
+                p.p_name, 
+                p.detail, 
+                p.amount, 
+                p.p_view, 
+                p.image, 
+                ph.price, 
+                pt.type_name 
+            FROM 
+                product p 
+            JOIN 
+                price_history ph ON p.p_id = ph.p_id 
+            JOIN 
+                product_type pt ON p.type_id = pt.type_id 
+            WHERE 
+                p.type_id = $type_id 
+                AND ph.to_date IS NULL 
+            ORDER BY 
+                p.p_name
+        ";
+        $result = mysqli_query($conn, $query);
         ?>
 
         <div class="bc-show">
+
             <?php
-            // Check if any results are returned
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    ?>
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+            ?>
                     <a href="itemsDetail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
                         <div class="bc-show-items-img">
                             <img src="assets/images/product/<?= $row['image'] ?>" alt="<?= $row['p_name'] ?>">
                         </div>
                         <p><?= $row['p_name'] ?></p>
-                        <h5><?= number_format($row['price'], 2) ?> ฿</h5>
+                        <div class="bc-show-items-detail">
+                            <!-- <span>ถูกซื้อแล้ว&nbsp;</span> <b><?= $row['sales_count'] ?>&nbsp</b> <span>ครั้ง</span> -->
+                        </div>
+                        <div class="bc-show-items-view">
+                            <div class="bc-show-items-view-product">
+                                <span><i class='bx bx-low-vision'></i>
+                                    <?= $row['p_view'] ?>
+                                </span>
+                            </div>
+                            <h5><?= number_format($row['price'], 2) ?> ฿</h5>
+                        </div>
+
                     </a>
-                    <?php
+            <?php
                 }
             } else {
                 echo "ไม่พบข้อมูลสินค้าในประเภทนี้";
             }
-            $stmt->close();
-            $conn->close();
+            mysqli_close($conn);
             ?>
-        </div>
 
-        <a class="btn btn-info" href="index.php">Back to index</a>
+        </div>
 
     </div>
 </body>

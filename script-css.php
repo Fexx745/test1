@@ -1,8 +1,9 @@
 <!-- CSS -->
 <link rel="stylesheet" href="assets/css/index.css">
 <link rel="stylesheet" href="assets/css/nav.css">
-<link rel="stylesheet" href="assets/CSS/footer.css">
-<link rel="stylesheet" href="assets/CSS/itemsDetail.css">
+<link rel="stylesheet" href="assets/css/footer.css">
+<link rel="stylesheet" href="assets/css/itemsDetail.css">
+<link rel="stylesheet" href="assets/css/edit-profile.css">
 
 
 <!-- Bootrap -->

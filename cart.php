@@ -9,7 +9,10 @@ if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit();
 }
-
+// ตรวจสอบและกำหนดค่าเริ่มต้นให้กับ $_SESSION['inPro']
+if (!isset($_SESSION['inPro'])) {
+    $_SESSION['inPro'] = 0;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +44,10 @@ if (!isset($_SESSION['username'])) {
         <form action="cart_insert.php" id="form1" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-12">
-                        <div class="d-flex"><h1>ตะกร้าสินค้า</h1><h1 style="color: red;">(<?php echo $_SESSION['inPro'] ?>)</h1></div>
+                    <div class="d-flex">
+                        <h1>ตะกร้าสินค้า</h1>
+                        <h1 style="color: red;">(<?php echo $_SESSION['inPro'] ?>)</h1>
+                    </div>
 
                     <table class="table table-hover my-3">
                         <tr>
@@ -59,12 +65,12 @@ if (!isset($_SESSION['username'])) {
                         $sumPrice = 0;
                         $m = 1;
                         if (isset($_SESSION["intLine"])) {   //ถ้าไม่เป็นค่าว่างให้ทำงานใน {}
-                        
+
                             for ($i = 0; $i <= (int) $_SESSION["intLine"]; $i++) {
                                 if (($_SESSION["strProductID"][$i]) != "") {
                                     //อันเดิม
                                     // $sql1 = "SELECT * FROM product WHERE p_id = '" . $_SESSION["strProductID"][$i] . "' ";
-                        
+
                                     //join ตาราง price_history
                                     $sql1 = "SELECT product.*, price_history.* 
                                     FROM product 
@@ -80,14 +86,13 @@ if (!isset($_SESSION['username'])) {
                                     $sumPrice = $sumPrice + $sum; // ราคารวม
                                     $_SESSION["sum_price"] = $sumPrice;
 
-                                    ?>
+                        ?>
                                     <tr>
                                         <td>
                                             <?= $m ?>
                                         </td>
                                         <td>
-                                            <img src="assets/images/product/<?= $row_product['image'] ?>" width="80px" height="100"
-                                                class="border" style="object-fit: cover;">
+                                            <img src="assets/images/product/<?= $row_product['image'] ?>" width="80px" height="100" class="border" style="object-fit: cover;">
                                         </td>
                                         <td>
                                             <?= $row_product['p_name'] ?>
@@ -102,12 +107,10 @@ if (!isset($_SESSION['username'])) {
                                             <?= number_format($sum, 2) ?>
                                         </td>
                                         <td>
-                                            <a href="order.php?id=<?= $row_product['p_id'] ?>"><button type="button"
-                                                    class="btn" style="background: #495057; color: #fff; font-weight: bold;">+</button></a>
+                                            <a href="order.php?id=<?= $row_product['p_id'] ?>"><button type="button" class="btn" style="background: #495057; color: #fff; font-weight: bold;">+</button></a>
                                             <!-- เชคจำนวนสินค้าถ้ามี 1 ปุ่ม - จะไม่มี -->
                                             <?php if ($_SESSION["strQty"][$i] > 1) { ?>
-                                                <a href="order_del.php?id=<?= $row_product['p_id'] ?>"><button type="button"
-                                                        class="btn" style="background: #6c757d; color: #fff; font-weight: bold;">-</button></a>
+                                                <a href="order_del.php?id=<?= $row_product['p_id'] ?>"><button type="button" class="btn" style="background: #6c757d; color: #fff; font-weight: bold;">-</button></a>
                                             <?php } ?>
                                         </td>
                                         <!-- <td>
@@ -121,10 +124,9 @@ if (!isset($_SESSION['username'])) {
                                         </td>
 
                                     </tr>
-                                    <?php
+                        <?php
                                     $m = $m + 1;
                                     $_SESSION['dePro'] = $m - 1;
-                                    
                                 }
                             }
                             // Update the number of products in cart
@@ -145,12 +147,11 @@ if (!isset($_SESSION['username'])) {
                         <div class="row">
 
                             <div class="col-md-6">
-                                <img style="width:600px; height: 600px; object-fit: cover;"
-                                    src="assets/images/other/slip.jpg" alt="">
+                                <img style="width:600px; height: 600px; object-fit: cover;" src="assets/images/other/slip.jpg" alt="">
                             </div> <!-- col-md-6 -->
 
                             <div class="col-md-6">
-                                <h4 class="alert alert-primary"><i class='bx bx-error-alt' ></i>
+                                <h4 class="alert alert-primary"><i class='bx bx-error-alt'></i>
                                     &nbsp;ให้แนบสลิปการโอนทุกทั้งครับ/ค่ะ .png .jpg</h4>
                                 <div class="text-end">
                                     <!-- <div class="input-group mb-3">
@@ -163,13 +164,11 @@ if (!isset($_SESSION['username'])) {
                                         <input type="hidden" class="form-control" name="payment_date" required>
                                     </div>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text"><i class='bx bxs-bank fs-4' ></i></span>
+                                        <span class="input-group-text"><i class='bx bxs-bank fs-4'></i></span>
                                         <input type="file" class="form-control" name="slip_image" required>
                                     </div>
-                                    <a href="index.php"><button type="button"
-                                            class="btn text-white" style="background: #343a40;">เลือกสินค้า</button></a>
-                                    <a href=""><button type="submit"
-                                            class="btn btn-success">ยืนยันการสั่งซื้อ</button></a>
+                                    <a href="index.php"><button type="button" class="btn text-white" style="background: #343a40;">เลือกสินค้า</button></a>
+                                    <a href=""><button type="submit" class="btn btn-success">ยืนยันการสั่งซื้อ</button></a>
                                 </div>
                             </div>
 
@@ -193,7 +192,7 @@ if (!isset($_SESSION['username'])) {
 </html>
 <?php
 if (isset($_SESSION['cart-success'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             // position: "top-center",
@@ -202,12 +201,12 @@ if (isset($_SESSION['cart-success'])) {
             text: "Successfully",
             showConfirmButton: false,
             timer: 1500
-        }).then(function () {
+        }).then(function() {
             window.location.href = 'print_order.php';
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['cart-success']);
 }
 ?>
@@ -230,3 +229,4 @@ if (isset($_SESSION['cart-success'])) {
         });
     }
 </script>
+
