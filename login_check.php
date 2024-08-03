@@ -30,7 +30,7 @@ if (mysqli_num_rows($result) > 0) {
 
         if ($status == 0) {
             $_SESSION['success'] = "เข้าสู่ระบบสำเร็จ";
-            header('Location: login.php');
+            header('Location: index.php');
             exit();
         } elseif ($status == 1) {
             $_SESSION['success-admin'] = "เข้าสู่ระบบสำเร็จ";

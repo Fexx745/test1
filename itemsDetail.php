@@ -111,7 +111,7 @@ include('condb.php');
                                 <button class="btn btn-danger" type="submit"><i class='bx bx-send'></i> ส่งคอมเมนต์</button>
                             </form>
                         <?php } else { ?>
-                            <p>กรุณาเข้าสู่ระบบเพื่อคอมเมนต์</p>
+                            <!-- <p>กรุณาเข้าสู่ระบบเพื่อคอมเมนต์</p> -->
                         <?php } ?>
                     </div>
 
