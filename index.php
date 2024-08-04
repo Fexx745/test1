@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('condb.php');
 ?>
 
@@ -132,3 +133,24 @@ include('condb.php');
 
 <?php include('script-js.php'); ?>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+<?php
+    if (isset($_SESSION['reg_success'])) {
+    ?>
+        <script>
+            Swal.fire({
+                // position: "top-center",
+                icon: "success",
+                title: "ลงทะเบียนสำเร็จ!",
+                text: "ยินดีด้วยคุณได้สมัครสมาชิกเรียบร้อย",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                window.location.href = 'index.php';
+            });
+        </script>
+
+    <?php
+        unset($_SESSION['reg_success']);
+    }
+    ?>

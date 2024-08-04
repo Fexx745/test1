@@ -123,23 +123,3 @@
 
 </html>
 
-<?php
-if (isset($_SESSION['reg_success'])) {
-    ?>
-    <script>
-        Swal.fire({
-            // position: "top-center",
-            icon: "success",
-            title: "ลงทะเบียนสำเร็จ!",
-            text: "Successfully registered",
-            showConfirmButton: false,
-            timer: 1500
-        }).then(function() {
-            window.location.href = 'login.php';
-        });
-    </script>
-
-    <?php
-    unset($_SESSION['reg_success']);
-}
-?>

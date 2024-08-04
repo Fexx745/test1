@@ -222,11 +222,12 @@ nav {
                 & a {
                     font-size: 13px;
                 }
+
                 & p {
                     font-size: 13px;
                 }
             }
-            
+
 
             .nav-bottom-search button:hover {
                 background-color: #212529;
@@ -245,6 +246,51 @@ nav {
                     font-weight: 1000;
                 }
             }
+
+            .nav-bottom-cart {
+                .cart-shop-toggle {
+                    background-color: #fff;
+                    display: flex;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 40px;
+                    color: #333;
+                    width: 200px;
+                    padding: 10px;
+                    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+                    border-radius: 3px;
+                    z-index: 100;
+
+                    .cart-shop-toggle-items {
+                        display: flex;
+                        font-size: 12px;
+                        margin: 5px 0;
+                        border-bottom: 1px solid #e5e5e5;
+                        align-items: center;
+                        padding: 10px 0;
+                        justify-content: space-between;
+
+                        .cart-shop-toggle-items-img {
+                            width: 30px;
+                            height: 30px;
+
+                            & img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: contain;
+                            }
+                        }
+                    }
+
+                    .cart-shop-toggle-items:last-child {
+                        border: none;
+                    }
+
+                    .cart-shop-toggle-items p:last-child {
+                        color: var(--bs-danger);
+                        font-weight: 700;
+                    }
+                }
 
                 .cart-shop {
                     position: relative;
@@ -275,3 +321,12 @@ nav {
             }
         }
     }
+
+    .modal-dialog-centered {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        /* Full screen height */
+    }
+}

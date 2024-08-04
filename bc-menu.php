@@ -16,8 +16,8 @@
 
         <?php } else {  ?>
 
-            <li><a href="login.php">เข้าสู่ระบบ</a></li>
-            <li><a href="reg.php">สมัครสมาชิก</a></li>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a></li>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">สมัครสมาชิก</a></li>
         <?php
         } ?>
     </ul>

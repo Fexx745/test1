@@ -19,6 +19,10 @@ $row = mysqli_fetch_array($result);
         #navUserToggle {
             display: none;
         }
+
+        /* #cartShopToggle {
+            display: none;
+        } */
     </style>
 </head>
 
@@ -65,7 +69,7 @@ $row = mysqli_fetch_array($result);
                         </div>
                     </div>
                     <div class="nav-bottom-cart">
-                        <a href="cart.php" class="cart-shop">
+                        <div href="cart.php" class="cart-shop">
                             <div class="cart-count">
                                 <?php
                                 if (isset($_SESSION['inPro'])) {
@@ -76,7 +80,30 @@ $row = mysqli_fetch_array($result);
                                 ?>
                             </div>
                             <i class='bx bxs-cart-alt'></i>
-                        </a>
+                            <div id="cartShopToggle" class="cart-shop-toggle">
+                                <div class="cart-shop-toggle-items">
+                                    <div class="cart-shop-toggle-items-img">
+                                        <img src="assets/images/product/B-1 ทีเร็กซ์.jpg" alt="">
+                                    </div>
+                                    <p>1 ชิ้น</p>
+                                    <p>B500</p>
+                                </div>
+                                <div class="cart-shop-toggle-items">
+                                    <div class="cart-shop-toggle-items-img">
+                                        <img src="assets/images/product/B-1 ทีเร็กซ์.jpg" alt="">
+                                    </div>
+                                    <p>1 ชิ้น</p>
+                                    <p>B500</p>
+                                </div>
+                                <div class="cart-shop-toggle-items">
+                                    <div class="cart-shop-toggle-items-img">
+                                        <img src="assets/images/product/B-1 ทีเร็กซ์.jpg" alt="">
+                                    </div>
+                                    <p>1 ชิ้น</p>
+                                    <p>B500</p>
+                                </div>
+                            </div>
+                        </ก>
                     </div>
                 </div>
             <?php } else { ?>
@@ -90,7 +117,7 @@ $row = mysqli_fetch_array($result);
                     </div>
                     <div class="nav-top-user">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a>
-                        <a href="reg.php">สมัครสมาชิก</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">สมัครสมาชิก</a>
                     </div>
                 </div>
                 <div class="nav-bottom">
@@ -113,9 +140,10 @@ $row = mysqli_fetch_array($result);
         </div>
     </nav>
 
+
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="loginModalLabel">เข้าสู่ระบบ</h5>
@@ -132,7 +160,9 @@ $row = mysqli_fetch_array($result);
                             <input type="password" class="form-control" id="psw" name="psw" placeholder="Password" required>
                         </div>
 
-                        <div class="d-flex justify-content-end mb-3">
+                        <div class="d-flex justify-content-between mb-3">
+                            <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: green;">ลืมรหัสผ่าน ?</a>
+
                             <a href="#" onclick="togglePasswordVisibility()"><i id="togglePasswordIcon" class='bx bxs-low-vision fs-4'></i></a>
                         </div>
 
@@ -140,14 +170,111 @@ $row = mysqli_fetch_array($result);
                             <button class="btn btn-success" type="submit">Login</button>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <p class="mt-2">ยังไม่มีบัญชี? <a href="reg.php">สมัครสมาชิก</a></p>
-                            <a href="forgot-form.php" id="forgotpsw" class="mt-2">ลืมรหัสผ่าน ?</a>
+                            <!-- <p class="mt-2">ยังไม่มีบัญชี? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" style="text-decoration: none; color: green;">สมัครสมาชิก</a></p> -->
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Registration Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signupModalLabel">สมัครสมาชิก</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="reg_insert.php" method="POST" onsubmit="return validatePasswords()">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class='bx bx-user'></i></span>
+                            <select class="form-control" name="prefix">
+                                <option value="" disabled selected hidden class="text-muted">- Prefix -</option>
+                                <?php
+                                $options = array('นาย', 'นาง', 'นางสาว');
+                                foreach ($options as $option) {
+                                    echo "<option value='$option'>$option</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class='bx bx-user'></i></span>
+                            <input type="text" class="form-control" name="fname" placeholder="First Name" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class='bx bx-user'></i></span>
+                            <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class='bx bx-envelope'></i></span>
+                            <input type="email" class="form-control" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class='bx bx-location-plus'></i></span>
+                            <input type="text" class="form-control" name="address" placeholder="Address" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class='bx bx-phone'></i></span>
+                            <input type="number" class="form-control" name="phone" placeholder="Phone" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class='bx bx-user-circle'></i></span>
+                            <input type="text" class="form-control" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class='bx bx-lock-alt'></i></span>
+                            <input type="password" class="form-control" id="reg_psw" name="psw" placeholder="Password" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class='bx bx-lock-alt'></i></span>
+                            <input type="password" class="form-control" id="confirm_psw" name="confirm_psw" placeholder="Confirm Password" required>
+                        </div>
+                        <div class="d-flex justify-content-end mb-3">
+                            <!-- <p>มีบัญชีอยู่แล้ว ? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" style="text-decoration: none; color: green;">เข้าสู่ระบบ</a></p> -->
+                            <a href="#" onclick="toggleRegPasswordVisibility()"><i id="toggleRegPasswordIcon" class='bx bxs-low-vision fs-4'></i></a>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary" type="submit">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validatePasswords() {
+            var password = document.getElementById("reg_psw").value;
+            var confirmPassword = document.getElementById("confirm_psw").value;
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+
+        function toggleRegPasswordVisibility() {
+            var passwordInput = document.getElementById("reg_psw");
+            var confirmPasswordInput = document.getElementById("confirm_psw");
+            var passwordIcon = document.getElementById("toggleRegPasswordIcon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                confirmPasswordInput.type = "text";
+                passwordIcon.classList.remove("bxs-low-vision");
+                passwordIcon.classList.add("bx-low-vision");
+            } else {
+                passwordInput.type = "password";
+                confirmPasswordInput.type = "password";
+                passwordIcon.classList.remove("bx-low-vision");
+                passwordIcon.classList.add("bxs-low-vision");
+            }
+        }
+    </script>
 
     <!-- Add your scripts at the bottom -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -159,6 +286,7 @@ $row = mysqli_fetch_array($result);
     <script>
         $(document).ready(function() {
             $("#navUserToggle").hide();
+            // $("#cartShopToggle").hide();
 
             $("#navToggleProfile").click(function() {
                 $("#navUserToggle").slideToggle();
@@ -166,11 +294,34 @@ $row = mysqli_fetch_array($result);
             $("#navUserToggle").mouseleave(function() {
                 $(this).slideUp();
             });
+            $("#cartShop").click(function() {
+                $("#cartShopToggle").slideToggle();
+            });
+
+            $("#navUserToggle").mouseleave(function() {
+                $(this).slideUp();
+            });
+
         });
 
         function togglePasswordVisibility() {
             var passwordInput = document.getElementById("psw");
             var passwordIcon = document.getElementById("togglePasswordIcon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passwordIcon.classList.remove("bxs-low-vision");
+                passwordIcon.classList.add("bx-low-vision");
+            } else {
+                passwordInput.type = "password";
+                passwordIcon.classList.remove("bx-low-vision");
+                passwordIcon.classList.add("bxs-low-vision");
+            }
+        }
+
+        function toggleRegPasswordVisibility() {
+            var passwordInput = document.getElementById("reg_psw");
+            var passwordIcon = document.getElementById("toggleRegPasswordIcon");
 
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
@@ -203,21 +354,58 @@ $row = mysqli_fetch_array($result);
     </script>
 
     <?php
+    if (isset($_SESSION['reg_success'])) {
+    ?>
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "ลงทะเบียนสำเร็จ!",
+                // text: "คุณได้เข้าสู่ระบบเรียบร้อยแล้ว",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+    <?php
+        unset($_SESSION['reg_success']);
+    }
+    ?>
+    <?php
     if (isset($_SESSION['success'])) {
     ?>
         <script>
             Swal.fire({
                 icon: "success",
                 title: "เข้าสู่ระบบสำเร็จ!",
-                text: "Login successful",
+                // text: "คุณได้เข้าสู่ระบบเรียบร้อยแล้ว",
                 showConfirmButton: false,
                 timer: 1500
-            }).then(function () {
+            }).then(function() {
                 window.location.href = 'index.php';
             });
         </script>
     <?php
         unset($_SESSION['success']);
+    }
+    ?>
+
+    <?php
+    if (isset($_SESSION['success-admin'])) {
+    ?>
+        <script>
+            Swal.fire({
+                // position: "top-center",
+                icon: "success",
+                title: "เข้าสู่ระบบสำเร็จ!",
+                // text: "",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                window.location.href = 'admin/index.php';
+            });
+        </script>
+
+    <?php
+        unset($_SESSION['success-admin']);
     }
     ?>
 
@@ -228,13 +416,77 @@ $row = mysqli_fetch_array($result);
             Swal.fire({
                 icon: "error",
                 title: "ชื่อผู้ใช้หรือรหัสผ่านผิด!",
-                text: "Login failed",
+                text: "กรุณาลองใหม่อีกครั้ง",
                 showConfirmButton: false,
                 timer: 1800
             });
         </script>
     <?php
         unset($_SESSION['error']);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['Username_Already'])) {
+    ?>
+        <script>
+            Swal.fire({
+                icon: "warning",
+                title: "ชื่อผู้ใช้ถูกใช้ไปงานแล้ว!",
+                text: "กรุณาลองใหม่อีกครั้ง",
+                showConfirmButton: false,
+                timer: 1800
+            });
+        </script>
+    <?php
+        unset($_SESSION['Username_Already']);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['Email_Already'])) {
+    ?>
+        <script>
+            Swal.fire({
+                icon: "warning",
+                title: "อีเมลล์ถูกใช้ไปงานแล้ว!",
+                text: "กรุณาลองใหม่อีกครั้ง",
+                showConfirmButton: false,
+                timer: 1800
+            });
+        </script>
+    <?php
+        unset($_SESSION['Email_Already']);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['Phone_Already'])) {
+    ?>
+        <script>
+            Swal.fire({
+                icon: "warning",
+                title: "เบอร์โทรศัพท์ถูกใช้ไปงานแล้ว!",
+                text: "กรุณาลองใหม่อีกครั้ง",
+                showConfirmButton: false,
+                timer: 1800
+            });
+        </script>
+    <?php
+        unset($_SESSION['Phone_Already']);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['PswDo_notMatch'])) {
+    ?>
+        <script>
+            Swal.fire({
+                icon: "warning",
+                title: "รหัสผ่านไม่ตรงกัน!",
+                text: "กรุณาลองใหม่อีกครั้ง",
+                showConfirmButton: false,
+                timer: 1800
+            });
+        </script>
+    <?php
+        unset($_SESSION['PswDo_notMatch']);
     }
     ?>
 
@@ -245,7 +497,7 @@ $row = mysqli_fetch_array($result);
             Swal.fire({
                 icon: "success",
                 title: "เปลี่ยนรหัสสำเร็จ!",
-                text: "Password changed successfully.",
+                text: "กรุณาเข้าสู่ระบบใหม่อีกครั้ง",
                 showConfirmButton: false,
                 timer: 1500
             })
@@ -254,6 +506,7 @@ $row = mysqli_fetch_array($result);
         unset($_SESSION['psw_suc']);
     }
     ?>
+
 
 </body>
 
