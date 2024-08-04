@@ -19,10 +19,10 @@
 
     <footer>
         <div class="container">
-            <hr width="100%">
-            <div class="footer-last">
-                <p style="color: #6c757d; font-size: 13px;">© 2024 RMUTI. All Rights Reserved</p>
-            </div>
+                <hr width="100%">
+                <div class="footer-last">
+                    <p style="color: #6c757d; font-size: 13px;">© 2024 RMUTI. All Rights Reserved</p>
+                </div>
         </div>
 
 

@@ -235,14 +235,14 @@
 
 
     .btn-buy {
-        background: var(--bs-danger);
+        background: var(--bs-orange);
         color: #fff;
         font-size: 1rem;
     }
 
     .btn-cart {
         background: #fcf5f4;
-        border: 1px solid var(--bs-danger);
+        border: 1px solid var(--bs-orange);
         margin-right: 10px;
         font-size: 15px;
         font-weight: 600;

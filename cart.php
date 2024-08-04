@@ -146,20 +146,20 @@ if (!isset($_SESSION['inPro'])) {
                     <div class="container" style="margin-top: 20px; margin-bottom: 100px;">
                         <div class="row">
 
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <img style="width:600px; height: 600px; object-fit: cover;" src="assets/images/other/slip.jpg" alt="">
-                            </div> <!-- col-md-6 -->
+                            </div> -->
 
-                            <div class="col-md-6">
-                                <h4 class="alert alert-primary"><i class='bx bx-error-alt'></i>
+                            <div class="col-md-12">
+                                <h4 class="alert alert-danger"><i class='bx bx-error-alt'></i>
                                     &nbsp;ให้แนบสลิปการโอนทุกทั้งครับ/ค่ะ .png .jpg</h4>
                                 <div class="text-end">
-                                    <!-- <div class="input-group mb-3">
+                                    <div class="input-group mb-3">
                                         <span class="input-group-text"><i class='bx bx-money'></i></span>
                                         <input type="text" class="form-control" name="payment_amount"
                                             placeholder="จำนวนเงินที่ชำระ" required
                                             value="<?php echo number_format($sumPrice, 2); ?>" readonly>
-                                    </div> -->
+                                    </div>
                                     <div class="input-group">
                                         <input type="hidden" class="form-control" name="payment_date" required>
                                     </div>
@@ -168,12 +168,12 @@ if (!isset($_SESSION['inPro'])) {
                                         <input type="file" class="form-control" name="slip_image" required>
                                     </div>
                                     <a href="index.php"><button type="button" class="btn text-white" style="background: #343a40;">เลือกสินค้า</button></a>
-                                    <a href=""><button type="submit" class="btn btn-success">ยืนยันการสั่งซื้อ</button></a>
+                                    <a href=""><button type="submit" class="btn btn-danger">ยืนยันการสั่งซื้อ</button></a>
                                 </div>
                             </div>
 
-                        </div> <!-- row2 -->
-                    </div> <!-- container 2 -->
+                        </div>
+                    </div>
 
                 </div> <!-- col-md-13 -->
             </div> <!-- row -->

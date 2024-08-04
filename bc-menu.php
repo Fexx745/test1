@@ -36,7 +36,7 @@
             while ($row = mysqli_fetch_array($result)) {
             ?>
                 <li><a href="search_type_product.php?type_id=<?= $row['type_id'] ?>">
-                        <img src="assets/images/type_product/<?= $row['type_image'] ?>" alt="" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <img src="assets/images/type_product/<?= $row['type_image'] ?>" alt="" style="width: 15px; height: 15px; margin-right: 5px;">
                         <?= $row['type_name'] ?>
                     </a></li>
             <?php
