@@ -47,7 +47,7 @@
 
 .body-container {
     max-width: 1280px;
-    display: flex;
+    /* display: flex; */
     height: auto;
     padding: 10px;
     margin: 0 auto;
@@ -59,7 +59,8 @@
     .bc-showDetail {
         display: flex;
         flex-direction: column;
-        width: 60%;
+        /* background-color: #0a58ca; */
+        width: 80%;
         /* background-color: #0dcaf0; */
     }
 
@@ -99,13 +100,13 @@
                 display: flex;
                 padding: 15px;
                 margin: 15px 0;
-                background: #e5e5e5;
-                color: var(--bs-danger);
+                background: var(--bs-gray-100);
+                color: var(--bs-orange);
                 font-size: 1rem;
                 border-radius: 5px;
 
                 & h3:first-child {
-                    color: var(--bs-red);
+                    color: var(--bs-orange);
                     margin-right: 20px;
                     font-weight: 500;
                     font-size: 1.3rem;
@@ -186,7 +187,7 @@
             width: 100px;
             & label {
                 font-size: 13px;
-                color: #333;
+                /* color: #333; */
             }
             /* background-color: #0a58ca; */
 
@@ -194,14 +195,15 @@
                 resize: none;
                 border: none;
                 outline: none;
-                background: #e5e5e5;
-                font-size: 13px;
-                font-weight: 200;
+                background: var(--bs-gray-200);
+                font-size: 15px;
+                font-weight: 500;
                 width: 500px;
                 height: 150px;
                 color: #000;
                 margin: 10px 0;
                 border-radius: 10px;
+                padding: 5px;
             }
         }
     }
@@ -278,15 +280,24 @@
 }
 
 .reviews-section {
-    margin-top: 20px;
-    width: 20%;
+    /* margin-top: 20px; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 50px;
+    /* padding: 30px; */
     /* background-color: brown; */
-    position: absolute;
-    right: 0;
+    /* position: absolute; */
+    /* right: 0; */
+    /* top: 1000px; */
 
     .reviews-container {
-        max-height: 700px;
+        max-height: 500px;
+        width: 100%;
         overflow-y: auto;
+        /* background-color: #0a58ca; */
+        margin-top: 100px;
 
         .review {
             border-bottom: 1px solid #ddd;
@@ -298,14 +309,34 @@
             justify-content: space-between;
             align-items: center;
 
+            & strong {
+                font-weight: 500;
+                font-size: 15px;
+                /* color: var(--bs-gray-700); */
+                color: #333;
+            }
+
             .review-rating {
                 color: #f0c14b;
                 /* สีสำหรับดาว */
             }
         }
 
+        .review-body {
+            & p {
+                font-size: 14px;
+                font-weight: 300;
+                color: #333;
+            }
+        }
+
         .review-footer {
             margin-top: 10px;
+
+            & small {
+                color: var(--bs-gray-600);
+                font-size: 12px;
+            }
         }
 
     }

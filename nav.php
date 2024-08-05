@@ -115,7 +115,7 @@
                                         }
                                     }
                                     if (!$hasItems) {
-                                        echo "<p>ไม่มีสินค้า</p>";
+                                        echo "<p>ไม่มีสินค้าในตะกร้า ...</p>";
                                     } else {
                                         ?>
                                         <?php if ($itemCount >= 1) { // แสดงปุ่ม "ไปที่ตะกร้า" ถ้ามีสินค้ามากกว่า 3 รายการ 
@@ -154,7 +154,7 @@
             </div>
             <div class="nav-bottom">
                 <div class="nav-bottom-logo">
-                    <a href="index.php">RMUTI</a>
+                    <a href="index.php">RMUTI SHOP</a>
                 </div>
                 <div class="nav-bottom-search">
                     <input type="text" placeholder="Search...">
@@ -328,7 +328,7 @@
                 });
 
                 // เช็คว่ามีสินค้าในตะกร้าหรือไม่
-                if ($(".cart-count").text().trim() !== "0") {
+                // if ($(".cart-count").text().trim() !== "0") {
                     $("#cartShop").click(function() {
                         $("#cartShopToggle").slideDown();
                     });
@@ -336,7 +336,7 @@
                     $("#cartShopToggle").mouseleave(function() {
                         $(this).slideUp();
                     });
-                }
+                // }
             });
 
 

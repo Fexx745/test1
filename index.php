@@ -1,8 +1,8 @@
 <?php
+// เริ่มต้น session
 session_start();
 include('condb.php');
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,9 +18,7 @@ include('condb.php');
 <?php include('index_slideimg.php'); ?>
 
 <section class="body-container">
-    <?php
-    include('bc-menu.php');
-    ?>
+    <?php include('bc-menu.php'); ?>
 
     <div class="bc-show">
         <?php
@@ -30,7 +28,8 @@ include('condb.php');
         $sql = "SELECT p.*, ph.price, u.unit_name,
             (SELECT COUNT(*) FROM tb_order_detail WHERE tb_order_detail.p_id = p.p_id) AS sales_count,
             (SELECT AVG(rating) FROM product_reviews WHERE product_reviews.p_id = p.p_id) AS average_rating,
-            (SELECT COUNT(*) FROM product_reviews WHERE product_reviews.p_id = p.p_id) AS review_count
+            (SELECT COUNT(*) FROM product_reviews WHERE product_reviews.p_id = p.p_id) AS review_count,
+            p.discount
         FROM product p
         LEFT JOIN price_history ph ON p.p_id = ph.p_id
         LEFT JOIN unit_type u ON p.unit_id = u.unit_id
@@ -42,6 +41,9 @@ include('condb.php');
         while ($row = mysqli_fetch_array($result)) {
             // คำนวณคะแนนเฉลี่ย (ถ้ามีรีวิว)
             $average_rating = round($row['average_rating']);
+
+            // คำนวณราคาหลังจากลดราคา
+            $discounted_price = $row['price'] * (1 - $row['discount'] / 100);
         ?>
             <a href="itemsDetail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
                 <div class="bc-show-items-img">
@@ -64,7 +66,18 @@ include('condb.php');
                             <b>(<?= $row['review_count'] ?> รีวิว)</b>
                         </span>
                     </div>
-                    <h5><?= number_format($row['price'], 2) ?> ฿</h5>
+                    <div class="bc-show-items-price">
+                        <h5>
+                            <?php if ($row['discount'] > 0) { ?>
+                                <div class="bc-show-item-discount">
+                                    <span>-<?= $row['discount'] ?>%</span>
+                                </div>
+                                ฿<?= number_format($discounted_price, 2) ?>
+                            <?php } else { ?>
+                                ฿<?= number_format($row['price'], 2) ?>
+                            <?php } ?>
+                        </h5>
+                    </div>
                 </div>
             </a>
         <?php
@@ -72,10 +85,6 @@ include('condb.php');
         ?>
         <div class="pagination">
             <?php
-            $limit = 16; // จำนวนสินค้าที่แสดงในแต่ละหน้า
-            $page = isset($_GET['page']) ? $_GET['page'] : 1; // หมายเลขหน้าที่ต้องการแสดง
-            $start = ($page - 1) * $limit; // คำนวณเริ่มต้นแสดงผลสินค้า
-
             $sql = "SELECT COUNT(*) FROM product";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_row($result);
@@ -122,7 +131,6 @@ include('condb.php');
         </div>
 
     </div>
-
 </section>
 
 <?php include('footer.php'); ?>
@@ -135,22 +143,21 @@ include('condb.php');
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 <?php
-    if (isset($_SESSION['reg_success'])) {
-    ?>
-        <script>
-            Swal.fire({
-                // position: "top-center",
-                icon: "success",
-                title: "ลงทะเบียนสำเร็จ!",
-                text: "ยินดีด้วยคุณได้สมัครสมาชิกเรียบร้อย",
-                showConfirmButton: false,
-                timer: 1500
-            }).then(function() {
-                window.location.href = 'index.php';
-            });
-        </script>
-
-    <?php
-        unset($_SESSION['reg_success']);
-    }
-    ?>
+if (isset($_SESSION['reg_success'])) {
+?>
+    <script>
+        Swal.fire({
+            // position: "top-center",
+            icon: "success",
+            title: "ลงทะเบียนสำเร็จ!",
+            text: "ยินดีด้วยคุณได้สมัครสมาชิกเรียบร้อย",
+            showConfirmButton: false,
+            timer: 1500
+        }).then(function() {
+            window.location.href = 'index.php';
+        });
+    </script>
+<?php
+    unset($_SESSION['reg_success']);
+}
+?>

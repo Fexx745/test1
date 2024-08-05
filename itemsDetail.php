@@ -88,67 +88,67 @@ include('condb.php');
                         </div>
 
                     </div> <!-- bc-showDetail-top -->
-                    <div class="bc-showDetail-bottom">
-                        <!-- ฟอร์มสำหรับเพิ่มคอมเมนต์ -->
-                        <?php if (isset($_SESSION['username'])) { ?>
-                            <form action="add_review.php" method="POST" id="reviewForm">
-                                <input type="hidden" name="product_id" value="<?= $product_id ?>">
-                                <input type="hidden" name="rating" id="rating" value="1"> <!-- เก็บค่าคะแนนที่เลือก -->
-                                <div>
-                                    <label for="rating">ให้คะแนน และรีวิวสินค้า</label>
-                                    <div id="rating-stars">
-                                        <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                            <i class='bx bxs-star' data-value="<?= $i ?>" onclick="setRating(<?= $i ?>)"></i>
-                                        <?php } ?>
+                    <section class="reviews-section">
+                        <!-- <h3>รีวิว</h3> -->
+                        <div class="bc-showDetail-bottom">
+                            <!-- ฟอร์มสำหรับเพิ่มคอมเมนต์ -->
+                            <?php if (isset($_SESSION['username'])) { ?>
+                                <form action="add_review.php" method="POST" id="reviewForm">
+                                    <input type="hidden" name="product_id" value="<?= $product_id ?>">
+                                    <input type="hidden" name="rating" id="rating" value="1"> <!-- เก็บค่าคะแนนที่เลือก -->
+                                    <div>
+                                        <label for="rating">ให้คะแนน และรีวิวสินค้า</label>
+                                        <div id="rating-stars">
+                                            <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                                <i class='bx bxs-star' data-value="<?= $i ?>" onclick="setRating(<?= $i ?>)"></i>
+                                            <?php } ?>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="bc-showDetail-comment">
-                                    <!-- <label for="comment">คอมเมนต์</label> -->
-                                    <textarea name="comment" id="comment" required></textarea>
-                                </div>
-                                <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
+                                    <div class="bc-showDetail-comment">
+                                        <!-- <label for="comment">คอมเมนต์</label> -->
+                                        <textarea name="comment" id="comment" required></textarea>
+                                    </div>
+                                    <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
 
-                                <button class="btn btn-danger" type="submit"><i class='bx bx-send'></i> ส่งคอมเมนต์</button>
-                            </form>
-                        <?php } else { ?>
-                            <!-- <p>กรุณาเข้าสู่ระบบเพื่อคอมเมนต์</p> -->
-                        <?php } ?>
-                    </div>
+                                    <button class="btn btn-danger" type="submit"><i class='bx bx-send'></i> ส่งคอมเมนต์</button>
+                                </form>
+                            <?php } else { ?>
+                                <!-- <p>กรุณาเข้าสู่ระบบเพื่อคอมเมนต์</p> -->
+                            <?php } ?>
+                        </div>
+                        <div class="reviews-container">
+                            <?php if (mysqli_num_rows($result_reviews) > 0) { ?>
+                                <?php while ($review = mysqli_fetch_array($result_reviews)) { ?>
+                                    <div class="review">
+                                        <div class="review-header">
+                                            <strong><?= htmlspecialchars($review['firstname'] . ' ' . $review['lastname']) ?></strong>
+                                            <span class="review-rating">
+                                                <?php for ($i = 0; $i < $review['rating']; $i++) { ?>
+                                                    <i class='bx bxs-star'></i>
+                                                <?php } ?>
+                                                <?php for ($i = $review['rating']; $i < 5; $i++) { ?>
+                                                    <i class='bx bx-star'></i>
+                                                <?php } ?>
+                                            </span>
+                                        </div>
+                                        <div class="review-body">
+                                            <p><?= htmlspecialchars($review['comment']) ?></p>
+                                        </div>
+                                        <div class="review-footer">
+                                            <small>วันที่รีวิว: <?= date('d/m/Y H:i', strtotime($review['created_at'])) ?></small>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <!-- <p>ยังไม่มีรีวิวสำหรับสินค้านี้</p> -->
+                            <?php } ?>
+                        </div>
 
-
+                    </section>
                 </div>
 
                 <!-- แสดงรีวิว -->
-                <div class="reviews-section">
-                    <h3>รีวิว</h3>
-                    <div class="reviews-container">
-                        <?php if (mysqli_num_rows($result_reviews) > 0) { ?>
-                            <?php while ($review = mysqli_fetch_array($result_reviews)) { ?>
-                                <div class="review">
-                                    <div class="review-header">
-                                        <strong><?= htmlspecialchars($review['firstname'] . ' ' . $review['lastname']) ?></strong>
-                                        <span class="review-rating">
-                                            <?php for ($i = 0; $i < $review['rating']; $i++) { ?>
-                                                <i class='bx bxs-star'></i>
-                                            <?php } ?>
-                                            <?php for ($i = $review['rating']; $i < 5; $i++) { ?>
-                                                <i class='bx bx-star'></i>
-                                            <?php } ?>
-                                        </span>
-                                    </div>
-                                    <div class="review-body">
-                                        <p><?= htmlspecialchars($review['comment']) ?></p>
-                                    </div>
-                                    <div class="review-footer">
-                                        <small>วันที่รีวิว: <?= date('d/m/Y H:i', strtotime($review['created_at'])) ?></small>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        <?php } else { ?>
-                            <p>ยังไม่มีรีวิวสำหรับสินค้านี้</p>
-                        <?php } ?>
-                    </div>
-                </div>
+
 
 
         <?php
