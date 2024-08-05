@@ -3,7 +3,7 @@
     const DBHOST = 'localhost';
     const DBUSER = 'root';
     const DBPASS = '';
-    const DBNAME = 'myshop_rmuti';
+    const DBNAME = 'myshop';
 
     $dsn = 'mysql:host=' . DBHOST . ';dbname=' . DBNAME . '';
     $conn = null;

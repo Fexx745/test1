@@ -2,7 +2,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "myshop_rmuti";
+    $dbname = "myshop";
 
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
