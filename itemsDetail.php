@@ -45,6 +45,8 @@ include('condb.php');
             // ตรวจสอบว่าพบข้อมูลสินค้าหรือไม่
             if ($row = mysqli_fetch_array($result)) {
                 $product_quantity = $row['amount']; // เก็บจำนวนคงเหลือในตัวแปร PHP
+                // คำนวณราคาหลังจากลดราคา
+                $discounted_price = $row['price'] * (1 - $row['discount'] / 100);
         ?>
                 <div class="bc-showDetail">
                     <div class="bc-showDetail-top">
@@ -57,17 +59,16 @@ include('condb.php');
                         <div class="bc-showDetail-right">
                             <h2><?= $row['p_name'] ?></h2>
                             <div class="bc-showDetail-price">
-                                <h3><?= number_format($row['price'], 2) ?> ฿</h3>
+                                <?php if ($row['discount'] > 0) { ?>
+                                    <h3><del><?= number_format($row['price'], 2) ?> ฿</del> <span><?= number_format($discounted_price, 2) ?> ฿</span></h3>
+                                <?php } else { ?>
+                                    <h3><?= number_format($row['price'], 2) ?> ฿</h3>
+                                <?php } ?>
                             </div>
                             <div class="bc-showTextDetail">
                                 <div style="margin-bottom: 20px;">
                                     <span><?= $row['detail'] ?></span>
                                 </div>
-
-                                <!-- <div style="margin-bottom: -15px;">
-                                    <p>จัดอยู่ในประเภท: <span><?= $row['type_name'] ?></span></p>
-                                </div>
-                                <p>ยี่ห้อ: <span><?= $row['brand_name'] ?></span></p> -->
                             </div>
                             <div class="bc-showDetail-count">
                                 <p>จำนวน</p>
@@ -89,7 +90,6 @@ include('condb.php');
 
                     </div> <!-- bc-showDetail-top -->
                     <section class="reviews-section">
-                        <!-- <h3>รีวิว</h3> -->
                         <div class="bc-showDetail-bottom">
                             <!-- ฟอร์มสำหรับเพิ่มคอมเมนต์ -->
                             <?php if (isset($_SESSION['username'])) { ?>
@@ -105,15 +105,11 @@ include('condb.php');
                                         </div>
                                     </div>
                                     <div class="bc-showDetail-comment">
-                                        <!-- <label for="comment">คอมเมนต์</label> -->
                                         <textarea name="comment" id="comment" required></textarea>
                                     </div>
                                     <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
-
                                     <button class="btn btn-danger" type="submit"><i class='bx bx-send'></i> ส่งคอมเมนต์</button>
                                 </form>
-                            <?php } else { ?>
-                                <!-- <p>กรุณาเข้าสู่ระบบเพื่อคอมเมนต์</p> -->
                             <?php } ?>
                         </div>
                         <div class="reviews-container">
@@ -139,17 +135,10 @@ include('condb.php');
                                         </div>
                                     </div>
                                 <?php } ?>
-                            <?php } else { ?>
-                                <!-- <p>ยังไม่มีรีวิวสำหรับสินค้านี้</p> -->
                             <?php } ?>
                         </div>
-
                     </section>
                 </div>
-
-                <!-- แสดงรีวิว -->
-
-
 
         <?php
             } else {
@@ -181,7 +170,6 @@ include('condb.php');
         });
     }
 
-    // Optional: Add hover effect
     document.querySelectorAll('#rating-stars .bxs-star').forEach(star => {
         star.addEventListener('mouseover', function() {
             const rating = this.getAttribute('data-value');
@@ -202,7 +190,7 @@ include('condb.php');
 </script>
 
 <script>
-    var maxQuantity = <?= $product_quantity; ?>; // จำนวนคงเหลือจากฐานข้อมูล
+    var maxQuantity = <?= $product_quantity; ?>;
 
     document.querySelector('.btn-decrement').addEventListener('click', function() {
         var quantityInput = document.getElementById('quantity');

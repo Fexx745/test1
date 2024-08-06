@@ -40,7 +40,10 @@ include('condb.php');
 
         while ($row = mysqli_fetch_array($result)) {
             // คำนวณคะแนนเฉลี่ย (ถ้ามีรีวิว)
-            $average_rating = round($row['average_rating']);
+            $average_rating = round($row['average_rating'], 1); // ปรับให้เป็นทศนิยม 1 ตำแหน่ง
+            $full_stars = floor($average_rating); // จำนวนดาวเต็ม
+            $half_star = ($average_rating - $full_stars >= 0.5) ? true : false; // ตรวจสอบว่ามีครึ่งดาวหรือไม่
+            $empty_stars = 5 - $full_stars - ($half_star ? 1 : 0); // จำนวนดาวที่ว่างเปล่า
 
             // คำนวณราคาหลังจากลดราคา
             $discounted_price = $row['price'] * (1 - $row['discount'] / 100);
@@ -50,33 +53,36 @@ include('condb.php');
                     <img src="assets/images/product/<?= $row['image'] ?>" alt="<?= $row['p_name'] ?>">
                 </div>
                 <p><?= $row['p_name'] ?></p>
-                <div class="bc-show-items-detail">
-                    <span>ถูกซื้อแล้ว&nbsp;</span> <b><?= $row['sales_count'] ?>&nbsp</b> <span>ครั้ง</span>
+                <div class="bc-show-items-price">
+                    <h5>
+                        <?php if ($row['discount'] > 0) { ?>
+                            <div class="bc-show-item-discount">
+                                <span>-<?= $row['discount'] ?>%</span>
+                            </div>
+                            ฿<?= number_format($discounted_price, 2) ?>
+                        <?php } else { ?>
+                            ฿<?= number_format($row['price'], 2) ?>
+                        <?php } ?>
+                    </h5>
                 </div>
+
                 <div class="bc-show-items-view">
                     <div class="bc-show-items-view-product">
                         <span>
-                            <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                <?php if ($i <= $average_rating) { ?>
-                                    <i class='bx bxs-star'></i>
-                                <?php } else { ?>
-                                    <i class='bx bx-star'></i>
-                                <?php } ?>
+                            <?php for ($i = 1; $i <= $full_stars; $i++) { ?>
+                                <i class='bx bxs-star'></i>
                             <?php } ?>
-                            <b>(<?= $row['review_count'] ?> รีวิว)</b>
+                            <?php if ($half_star) { ?>
+                                <i class='bx bxs-star-half'></i>
+                            <?php } ?>
+                            <?php for ($i = 1; $i <= $empty_stars; $i++) { ?>
+                                <i class='bx bx-star'></i>
+                            <?php } ?>
+                            <b>&nbsp;(<?=$average_rating?>)</b>
                         </span>
                     </div>
-                    <div class="bc-show-items-price">
-                        <h5>
-                            <?php if ($row['discount'] > 0) { ?>
-                                <div class="bc-show-item-discount">
-                                    <span>-<?= $row['discount'] ?>%</span>
-                                </div>
-                                ฿<?= number_format($discounted_price, 2) ?>
-                            <?php } else { ?>
-                                ฿<?= number_format($row['price'], 2) ?>
-                            <?php } ?>
-                        </h5>
+                    <div class="bc-show-items-detail">
+                        <span>ขายแล้ว&nbsp;<?= $row['sales_count'] ?>&nbsp;<?= $row['unit_name'] ?></span>
                     </div>
                 </div>
             </a>
