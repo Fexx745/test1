@@ -32,11 +32,30 @@ include('condb.php');
             $result = mysqli_query($conn, $sql);
 
             // ดึงคอมเมนต์และคะแนนจากฐานข้อมูล
-            $sql_reviews = "SELECT r.*, u.username, u.firstname, u.lastname FROM product_reviews r
-            INNER JOIN tb_member u ON r.member_id = u.id
-            WHERE r.p_id = '$product_id'
-            ORDER BY r.created_at DESC";
+            $reviews_per_page = 4; // Number of reviews per page
+            $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $offset = ($current_page - 1) * $reviews_per_page;
+
+            $sql_reviews = "SELECT r.*, u.username, u.firstname, u.lastname 
+                            FROM product_reviews r
+                            INNER JOIN tb_member u ON r.member_id = u.id
+                            WHERE r.p_id = '$product_id'
+                            ORDER BY r.created_at DESC
+                            LIMIT $reviews_per_page OFFSET $offset";
             $result_reviews = mysqli_query($conn, $sql_reviews);
+
+            // คำนวณคะแนนดาวเฉลี่ย
+            $sql_average_rating = "SELECT AVG(rating) AS average_rating FROM product_reviews WHERE p_id = '$product_id'";
+            $result_average_rating = mysqli_query($conn, $sql_average_rating);
+            $row_average_rating = mysqli_fetch_assoc($result_average_rating);
+            $average_rating = $row_average_rating['average_rating'];
+
+
+            $sql_total_reviews = "SELECT COUNT(*) AS total FROM product_reviews WHERE p_id = '$product_id'";
+            $result_total_reviews = mysqli_query($conn, $sql_total_reviews);
+            $row_total_reviews = mysqli_fetch_assoc($result_total_reviews);
+            $total_reviews = $row_total_reviews['total'];
+            $total_pages = ceil($total_reviews / $reviews_per_page);
 
             // อัปเดตจำนวนการเข้าชม
             $sql2 = "UPDATE product SET p_view=p_view+1 WHERE p_id='$product_id'";
@@ -45,8 +64,6 @@ include('condb.php');
             // ตรวจสอบว่าพบข้อมูลสินค้าหรือไม่
             if ($row = mysqli_fetch_array($result)) {
                 $product_quantity = $row['amount']; // เก็บจำนวนคงเหลือในตัวแปร PHP
-                // คำนวณราคาหลังจากลดราคา
-                $discounted_price = $row['price'] * (1 - $row['discount'] / 100);
         ?>
                 <div class="bc-showDetail">
                     <div class="bc-showDetail-top">
@@ -59,11 +76,7 @@ include('condb.php');
                         <div class="bc-showDetail-right">
                             <h2><?= $row['p_name'] ?></h2>
                             <div class="bc-showDetail-price">
-                                <?php if ($row['discount'] > 0) { ?>
-                                    <h3><del><?= number_format($row['price'], 2) ?> ฿</del> <span><?= number_format($discounted_price, 2) ?> ฿</span></h3>
-                                <?php } else { ?>
-                                    <h3><?= number_format($row['price'], 2) ?> ฿</h3>
-                                <?php } ?>
+                                <h3><?= number_format($row['price'], 2) ?> ฿</h3>
                             </div>
                             <div class="bc-showTextDetail">
                                 <div style="margin-bottom: 20px;">
@@ -73,7 +86,7 @@ include('condb.php');
                             <div class="bc-showDetail-count">
                                 <p>จำนวน</p>
                                 <button type="button" class="btn-decrement">-</button>
-                                <input type="text" name="quantity" id="quantity" class="txt txt-count" value="1" min="1" readonly>
+                                <input type="number" name="quantity" id="quantity" class="txt txt-count" value="1" min="1">
                                 <button type="button" class="btn-increment">+</button>
                                 <span>เหลือ <?= $row['amount'] ?> <?= $row['unit_name'] ?></span>
                             </div>
@@ -91,13 +104,13 @@ include('condb.php');
                     </div> <!-- bc-showDetail-top -->
                     <section class="reviews-section">
                         <div class="bc-showDetail-bottom">
-                            <!-- ฟอร์มสำหรับเพิ่มคอมเมนต์ -->
+                            <!-- Form for adding comments -->
                             <?php if (isset($_SESSION['username'])) { ?>
                                 <form action="add_review.php" method="POST" id="reviewForm">
                                     <input type="hidden" name="product_id" value="<?= $product_id ?>">
-                                    <input type="hidden" name="rating" id="rating" value="1"> <!-- เก็บค่าคะแนนที่เลือก -->
+                                    <input type="hidden" name="rating" id="rating" value="1">
                                     <div>
-                                        <label for="rating">ให้คะแนน และรีวิวสินค้า</label>
+                                        <label for="rating">ให้คะแนนสินค้า:</label>
                                         <div id="rating-stars">
                                             <?php for ($i = 1; $i <= 5; $i++) { ?>
                                                 <i class='bx bxs-star' data-value="<?= $i ?>" onclick="setRating(<?= $i ?>)"></i>
@@ -108,14 +121,31 @@ include('condb.php');
                                         <textarea name="comment" id="comment" required></textarea>
                                     </div>
                                     <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
-                                    <button class="btn btn-danger" type="submit"><i class='bx bx-send'></i> ส่งคอมเมนต์</button>
+                                    <button class="btn btn-danger" type="submit"><i class='bx bx-send'></i> คอมเมนต์</button>
                                 </form>
                             <?php } ?>
+                        </div>
+                        <!-- Rating filter UI -->
+                        <div class="rating-filter">
+                            <div class="rating-filter-avg">
+                                <label><?= number_format($average_rating, 1) ?> <span>เต็ม 5</span></label>
+                                <div id="ratingStars">
+                                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                        <i class='bx bxs-star <?= $i <= round($average_rating) ? 'selected' : '' ?>'></i>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div id="ratingFilterButtons">
+                                <button class="rating-button" onclick="filterReviews(0)">คอมเมนต์ทั้งหมด</button>
+                                <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                    <button class="rating-button" onclick="filterReviews(<?= $i ?>)"><?= $i ?> <i class='bx bxs-star'></i></button>
+                                <?php } ?>
+                            </div>
                         </div>
                         <div class="reviews-container">
                             <?php if (mysqli_num_rows($result_reviews) > 0) { ?>
                                 <?php while ($review = mysqli_fetch_array($result_reviews)) { ?>
-                                    <div class="review">
+                                    <div class="review" data-rating="<?= $review['rating'] ?>">
                                         <div class="review-header">
                                             <strong><?= htmlspecialchars($review['firstname'] . ' ' . $review['lastname']) ?></strong>
                                             <span class="review-rating">
@@ -131,80 +161,92 @@ include('condb.php');
                                             <p><?= htmlspecialchars($review['comment']) ?></p>
                                         </div>
                                         <div class="review-footer">
-                                            <small>วันที่รีวิว: <?= date('d/m/Y H:i', strtotime($review['created_at'])) ?></small>
+                                            <small>Review Date: <?= date('d/m/Y H:i', strtotime($review['created_at'])) ?></small>
                                         </div>
                                     </div>
                                 <?php } ?>
                             <?php } ?>
                         </div>
+                        <?php
+                        // Pagination code
+                        echo '<ul class="pagination">';
+                        if ($current_page > 1) {
+                            echo '<li class="page-item">';
+                            echo '<a class="page-link" href="?id=' . $product_id . '&page=' . ($current_page - 1) . '" aria-label="Previous">';
+                            echo '<span aria-hidden="true"><i class="bx bx-chevron-left"></i></span>';
+                            echo '</a>';
+                            echo '</li>';
+                        }
+                        for ($i = 1; $i <= $total_pages; $i++) {
+                            echo '<li class="page-item ' . ($i == $current_page ? 'active' : '') . '">';
+                            echo '<a class="page-link" href="?id=' . $product_id . '&page=' . $i . '">' . $i . '</a>';
+                            echo '</li>';
+                        }
+                        if ($current_page < $total_pages) {
+                            echo '<li class="page-item">';
+                            echo '<a class="page-link" href="?id=' . $product_id . '&page=' . ($current_page + 1) . '" aria-label="Next">';
+                            echo '<span aria-hidden="true"><i class="bx bx-chevron-right"></i></span>';
+                            echo '</a>';
+                            echo '</li>';
+                        }
+                        echo '</ul>';
+                        ?>
                     </section>
-                </div>
+
+                </div> <!-- bc-showDetail -->
 
         <?php
             } else {
-                echo "ไม่พบข้อมูลสินค้า";
+                echo "<h3>ไม่พบสินค้าที่คุณกำลังค้นหา</h3>";
             }
         } else {
-            echo "ไม่มีการส่งค่า id มาหรือข้อมูลสินค้าไม่ถูกต้อง";
+            echo "<h3>ไม่พบสินค้าที่คุณกำลังค้นหา</h3>";
         }
         ?>
     </section>
-
-    <?php include('script-js.php'); ?>
     <?php include('footer.php'); ?>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script>
+        // ฟังก์ชันสำหรับตั้งค่าคะแนน
+        function setRating(rating) {
+            document.getElementById('rating').value = rating;
+            var stars = document.querySelectorAll('#rating-stars .bxs-star');
+            stars.forEach(function(star, index) {
+                if (index < rating) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+        }
+
+        // ฟังก์ชันสำหรับกรองคอมเมนต์
+        function filterReviews(rating) {
+            const reviews = document.querySelectorAll('.review');
+            reviews.forEach(review => {
+                if (rating == 0 || review.getAttribute('data-rating') == rating) {
+                    review.style.display = 'block';
+                } else {
+                    review.style.display = 'none';
+                }
+            });
+        }
+
+        // เพิ่มเหตุการณ์สำหรับปุ่ม increment และ decrement
+        document.querySelector('.btn-decrement').addEventListener('click', function() {
+            var quantity = document.getElementById('quantity');
+            if (quantity.value > 1) {
+                quantity.value--;
+            }
+        });
+
+        document.querySelector('.btn-increment').addEventListener('click', function() {
+            var quantity = document.getElementById('quantity');
+            var maxQuantity = <?= $row['amount'] ?>;
+            if (quantity.value < maxQuantity) {
+                quantity.value++;
+            }
+        });
+    </script>
 </body>
 
 </html>
-
-<script>
-    function setRating(rating) {
-        document.getElementById('rating').value = rating;
-        const stars = document.querySelectorAll('#rating-stars .bxs-star');
-        stars.forEach(star => {
-            if (star.getAttribute('data-value') <= rating) {
-                star.classList.add('selected');
-            } else {
-                star.classList.remove('selected');
-            }
-        });
-    }
-
-    document.querySelectorAll('#rating-stars .bxs-star').forEach(star => {
-        star.addEventListener('mouseover', function() {
-            const rating = this.getAttribute('data-value');
-            document.querySelectorAll('#rating-stars .bxs-star').forEach(star => {
-                if (star.getAttribute('data-value') <= rating) {
-                    star.classList.add('hover');
-                } else {
-                    star.classList.remove('hover');
-                }
-            });
-        });
-        star.addEventListener('mouseout', function() {
-            document.querySelectorAll('#rating-stars .bxs-star').forEach(star => {
-                star.classList.remove('hover');
-            });
-        });
-    });
-</script>
-
-<script>
-    var maxQuantity = <?= $product_quantity; ?>;
-
-    document.querySelector('.btn-decrement').addEventListener('click', function() {
-        var quantityInput = document.getElementById('quantity');
-        var currentValue = parseInt(quantityInput.value);
-        if (currentValue > parseInt(quantityInput.min)) {
-            quantityInput.value = currentValue - 1;
-        }
-    });
-
-    document.querySelector('.btn-increment').addEventListener('click', function() {
-        var quantityInput = document.getElementById('quantity');
-        var currentValue = parseInt(quantityInput.value);
-        if (currentValue < maxQuantity) {
-            quantityInput.value = currentValue + 1;
-        }
-    });
-</script>

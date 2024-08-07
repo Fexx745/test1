@@ -28,8 +28,7 @@ include('condb.php');
         $sql = "SELECT p.*, ph.price, u.unit_name,
             (SELECT COUNT(*) FROM tb_order_detail WHERE tb_order_detail.p_id = p.p_id) AS sales_count,
             (SELECT AVG(rating) FROM product_reviews WHERE product_reviews.p_id = p.p_id) AS average_rating,
-            (SELECT COUNT(*) FROM product_reviews WHERE product_reviews.p_id = p.p_id) AS review_count,
-            p.discount
+            (SELECT COUNT(*) FROM product_reviews WHERE product_reviews.p_id = p.p_id) AS review_count
         FROM product p
         LEFT JOIN price_history ph ON p.p_id = ph.p_id
         LEFT JOIN unit_type u ON p.unit_id = u.unit_id
@@ -44,9 +43,6 @@ include('condb.php');
             $full_stars = floor($average_rating); // จำนวนดาวเต็ม
             $half_star = ($average_rating - $full_stars >= 0.5) ? true : false; // ตรวจสอบว่ามีครึ่งดาวหรือไม่
             $empty_stars = 5 - $full_stars - ($half_star ? 1 : 0); // จำนวนดาวที่ว่างเปล่า
-
-            // คำนวณราคาหลังจากลดราคา
-            $discounted_price = $row['price'] * (1 - $row['discount'] / 100);
         ?>
             <a href="itemsDetail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
                 <div class="bc-show-items-img">
@@ -55,14 +51,7 @@ include('condb.php');
                 <p><?= $row['p_name'] ?></p>
                 <div class="bc-show-items-price">
                     <h5>
-                        <?php if ($row['discount'] > 0) { ?>
-                            <div class="bc-show-item-discount">
-                                <span>-<?= $row['discount'] ?>%</span>
-                            </div>
-                            ฿<?= number_format($discounted_price, 2) ?>
-                        <?php } else { ?>
-                            ฿<?= number_format($row['price'], 2) ?>
-                        <?php } ?>
+                        ฿<?= number_format($row['price'], 2) ?>
                     </h5>
                 </div>
 
@@ -78,7 +67,7 @@ include('condb.php');
                             <?php for ($i = 1; $i <= $empty_stars; $i++) { ?>
                                 <i class='bx bx-star'></i>
                             <?php } ?>
-                            <b>&nbsp;(<?=$average_rating?>)</b>
+                            <b>&nbsp;(<?= $average_rating ?>)</b>
                         </span>
                     </div>
                     <div class="bc-show-items-detail">

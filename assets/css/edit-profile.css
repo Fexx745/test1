@@ -84,24 +84,26 @@
         width: 120px;
         height: 30px;
         padding: 5px;
-        background-color: #0a7e07;
+        background-color: var(--bs-orange);
         color: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 10px;
+        border-radius: 7px;
         cursor: pointer;
     }
+
     .wait-status {
         width: 120px;
         height: 30px;
         padding: 5px;
-        background-color: var(--bs-warning);
-        color: #000;
+        background: #fcf5f4;
+        border: 1px solid var(--bs-orange);
+        color: #333;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 10px;
+        border-radius: 7px;
         cursor: pointer;
     }
 }
