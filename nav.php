@@ -193,13 +193,13 @@
                             </div>
 
                             <div class="d-flex justify-content-between mb-3">
-                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: green;">ลืมรหัสผ่าน ?</a>
+                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: red;">ลืมรหัสผ่าน ?</a>
 
-                                <a href="#" onclick="togglePasswordVisibility()"><i id="togglePasswordIcon" class='bx bxs-low-vision fs-4'></i></a>
+                                <a href="#" onclick="togglePasswordVisibility()"><i id="togglePasswordIcon" class='bx bxs-low-vision fs-4' style="color: red;"></i></a>
                             </div>
 
                             <div class="d-grid">
-                                <button class="btn btn-success" type="submit">Login</button>
+                                <button class="btn btn-danger" type="submit">Login</button>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <!-- <p class="mt-2">ยังไม่มีบัญชี? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" style="text-decoration: none; color: green;">สมัครสมาชิก</a></p> -->
