@@ -16,13 +16,14 @@ $orderID = intval($_GET['orderID']);
 
 $sql = "SELECT tb_order.orderID, tb_order.reg as order_date, tb_order.total_price, tb_order.order_status, tb_order.parcel_number,
                tb_order_detail.p_id, tb_order_detail.orderQty, tb_order_detail.Total,
-               product.p_name,
+               product.p_name, product.image,  /* เพิ่มการดึงข้อมูลชื่อไฟล์รูปภาพ */
                shipping_type.shipping_type_name
         FROM tb_order
         JOIN tb_order_detail ON tb_order.orderID = tb_order_detail.orderID
         JOIN product ON tb_order_detail.p_id = product.p_id
         LEFT JOIN shipping_type ON tb_order.shipping_type_id = shipping_type.shipping_type_id
         WHERE tb_order.orderID = ?";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $orderID);
 $stmt->execute();
@@ -65,35 +66,38 @@ function getOrderStatus($status)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details</title>
-    <?php include('script-css.php'); ?>
+    <?php include ('script-css.php'); ?>
 </head>
 
 <body>
-    <?php include('nav.php'); ?>
+    <?php include ('nav.php'); ?>
 
     <div class="body-container">
 
-        <?php include('bc-menu.php'); ?>
+        <?php include ('bc-menu.php'); ?>
 
         <div class="view-history-menu">
             <div class="col-mb-12 mt-2" style="margin-bottom: 20px;">
                 <h3><i class='bx bx-receipt'></i>&nbsp;รายละเอียดการสั่งซื้อ</h3>
             </div>
-            <?php if (empty($order_details)) : ?>
+            <?php if (empty($order_details)): ?>
                 <p>ไม่พบรายละเอียดการสั่งซื้อ</p>
-            <?php else : ?>
+            <?php else: ?>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
+                                <th scope="col">#</th>
                                 <th scope="col">ชื่อสินค้า</th>
                                 <th scope="col">จำนวน</th>
                                 <th scope="col">รวม (บาท)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($order_details['items'] as $item) : ?>
+                            <?php foreach ($order_details['items'] as $item): ?>
                                 <tr>
+                                    <td><img src="assets/images/product/<?= $row['image'] ?>"></td>
+
                                     <td><?php echo $item['product_name']; ?></td>
                                     <td><?php echo $item['orderQty']; ?></td>
                                     <td>฿<?php echo $item['Total']; ?></td>
@@ -118,11 +122,11 @@ function getOrderStatus($status)
         </div> <!-- end view-order-details -->
     </div> <!-- body-container -->
 
-    <?php include('footer.php'); ?>
+    <?php include ('footer.php'); ?>
 
 </body>
 
 </html>
 
-<?php include('script-js.php'); ?>
+<?php include ('script-js.php'); ?>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>

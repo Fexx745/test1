@@ -51,7 +51,7 @@ nav {
     width: 100%;
     height: auto;
     padding: 5px 0;
-    background-color: var(--bs-danger);
+    background: linear-gradient(195deg, #EC407A 0%, #D81B60 100%);
     margin-bottom: 20px;
     display: flex;
     justify-content: center;

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('condb.php');
+include ('condb.php');
 
 if (!isset($_SESSION['username'])) {
     header('Location: ../login.php');
@@ -10,22 +10,12 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-//รายการสั่งซื้อสินค้าที่ยังไม่ชำระเงิน
-$sql = "SELECT COUNT(orderID) as order_no FROM tb_order WHERE order_status='1' ";
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($result);
+// ตรวจสอบสินค้าที่หมดสต็อก (เหลือ 0 ชิ้น)
+$sql_out_of_stock = "SELECT p_name, amount FROM product WHERE amount = 0";
+$result_out_of_stock = mysqli_query($conn, $sql_out_of_stock);
+$out_of_stock_count = mysqli_num_rows($result_out_of_stock); // จำนวนสินค้าที่หมดสต็อก
 
-// //รายการสั่งซื้อที่ถูกยกเลิก
-$sql2 = "SELECT COUNT(orderID) as order_cancel FROM tb_order WHERE order_status='0' ";
-$result2 = mysqli_query($conn, $sql2);
-$row2 = mysqli_fetch_array($result2);
-
-// //รายการสั่งซื้อสินค้าที่ชำระเงินแล้ว
-$sql3 = "SELECT COUNT(orderID) as order_yes FROM tb_order WHERE order_status='2' ";
-$result3 = mysqli_query($conn, $sql3);
-$row3 = mysqli_fetch_array($result3);
-
-// //รายการสินค้าที่เหลือต่ำกว่า 10 ชิ้น
+// สินค้าทั้งหมด
 $sql4 = "SELECT COUNT(p_id) as all_pd FROM product";
 $result4 = mysqli_query($conn, $sql4);
 $row4 = mysqli_fetch_array($result4);
@@ -34,6 +24,8 @@ $row4 = mysqli_fetch_array($result4);
 $sql_low_stock = "SELECT p_name, amount FROM product WHERE amount < 10";
 $result_low_stock = mysqli_query($conn, $sql_low_stock);
 $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสินค้าที่น้อยกว่า 10 ชิ้น
+
+
 
 // เงื่อนไขสำหรับการแจ้งเตือนผ่าน LINE
 // if ($low_stock_count > 0) {
@@ -118,70 +110,103 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
 
 <body class="sb-nav-fixed">
 
-    <?php include('menu.php') ?>
+    <?php include ('menu.php') ?>
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4 mt-4">
-            <h1 class="mt-4">Dashboard</h1>
+                <h1 class="mt-4">Dashboard</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #dc3545;">
-                            <div class="card-body">รายการสินค้าทั้งหมด<h4>
-                                    <?= $row4['all_pd'] ?>
-                                </h4>
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #42424a 0%, #191919 100%);">
+                            <div class="card-body">
+                                สินค้าทั้งหมด<h5><?= $row4['all_pd'] ?> รายการ</h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="index.php"
-                                            style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-store'></i> สินค้าทั้งหมด</a></small></div>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #198754;">
-                            <div class="card-body">รายการสั่งซื้อสินค้า (ยังไม่ชำระเงิน)<h4>
-                                    <?= $row['order_no'] ?>
-                            </div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="report_order.php"
-                                            style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-error-alt'></i> ยังไม่ชำระเงิน</a></small></div>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #6f42c1;">
-                            <div class="card-body">รายการสั่งซื้อสินค้า (ชำระเงินแล้ว)<h4>
-                                    <?= $row3['order_yes'] ?></div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="report_order_yes.php"
-                                            style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-wallet'></i> ชำระเงินแล้ว</a></small></div>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #0d6efd;">
-                            <div class="card-body">สินค้าที่เหลือจำนวนต่ำกว่า 10 ชิ้น<h4>
-                                    <?= $row2['order_cancel'] ?>
-                                </h4>
-                            </div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="report_order_no.php"
-                                            style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-error-alt'></i> สินค้าที่เหลือต่ำกว่าเกณฑ์</a></small>
+                                <div>
+                                    <small>
+                                        <a href="#" style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bxs-store'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            สินค้าทั้งหมด
+                                        </a>
+                                    </small>
                                 </div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #fb8be9 0%, #D81B60 100%);">
+                            <div class="card-body">
+                                สินค้าต่ำกว่า 10 ชิ้น<h5><?= $low_stock_count ?> รายการ</h5>
+                            </div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <div>
+                                    <small>
+                                        <a href="#"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bx-error'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            สินค้าต่ำกว่าเกณฑ์
+                                        </a>
+                                    </small>
+                                </div>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #58d68d 0%, #43A047 100%);">
+                            <div class="card-body">
+                                สินค้าหมดสต็อก<h5><?= $out_of_stock_count ?> รายการ</h5>
+                            </div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <div>
+                                    <small>
+                                        <a href="#"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bx-error-alt'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            สินค้าหมดสต็อก
+                                        </a>
+                                    </small>
+                                </div>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <!-- <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #FFC107 0%, #FF9800 100%);"> -->
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #71cdf5 0%, #1A73E8 100%);">
+                            <div class="card-body">
+                                Comming Soon ... <h5> # </h5>
+                            </div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <div>
+                                    <small>
+                                        <a href="#"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bx-error'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            Comming Soon ...
+                                        </a>
+                                    </small>
+                                </div>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
 
                 <div class="card mb-4">
                     <div class="card-header">
@@ -265,15 +290,15 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
 
                         </table>
                         <div class="mt-4" class="mb-2">
-                                <a href="index.php" class="btn btn-primary">ย้อนกลับ</a>
+                            <a href="index.php" class="btn btn-primary">ย้อนกลับ</a>
                         </div>
                     </div> <!-- card-body -->
-                    
+
                 </div>
             </div>
         </main>
 
-        <?php include('footer.php') ?>
+        <?php include ('footer.php') ?>
     </div>
     </div>
 </body>

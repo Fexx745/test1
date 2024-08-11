@@ -67,7 +67,7 @@ include('condb.php');
                             <?php for ($i = 1; $i <= $empty_stars; $i++) { ?>
                                 <i class='bx bx-star'></i>
                             <?php } ?>
-                            <b>&nbsp;(<?= $average_rating ?>)</b>
+                            <b>&nbsp;(รีวิว <?= $average_rating ?><i class='bx bxs-star'></i>)</b>
                         </span>
                     </div>
                     <div class="bc-show-items-detail">

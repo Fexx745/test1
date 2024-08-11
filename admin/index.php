@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('condb.php');
+include ('condb.php');
 
 if (!isset($_SESSION['username'])) {
     header('Location: ../login.php');
@@ -15,20 +15,40 @@ $sql = "SELECT COUNT(id) as customer FROM tb_member";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
-// //รายการสั่งซื้อที่ถูกยกเลิก
-$sql2 = "SELECT SUM(total_price) as total_price FROM tb_order";
+// ยอดขายวันนี้
+$sql2 = "
+    SELECT SUM(total_price) as total_price 
+    FROM tb_order 
+    WHERE DATE(reg) = CURDATE()
+";
 $result2 = mysqli_query($conn, $sql2);
 $row2 = mysqli_fetch_array($result2);
+$total_sales_today = isset($row2['total_price']) ? $row2['total_price'] : 0;
 
-// //รายการสั่งซื้อสินค้าที่ชำระเงินแล้ว
-$sql3 = "SELECT COUNT(orderID) as order_yes FROM tb_order";
+
+//สั่งซื้อวันนี้
+$sql3 = "
+    SELECT COUNT(orderID) as order_today 
+    FROM tb_order 
+    WHERE DATE(reg) = CURDATE()
+";
 $result3 = mysqli_query($conn, $sql3);
 $row3 = mysqli_fetch_array($result3);
+$order_today = isset($row3['order_today']) ? $row3['order_today'] : 0;
 
-//จำนวนสินค้าทั้งหมด
-$sql4 = "SELECT COUNT(p_id) as all_pd FROM product";
+
+//ยอดขายเดือนนี้
+$sql4 = "
+    SELECT SUM(total_price) as total_sales_this_month 
+    FROM tb_order 
+    WHERE MONTH(reg) = MONTH(CURDATE()) 
+    AND YEAR(reg) = YEAR(CURDATE())
+";
 $result4 = mysqli_query($conn, $sql4);
 $row4 = mysqli_fetch_array($result4);
+$total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_sales_this_month'] : 0;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +87,7 @@ $row4 = mysqli_fetch_array($result4);
 
 <body class="sb-nav-fixed">
 
-    <?php include('menu.php') ?>
+    <?php include ('menu.php') ?>
     <div id="layoutSidenav_content" style="background: #fff;">
         <main>
             <div class="container-fluid px-4">
@@ -77,51 +97,62 @@ $row4 = mysqli_fetch_array($result4);
                 </ol>
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: linear-gradient(195deg, #42424a 0%, #191919 100%);">
-                            <div class="card-body">ลูกค้า<h4>
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #42424a 0%, #191919 100%);   ">
+                            <div class="card-body">ลูกค้า<h5>
                                     <?= $row['customer'] ?> คน
-                                </h4>
+                                </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="#" style="text-decoration: none; color: white;">
-                                            <i class='bx bx-user-circle' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bx-user-circle'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
                                             จำนวนผู้ใช้งานบนเว็บไซต์</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: linear-gradient(195deg, #EC407A 0%, #D81B60 100%);">
-                            <div class="card-body">ยอดขายทั้งหมด<h4>
-                                    <?= number_format($row2['total_price'], 2, '.', ',') ?> บาท
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #fb8be9 0%, #D81B60 100%);">
+                            <div class="card-body">ยอดขายวันนี้<h5>
+                                    <?= number_format($total_sales_today, 2) ?> บาท
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="#" style="text-decoration: none; color: white;">
-                                            <i class='bx bx-money' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> ยอดรวมรายได้ทั้งหมด</a></small></div>
+                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bx-money'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            ยอดขายวันนี้</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: linear-gradient(195deg, #66BB6A 0%, #43A047 100%);">
-                            <div class="card-body">สั่งซื้อทั้งหมด<h4>
-                                    <?= $row3['order_yes'] ?> รายการ</div>
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #58d68d 0%, #43A047 100%);">
+                            <div class="card-body">ยอดการสั่งซื้อวันนี้<h5>
+                                    <?= ($order_today) ?> รายการ</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="#" style="text-decoration: none; color: white;">
-                                            <i class='bx bx-list-ul' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> จำนวนรายการสั่งซื้อทั้งหมด</a></small></div>
+                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bx-list-ul'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            จำนวนการสั่งซื้อสินค้าวันนี้</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: linear-gradient(195deg, #49a3f1 0%, #1A73E8 100%);">
-                            <div class="card-body">จำนวนสินค้าทั้งหมด<h4>
-                                    <?= $row4['all_pd'] ?> รายการ
-                                </h4>
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #71cdf5 0%, #1A73E8 100%);">
+                            <div class="card-body">ยอดขายเดือนนี้<h5>
+                                    <?= number_format($total_sales_this_month, 2); ?> บาท
+                                </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="#" style="text-decoration: none; color: white;">
-                                            <i class='bx bx-box' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> จำนวนสินค้าทั้งหมด</a></small>
+                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bx-box'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            ยอดขายเดือนนี้</a></small>
                                 </div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
@@ -138,12 +169,17 @@ $row4 = mysqli_fetch_array($result4);
                             </div>
                         </div>
                         <div class="card-body-details">
-                            <div class="1"><a href="prd_show_product.php"><i class='bx bx-basket'></i>จัดการสินค้า</a></div>
-                            <div class="2"><a href="addproducttype.php"><i class='bx bx-category-alt'></i>จัดการประเภทสินค้า</a></div>
+                            <div class="1"><a href="prd_show_product.php"><i class='bx bx-basket'></i>จัดการสินค้า</a>
+                            </div>
+                            <div class="2"><a href="addproducttype.php"><i
+                                        class='bx bx-category-alt'></i>จัดการประเภทสินค้า</a></div>
                             <div class="3"><a href="addunit.php"><i class='bx bxl-unity'></i>จัดการหน่วยสินค้า</a></div>
-                            <div class="4"><a href="addbrand.php"><i class='bx bx-layout'></i>จัดการยี่ห้อสินค้า</a></div>
-                            <div class="5"><a href="show_account.php"><i class='bx bx-user-pin'></i>จัดการข้อมูลลูกค้า</a></div>
-                            <div class="6"><a href="addshipping.php"><i class='bx bx-car'></i>จัดการข้อมูลขนส่ง</a></div>
+                            <div class="4"><a href="addbrand.php"><i class='bx bx-layout'></i>จัดการยี่ห้อสินค้า</a>
+                            </div>
+                            <div class="5"><a href="show_account.php"><i
+                                        class='bx bx-user-pin'></i>จัดการข้อมูลลูกค้า</a></div>
+                            <div class="6"><a href="addshipping.php"><i class='bx bx-car'></i>จัดการข้อมูลขนส่ง</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-6">
@@ -154,12 +190,17 @@ $row4 = mysqli_fetch_array($result4);
                             </div>
                         </div>
                         <div class="card-body-details">
-                            <div class="1"><a href="report_order.php"><i class='bx bx-notepad'></i>ตรวจสอบการสั่งซื้อ</a></div>
+                            <div class="1"><a href="report_order.php"><i
+                                        class='bx bx-notepad'></i>ตรวจสอบการสั่งซื้อ</a></div>
                             <div class="2"><a href="#"><i class='bx bxs-calculator'></i>สร้างรายงานสรุปยอดขาย</a></div>
-                            <div class="3"><a href="editbanner.php"><i class='bx bxs-image'></i>แก้ไขรูปภาพแบนเนอร์</a></div>
-                            <div class="5"><a href="#"><i class='bx bxs-cog'></i><b style="color: red;">Coming Soon...</b></a></div>
-                            <div class="5"><a href="#"><i class='bx bx-window-close'></i><b style="color: red;">Coming Soon...</b></a></div>
-                            <div class="6"><a href="#"><i class='bx bx-window-close'></i><b style="color: red;">Coming Soon...</b></a></div>
+                            <div class="3"><a href="editbanner.php"><i class='bx bxs-image'></i>แก้ไขรูปภาพแบนเนอร์</a>
+                            </div>
+                            <div class="5"><a href="#"><i class='bx bxs-cog'></i><b style="color: red;">Coming
+                                        Soon...</b></a></div>
+                            <div class="5"><a href="#"><i class='bx bx-window-close'></i><b style="color: red;">Coming
+                                        Soon...</b></a></div>
+                            <div class="6"><a href="#"><i class='bx bx-window-close'></i><b style="color: red;">Coming
+                                        Soon...</b></a></div>
                         </div>
                     </div>
                 </div>
@@ -200,26 +241,28 @@ $row4 = mysqli_fetch_array($result4);
             </div>
         </main>
 
-        <?php include('footer.php') ?>
+        <?php include ('footer.php') ?>
     </div>
     </div>
 </body>
 
 </html>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
 <script src="js/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="assets/demo/chart-area-demo.js"></script>
 <script src="assets/demo/chart-bar-demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+    crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
 
 <!-- Chart -->
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/Chart.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         showGraph();
     });
 
@@ -227,7 +270,7 @@ $row4 = mysqli_fetch_array($result4);
     function showGraph() {
         {
             $.post("data_product.php",
-                function(data) {
+                function (data) {
                     console.log(data);
                     var name = [];
                     var marks = [];
@@ -260,7 +303,7 @@ $row4 = mysqli_fetch_array($result4);
     }
 </script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         showGraph1();
     });
 
@@ -268,7 +311,7 @@ $row4 = mysqli_fetch_array($result4);
     function showGraph1() {
         {
             $.post("data_sale.php",
-                function(data) {
+                function (data) {
                     console.log(data);
                     var name = [];
                     var marks = [];
@@ -304,7 +347,7 @@ $row4 = mysqli_fetch_array($result4);
 <!-- Your PHP code -->
 <?php
 if (isset($_SESSION['delete_product'])) {
-?>
+    ?>
     <script>
         Swal.fire({
             icon: "success",
@@ -314,7 +357,7 @@ if (isset($_SESSION['delete_product'])) {
             timer: 1500
         });
     </script>
-<?php
+    <?php
     unset($_SESSION['delete_product']);
 }
 ?>
@@ -340,7 +383,7 @@ if (isset($_SESSION['delete_product'])) {
 
 <?php
 if (isset($_SESSION['edit_product'])) {
-?>
+    ?>
     <script>
         Swal.fire({
             // position: "top-center",
@@ -349,19 +392,19 @@ if (isset($_SESSION['edit_product'])) {
             text: "Successfully",
             showConfirmButton: false,
             timer: 1500
-        }).then(function() {
+        }).then(function () {
             window.location.href = 'index.php';
         });
     </script>
 
-<?php
+    <?php
     unset($_SESSION['edit_product']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['editprice'])) {
-?>
+    ?>
     <script>
         Swal.fire({
             icon: "success",
@@ -371,14 +414,14 @@ if (isset($_SESSION['editprice'])) {
             timer: 1500
         });
     </script>
-<?php
+    <?php
     unset($_SESSION['editprice']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['addstock'])) {
-?>
+    ?>
     <script>
         Swal.fire({
             icon: "success",
@@ -388,7 +431,7 @@ if (isset($_SESSION['addstock'])) {
             timer: 1500
         });
     </script>
-<?php
+    <?php
     unset($_SESSION['addstock']);
 }
 ?>
