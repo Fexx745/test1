@@ -131,7 +131,7 @@ function getOrderStatus($status)
                                     </td>
                                     <td><?php echo $order['parcel_number'] ?: 'รอจัดส่ง'; ?></td>
                                     <td><?php echo $order['shipping_type_name']; ?></td>
-                                    <td class="text-center"><a href="order_detail.php?orderID=<?php echo $orderID; ?>" class="btn btn-success"><i class='bx bx-receipt'></i></a></td>
+                                    <td class="text-center"><a href="order_detail.php?orderID=<?php echo $orderID; ?>" class="btn btn-warning"><i class='bx bx-receipt'></i></a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

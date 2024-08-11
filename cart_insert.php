@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('condb.php');
+include ('condb.php');
 
 // ดึงข้อมูลการเข้าสู่ระบบของผู้ใช้ (เช่นชื่อผู้ใช้หรืออีเมล)
 $userID = $_SESSION['user_id']; // หรือใช้ข้อมูลการเข้าสู่ระบบที่คุณมีอยู่
@@ -129,5 +129,11 @@ unset($_SESSION["sum_price"]);
 
 $_SESSION['cart-success'] = "สั่งซื้อสินค้าสำเร็จ";
 header('Location: cart.php');
+unset($_SESSION["intLine"]);
+unset($_SESSION["strProductID"]);
+unset($_SESSION["strQty"]);
+unset($_SESSION["sum_price"]);
+unset($_SESSION["inPro"]);
+unset($_SESSION["dePro"]);
 exit();
 ?>

@@ -202,7 +202,7 @@ if (isset($_SESSION['cart-success'])) {
             showConfirmButton: false,
             timer: 1500
         }).then(function() {
-            window.location.href = 'print_order.php';
+            window.location.href = 'index.php';
         });
     </script>
 
