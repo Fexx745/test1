@@ -78,8 +78,7 @@ $row = mysqli_fetch_array($result);
                                 <tr>
                                     <th>#</th>
                                     <th>ยี่ห้อสินค้า</th>
-                                    <th>แก้ไข</th>
-                                    <th>ลบ</th>
+                                    <th>จัดการยี่ห้อสินค้า</th>
                                 </tr>
                             </thead>
                             <h3 class="alert alert-secondary mt-3 mb-3">ยี่ห้อสินค้าทั้งหมด</h3>
@@ -92,15 +91,9 @@ $row = mysqli_fetch_array($result);
                                     <tr>
                                         <td><?= $row['brand_id'] ?></td>
                                         <td><?= $row['brand_name'] ?></td>
-                                        <!-- <td>
-                                            <a class="btn btn-warning" href="prd_editbrand.php?id=<?= $row['brand_id'] ?>"><i class='bx bx-edit'></i>แก้ไข</a>
-                                        </td> -->
                                         <td>
-                                            <a class="btn btn-warning" href="javascript:void(0);" onclick="editBrand('<?= $row['brand_id'] ?>', '<?= $row['brand_name'] ?>')"><i class='bx bx-edit'></i>แก้ไข</a>
-                                        </td>
-
-                                        <td>
-                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['brand_id'] ?>')"><i class='bx bx-trash'></i>ลบ</a>
+                                            <a class="btn btn-warning" href="javascript:void(0);" onclick="editBrand('<?= $row['brand_id'] ?>', '<?= $row['brand_name'] ?>')"><i class='bx bx-pencil'></i></a>
+                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['brand_id'] ?>')"><i class='bx bx-trash-alt'></i></a>
                                         </td>
                                     </tr>
 
@@ -153,8 +146,8 @@ if (isset($_SESSION['addbrand'])) {
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "Are you sure?",
-            text: "คุณต้องการลบหรือไม่?",
+            title: "ต้องการลบสินค้าช้านี้?",
+            text: "กดยืนยันเพื่อยินยอมในการลบสินค้า",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

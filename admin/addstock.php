@@ -69,14 +69,13 @@ $row = mysqli_fetch_array($result);
                                 <input type="hidden" class="form-control-plaintext alert alert-warning" name="pid" value="<?= $row['p_id']; ?>" readonly>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-basket'></i></span>
+                                <span class="input-group-text"><i class='bx bx-cube'></i></span>
                                 <input type="text" class="form-control" name="pname" value="<?= $row['p_name']; ?>" readonly>
                             </div>
                             <h5 class="alert alert-danger"><i class='bx bx-error-circle'></i> สินค้าที่เพิ่มเข้าไปจะ + เพิ่มจากที่มีอยู่</h5>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bxs-cart-add'></i></span>
-                                <input type="text" class="form-control" name="amount" placeholder="เพิ่มสต็อกสินค้า"
-                                    required>
+                                <span class="input-group-text"><i class='bx bx-plus-circle'></i></span>
+                                <input type="text" class="form-control" name="amount" placeholder="เพิ่มสต็อกสินค้า" required>
                             </div>
                             <div class="mt-3">
                                 <a href="prd_show_product.php" class="btn btn-primary">ย้อนกลับ</a>
@@ -84,6 +83,7 @@ $row = mysqli_fetch_array($result);
                             </div>
                         </form>
                     </div> <!-- card-body -->
+
                 </div>
             </div>
         </main>
@@ -124,7 +124,7 @@ $row = mysqli_fetch_array($result);
 
 <?php
 if (isset($_SESSION['editstock'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             // position: "top-center",
@@ -133,12 +133,12 @@ if (isset($_SESSION['editstock'])) {
             text: "Successfully",
             showConfirmButton: false,
             timer: 1500
-        }).then(function () {
+        }).then(function() {
             window.location.href = 'index.php';
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['editstock']);
 }
 ?>

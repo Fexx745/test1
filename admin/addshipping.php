@@ -78,8 +78,7 @@ $row = mysqli_fetch_array($result);
                                 <tr>
                                     <th>#</th>
                                     <th>หน่วยสินค้า</th>
-                                    <th>แก้ไข</th>
-                                    <th>ลบ</th>
+                                    <th>จัดการข้อมูล</th>
                                 </tr>
                             </thead>
                             <h3 class="alert alert-secondary mt-3 mb-3">ขนส่งทั้งหมด</h3>
@@ -93,11 +92,8 @@ $row = mysqli_fetch_array($result);
                                         <td><?= $row['shipping_type_id'] ?></td>
                                         <td><?= $row['shipping_type_name'] ?></td>
                                         <td>
-                                            <a class="btn btn-warning" href="javascript:void(0);" onclick="editShipping('<?= $row['shipping_type_id'] ?>', '<?= $row['shipping_type_name'] ?>')"><i class='bx bx-edit'></i>แก้ไข</a>
-                                        </td>
-
-                                        <td>
-                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['shipping_type_id'] ?>')"><i class='bx bx-trash'></i>ลบ</a>
+                                            <a class="btn btn-warning" href="javascript:void(0);" onclick="editShipping('<?= $row['shipping_type_id'] ?>', '<?= $row['shipping_type_name'] ?>')"><i class='bx bx-pencil'></i></a>
+                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['shipping_type_id'] ?>')"><i class='bx bx-trash-alt'></i></a>
                                         </td>
                                     </tr>
                                 <?php

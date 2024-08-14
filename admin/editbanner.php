@@ -65,12 +65,12 @@ $row = mysqli_fetch_array($result);
                         <h3 class="alert alert-primary">เพิ่มรูปภาพแบนเนอร์ ขนาดรูปภาพแนะนำ 1920x500</h3>
                         <form method="POST" action="insert_banner.php" enctype="multipart/form-data">
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-image-alt' ></i></span>
+                                <span class="input-group-text"><i class='bx bx-image-alt'></i></span>
                                 <input type="text" class="form-control" name="banner_name" placeholder="ชื่อรูปภาพ"
                                     required>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-detail' ></i></span>
+                                <span class="input-group-text"><i class='bx bx-detail'></i></span>
                                 <input type="text" class="form-control" name="banner_detail" placeholder="รายละเอียดรูปภาพ">
                             </div>
                             <div class="mb-3 mt-3">
@@ -89,8 +89,7 @@ $row = mysqli_fetch_array($result);
                                     <th>รูปภาพ</th>
                                     <th>ชื่อรูปภาพ</th>
                                     <th>คำอธิบายรูปภาพ</th>
-                                    <th>แก้ไข</th>
-                                    <th>ลบ</th>
+                                    <th>จัดการข้อมูล</th>
                                 </tr>
                             </thead>
                             <h3 class="alert alert-secondary mt-3 mb-3">รูปภาพแสดงทั้งหมด</h3>
@@ -110,12 +109,10 @@ $row = mysqli_fetch_array($result);
                                         <td><?= $row['banner_name'] ?></td>
                                         <td><?= $row['banner_detail'] ?></td>
                                         <td>
-                                            <a class="btn btn-warning" href="edit_banner.php?id=<?= $row['banner_id'] ?>"><i class='bx bx-edit'></i>แก้ไข</a>
-                                        </td>
-                                        <td>
+                                            <a class="btn btn-warning" href="edit_banner.php?id=<?= $row['banner_id'] ?>"><i class='bx bx-pencil'></i></a>
                                             <a class="btn btn-danger" href="javascript:void(0);"
                                                 onclick="confirmDelete('<?= $row['banner_id'] ?>')"><i
-                                                    class='bx bx-trash'></i>ลบ</a>
+                                                    class='bx bx-trash-alt'></i></a>
                                         </td>
                                     </tr>
 
@@ -148,7 +145,7 @@ $row = mysqli_fetch_array($result);
 
 <?php
 if (isset($_SESSION['success'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             // position: "top-center",
@@ -160,7 +157,7 @@ if (isset($_SESSION['success'])) {
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['success']);
 }
 ?>
@@ -186,7 +183,7 @@ if (isset($_SESSION['success'])) {
 
 <?php
 if (isset($_SESSION['banner_update'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             // position: "top-center",
@@ -198,14 +195,14 @@ if (isset($_SESSION['banner_update'])) {
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['banner_update']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['deletebanner'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -215,7 +212,7 @@ if (isset($_SESSION['deletebanner'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['deletebanner']);
 }
 ?>

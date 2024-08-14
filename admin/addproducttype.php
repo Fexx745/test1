@@ -83,8 +83,7 @@ $row = mysqli_fetch_array($result);
                                     <th>#</th>
                                     <th>รูปภาพ</th>
                                     <th>ชื่อประเภทสินค้า</th>
-                                    <th>แก้ไข</th>
-                                    <th>ลบ</th>
+                                    <th>จัดการประเภทสินค้า</th>
                                 </tr>
                             </thead>
                             <h3 class="alert alert-secondary mt-3 mb-3">ประเภทสินค้าทั้งหมด</h3>
@@ -100,14 +99,9 @@ $row = mysqli_fetch_array($result);
                                             <img style="width: 100px; height: 100px; object-fit: cover;" src="../assets/images/type_product/<?= $row['type_image'] ?>" alt="รูปภาพ" onerror="this.src='../assets/images/other/no_img.png';">
                                         </td>
                                         <td><?= $row['type_name'] ?></td>
-                                        <!-- <td>
-                                            <a class="btn btn-warning" href="javascript:void(0);" onclick="editTypeProduct('<?= $row['type_id'] ?>', '<?= $row['type_name'] ?>')"><i class='bx bx-edit'></i>แก้ไข</a>
-                                        </td> -->
                                         <td>
-                                            <a class="btn btn-warning" href="prd_edit_typeproduct.php?id=<?= $row['type_id'] ?>"><i class='bx bx-edit'></i>แก้ไข</a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['type_id'] ?>')"><i class='bx bx-trash'></i>ลบ</a>
+                                            <a class="btn btn-warning" href="prd_edit_typeproduct.php?id=<?= $row['type_id'] ?>"><i class='bx bx-pencil'></i></a>
+                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['type_id'] ?>')"><i class='bx bx-trash-alt'></i></a>
                                         </td>
                                     </tr>
 
@@ -160,8 +154,8 @@ if (isset($_SESSION['edit_producttype'])) {
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "Are you sure?",
-            text: "คุณต้องการลบหรือไม่?",
+            title: "ต้องการลบสินค้าช้านี้?",
+            text: "กดยืนยันเพื่อยินยอมในการลบสินค้า",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

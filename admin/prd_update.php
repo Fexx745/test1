@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_query($conn, $updateQuery);
 
     if ($result) {
-        $_SESSION['edit_product'] = "แก้ไขสินค้า";
-        header('Location: prd_show_product.php');
+        $_SESSION['edit_product'] = "แก้ไขสินค้าเรียบร้อยแล้ว";
+        header('Location: prd_edit_product.php?id=' . $pid);
         exit();
     } else {
         echo "Error updating product information: " . mysqli_error($conn);

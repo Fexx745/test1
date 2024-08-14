@@ -65,11 +65,11 @@ $row = mysqli_fetch_array($result);
                         <h3 class="alert alert-primary">เพิ่มสินค้า</h3>
                         <form method="POST" action="insert_product.php" enctype="multipart/form-data">
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-basket'></i></span>
+                                <span class="input-group-text"><i class='bx bx-package'></i></span>
                                 <input type="text" class="form-control" name="p_name" placeholder="ชื่อสินค้า" required>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-book-reader' ></i></span>
+                                <span class="input-group-text"><i class='bx bx-detail'></i></span>
                                 <input type="text" class="form-control" name="detail" placeholder="รายละเอียดสินค้า"
                                     required>
                             </div>
@@ -78,7 +78,7 @@ $row = mysqli_fetch_array($result);
                                 <div class="col-md-4">
                                     <label for="">ประเภท&nbsp;&gt;</label>
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="typeprd"><i class='bx bx-layer-plus' ></i></label>
+                                        <label class="input-group-text" for="typeprd"><i class='bx bx-category'></i></label>
                                         <select name="typeprd" id="typeprd" class="form-select">
                                             <?php
                                             include('condb.php');
@@ -87,16 +87,16 @@ $row = mysqli_fetch_array($result);
 
                                             if (mysqli_num_rows($result) > 0) {
                                                 while ($rows = mysqli_fetch_array($result)) {
-                                                    ?>
+                                            ?>
                                                     <option value='<?php echo $rows['type_id']; ?>'>
                                                         <?php echo $rows['type_name']; ?>
                                                     </option>
-                                                    <?php
+                                                <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value=''>No types found</option>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </select>
@@ -106,7 +106,7 @@ $row = mysqli_fetch_array($result);
                                 <div class="col-md-4">
                                     <label for="">หน่วย&nbsp;&gt;</label>
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="unittype"><i class='bx bx-layer-plus' ></i></label>
+                                        <label class="input-group-text" for="unittype"><i class='bx bx-cube'></i></label>
                                         <select name="unittype" id="unittype" class="form-select">
                                             <?php
                                             include('condb.php');
@@ -115,16 +115,16 @@ $row = mysqli_fetch_array($result);
 
                                             if (mysqli_num_rows($result2) > 0) {
                                                 while ($row2 = mysqli_fetch_array($result2)) {
-                                                    ?>
+                                            ?>
                                                     <option value='<?php echo $row2['unit_id']; ?>'>
                                                         <?php echo $row2['unit_name']; ?>
                                                     </option>
-                                                    <?php
+                                                <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value=''>No types found</option>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </select>
@@ -134,7 +134,7 @@ $row = mysqli_fetch_array($result);
                                 <div class="col-md-4">
                                     <label for="">ยี่ห้อ&nbsp;&gt;</label>
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="brandprd"><i class='bx bx-layer-plus' ></i></label>
+                                        <label class="input-group-text" for="brandprd"><i class='bx bx-tag'></i></label>
                                         <select name="brandprd" id="brandprd" class="form-select">
                                             <?php
                                             include('condb.php');
@@ -143,16 +143,16 @@ $row = mysqli_fetch_array($result);
 
                                             if (mysqli_num_rows($result3) > 0) {
                                                 while ($row3 = mysqli_fetch_array($result3)) {
-                                                    ?>
+                                            ?>
                                                     <option value='<?php echo $row3['brand_id']; ?>'>
                                                         <?php echo $row3['brand_name']; ?>
                                                     </option>
-                                                    <?php
+                                                <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value=''>No types found</option>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </select>
@@ -161,15 +161,16 @@ $row = mysqli_fetch_array($result);
                             </div>
 
 
+
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-coin'></i></span>
+                                <span class="input-group-text"><i class='bx bx-money'></i></span>
                                 <input type="text" class="form-control" name="price" placeholder="ราคาสินค้า" required>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bxs-cart-add'></i></span>
-                                <input type="text" class="form-control" name="amount" placeholder="จำนวนสินค้า"
-                                    required>
+                                <span class="input-group-text"><i class='bx bx-package'></i></span>
+                                <input type="text" class="form-control" name="amount" placeholder="จำนวนสินค้า" required>
                             </div>
+
                             <div class="mb-3 mt-3">
                                 <label for="" class="mb-1">อัพโหลดรูปภาพ:</label>
                                 <input type="file" class="form-control" name="fileimage">
@@ -189,6 +190,7 @@ $row = mysqli_fetch_array($result);
     </div>
     </div>
 </body>
+
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -203,7 +205,7 @@ $row = mysqli_fetch_array($result);
 
 <?php
 if (isset($_SESSION['addproduct'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             // position: "top-center",
@@ -212,12 +214,12 @@ if (isset($_SESSION['addproduct'])) {
             text: "Successfully",
             showConfirmButton: false,
             timer: 1500
-        }).then(function () {
+        }).then(function() {
             window.location.href = 'index.php';
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['addproduct']);
 }
 ?>

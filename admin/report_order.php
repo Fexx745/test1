@@ -76,55 +76,59 @@ $row4 = mysqli_fetch_array($result4);
                 </ol>
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #dc3545;">
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #42424a 0%, #191919 100%);   ">
                             <div class="card-body">รายการสินค้าทั้งหมด<h4>
                                     <?= $row4['all_pd'] ?>
                                 </h4>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="index.php"
-                                            style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-store'></i> สินค้าทั้งหมด</a></small></div>
+                                <div><small><a href="prd_show_product.php"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bxs-store' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> สินค้าทั้งหมด</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #6f42c1;">
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #fb8be9 0%, #D81B60 100%);">
                             <div class="card-body">รายการสั่งซื้อสินค้า (ยังไม่ชำระเงิน)<h4>
                                     <?= $row['order_no'] ?>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="report_order.php"
-                                            style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-error-alt'></i> ยังไม่ชำระเงิน</a></small></div>
+                                <div><small><a href="report_order.php"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bxs-error-alt' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> ยังไม่ชำระเงิน</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #198754;">
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #58d68d 0%, #43A047 100%);">
                             <div class="card-body">รายการสั่งซื้อสินค้า (ชำระเงินแล้ว)<h4>
                                     <?= $row3['order_yes'] ?>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="report_order_yes.php"
-                                            style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-wallet'></i> ชำระเงินแล้ว</a></small></div>
+                                <div><small><a href="report_order_yes.php"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bxs-wallet' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> ชำระเงินแล้ว</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #0d6efd;">
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #71cdf5 0%, #1A73E8 100%);">
                             <div class="card-body">รายการสั่งซื้อสินค้า (ยกเลิก) 10 ชิ้น<h4>
                                     <?= $row2['order_cancel'] ?>
                                 </h4>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="report_order_no.php"
-                                            style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-error-alt'></i> ยกเลิกคำสั่งซื้อ</a></small>
+                                <div><small><a href="report_order_no.php"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bxs-error-alt' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> ยกเลิกคำสั่งซื้อ</a></small>
                                 </div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
@@ -136,54 +140,53 @@ $row4 = mysqli_fetch_array($result4);
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        แสดงข้อมูลการสั่งซื้อสินค้าที่ (ยังไม่ได้ชำระเงิน)
+                        แสดงข้อมูลการสั่งซื้อสินค้าที่รอการชำระเงิน
 
                         <div class="mt-3 mb-3">
                             <a href="report_order_yes.php"><button type="button"
-                                    class="btn" style="background: #198754; color: #fff;"><i class='bx bx-check-circle' ></i>&nbsp;ชำระเงินแล้ว</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #198754 0%, #20c997 100%); color: #fff;"><i class='bx bx-check-circle'></i>&nbsp;ชำระเงินแล้ว</button></a>
                             <a href="report_order.php"><button type="button"
-                                    class="btn" style="background: #6f42c1; color: #fff;"><i class='bx bxs-hourglass' ></i>&nbsp;ยังไม่ชำระเงิน</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #fd7e14 0%, #ffc107 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
                             <a href="report_order_no.php"><button type="button"
-                                    class="btn" style="background: #dc3545; color: #fff;"><i class='bx bx-rotate-right' ></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;"><i class='bx bx-x-circle'></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
                         </div>
-
-                        <div>
-                            <form name="form1" action="report_order.php" method="POST">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <input type="text" name="dt1" id="datepicker" class="form-control"
-                                            placeholder="ค้าหาตั้งแต่วันที่" readonly>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <input type="text" name="dt2" id="datepicker2" class="form-control"
-                                            placeholder="ถึงวันที่ ..." readonly>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <button type="submit" class="btn btn-primary"><i class='bx bx-search-alt' ></i></button>
-                                    </div>
+                        <form name="form1" action="report_order.php" method="POST">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <input type="text" name="dt1" id="datepicker" class="form-control"
+                                        placeholder="ค้นหาตั้งแต่วันที่" readonly>
                                 </div>
-                            </form>
-                        </div>
+                                <div class="col-sm-3">
+                                    <input type="text" name="dt2" id="datepicker2" class="form-control"
+                                        placeholder="ถึงวันที่ ..." readonly>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="submit" class="btn btn-block" style="background: linear-gradient(195deg, #0a58ca 0%, #0d6efd 100%); color: #fff;">
+                                        <i class='bx bx-search-alt'></i> ค้นหา
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="card-body">
-                        <table id="datatablesSimple" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>เลขที่ใบสั่งซื้อ</th>
-                                    <th>ลูกค้า</th>
-                                    <th>ที่อยู่จัดส่งสินค้า</th>
-                                    <th>เบอร์โทรศัพท์</th>
-                                    <th>ราคารวมสุทธิ</th>
-                                    <th>วันที่สั่งซื้อ</th>
-                                    <th>รอการตรวจสอบ</th>
-                                    <th>รายละเอียด</th>
-                                    <th>ปรับสถานะ</th>
-                                    <th>ยกเลิกการสั่งซื้อ</th>
-                                    <!-- <th>ลบคำสั่งซื้อ</th> -->
-                                </tr>
-                            </thead>
-                            <!-- search fill -->
-                            <!-- <tfoot>
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>เลขที่ใบสั่งซื้อ</th>
+                                <th>ลูกค้า</th>
+                                <th>ที่อยู่จัดส่งสินค้า</th>
+                                <th>เบอร์โทรศัพท์</th>
+                                <th>ราคารวมสุทธิ</th>
+                                <th>วันที่สั่งซื้อ</th>
+                                <th>สถานะ</th>
+                                <th>รายละเอียด</th>
+                                <th>ปรับสถานะ</th>
+                                <!-- <th>ลบคำสั่งซื้อ</th> -->
+                            </tr>
+                        </thead>
+                        <!-- search fill -->
+                        <!-- <tfoot>
                                 <tr>
                                     <th>orderID</th>
                                     <th>cus_name</th>
@@ -194,118 +197,116 @@ $row4 = mysqli_fetch_array($result4);
                                 </tr>
                             </tfoot> -->
 
-                            <tbody>
-                                <?php
-                                $ddt1 = @$_POST['dt1'];
-                                $ddt2 = @$_POST['dt2'];
+                        <tbody>
+                            <?php
+                            $ddt1 = @$_POST['dt1'];
+                            $ddt2 = @$_POST['dt2'];
 
-                                if ((!empty($ddt1)) && (!empty($ddt2))) {
-                                    echo '<div class="alert alert-secondary">';
-                                    echo "<strong>ค้นหาตั้งแต่วันที่</strong> " . $ddt1 . " <strong>ถึงวันที่</strong> " . $ddt2;
-                                    echo '</div>';
+                            if ((!empty($ddt1)) && (!empty($ddt2))) {
+                                echo '<div class="alert alert-secondary">';
+                                echo "<strong>ค้นหาตั้งแต่วันที่</strong> " . $ddt1 . " <strong>ถึงวันที่</strong> " . $ddt2;
+                                echo '</div>';
 
-                                    $date1 = date('Y-m-d', strtotime($ddt1));
-                                    $date2 = date('Y-m-d', strtotime($ddt2));
+                                $date1 = date('Y-m-d', strtotime($ddt1));
+                                $date2 = date('Y-m-d', strtotime($ddt2));
 
-                                    $sql = "SELECT *
+                                $sql = "SELECT *
                                     FROM tb_order o
                                     JOIN tb_member m ON o.member_id = m.id
                                     WHERE o.order_status = '1' AND o.reg BETWEEN '$date1' AND '$date2'
                                     ORDER BY o.reg DESC";
-                                } else {
-                                    $sql = "SELECT *
+                            } else {
+                                $sql = "SELECT *
                                     FROM tb_order o
                                     JOIN tb_member m ON o.member_id = m.id
                                     WHERE o.order_status = '1'
                                     ORDER BY o.reg DESC";
-                                }
+                            }
 
-                                $result = mysqli_query($conn, $sql);
+                            $result = mysqli_query($conn, $sql);
 
-                                while ($row = mysqli_fetch_array($result)) {
-                                    $status = $row['order_status'];
-                                    ?>
-                                    <tr>
-                                        <td>
-                                            <?= $row['orderID'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $row['prefix'] ?>
-                                            <?= $row['firstname'] ?>
-                                            <?= $row['lastname'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $row['address'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $row['telephone'] ?>
-                                        </td>
-                                        <td>
-                                            <span style="color: black; font-weight: bold;">
-                                                <?php echo number_format($row['total_price'], 2); ?>
-                                            </span>
+                            while ($row = mysqli_fetch_array($result)) {
+                                $status = $row['order_status'];
+                            ?>
+                                <tr>
+                                    <td>
+                                        <?= $row['orderID'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $row['prefix'] ?>
+                                        <?= $row['firstname'] ?>
+                                        <?= $row['lastname'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $row['address'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $row['telephone'] ?>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            <?php echo number_format($row['total_price'], 2); ?>
+                                        </span>
 
 
-                                        </td>
-                                        <td>
-                                            <?= $row['reg'] ?>
-                                        </td>
-                                        <td>
-                                            <div class="text-center">
+                                    </td>
+                                    <td>
+                                        <?= $row['reg'] ?>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
                                             <?php
                                             if ($status == 1) {
-                                                echo "<div class='' style='border-radius: 100px; background: #a272fa; color: #fff; padding: 5px;'><i class='bx bxs-hourglass' >รอตรวจสอบ</i></div>";
+                                                echo "<div class='' style='border-radius: 10px; background: linear-gradient(195deg, #42424a 0%, #191919 100%); color: #fff; padding: 5px;'>
+                                                    <i class='bx bxs-hourglass'></i>&nbsp;รอตรวจสอบ
+                                                  </div>";
                                             } else if ($status == 2) {
                                                 echo "<b style='color: green;'>ชำระเงินแล้ว</b>";
                                             } else if ($status == 0) {
                                                 echo "<b style='color: red;'>ยกเลิกการสั่งซื้อ</b>";
                                             }
                                             ?>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-center">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
                                             <a href="report_order_detail.php?id=<?= $row['orderID'] ?>"
-                                                class="btn" style="background: #f7d367;"><i class='bx bx-message-detail' ></i></a></td>
-                                            </div>
-                                        <td>
-                                           <div class="text-center">
-                                           <a class="btn btn-success" href="javascript:void(0);"
-                                                onclick="confirmOrder('<?= $row['orderID'] ?>')"><i class='bx bx-check-circle' ></i></a>
-                                           </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-center">
-                                            <a class="btn btn-danger" href="javascript:void(0);"
-                                                onclick="confirmCancelOrder('<?= $row['orderID'] ?>')"><i class='bx bx-rotate-right' ></i></a>
-                                            </div>
-                                        </td>
-                                        <!-- <td>
+                                                class="btn" style="background: linear-gradient(195deg, #fd7e14 0%, #ffc107 100%); color: #fff;"><i class='bx bx-message-detail'></i></a>
+                                        </div>
+                                    <td>
+                                        <div class="text-center">
+                                            <a class="btn" style="background: linear-gradient(195deg, #198754 0%, #20c997 100%); color: #fff;" href="javascript:void(0);"
+                                                onclick="confirmOrder('<?= $row['orderID'] ?>')"><i class='bx bx-check-circle'></i></a>
+                                            <a class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #df6a76 100%); color: #fff;" href="javascript:void(0);"
+                                                onclick="confirmCancelOrder('<?= $row['orderID'] ?>')"><i class='bx bx-rotate-right'></i></a>
+                                        </div>
+                                    </td>
+                                    <!-- <td>
                                             <div class="text-center">
                                             <a class="btn btn-primary" href="javascript:void(0);"
                                                 onclick="confirmDelete('<?= $row['orderID'] ?>')"><i
                                                     class='bx bx-trash'></i></a>
                                             </div>
                                         </td> -->
-                                    </tr>
-                                    <?php
-                                }
-                                mysqli_close($conn);
-                                ?>
+                                </tr>
+                            <?php
+                            }
+                            mysqli_close($conn);
+                            ?>
 
 
-                            </tbody>
+                        </tbody>
 
-                        </table>
-                        <div class="mt-4" class="mb-2">
-                            <a href="index.php" class="btn btn-primary">ย้อนกลับ</a>
-                        </div>
+                    </table>
+                    <div class="mt-4" class="mb-2">
+                        <a href="index.php" class="btn btn-primary">ย้อนกลับ</a>
                     </div>
                 </div>
             </div>
-        </main>
+    </div>
+    </main>
 
-        <?php include('footer.php') ?>
+    <?php include('footer.php') ?>
     </div>
     </div>
 </body>
@@ -338,7 +339,6 @@ $row4 = mysqli_fetch_array($result4);
         customWeekDays: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.']
         // customMonths: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
     });
-
 </script>
 
 <script>
@@ -400,7 +400,7 @@ $row4 = mysqli_fetch_array($result4);
 
 <?php
 if (isset($_SESSION['delete_order'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -410,7 +410,7 @@ if (isset($_SESSION['delete_order'])) {
             timer: 1000
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['delete_order']);
 }
 ?>

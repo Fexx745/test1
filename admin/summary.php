@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('condb.php');
+include('condb.php');
 
 if (!isset($_SESSION['username'])) {
     header('Location: ../login.php');
@@ -89,7 +89,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
 
 <body class="sb-nav-fixed">
 
-    <?php include ('menu.php') ?>
+    <?php include('menu.php') ?>
     <div id="layoutSidenav_content" style="background: #fff;">
         <main>
             <div class="container-fluid px-4">
@@ -165,32 +165,37 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                 <!-- สรุปยอดขายรายเดือน -->
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
+                        <i class="bx bx-line-chart me-1"></i>
                         สรุปยอดขายรายเดือน
                     </div>
+
                     <div class="card-body">
                         <form name="form2" action="sales_summary.php" method="POST">
-                            <label for="">สรุปยอดขายรายเดือน</label>
                             <div class="row">
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="text" name="dt1" id="datepicker1" class="form-control"
                                         placeholder="ค้าหาตั้งแต่วันที่" readonly>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="text" name="dt2" id="datepicker2" class="form-control"
                                         placeholder="ถึงวันที่ ..." readonly>
                                 </div>
-                                <div class="col-sm-4">
-                                    <button type="submit" class="btn btn-primary"><i
-                                            class='bx bx-search-alt'></i></button>
+                                <div class="col-sm-3">
+                                    <button type="submit" class="btn btn-block" style="background: linear-gradient(195deg, #0a58ca 0%, #0d6efd 100%); color: #fff;">
+                                        <i class='bx bx-search-alt'></i> ค้นหา
+                                    </button>
                                 </div>
                             </div>
                         </form>
+                        <div class="mt-4" class="mb-2">
+                            <a href="index.php" class="btn btn-primary">ย้อนกลับ</a>
+                        </div>
                     </div>
                 </div>
 
+
                 <script>
-                    $(function () {
+                    $(function() {
                         $("#datepicker1").datepicker({
                             dateFormat: 'yy-mm-dd'
                         });
@@ -207,5 +212,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
 
 </html>
 
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>

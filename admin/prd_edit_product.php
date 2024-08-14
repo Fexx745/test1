@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('condb.php');
+include('condb.php');
 
 if (!isset($_SESSION['username'])) {
     header('Location: ../login.php');
@@ -56,7 +56,7 @@ $row = mysqli_fetch_array($result);
 
 <body class="sb-nav-fixed">
 
-    <?php include ('menu.php') ?>
+    <?php include('menu.php') ?>
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4 mt-4">
@@ -73,18 +73,17 @@ $row = mysqli_fetch_array($result);
                                     value="<?= $row['p_id']; ?>" readonly>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-basket'></i></span>
+                                <span class="input-group-text"><i class='bx bx-package'></i></span>
                                 <input type="text" class="form-control" name="pname" value="<?= $row['p_name']; ?>">
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-book-reader'></i></span>
+                                <span class="input-group-text"><i class='bx bx-detail'></i></span>
                                 <input type="text" class="form-control" name="detail" value="<?= $row['detail']; ?>">
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="">ประเภท&nbsp;&gt;</label>
                                     <?php
-                                    // Using LEFT JOIN to get all types even if there are no products with that type
                                     $sql5 = "SELECT DISTINCT t.type_id, t.type_name 
                                     FROM product_type as t 
                                     LEFT JOIN product as p 
@@ -93,17 +92,16 @@ $row = mysqli_fetch_array($result);
                                     $result5 = mysqli_query($conn, $sql5);
 
                                     if ($result5) {
-
-                                        // Check if there are any rows returned
                                         if (mysqli_num_rows($result5) > 0) {
                                             echo '<div class="input-group mb-3">';
-                                            echo '<label class="input-group-text" for="typeprd"><i class="bx bx-layer-plus"></i></label>';
+                                            echo '<label class="input-group-text" for="typeprd"><i class="bx bx-category-alt"></i></label>';
                                             echo '<select name="typeprd" class="form-select">';
+
                                             while ($typeRow = mysqli_fetch_assoc($result5)) {
-                                                // Debugging: Output each row
-                                                echo "Type ID: " . $typeRow['type_id'] . " - Type Name: " . $typeRow['type_name'] . "<br>";
-                                                echo '<option value="' . $typeRow['type_id'] . '">' . $typeRow['type_name'] . '</option>';
+                                                $selected = ($row['type_id'] == $typeRow['type_id']) ? 'selected' : '';
+                                                echo '<option value="' . $typeRow['type_id'] . '" ' . $selected . '>' . $typeRow['type_name'] . '</option>';
                                             }
+
                                             echo '</select>';
                                             echo '</div>';
                                         } else {
@@ -113,35 +111,36 @@ $row = mysqli_fetch_array($result);
                                         echo 'Error: ' . mysqli_error($conn);
                                     }
 
-                                    mysqli_close($conn); // Close the database connection
+                                    mysqli_close($conn);
                                     ?>
                                 </div>
+
 
 
                                 <div class="col-md-4">
                                     <label for="">หน่วย&nbsp;&gt;</label>
                                     <div class="input-group mb-3">
                                         <label class="input-group-text" for="unittype"><i
-                                                class='bx bx-layer-plus'></i></label>
+                                                class='bx bx-cube'></i></label>
                                         <select name="unittype" id="unittype" class="form-select">
                                             <?php
-                                            include ('condb.php');
+                                            include('condb.php');
                                             $sql2 = "SELECT DISTINCT u.unit_id, u.unit_name FROM unit_type as u ORDER BY u.unit_id";
                                             $result2 = mysqli_query($conn, $sql2);
 
                                             if (mysqli_num_rows($result2) > 0) {
                                                 while ($row2 = mysqli_fetch_assoc($result2)) {
-                                                    ?>
+                                            ?>
                                                     <option value="<?= $row2['unit_id']; ?>"
                                                         <?= ($row['unit_id'] == $row2['unit_id']) ? 'selected' : ''; ?>>
                                                         <?= $row2['unit_name']; ?>
                                                     </option>
-                                                    <?php
+                                                <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value='' disabled>No types found</option>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </select>
@@ -153,26 +152,26 @@ $row = mysqli_fetch_array($result);
                                     <label for="">ยี่ห้อ&nbsp;&gt;</label>
                                     <div class="input-group mb-3">
                                         <label class="input-group-text" for="brandprd"><i
-                                                class='bx bx-layer-plus'></i></label>
+                                                class='bx bx-tag'></i></label>
                                         <select name="brandprd" id="brandprd" class="form-select">
                                             <?php
-                                            include ('condb.php');
+                                            include('condb.php');
                                             $sql3 = "SELECT DISTINCT b.brand_id, b.brand_name FROM brand_type as b ORDER BY b.brand_id";
                                             $result3 = mysqli_query($conn, $sql3);
 
                                             if (mysqli_num_rows($result3) > 0) {
                                                 while ($row3 = mysqli_fetch_assoc($result3)) {
-                                                    ?>
+                                            ?>
                                                     <option value="<?= $row3['brand_id']; ?>"
                                                         <?= ($row['brand_id'] == $row3['brand_id']) ? 'selected' : ''; ?>>
                                                         <?= $row3['brand_name']; ?>
                                                     </option>
-                                                    <?php
+                                                <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value='' disabled>No brands found</option>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </select>
@@ -180,10 +179,10 @@ $row = mysqli_fetch_array($result);
 
                                 </div>
                             </div>
-
+                            <label for="">จำนวนสินค้าในสต็อก&nbsp;&gt;</label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bxs-cart-add'></i></span>
-                                <input type="number" class="form-control" name="amount" value="<?= $row['amount']; ?>">
+                                <span class="input-group-text"><i class='bx bx-layer'></i></span>
+                                <input type="number" class="form-control" name="amount" value="<?= $row['amount']; ?>" placeholder="จำนวนสินค้าในสต็อก">
                             </div>
                             <div class="mb-3 mt-3">
                                 <img src="../assets/images/product/<?= $row['image'] ?>" alt="รูปภาพปัจจุบัน"
@@ -200,7 +199,7 @@ $row = mysqli_fetch_array($result);
             </div>
         </main>
 
-        <?php include ('footer.php') ?>
+        <?php include('footer.php') ?>
     </div>
     </div>
 </body>
@@ -216,3 +215,22 @@ $row = mysqli_fetch_array($result);
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
     crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+
+<?php
+if (isset($_SESSION['edit_product'])) {
+?>
+    <script>
+        Swal.fire({
+            // position: "top-center",
+            icon: "success",
+            title: "แก้ไขสำเร็จ!",
+            text: "Successfully",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+
+<?php
+    unset($_SESSION['edit_product']);
+}
+?>

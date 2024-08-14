@@ -192,7 +192,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                         <div class="card-body-details">
                             <div class="1"><a href="report_order.php"><i
                                         class='bx bx-notepad'></i>ตรวจสอบการสั่งซื้อ</a></div>
-                            <div class="2"><a href="#"><i class='bx bxs-calculator'></i>สร้างรายงานสรุปยอดขาย</a></div>
+                            <div class="2"><a href="summary.php"><i class='bx bxs-calculator'></i>สร้างรายงานสรุปยอดขาย</a></div>
                             <div class="3"><a href="editbanner.php"><i class='bx bxs-image'></i>แก้ไขรูปภาพแบนเนอร์</a>
                             </div>
                             <div class="5"><a href="#"><i class='bx bxs-cog'></i><b style="color: red;">Coming

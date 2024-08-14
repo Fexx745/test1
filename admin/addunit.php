@@ -78,8 +78,7 @@ $row = mysqli_fetch_array($result);
                                 <tr>
                                     <th>#</th>
                                     <th>หน่วยสินค้า</th>
-                                    <th>แก้ไข</th>
-                                    <th>ลบ</th>
+                                    <th>จัดการหน่วยสินค้า</th>
                                 </tr>
                             </thead>
                             <h3 class="alert alert-secondary mt-3 mb-3">หน่วยสินค้าทั้งหมด</h3>
@@ -92,15 +91,9 @@ $row = mysqli_fetch_array($result);
                                     <tr>
                                         <td><?= $row['unit_id'] ?></td>
                                         <td><?= $row['unit_name'] ?></td>
-                                        <!-- <td>
-                                            <a class="btn btn-warning" href="prd_editunit.php?id=<?= $row['unit_id'] ?>"><i class='bx bx-edit'></i>แก้ไข</a>
-                                        </td> -->
                                         <td>
-                                            <a class="btn btn-warning" href="javascript:void(0);" onclick="editUnit('<?= $row['unit_id'] ?>', '<?= $row['unit_name'] ?>')"><i class='bx bx-edit'></i>แก้ไข</a>
-                                        </td>
-
-                                        <td>
-                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['unit_id'] ?>')"><i class='bx bx-trash'></i>ลบ</a>
+                                            <a class="btn btn-warning" href="javascript:void(0);" onclick="editUnit('<?= $row['unit_id'] ?>', '<?= $row['unit_name'] ?>')"><i class='bx bx-pencil'></i></a>
+                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['unit_id'] ?>')"><i class='bx bx-trash-alt'></i></a>
                                         </td>
                                     </tr>
 
@@ -153,8 +146,8 @@ if (isset($_SESSION['addunit'])) {
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "Are you sure?",
-            text: "คุณต้องการลบหรือไม่?",
+            title: "ต้องการลบสินค้าช้านี้?",
+            text: "กดยืนยันเพื่อยินยอมในการลบสินค้า",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

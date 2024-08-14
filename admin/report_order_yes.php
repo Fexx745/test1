@@ -70,51 +70,59 @@ $row4 = mysqli_fetch_array($result4);
                 </ol>
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #dc3545;">
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #42424a 0%, #191919 100%);   ">
                             <div class="card-body">รายการสินค้าทั้งหมด<h4>
                                     <?= $row4['all_pd'] ?>
                                 </h4>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="index.php" style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-store'></i> สินค้าทั้งหมด</a></small></div>
+                                <div><small><a href="index.php"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bxs-store' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> สินค้าทั้งหมด</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #6f42c1;">
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #fb8be9 0%, #D81B60 100%);">
                             <div class="card-body">รายการสั่งซื้อสินค้า (ยังไม่ชำระเงิน)<h4>
                                     <?= $row['order_no'] ?>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="report_order.php" style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-error-alt'></i> ยังไม่ชำระเงิน</a></small></div>
+                                <div><small><a href="report_order.php"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bxs-error-alt' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> ยังไม่ชำระเงิน</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #198754;">
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #58d68d 0%, #43A047 100%);">
                             <div class="card-body">รายการสั่งซื้อสินค้า (ชำระเงินแล้ว)<h4>
                                     <?= $row3['order_yes'] ?>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="report_order_yes.php" style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-wallet'></i> ชำระเงินแล้ว</a></small></div>
+                                <div><small><a href="report_order_yes.php"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bxs-wallet' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> ชำระเงินแล้ว</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4" style="background: #0d6efd;">
+                        <div class="card text-white mb-4"
+                            style="background: linear-gradient(195deg, #71cdf5 0%, #1A73E8 100%);">
                             <div class="card-body">รายการสั่งซื้อสินค้า (ยกเลิก) 10 ชิ้น<h4>
                                     <?= $row2['order_cancel'] ?>
                                 </h4>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small style="font-size: 12px;"><a href="report_order_no.php" style="text-decoration: none; color: white;">
-                                            <i class='bx bxs-error-alt'></i> ยกเลิกคำสั่งซื้อ</a></small>
+                                <div><small><a href="report_order_no.php"
+                                            style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bxs-error-alt' style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i> ยกเลิกคำสั่งซื้อ</a></small>
                                 </div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
@@ -130,118 +138,119 @@ $row4 = mysqli_fetch_array($result4);
                         แสดงข้อมูลการสั่งซื้อสินค้า (ชำระเงินแล้ว)
 
                         <div class="mt-3 mb-3">
-                            <a href="report_order_yes.php"><button type="button" class="btn" style="background: #198754; color: #fff;"><i class='bx bx-check-circle'></i>&nbsp;ชำระเงินแล้ว</button></a>
-                            <a href="report_order.php"><button type="button" class="btn" style="background: #6f42c1; color: #fff;"><i class='bx bxs-hourglass'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
-                            <a href="report_order_no.php"><button type="button" class="btn" style="background: #dc3545; color: #fff;"><i class='bx bx-rotate-right'></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
+                            <a href="report_order_yes.php"><button type="button"
+                                    class="btn" style="background: linear-gradient(195deg, #198754 0%, #20c997 100%); color: #fff;"><i class='bx bx-check-circle'></i>&nbsp;ชำระเงินแล้ว</button></a>
+                            <a href="report_order.php"><button type="button"
+                                    class="btn" style="background: linear-gradient(195deg, #fd7e14 0%, #ffc107 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
+                            <a href="report_order_no.php"><button type="button"
+                                    class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;"><i class='bx bx-x-circle'></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
                         </div>
 
                     </div>
-                    <div class="card-body">
-                        <table id="datatablesSimple" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>เลขที่ใบสั่งซื้อ</th>
-                                    <th>ลูกค้า</th>
-                                    <th>ที่อยู่จัดส่งสินค้า</th>
-                                    <th>เบอร์โทรศัพท์</th>
-                                    <th>ราคารวมสุทธิ</th>
-                                    <th>วันที่สั่งซื้อ</th>
-                                    <th>สถานะการสั่งซื้อ</th>
-                                    <th>รายละเอียด</th>
-                                    <th>ลบคำสั่งซื้อ</th>
-                                    <th>ออกใบเสร็จ</th>
-                                </tr>
-                            </thead>
-                            <!-- search fill -->
-                            <tfoot>
-                                <tr>
-                                    <th>orderID</th>
-                                    <th>cus_name</th>
-                                    <th>address</th>
-                                    <th>telephone</th>
-                                    <th>telephone</th>
-                                    <th>telephone</th>
-                                    <th>telephone</th>
-                                </tr>
-                            </tfoot>
+                </div>
 
-                            <tbody>
-                                <?php
-                                $sql = "SELECT *
+                <div class="card-body">
+                    <table id="datatablesSimple" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>เลขที่ใบสั่งซื้อ</th>
+                                <th>ลูกค้า</th>
+                                <th>ที่อยู่จัดส่งสินค้า</th>
+                                <th>เบอร์โทรศัพท์</th>
+                                <th>ราคารวมสุทธิ</th>
+                                <th>วันที่สั่งซื้อ</th>
+                                <th>สถานะการสั่งซื้อ</th>
+                                <th>การจัดส่ง</th>
+                                <th>จัดการข้อมูล</th>
+                            </tr>
+                        </thead>
+                        <!-- search fill -->
+                        <tfoot>
+                            <tr>
+                                <th>orderID</th>
+                                <th>cus_name</th>
+                                <th>address</th>
+                                <th>telephone</th>
+                                <th>telephone</th>
+                                <th>telephone</th>
+                                <th>telephone</th>
+                            </tr>
+                        </tfoot>
+
+                        <tbody>
+                            <?php
+                            $sql = "SELECT *
                                 FROM tb_order as t
                                 JOIN tb_member as tm ON t.member_id = tm.id
                                 WHERE t.order_status = 2
                                 ORDER BY t.reg DESC;";
-                                $result = mysqli_query($conn, $sql);
-                                while ($row = mysqli_fetch_array($result)) {
-                                    $status = $row['order_status'];
-                                ?>
-                                    <tr>
-                                        <td>
-                                            <?= $row['orderID'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $row['prefix'] ?>
-                                            <?= $row['firstname'] ?>
-                                            <?= $row['lastname'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $row['address'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $row['telephone'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $row['total_price'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $row['reg'] ?>
-                                        </td>
-                                        <td>
-                                            <div class="text-center">
-                                                <?php
-                                                if ($status == 1) {
-                                                    echo "<b style='color: blue;'>ยังไม่ชำระเงิน</b>";
-                                                } else if ($status == 2) {
-                                                    echo "<span style='color: white; border-radius: 20px; background: #198754; padding: 5px;'><i class='bx bx-check' ></i>ชำระเงินแล้ว</span>";
-                                                } else if ($status == 0) {
-                                                    echo "<b style='color: red;'>ยกเลิกการสั่งซื้อ</b>";
-                                                }
-                                                ?>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-center">
-                                                <a href="report_order_detail.php?id=<?= $row['orderID'] ?>" class="btn btn-warning"><i class='bx bx-message-detail'></i></a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-center">
-                                                <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['orderID'] ?>')"><i class='bx bx-trash'></i></a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-center">
-                                                <a class="btn btn-primary" href="generate_receipt.php?id=<?= $row['orderID'] ?>"><i class='bx bx-printer'></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php
-                                }
-                                mysqli_close($conn);
-                                ?>
-                            </tbody>
+                            $result = mysqli_query($conn, $sql);
+                            while ($row = mysqli_fetch_array($result)) {
+                                $status = $row['order_status'];
+                            ?>
+                                <tr>
+                                    <td>
+                                        <?= $row['orderID'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $row['prefix'] ?>
+                                        <?= $row['firstname'] ?>
+                                        <?= $row['lastname'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $row['address'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $row['telephone'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $row['total_price'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $row['reg'] ?>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <?php
+                                            if ($status == 1) {
+                                                echo "<b style='color: blue;'>ยังไม่ชำระเงิน</b>";
+                                            } else if ($status == 2) {
+                                                echo "<div class='' style='border-radius: 10px; background: linear-gradient(195deg, #42424a 0%, #191919 100%); color: #fff; padding: 5px;'>
+                                                    <i class='bx bx-check' ></i>&nbsp;ชำระเงินแล้ว
+                                                  </div>";
+                                            } else if ($status == 0) {
+                                                echo "<b style='color: red;'>ยกเลิกการสั่งซื้อ</b>";
+                                            }
+                                            ?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <a href="report_order_detail.php?id=<?= $row['orderID'] ?>" class="btn btn-warning"><i class='bx bx-car'></i></a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <a class="btn btn-primary" href="generate_receipt.php?id=<?= $row['orderID'] ?>"><i class='bx bx-printer'></i></a>
+                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['orderID'] ?>')"><i class='bx bx-trash'></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
+                            mysqli_close($conn);
+                            ?>
+                        </tbody>
 
-                        </table>
-                        <div class="mb-2">
-                            <a href="report_order.php" class="btn btn-primary">ย้อนกลับ</a>
-                        </div>
+                    </table>
+                    <div class="mb-2">
+                        <a href="report_order.php" class="btn btn-primary">ย้อนกลับ</a>
                     </div>
                 </div>
             </div>
-        </main>
-
-        <?php include('footer.php') ?>
+    </div>
+    </main>
+    <?php include('footer.php') ?>
     </div>
     </div>
 </body>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('condb.php');
+include('condb.php');
 
 if (!isset($_SESSION['username'])) {
     header('Location: ../login.php');
@@ -110,7 +110,7 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
 
 <body class="sb-nav-fixed">
 
-    <?php include ('menu.php') ?>
+    <?php include('menu.php') ?>
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4 mt-4">
@@ -227,8 +227,7 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                                     <th>ยี่ห้อ</th>
                                     <th>ราคา</th>
                                     <th>จำนวน</th>
-                                    <th>แก้ไขข้อมูลสินค้า</th>
-                                    <th>ปรับราคาสินค้า</th>
+                                    <th>จัดการสินค้า</th>
                                 </tr>
                             </thead>
 
@@ -242,7 +241,7 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                                         ORDER BY p.p_id";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($result)) {
-                                    ?>
+                                ?>
                                     <tr>
                                         <td>
                                             <img style="width: 100px; height: 100px; object-fit: cover;"
@@ -268,21 +267,15 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                                             <?= $row['unit_name'] ?>
                                         </td>
                                         <td>
-                                            <a class="btn btn-success" href="addstock.php?id=<?= $row['p_id'] ?>"><i
-                                                    class='bx bx-plus'></i>เพิ่มจำนวนสินค้า</a>
-                                            <a class="btn btn-warning" href="prd_edit_product.php?id=<?= $row['p_id'] ?>"><i
-                                                    class='bx bx-edit'></i>แก้ไข</a>
-                                            <a class="btn btn-danger" href="javascript:void(0);"
-                                                onclick="confirmDelete('<?= $row['p_id'] ?>')"><i
-                                                    class='bx bx-trash'></i>ลบ</a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-info" href="prd_editprice.php?id=<?= $row['p_id'] ?>"><i
+                                            <a class="btn btn-warning" href="prd_edit_product.php?id=<?= $row['p_id'] ?>"><i class='bx bx-pencil'></i></a>
+                                            <a class="btn btn-success" href="addstock.php?id=<?= $row['p_id'] ?>"><i class='bx bx-plus-circle'></i></a>
+                                            <a class="btn btn-primary" href="prd_editprice.php?id=<?= $row['p_id'] ?>"><i
                                                     class='bx bx-money'></i></a>
+                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['p_id'] ?>')"><i class='bx bx-trash-alt'></i></a>
                                         </td>
                                     </tr>
 
-                                    <?php
+                                <?php
                                 }
                                 mysqli_close($conn);
                                 ?>
@@ -298,7 +291,7 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
             </div>
         </main>
 
-        <?php include ('footer.php') ?>
+        <?php include('footer.php') ?>
     </div>
     </div>
 </body>
@@ -318,7 +311,7 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
 <!-- Your PHP code -->
 <?php
 if (isset($_SESSION['delete_product'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -328,7 +321,7 @@ if (isset($_SESSION['delete_product'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['delete_product']);
 }
 ?>
@@ -336,8 +329,8 @@ if (isset($_SESSION['delete_product'])) {
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "Are you sure?",
-            text: "คุณต้องการลบหรือไม่?",
+            title: "ต้องการลบสินค้าช้านี้?",
+            text: "กดยืนยันเพื่อยินยอมในการลบสินค้า",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -352,30 +345,11 @@ if (isset($_SESSION['delete_product'])) {
     }
 </script>
 
-<?php
-if (isset($_SESSION['edit_product'])) {
-    ?>
-    <script>
-        Swal.fire({
-            // position: "top-center",
-            icon: "success",
-            title: "แก้ไขสำเร็จ!",
-            text: "Successfully",
-            showConfirmButton: false,
-            timer: 1500
-        }).then(function () {
-            window.location.href = 'prd_show_product.php';
-        });
-    </script>
 
-    <?php
-    unset($_SESSION['edit_product']);
-}
-?>
 
 <?php
 if (isset($_SESSION['addstock'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -385,7 +359,7 @@ if (isset($_SESSION['addstock'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['addstock']);
 }
 ?>
