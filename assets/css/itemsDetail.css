@@ -106,7 +106,7 @@
                 border-radius: 5px;
 
                 & h3:first-child {
-                    color: var(--bs-code-color);
+                    color: var(--bs-danger);
                     margin-right: 20px;
                     font-weight: 500;
                     font-size: 1.5rem;
@@ -141,6 +141,8 @@
                     /* margin-right: -10px; */
                     text-align: center;
                     /* border: 1px solid #ccc; */
+                    border: none;
+                    outline: none;
                 }
 
                 & p {
@@ -156,9 +158,10 @@
             }
 
             .bc-showDetail-view {
-                & b {
+                & span {
                     color: var(--bs-gray-600);
-                    font-size: 14px;
+                    font-size: 12px;
+                    font-weight: 500;
                 }
             }
 

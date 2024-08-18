@@ -199,7 +199,7 @@
                             </div>
 
                             <div class="d-grid">
-                                <button class="btn" type="submit" style="background: linear-gradient(195deg, #EC407A 0%, #D81B60 100%); color: #fff;">Login</button>
+                                <button class="btn" type="submit" style="background: linear-gradient(195deg, #dc3545 0%, #dc3545 100%); color: #fff;">Login</button>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <!-- <p class="mt-2">ยังไม่มีบัญชี? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" style="text-decoration: none; color: green;">สมัครสมาชิก</a></p> -->
@@ -210,73 +210,6 @@
             </div>
         </div>
 
-        <!-- Registration Modal -->
-        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="signupModalLabel">สมัครสมาชิก</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="reg_insert.php" method="POST" onsubmit="return validatePasswords()">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-user'></i></span>
-                                <select class="form-control" name="prefix">
-                                    <option value="" disabled selected hidden class="text-muted">- Prefix -</option>
-                                    <?php
-                                    $options = array('นาย', 'นาง', 'นางสาว');
-                                    foreach ($options as $option) {
-                                        echo "<option value='$option'>$option</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-user'></i></span>
-                                <input type="text" class="form-control" name="fname" placeholder="First Name" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-user'></i></span>
-                                <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-envelope'></i></span>
-                                <input type="email" class="form-control" name="email" placeholder="Email" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-location-plus'></i></span>
-                                <input type="text" class="form-control" name="address" placeholder="Address" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-phone'></i></span>
-                                <input type="number" class="form-control" name="phone" placeholder="Phone" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-user-circle'></i></span>
-                                <input type="text" class="form-control" name="username" placeholder="Username" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-lock-alt'></i></span>
-                                <input type="password" class="form-control" id="reg_psw" name="psw" placeholder="Password" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-lock-alt'></i></span>
-                                <input type="password" class="form-control" id="confirm_psw" name="confirm_psw" placeholder="Confirm Password" required>
-                            </div>
-                            <div class="d-flex justify-content-end mb-3">
-                                <!-- <p>มีบัญชีอยู่แล้ว ? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" style="text-decoration: none; color: green;">เข้าสู่ระบบ</a></p> -->
-                                <a href="#" onclick="toggleRegPasswordVisibility()"><i id="toggleRegPasswordIcon" class='bx bxs-low-vision fs-4'></i></a>
-                            </div>
-                            <div class="d-grid">
-                                <button class="btn btn-primary" type="submit">Register</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <script>
             function validatePasswords() {

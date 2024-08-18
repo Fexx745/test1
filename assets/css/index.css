@@ -67,7 +67,7 @@
 
         & ul li a:hover {
             background: linear-gradient(90deg, #f7f7f7, #eaeaea);
-            color: var(--bs-danger);
+            color: var(--bs-orange);
             /* border-bottom: 2px solid var(--bs-gray-900); */
             transition: background 0.3s ease, color 0.3s ease, border-bottom 0.3s ease, transform 0.3s ease;
             transform: scale(1.05);
@@ -251,7 +251,6 @@
                     color: var(--bs-gray-700);
                 }
             } */
-
             .bc-show-items-view {
                 display: flex;
                 justify-content: space-between;
@@ -259,19 +258,25 @@
                 padding: 5px 10px;
 
                 .bc-show-items-view-product {
-
+                    background-color: #fff7de;
+                    border: 1px solid var(--bs-warning);
+                    border-radius: 5px;
                     font-size: 3px;
                     font-weight: 300;
 
                     & b {
                         font-size: 12px;
                         color: #333;
+                        /* line-height: 1; */
+                        padding: 5px;
+                        font-weight: 400;
                     }
 
                     & i {
                         font-weight: 500;
-                        font-size: 10px;
-                        color: var(--bs-warning);
+                        font-size: 12px;
+                        color: #eaaf00;
+                        margin-right: 3px;
 
                     }
                 }
@@ -300,7 +305,7 @@
 
 
                 & h5 {
-                    color: var(--bs-code-color);
+                    color: var(--bs-danger);
                     font-size: 1rem;
                     text-align: end;
                     margin-right: 25px;
@@ -327,7 +332,7 @@
         }
 
         .bc-show-items:hover {
-            border: 1px solid var(--bs-danger);
+            border: 1px solid var(--bs-orange);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             /* เพิ่ม box-shadow ที่นี่ */
         }

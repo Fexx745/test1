@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,12 +27,13 @@
         }
 
         .wrapper {
-            border-top: 3px solid blue;
+            border-top: 3px solid #dc3545;
 
             & a {
                 text-decoration: none;
-                color: green;
+                color: #d63384;
             }
+
             & a:hover {
                 opacity: 0.5;
                 transition: .3s;
@@ -52,23 +55,23 @@
                     if (!empty($_SESSION["Error"])) {
                         echo "<h5 id='errorMessage' class='alert alert-danger'>" . $_SESSION["Error"] . "</h5>";
                         echo "<script>
-                            setTimeout(function() {
-                                var errorMessage = document.getElementById('errorMessage');
-                                if (errorMessage) {
-                                    errorMessage.style.display = 'none';
-                                }
-                            }, 5000); // นับเวลา 5 วินาทีแล้วซ่อนข้อความ
-                        </script>";
-                        unset($_SESSION["Error"]); // ลบค่า $_SESSION["Error"] ออกจาก session
+                        setTimeout(function() {
+                            var errorMessage = document.getElementById('errorMessage');
+                            if (errorMessage) {
+                                errorMessage.style.display = 'none';
+                            }
+                        }, 5000); // Hide the error message after 5 seconds
+                    </script>";
+                        unset($_SESSION["Error"]); // Clear the error session variable
                     }
                     ?>
                 </p>
 
                 <form action="reg_insert.php" method="POST">
                     <div class="input-group mb-3">
-                        <span class="input-group-text"><i class='bx bx-user'></i></span>
+                        <span class="input-group-text"><i class='bx bx-id-card'></i></span>
                         <select class="form-control" name="prefix">
-                            <option value="" disabled selected hidden class="text-muted">- Prefix -</option>
+                            <option value="" disabled selected hidden class="text-muted">** คำนำหน้าชื่อ **</option>
                             <?php
                             $options = array('นาย', 'นาง', 'นางสาว');
                             foreach ($options as $option) {
@@ -80,47 +83,73 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-user'></i></span>
-                        <input type="text" class="form-control" name="fname" placeholder="First Name" required>
+                        <input type="text" class="form-control" name="fname" placeholder="ชื่อ" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-user'></i></span>
-                        <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
+                        <input type="text" class="form-control" name="lname" placeholder="นามสกุล" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-envelope'></i></span>
-                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                        <input type="email" class="form-control" name="email" placeholder="อีเมลล์" required>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text"><i class='bx bx-location-plus'></i></span>
-                        <input type="text" class="form-control" name="address" placeholder="Address" required>
+                        <span class="input-group-text"><i class='bx bx-map'></i></span>
+                        <input type="text" class="form-control" name="address" placeholder="ที่อยู่ ...." required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-phone'></i></span>
-                        <input type="number" class="form-control" name="phone" placeholder="Phone" required>
+                        <input type="text" class="form-control" name="phone" placeholder="เบอร์โทร์ศัพท์" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-user-circle'></i></span>
-                        <input type="text" class="form-control" name="username" placeholder="Username" required>
+                        <input type="text" class="form-control" name="username" placeholder="ชื่อผู้ใช้" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-lock'></i></span>
-                        <input type="password" class="form-control" name="psw" placeholder="Password" required>
+                        <input type="password" class="form-control" name="psw" placeholder="รหัสผ่าน" required>
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-lock'></i></span>
-                        <input type="password" class="form-control" name="conpsw" placeholder="Confirm Password" required>
+                        <input type="password" class="form-control" name="confirm_psw" placeholder="ยืนยันรหัสผ่าน" required>
                     </div>
                     <div class="d-grid">
-                        <button class="btn btn-primary">Signup Now</button>
-                        <p class="text-center mt-2">คุณมีบัญชีอยู่แล้ว ? <a href="login.php">เข้าสู่ระบบ</a></p>
+                        <button class="btn" style="background: #dc3545; color: #fff;">Signup Now</button>
+                        <p class="text-center mt-2">คุณมีบัญชีอยู่แล้ว ? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a></p>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
+
 </body>
 
 </html>
 
+
+
+<?php
+$alerts = [
+    'Username_Already' => 'ชื่อผู้ใช้ถูกใช้ไปแล้ว!',
+    'Email_Already' => 'อีเมลล์ถูกใช้ไปแล้ว!',
+    'Phone_Already' => 'เบอร์โทรศัพท์ถูกใช้ไปแล้ว!',
+    'PswDo_notMatch' => 'รหัสผ่านไม่ตรงกัน!',
+];
+
+foreach ($alerts as $key => $message) {
+    if (isset($_SESSION[$key])) {
+        echo "<script>
+            Swal.fire({
+                icon: 'warning',
+                title: '$message',
+                text: 'กรุณาลองใหม่อีกครั้ง',
+                showConfirmButton: false,
+                timer: 1800
+            });
+        </script>";
+        unset($_SESSION[$key]);
+    }
+}
+?>

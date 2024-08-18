@@ -54,11 +54,10 @@ include('condb.php');
                         ฿<?= number_format($row['price'], 2) ?>
                     </h5>
                 </div>
-
                 <div class="bc-show-items-view">
                     <div class="bc-show-items-view-product">
                         <span>
-                            <?php for ($i = 1; $i <= $full_stars; $i++) { ?>
+                            <!-- <?php for ($i = 1; $i <= $full_stars; $i++) { ?>
                                 <i class='bx bxs-star'></i>
                             <?php } ?>
                             <?php if ($half_star) { ?>
@@ -66,8 +65,8 @@ include('condb.php');
                             <?php } ?>
                             <?php for ($i = 1; $i <= $empty_stars; $i++) { ?>
                                 <i class='bx bx-star'></i>
-                            <?php } ?>
-                            <b>&nbsp;(รีวิว <?= $average_rating ?><i class='bx bxs-star'></i>)</b>
+                            <?php } ?> -->
+                            <b><i class='bx bxs-star'></i><?= $average_rating ?></b>
                         </span>
                     </div>
                     <div class="bc-show-items-detail">

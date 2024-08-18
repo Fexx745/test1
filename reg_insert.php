@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result_username_check = mysqli_query($conn, $username_check_query);
     if (mysqli_num_rows($result_username_check) > 0) {
         $_SESSION['Username_Already'] = "ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว!!";
-        header('Location: index.php');
+        header('Location: reg.php');
         exit();
     }
     // ตรวจสอบชื่อผู้ใช้ที่มีอยู่แล้ว
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result_email_check = mysqli_query($conn, $email_check_query);
     if (mysqli_num_rows($result_email_check) > 0) {
         $_SESSION['Email_Already'] = "อีเมลล์ถูกใช้ไปแล้ว!!";
-        header('Location: index.php');
+        header('Location: reg.php');
         exit();
     }
 
@@ -36,14 +36,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result_phone_check = mysqli_query($conn, $phone_check_query);
     if (mysqli_num_rows($result_phone_check) > 0) {
         $_SESSION['Phone_Already'] = "เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว!!";
-        header('Location: index.php');
+        header('Location: reg.php');
         exit();
     }
 
     // ตรวจสอบรหัสผ่านที่ตรงกัน
     if ($password !== $confirmPassword) {
         $_SESSION['PswDo_notMatch'] = "รหัสผ่านไม่ตรงกัน";
-        header('Location: index.php');
+        header('Location: reg.php');
         exit();
     }
 

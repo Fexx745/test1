@@ -12,14 +12,14 @@
         ?>
             <li><a href="edit-profile.php?id=<?php echo $_SESSION['user_id']; ?>"><i class='bx bxs-user-circle'></i>&nbsp;ตั้งค่าผู้ใช้</a></li>
             <li><a href="view-order-history.php"><i class='bx bx-history'></i>&nbsp;ดูประวัติการสั่งซื้อ</a></li>
-            <li><a href="cart.php"><i class='bx bx-cart'></i>&nbsp;ตะกร้าสินค้า</a></li>
+            <!-- <li><a href="cart.php"><i class='bx bx-cart'></i>&nbsp;ตะกร้าสินค้า</a></li> -->
             <!-- <li><a href="logout.php"><i class='bx bx-log-out'></i>&nbsp;ออกจากระบบ</a></li> -->
 
         <?php } else {  ?>
 
             <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a></li>
-            <li><a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">สมัครสมาชิก</a></li>
-            <li><a href="reg-homepage.php">สมัครสมาชิก</a></li>
+            <li><a href="reg.php">สมัครสมาชิก</a></li>
+            <!-- <li><a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">สมัครสมาชิก</a></li> -->
         <?php
         } ?>
     </ul>

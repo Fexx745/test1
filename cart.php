@@ -137,7 +137,7 @@ if (!isset($_SESSION['inPro'])) {
                         <tr>
                             <td class="text-end fs-5" colspan="6">รวมเป็นเงิน</td>
                             <td>
-                                <span class="fs-5" style="color: #d63384; font-weight: 600;">
+                                <span class="fs-5" style="color: #dc3545; font-weight: 600;">
                                     <?= number_format($sumPrice, 2) ?>
                                 </span>
                             </td>
@@ -146,7 +146,8 @@ if (!isset($_SESSION['inPro'])) {
                     </table>
                     <div class="container" style="margin-top: 20px; margin-bottom: 100px;">
                         <div class="row">
-                            <div class="col-md-6 alert" style="background: linear-gradient(195deg, #fff 0%, #f05da6 80%); color: #fff; border: none; outline: none;">
+                            <div class="col-md-6 alert" style="background: rgba(229, 229, 229, 0.8); color: #333; border: none; outline: none;">
+
                                 <h4>
                                     <i class='bx bx-info-circle'></i>
                                     &nbsp;โปรดแนบสลิปการโอนทุกครั้งที่ทำการชำระเงิน
@@ -193,10 +194,9 @@ if (isset($_SESSION['cart-success'])) {
 ?>
     <script>
         Swal.fire({
-            // position: "top-center",
             icon: "success",
-            title: "สั่งซื้อสินค้าสำเร็จ!",
-            text: "Successfully",
+            title: "คำสั่งซื้อของคุณสำเร็จแล้ว!",
+            text: "ขอบคุณสำหรับการสั่งซื้อ",
             showConfirmButton: false,
             timer: 1500
         }).then(function() {
@@ -208,6 +208,7 @@ if (isset($_SESSION['cart-success'])) {
     unset($_SESSION['cart-success']);
 }
 ?>
+
 
 <!-- upload_error -->
 <?php

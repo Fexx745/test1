@@ -82,7 +82,7 @@ include('condb.php');
                             <div class="bc-showTextDetail">
                                 <div style="margin-bottom: 20px;">
                                     <span><?= $row['detail'] ?></span>
-                                    <p class="mt-2"><b>ยี่ห้อสินค้า:</b> <?= $row['brand_name'] ?></p>
+                                    <p class="mt-2"><strong>ยี่ห้อสินค้า:</strong> <?= $row['brand_name'] ?></p>
                                 </div>
                             </div>
                             <div class="bc-showDetail-count">
@@ -93,7 +93,7 @@ include('condb.php');
                                 <span>เหลือ <?= $row['amount'] ?> <?= $row['unit_name'] ?></span>
                             </div>
                             <div class="bc-showDetail-view">
-                                <b style="display:inline;">จำนวนผู้เข้าชมสินค้า <?= $row['p_view']; ?> <i class='bx bx-low-vision'></i></b>
+                                <span style="display:inline;">จำนวนผู้เข้าชมสินค้า <?= $row['p_view']; ?> <i class='bx bx-low-vision'></i></span>
                             </div>
 
 
@@ -105,6 +105,7 @@ include('condb.php');
                                     <button class="btn-me btn-out-of-stock me-2" disabled>สินค้าหมด</button>
                                 <?php } ?>
                             </div>
+                            
                         </div>
 
                     </div> <!-- bc-showDetail-top -->
@@ -127,7 +128,7 @@ include('condb.php');
                                         <textarea name="comment" id="comment" required></textarea>
                                     </div>
                                     <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
-                                    <button class="btn btn-danger" type="submit"><i class='bx bx-send'></i> คอมเมนต์</button>
+                                    <button class="btn btn-danger" type="submit">คอมเมนต์</button>
                                 </form>
                             <?php } ?>
                         </div>
@@ -212,6 +213,7 @@ include('condb.php');
     </section>
     <?php include('footer.php'); ?>
     <script>
+        
         // ฟังก์ชันสำหรับตั้งค่าคะแนน
         function setRating(rating) {
             document.getElementById('rating').value = rating;
