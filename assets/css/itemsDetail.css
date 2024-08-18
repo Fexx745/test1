@@ -136,11 +136,11 @@
 
                 & input {
                     height: 28px;
-                    width: 50px;
-                    margin-left: -10px;
-                    margin-right: -10px;
+                    /* width: 50px; */
+                    /* margin-left: -10px; */
+                    /* margin-right: -10px; */
                     text-align: center;
-                    border: 1px solid #ccc;
+                    /* border: 1px solid #ccc; */
                 }
 
                 & p {
@@ -153,6 +153,13 @@
                     color: var(--bs-gray-600);
                 }
 
+            }
+
+            .bc-showDetail-view {
+                & b {
+                    color: var(--bs-gray-600);
+                    font-size: 14px;
+                }
             }
 
             .btn-control-buy {
@@ -243,7 +250,8 @@
 
 
     .btn-buy {
-        background: var(--bs-orange);
+        /* background: linear-gradient(195deg, #fd7e14 0%, #ffc107 100%); */
+        background-color: #fd7e14;
         color: #fff;
         font-size: 1rem;
     }
@@ -259,9 +267,10 @@
 }
 
 .bc-showDetail-count button {
-    background-color: #f0f0f0;
-    /* สีพื้นหลังของปุ่ม */
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
+    border: none;
+    /* border-radius: 100%; */
+    border-radius: 2px;
     padding: 5px 10px;
     cursor: pointer;
     font-size: 16px;
@@ -272,17 +281,20 @@
 }
 
 .bc-showDetail-count .btn-decrement {
-    border-radius: 2px 0 0 2px;
     border-right: none;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 500;
+    background: var(--bs-gray-100);
+    color: var(--bs-orange);
+    border: 1px solid var(--bs-orange);
 }
 
 .bc-showDetail-count .btn-increment {
-    border-radius: 0 2px 2px 0;
     border-left: none;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--bs-orange);
 }
 
 .reviews-section {

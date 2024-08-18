@@ -1,0 +1,549 @@
+<div?php include('condb.php'); $sql="SELECT * FROM tb_member" ; $result=mysqli_query($conn, $sql); $row=mysqli_fetch_array($result); ?>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Navbar</title>
+        <link rel="stylesheet" href="./assets/css/nav.css">
+
+        <style>
+            /* ซ่อนเมนูตั้งแต่แรกด้วย CSS */
+            #navUserToggle {
+                display: none;
+            }
+
+            #cartShopToggle {
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+            <div class="nav-container">
+                <?php
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+                if (isset($_SESSION['username'])) {
+                ?>
+                    <!-- if login -->
+                    <div class="nav-top">
+                        <div class="nav-top-contract">
+                            <ul>
+                                <li><a href="index.php"><i class='bx bxs-home'></i> หน้าหลัก</a></li>
+                                <li><a href=""><i class='bx bxs-phone-call'></i> ติดต่อ</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-top-user">
+                            <div class="nav-top-user-profile">
+                                <img src="assets/images/other/User-Profile-PNG.png" alt="">
+                            </div>
+                            <p id="navToggleProfile"><?php echo $_SESSION['fname'] . " " . $_SESSION['lname']; ?> <i class='bx bxs-chevron-down'></i></p>
+                            <div id="navUserToggle" class="nav-top-user-toggle">
+                                <ul>
+                                    <li><a href="edit-profile.php?id=<?php echo $_SESSION['user_id']; ?>">ตั้งค่าผู้ใช้</a></li>
+                                    <li><a href="cart.php">การซื้อของฉัน</a></li>
+                                    <li><a href="logout.php" onclick="confirmLogout(event)">ออกจากระบบ</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="nav-bottom">
+                        <div class="nav-bottom-logo">
+                            <a href="index.php">RMUTI SHOP</a>
+                        </div>
+                        <div class="nav-bottom-search">
+                            <form action="index_search.php" method="POST" class="nav-bottom-search" style="position: relative;">
+                                <input type="text" placeholder="Search..." id="search" name="search" autocomplete="off" required>
+                                <button type="submit" name="submit"><i class='bx bx-search-alt'></i></button>
+                                <div class="list-group" id="show-list"></div>
+                            </form>
+                            <div class="col-md-5">
+                                <div class="list-group" style="position: absolute; width: 490px;" id="show-list"></div>
+                            </div>
+                        </div>
+                        <div class="nav-bottom-cart">
+                            <div id="cartShop" class="cart-shop">
+                                <div class="cart-count">
+                                    <?php
+                                    if (isset($_SESSION['inPro']) && $_SESSION['inPro'] > 0) {
+                                        echo $_SESSION['inPro'];
+                                    } else {
+                                        echo "0";
+                                    }
+                                    ?>
+                                </div>
+                                <i class='bx bx-cart-alt'></i>
+                                <div id="cartShopToggle" class="cart-shop-toggle">
+                                    <div class="cart-shop-toggle-header">
+                                        <p>สินค้าที่เพิ่งเพิ่มเข้าไป</p>
+                                    </div>
+                                    <?php
+                                    $hasItems = false;
+                                    $totalPrice = 0;
+                                    $itemCount = 0; // ตัวนับจำนวนรายการสินค้า
+                                    if (isset($_SESSION["intLine"])) {
+                                        for ($i = 0; $i <= (int) $_SESSION["intLine"]; $i++) {
+                                            if (($_SESSION["strProductID"][$i]) != "") {
+                                                $sql1 = "SELECT product.*, price_history.* 
+                    FROM product 
+                    LEFT JOIN price_history ON product.p_id = price_history.p_id 
+                    WHERE product.p_id = '" . $_SESSION["strProductID"][$i] . "'";
+                                                $result1 = mysqli_query($conn, $sql1);
+                                                $row_product = mysqli_fetch_array($result1);
+                                                $hasItems = true;
+                                                $total = $_SESSION["strQty"][$i] * $row_product['price'];
+                                                $totalPrice += $total;
+                                                $itemCount++; // เพิ่มจำนวนรายการสินค้า
+                                                if ($itemCount <= 3) { // แสดงแค่ 3 รายการสินค้า
+                                    ?>
+                                                    <div class="cart-shop-toggle-items">
+                                                        <div class="cart-shop-toggle-items-img">
+                                                            <img src="assets/images/product/<?= $row_product['image'] ?>" alt="">
+                                                        </div>
+                                                        <p><?= $_SESSION["strQty"][$i] ?> ชิ้น</p>
+                                                        <p><?= number_format($total, 2) ?> บาท</p>
+                                                    </div>
+                                        <?php
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (!$hasItems) {
+                                        echo "<p>ไม่มีสินค้าในตะกร้า ...</p>";
+                                    } else {
+                                        ?>
+                                        <?php if ($itemCount >= 1) { // แสดงปุ่ม "ไปที่ตะกร้า" ถ้ามีสินค้ามากกว่า 3 รายการ 
+                                        ?>
+                                            <div class="cart-shop-toggle-items-gotocart">
+                                                <p><?= $itemCount ?> สินค้าเพิ่มเติมในรถเข็น</p>
+                                                <a href="cart.php" class="btn-cart">ดูรถเข็นของคุณ</a>
+                                            </div>
+                                        <?php } ?>
+                                        <div class="cart-shop-toggle-items-totalprice">
+                                            <p>ราคารวมสุทธิ:</p>
+                                            <p><?= number_format($totalPrice, 2) ?> บาท</p>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+        <?php } else { ?>
+            <!-- if not login -->
+            <div class="nav-top">
+                <div class="nav-top-contract">
+                    <ul>
+                        <li><a href="index.php"><i class='bx bxs-home'></i> หน้าหลัก</a></li>
+                        <li><a href=""><i class='bx bxs-phone-call'></i> ติดต่อ</a></li>
+                    </ul>
+                </div>
+                <div class="nav-top-user">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">สมัครสมาชิก</a>
+                </div>
+            </div>
+            <div class="nav-bottom">
+                <div class="nav-bottom-logo">
+                    <a href="index.php">RMUTI SHOP</a>
+                </div>
+                <!-- <div class="nav-bottom-search">
+                    <input type="text" placeholder="Search...">
+                    <button type="button"><i class='bx bx-search-alt'></i></button>
+                </div> -->
+                <div class="nav-bottom-cart">
+                    <div class="cart-shop">
+                        <i class='bx bxs-cart-alt'></i>
+                    </div>
+                </div>
+            </div>
+        <?php
+                }
+        ?>
+        </div>
+        </nav>
+
+
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">เข้าสู่ระบบ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="login_check.php" method="POST">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class='bx bx-user-circle'></i></span>
+                                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                            </div>
+                            <div class="input-group mb-1">
+                                <span class="input-group-text"><i class='bx bx-lock-alt'></i></span>
+                                <input type="password" class="form-control" id="psw" name="psw" placeholder="Password" required>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-3">
+                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: #000;">ลืมรหัสผ่าน ?</a>
+
+                                <a href="#" onclick="togglePasswordVisibility()"><i id="togglePasswordIcon" class='bx bxs-low-vision fs-4' style="color: #000;"></i></a>
+                            </div>
+
+                            <div class="d-grid">
+                                <button class="btn" type="submit" style="background: linear-gradient(195deg, #EC407A 0%, #D81B60 100%); color: #fff;">Login</button>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <!-- <p class="mt-2">ยังไม่มีบัญชี? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" style="text-decoration: none; color: green;">สมัครสมาชิก</a></p> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Modal -->
+        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signupModalLabel">สมัครสมาชิก</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="reg_insert.php" method="POST" onsubmit="return validatePasswords()">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class='bx bx-user'></i></span>
+                                <select class="form-control" name="prefix">
+                                    <option value="" disabled selected hidden class="text-muted">- Prefix -</option>
+                                    <?php
+                                    $options = array('นาย', 'นาง', 'นางสาว');
+                                    foreach ($options as $option) {
+                                        echo "<option value='$option'>$option</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class='bx bx-user'></i></span>
+                                <input type="text" class="form-control" name="fname" placeholder="First Name" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class='bx bx-user'></i></span>
+                                <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class='bx bx-envelope'></i></span>
+                                <input type="email" class="form-control" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class='bx bx-location-plus'></i></span>
+                                <input type="text" class="form-control" name="address" placeholder="Address" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class='bx bx-phone'></i></span>
+                                <input type="number" class="form-control" name="phone" placeholder="Phone" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class='bx bx-user-circle'></i></span>
+                                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class='bx bx-lock-alt'></i></span>
+                                <input type="password" class="form-control" id="reg_psw" name="psw" placeholder="Password" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class='bx bx-lock-alt'></i></span>
+                                <input type="password" class="form-control" id="confirm_psw" name="confirm_psw" placeholder="Confirm Password" required>
+                            </div>
+                            <div class="d-flex justify-content-end mb-3">
+                                <!-- <p>มีบัญชีอยู่แล้ว ? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" style="text-decoration: none; color: green;">เข้าสู่ระบบ</a></p> -->
+                                <a href="#" onclick="toggleRegPasswordVisibility()"><i id="toggleRegPasswordIcon" class='bx bxs-low-vision fs-4'></i></a>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-primary" type="submit">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function validatePasswords() {
+                var password = document.getElementById("reg_psw").value;
+                var confirmPassword = document.getElementById("confirm_psw").value;
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match.");
+                    return false;
+                }
+                return true;
+            }
+
+            function toggleRegPasswordVisibility() {
+                var passwordInput = document.getElementById("reg_psw");
+                var confirmPasswordInput = document.getElementById("confirm_psw");
+                var passwordIcon = document.getElementById("toggleRegPasswordIcon");
+
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    confirmPasswordInput.type = "text";
+                    passwordIcon.classList.remove("bxs-low-vision");
+                    passwordIcon.classList.add("bx-low-vision");
+                } else {
+                    passwordInput.type = "password";
+                    confirmPasswordInput.type = "password";
+                    passwordIcon.classList.remove("bx-low-vision");
+                    passwordIcon.classList.add("bxs-low-vision");
+                }
+            }
+        </script>
+
+        <!-- Add your scripts at the bottom -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+        <script src="search.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $("#navUserToggle").hide();
+                $("#cartShopToggle").hide();
+
+                $("#navToggleProfile").click(function() {
+                    $("#navUserToggle").slideToggle();
+                });
+                $("#navUserToggle").mouseleave(function() {
+                    $(this).slideUp();
+                });
+
+                // เช็คว่ามีสินค้าในตะกร้าหรือไม่
+                // if ($(".cart-count").text().trim() !== "0") {
+                    $("#cartShop").click(function() {
+                        $("#cartShopToggle").slideDown();
+                    });
+
+                    $("#cartShopToggle").mouseleave(function() {
+                        $(this).slideUp();
+                    });
+                // }
+            });
+
+
+            function togglePasswordVisibility() {
+                var passwordInput = document.getElementById("psw");
+                var passwordIcon = document.getElementById("togglePasswordIcon");
+
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    passwordIcon.classList.remove("bxs-low-vision");
+                    passwordIcon.classList.add("bx-low-vision");
+                } else {
+                    passwordInput.type = "password";
+                    passwordIcon.classList.remove("bx-low-vision");
+                    passwordIcon.classList.add("bxs-low-vision");
+                }
+            }
+
+            function toggleRegPasswordVisibility() {
+                var passwordInput = document.getElementById("reg_psw");
+                var passwordIcon = document.getElementById("toggleRegPasswordIcon");
+
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    passwordIcon.classList.remove("bxs-low-vision");
+                    passwordIcon.classList.add("bx-low-vision");
+                } else {
+                    passwordInput.type = "password";
+                    passwordIcon.classList.remove("bx-low-vision");
+                    passwordIcon.classList.add("bxs-low-vision");
+                }
+            }
+
+            function confirmLogout(event) {
+                event.preventDefault(); // ป้องกันการโหลดหน้าต่อไปทันที
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณต้องการออกจากระบบหรือไม่?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ใช่, ออกจากระบบ!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'logout.php';
+                    }
+                });
+            }
+        </script>
+
+        <?php
+        if (isset($_SESSION['reg_success'])) {
+        ?>
+            <script>
+                Swal.fire({
+                    icon: "success",
+                    title: "ลงทะเบียนสำเร็จ!",
+                    // text: "คุณได้เข้าสู่ระบบเรียบร้อยแล้ว",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php
+            unset($_SESSION['reg_success']);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['success'])) {
+        ?>
+            <script>
+                Swal.fire({
+                    icon: "success",
+                    title: "เข้าสู่ระบบสำเร็จ!",
+                    // text: "คุณได้เข้าสู่ระบบเรียบร้อยแล้ว",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(function() {
+                    window.location.href = 'index.php';
+                });
+            </script>
+        <?php
+            unset($_SESSION['success']);
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION['success-admin'])) {
+        ?>
+            <script>
+                Swal.fire({
+                    // position: "top-center",
+                    icon: "success",
+                    title: "เข้าสู่ระบบสำเร็จ!",
+                    // text: "",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(function() {
+                    window.location.href = 'admin/index.php';
+                });
+            </script>
+
+        <?php
+            unset($_SESSION['success-admin']);
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION['error'])) {
+        ?>
+            <script>
+                Swal.fire({
+                    icon: "error",
+                    title: "ชื่อผู้ใช้หรือรหัสผ่านผิด!",
+                    text: "กรุณาลองใหม่อีกครั้ง",
+                    showConfirmButton: false,
+                    timer: 1800
+                });
+            </script>
+        <?php
+            unset($_SESSION['error']);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['Username_Already'])) {
+        ?>
+            <script>
+                Swal.fire({
+                    icon: "warning",
+                    title: "ชื่อผู้ใช้ถูกใช้ไปงานแล้ว!",
+                    text: "กรุณาลองใหม่อีกครั้ง",
+                    showConfirmButton: false,
+                    timer: 1800
+                });
+            </script>
+        <?php
+            unset($_SESSION['Username_Already']);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['Email_Already'])) {
+        ?>
+            <script>
+                Swal.fire({
+                    icon: "warning",
+                    title: "อีเมลล์ถูกใช้ไปงานแล้ว!",
+                    text: "กรุณาลองใหม่อีกครั้ง",
+                    showConfirmButton: false,
+                    timer: 1800
+                });
+            </script>
+        <?php
+            unset($_SESSION['Email_Already']);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['Phone_Already'])) {
+        ?>
+            <script>
+                Swal.fire({
+                    icon: "warning",
+                    title: "เบอร์โทรศัพท์ถูกใช้ไปงานแล้ว!",
+                    text: "กรุณาลองใหม่อีกครั้ง",
+                    showConfirmButton: false,
+                    timer: 1800
+                });
+            </script>
+        <?php
+            unset($_SESSION['Phone_Already']);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION['PswDo_notMatch'])) {
+        ?>
+            <script>
+                Swal.fire({
+                    icon: "warning",
+                    title: "รหัสผ่านไม่ตรงกัน!",
+                    text: "กรุณาลองใหม่อีกครั้ง",
+                    showConfirmButton: false,
+                    timer: 1800
+                });
+            </script>
+        <?php
+            unset($_SESSION['PswDo_notMatch']);
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION['psw_suc'])) {
+        ?>
+            <script>
+                Swal.fire({
+                    icon: "success",
+                    title: "เปลี่ยนรหัสสำเร็จ!",
+                    text: "กรุณาเข้าสู่ระบบใหม่อีกครั้ง",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            </script>
+        <?php
+            unset($_SESSION['psw_suc']);
+        }
+        ?>
+
+
+    </body>
+
+    </html>

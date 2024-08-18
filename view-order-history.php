@@ -41,7 +41,9 @@ $sql = "SELECT tb_order.orderID, tb_order.reg as order_date, tb_order.total_pric
         JOIN product ON tb_order_detail.p_id = product.p_id
         LEFT JOIN shipping_type ON tb_order.shipping_type_id = shipping_type.shipping_type_id
         WHERE tb_order.member_id = ?
+        ORDER BY tb_order.reg DESC
         LIMIT ? OFFSET ?";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("iii", $user_id, $orders_per_page, $offset);
 $stmt->execute();
@@ -131,7 +133,7 @@ function getOrderStatus($status)
                                     </td>
                                     <td><?php echo $order['parcel_number'] ?: 'รอจัดส่ง'; ?></td>
                                     <td><?php echo $order['shipping_type_name']; ?></td>
-                                    <td class="text-center"><a href="order_detail.php?orderID=<?php echo $orderID; ?>" class="btn btn-secondary"><i class='bx bx-receipt'></i></a></td>
+                                    <td class="text-center"><a href="order_detail.php?orderID=<?php echo $orderID; ?>" class="btn" style='border-radius: 10px; background: linear-gradient(195deg, #42424a 0%, #191919 100%); color: #fff;'><i class='bx bx-receipt'></i></a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

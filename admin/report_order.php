@@ -203,8 +203,8 @@ $row4 = mysqli_fetch_array($result4);
                             $ddt2 = @$_POST['dt2'];
 
                             if ((!empty($ddt1)) && (!empty($ddt2))) {
-                                echo '<div class="alert alert-secondary">';
-                                echo "<strong>ค้นหาตั้งแต่วันที่</strong> " . $ddt1 . " <strong>ถึงวันที่</strong> " . $ddt2;
+                                echo '<div class="alert" style="background: linear-gradient(195deg, #f05da6 0%, #d63384 100%); color: #fff; border: none; outline: none;">';
+                                echo "<strong>ค้นหาตั้งแต่วันที่</strong> <h4>" . $ddt1 . " ถึงวันที่ " . $ddt2 . "</h4>";
                                 echo '</div>';
 
                                 $date1 = date('Y-m-d', strtotime($ddt1));

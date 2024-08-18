@@ -41,13 +41,14 @@
 
 <body>
 
+    <?php include('nav-reg.php'); ?>
+
     <div class="container">
         <div class="row mt-5">
             <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
                 <h2 class="text-center pt-3">Signup Now</h2>
                 <p class="text-center text-muted lead mb-3">
                     <?php
-                    session_start();
                     if (!empty($_SESSION["Error"])) {
                         echo "<h5 id='errorMessage' class='alert alert-danger'>" . $_SESSION["Error"] . "</h5>";
                         echo "<script>

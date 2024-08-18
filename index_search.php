@@ -46,44 +46,46 @@ include('condb.php');
 
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_array($result)) {
-                    $check_amount = $row['amount'];
-                    $average_rating = round($row['average_rating']);
+                    $average_rating = round($row['average_rating'], 1); // ปรับให้เป็นทศนิยม 1 ตำแหน่ง
+                    $full_stars = floor($average_rating); // จำนวนดาวเต็ม
+                    $half_star = ($average_rating - $full_stars >= 0.5) ? true : false; // ตรวจสอบว่ามีครึ่งดาวหรือไม่
+                    $empty_stars = 5 - $full_stars - ($half_star ? 1 : 0); // จำนวนดาวที่ว่างเปล่า
             ?>
                     <a href="itemsDetail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
                         <div class="bc-show-items-img">
                             <img src="assets/images/product/<?= $row['image'] ?>" alt="<?= $row['p_name'] ?>">
                         </div>
                         <p><?= $row['p_name'] ?></p>
-                        <div class="bc-show-items-detail">
-                            <span>ถูกซื้อแล้ว&nbsp;</span> <b><?= $row['sales_count'] ?>&nbsp;</b> <span>ครั้ง</span>
+                        <div class="bc-show-items-price">
+                            <h5>
+                                ฿<?= number_format($row['price'], 2) ?>
+                            </h5>
                         </div>
+
                         <div class="bc-show-items-view">
                             <div class="bc-show-items-view-product">
                                 <span>
-                                    <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                        <?php if ($i <= $average_rating) { ?>
-                                            <i class='bx bxs-star'></i>
-                                        <?php } else { ?>
-                                            <i class='bx bx-star'></i>
-                                        <?php } ?>
+                                    <?php for ($i = 1; $i <= $full_stars; $i++) { ?>
+                                        <i class='bx bxs-star'></i>
                                     <?php } ?>
-                                    <b>(<?= $row['review_count'] ?> รีวิว)</b>
+                                    <?php if ($half_star) { ?>
+                                        <i class='bx bxs-star-half'></i>
+                                    <?php } ?>
+                                    <?php for ($i = 1; $i <= $empty_stars; $i++) { ?>
+                                        <i class='bx bx-star'></i>
+                                    <?php } ?>
+                                    <b>&nbsp;(รีวิว <?= $average_rating ?><i class='bx bxs-star'></i>)</b>
                                 </span>
                             </div>
-                            <h5><?= number_format($row['price'], 2) ?> ฿</h5>
+                            <div class="bc-show-items-detail">
+                                <span>ขายแล้ว&nbsp;<?= $row['sales_count'] ?>&nbsp;<?= $row['unit_name'] ?></span>
+                            </div>
                         </div>
                     </a>
             <?php
                 }
-            } else {
-                echo '<div class="product-not-found">';
-                echo '<img src="assets/images/other/nopd.jpg">';
-                echo '<p>ไม่พบสินค้าที่คุณกำลังค้นหา ...</p>';
-                echo '</div>';
-            }
-            ?>
-            <div class="pagination">
-                <?php
+
+                // Only display the pagination if products are found
                 $sql = "SELECT COUNT(*) FROM product WHERE product.p_name LIKE '%$search%'";
                 $result = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_row($result);
@@ -97,6 +99,7 @@ include('condb.php');
                     exit;
                 }
 
+                echo '<div class="pagination">';
                 echo '<ul class="pagination">';
 
                 // แสดงปุ่ม "Previous"
@@ -125,17 +128,19 @@ include('condb.php');
                 }
 
                 echo '</ul>';
-                mysqli_close($conn);
-                ?>
-            </div>
-            <!-- <div class="back">
-                <a href="index.php" class="btn btn-info rounded-5"><i class='bx bx-arrow-back'></i>&nbsp;ย้อนกลับ</a>
-            </div> -->
+                echo '</div>';
+
+            } else {
+                echo '<div class="product-not-found">';
+                echo '<img src="assets/images/other/nopd.jpg">';
+                echo '<p>ไม่พบสินค้าที่คุณกำลังค้นหา ...</p>';
+                echo '</div>';
+            }
+            mysqli_close($conn);
+            ?>
         </div>
-
-
-
     </div> <!-- container -->
+
     <?php include('footer.php'); ?>
 </body>
 

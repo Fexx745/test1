@@ -98,7 +98,7 @@ function getOrderStatus($status)
                             <?php foreach ($order_details['items'] as $item): ?>
                                 <tr>
                                     <td><img src="assets/images/product/<?= htmlspecialchars($item['image']); ?>"
-                                            alt="Product Image" style="width: 50px; height: 50px; object-fit: cover:"></td>
+                                            alt="Product Image" style="width: 50px; height: 70px; object-fit: cover;"></td>
                                     <td><?php echo $item['product_name']; ?></td>
                                     <td><?php echo $item['orderQty']; ?></td>
                                     <td>฿<?php echo $item['Total']; ?></td>

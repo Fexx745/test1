@@ -2,6 +2,27 @@
 session_start();
 include ('condb.php');
 
+// ตรวจสอบไฟล์สลิป
+$allowed_extensions = ['jpg', 'jpeg', 'png'];
+$slip_image = $_FILES['slip_image']['name'];
+$extension = strtolower(pathinfo($slip_image, PATHINFO_EXTENSION));
+
+// ตรวจสอบประเภทไฟล์
+if (!in_array($extension, $allowed_extensions)) {
+    $_SESSION['upload_error'] = 'Only JPG, JPEG, and PNG files are allowed.';
+    header('Location: cart.php');
+    exit();
+}
+
+// อัปโหลดไฟล์สลิปไปยังโฟลเดอร์ที่กำหนด
+$target_dir = "assets/images/slip_images/";
+$target_file = $target_dir . basename($_FILES["slip_image"]["name"]);
+if (!move_uploaded_file($_FILES["slip_image"]["tmp_name"], $target_file)) {
+    $_SESSION['upload_error'] = 'Error: Unable to upload slip image.';
+    header('Location: cart.php');
+    exit();
+}
+
 // ดึงข้อมูลการเข้าสู่ระบบของผู้ใช้ (เช่นชื่อผู้ใช้หรืออีเมล)
 $userID = $_SESSION['user_id']; // หรือใช้ข้อมูลการเข้าสู่ระบบที่คุณมีอยู่
 
@@ -70,14 +91,6 @@ if ($stmt->execute()) {
     echo "Error inserting log: " . $stmt->error;
 }
 $stmt->close();
-
-// เพิ่มข้อมูลการชำระเงิน
-$slip_image = $_FILES['slip_image']['name']; // ชื่อไฟล์สลิป
-
-// อัปโหลดไฟล์สลิปไปยังโฟลเดอร์ที่กำหนด
-$target_dir = "assets/images/slip_images/";
-$target_file = $target_dir . basename($_FILES["slip_image"]["name"]);
-move_uploaded_file($_FILES["slip_image"]["tmp_name"], $target_file);
 
 // เพิ่มข้อมูลการชำระเงินลงในตาราง tb_payment
 $sql_payment = "INSERT INTO tb_payment (orderID, payment_method, slip_image)

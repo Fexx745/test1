@@ -92,10 +92,10 @@ $row = mysqli_fetch_array($result);
                                         <td><?= $row['status'] == 1 ? 'ผู้ดูแลระบบ' : 'ลูกค้า' ?></td>
                                         <td><?= $row['reg_date'] ?></td>
                                         <td>
-                                            <a class="btn btn-warning" href="editaccount.php?id=<?= $row['id'] ?>"><i class='bx bx-edit'></i>แก้ไข</a>
+                                            <a class="btn btn-warning" href="editaccount.php?id=<?= $row['id'] ?>"><i class='bx bx-pencil'></i></a>
                                             <a class="btn btn-danger" href="javascript:void(0);"
                                                 onclick="confirmDelete('<?= $row['id'] ?>')"><i
-                                                    class='bx bx-trash'></i>ลบ</a>
+                                                    class='bx bx-trash-alt'></i></a>
                                         </td>
                                     </tr>
 

@@ -15,7 +15,7 @@ $dt1 = isset($_POST['dt1']) ? $_POST['dt1'] : null;
 $dt2 = isset($_POST['dt2']) ? $_POST['dt2'] : null;
 
 if (!empty($dt1) && !empty($dt2)) {
-    $sql = "SELECT p.p_name, u.unit_name, SUM(od.orderQty) AS total_quantity, SUM(od.Total) AS total_price
+    $sql = "SELECT p.p_name, u.unit_name, p.image, SUM(od.orderQty) AS total_quantity, SUM(od.Total) AS total_price
             FROM tb_order o
             INNER JOIN tb_order_detail od ON o.orderID = od.orderID
             INNER JOIN product p ON od.p_id = p.p_id
@@ -91,32 +91,6 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
         .card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
-        /* table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid black;
-        }
-
-        th,
-        td {
-            padding: 15px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        } */
     </style>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -230,6 +204,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                                     <table id="datatablesSimple" class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>ชื่อสินค้า</th>
                                                 <th>จำนวนที่ขายได้</th>
                                                 <th>ยอดขายสุทธิ</th>
@@ -239,15 +214,17 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                                             $grand_total += $row['total_price']; // Calculate total sum
                                         ?>
                                             <tr>
+                                                <td><img src="../assets/images/product/<?= htmlspecialchars($row['image']); ?>"
+                                                        alt="Product Image" style="width: 50px; height: 70px; object-fit: cover;"></td>
                                                 <td><?php echo $row['p_name']; ?></td>
                                                 <td><?php echo $row['total_quantity'] . ' ' . $row['unit_name']; ?></td>
                                                 <td><?php echo number_format($row['total_price'], 2); ?></td>
                                             </tr>
                                         <?php } ?>
                                     </table>
-                                    <div class="">
-                                        <strong>ยอดรวมสุทธิ</strong>
-                                        <strong><?php echo number_format($grand_total, 2); ?></strong>
+                                    <div class="alert mt-4" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff; border: none; outline: none;">
+                                        <p>ตั้งแต่วันที่ <?php echo $dt1; ?> ถึงวันที่ <?php echo $dt2; ?> ยอดรวมสุทธิ</p>
+                                        <strong style="font-size: 1.5rem;"><?php echo number_format($grand_total, 2); ?> บาท</strong>
                                     </div>
                                 <?php } else { ?>
                                     <div class="mt-3" class="mb-2">

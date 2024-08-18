@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="assets/css/nav.css">
 <link rel="stylesheet" href="assets/css/footer.css">
 <link rel="stylesheet" href="assets/css/itemsDetail.css">
-<link rel="stylesheet" href="assets/css/edit-profile.css">
+<link rel="stylesheet" href="assets/css/view-container.css">
 
 
 <!-- Bootrap -->

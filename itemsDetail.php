@@ -10,6 +10,7 @@ include('condb.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สวัสดี</title>
     <?php include('script-css.php'); ?>
+
 </head>
 
 <body>
@@ -22,7 +23,7 @@ include('condb.php');
             $product_id = $_GET['id'];
 
             // ดึงข้อมูลสินค้า
-            $sql = "SELECT p.*, ph.price, u.unit_name, c.type_name, b.brand_name
+            $sql = "SELECT p.*, ph.price, u.unit_name, c.type_name, b.brand_name,p.p_view
                     FROM product p
                     INNER JOIN product_type c ON p.type_id = c.type_id
                     LEFT JOIN price_history ph ON p.p_id = ph.p_id
@@ -68,7 +69,7 @@ include('condb.php');
                 <div class="bc-showDetail">
                     <div class="bc-showDetail-top">
                         <div class="bc-showDetail-left">
-                            <div class="bc-showDetail-photo">
+                            <div class="bc-showDetail-.bc-showDetail-viewphoto">
                                 <img src="assets/images/product/<?= $row['image'] ?>" alt="<?= $row['p_name'] ?>">
                             </div>
                         </div>
@@ -81,6 +82,7 @@ include('condb.php');
                             <div class="bc-showTextDetail">
                                 <div style="margin-bottom: 20px;">
                                     <span><?= $row['detail'] ?></span>
+                                    <p class="mt-2"><b>ยี่ห้อสินค้า:</b> <?= $row['brand_name'] ?></p>
                                 </div>
                             </div>
                             <div class="bc-showDetail-count">
@@ -90,6 +92,10 @@ include('condb.php');
                                 <button type="button" class="btn-increment">+</button>
                                 <span>เหลือ <?= $row['amount'] ?> <?= $row['unit_name'] ?></span>
                             </div>
+                            <div class="bc-showDetail-view">
+                                <b style="display:inline;">จำนวนผู้เข้าชมสินค้า <?= $row['p_view']; ?> <i class='bx bx-low-vision'></i></b>
+                            </div>
+
 
                             <div class="btn-control-buy">
                                 <?php if ($product_quantity > 0) { ?>

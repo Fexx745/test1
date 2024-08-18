@@ -70,21 +70,22 @@
 
     .page-order-view {
         position: absolute;
-        right: 20px;
+        left: 20px;
         bottom: 0;
     }
 
     .previous-button {
         position: absolute;
-        left: 20px;
+        right: 20px;
         bottom: 20px;
     }
 
     .success-status {
-        width: 120px;
+        width: 110px;
         height: 30px;
         padding: 5px;
-        background: linear-gradient(195deg, #198754 0%, #36ac75 100%);
+        background: linear-gradient(195deg, #38a06f 0%, #4fb786 100%);
+        border: 1px solid var(--bs-gray-100);
         color: #fff;
         display: flex;
         align-items: center;
@@ -95,18 +96,34 @@
     }
 
     .wait-status {
-        width: 120px;
+        width: 110px;
         height: 30px;
         padding: 5px;
-        background: linear-gradient(195deg, #e5e5e5 0%, #fff 100%);
-        border: 2px solid var(--bs-success);
+        /* background: linear-gradient(195deg, #e5e5e5 0%, #fff 100%); */
+        background: linear-gradient(195deg, #0dcaf0 0%, #82e6fa 100%);
+        border: 1px solid var(--bs-gray-100);
         /* background: linear-gradient(195deg, #ffc107 0%, #ffc107 100%); */
-        color: #333;
+        color: #fff;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         border-radius: 7px;
         font-size: 14px;
         cursor: pointer;
+    }
+
+    .cancel-status {
+        width: 110px;
+        height: 30px;
+        padding: 5px;
+        background: linear-gradient(195deg, #dc3545 0%, #ee7c88 100%);
+        border: 1px solid var(--bs-gray-100);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        border-radius: 7px;
+        cursor: pointer;
+        font-size: 14px;
     }
 }
