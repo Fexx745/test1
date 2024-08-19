@@ -256,6 +256,7 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 5px 10px;
+                margin-top: -5px;
 
                 .bc-show-items-view-product {
                     background-color: #fff7de;

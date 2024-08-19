@@ -213,8 +213,8 @@ $row4 = mysqli_fetch_array($result4);
                                             } else if ($status == 2) {
                                                 echo "<b style='color: green;'>ชำระเงินแล้ว</b>";
                                             } else if ($status == 0) {
-                                                echo "<div class='' style='border-radius: 10px; background: linear-gradient(195deg, #42424a 0%, #191919 100%); color: #fff; padding: 5px;'>
-                                                    <i class='bx bx-rotate-right'></i>&nbsp;ยกเลิกคำสั่งซื้อ
+                                                  echo "<div class='' style='border-radius: 5px; background: #f8f9fa; color: #dc3545; padding: 2px 0;'>
+                                                    <b><i class='bx bx-rotate-right'></i>&nbsp;ยกเลิกคำสั่งซื้อ</b>
                                                   </div>";
                                             }
                                             ?>

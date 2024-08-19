@@ -203,7 +203,7 @@ $row4 = mysqli_fetch_array($result4);
                             $ddt2 = @$_POST['dt2'];
 
                             if ((!empty($ddt1)) && (!empty($ddt2))) {
-                                echo '<div class="alert" style="background: linear-gradient(195deg, #f05da6 0%, #d63384 100%); color: #fff; border: none; outline: none;">';
+                                echo '<div class="alert" style="background: linear-gradient(195deg, #dee2e6 0%, #dee2e6 100%); color: #333; border: none; outline: none;">';
                                 echo "<strong>ค้นหาตั้งแต่วันที่</strong> <h4>" . $ddt1 . " ถึงวันที่ " . $ddt2 . "</h4>";
                                 echo '</div>';
 
@@ -257,8 +257,8 @@ $row4 = mysqli_fetch_array($result4);
                                         <div class="text-center">
                                             <?php
                                             if ($status == 1) {
-                                                echo "<div class='' style='border-radius: 10px; background: linear-gradient(195deg, #42424a 0%, #191919 100%); color: #fff; padding: 5px;'>
-                                                    <i class='bx bxs-hourglass'></i>&nbsp;รอตรวจสอบ
+                                                echo "<div class='' style='border-radius: 5px; background: #f8f9fa; color: #fd7e14; padding: 2px 0;'>
+                                                    <b><i class='bx bxs-hourglass'></i>&nbsp;รอตรวจสอบ</b>
                                                   </div>";
                                             } else if ($status == 2) {
                                                 echo "<b style='color: green;'>ชำระเงินแล้ว</b>";
@@ -303,10 +303,10 @@ $row4 = mysqli_fetch_array($result4);
                     </div>
                 </div>
             </div>
+            <?php include('footer.php') ?>
+
     </div>
     </main>
-
-    <?php include('footer.php') ?>
     </div>
     </div>
 </body>

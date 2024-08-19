@@ -215,8 +215,8 @@ $row4 = mysqli_fetch_array($result4);
                                             if ($status == 1) {
                                                 echo "<b style='color: blue;'>ยังไม่ชำระเงิน</b>";
                                             } else if ($status == 2) {
-                                                echo "<div class='' style='border-radius: 10px; background: linear-gradient(195deg, #42424a 0%, #191919 100%); color: #fff; padding: 5px;'>
-                                                    <i class='bx bx-check' ></i>&nbsp;ชำระเงินแล้ว
+                                                  echo "<div class='' style='border-radius: 5px; background: #f8f9fa; color: #198754; padding: 2px 0;'>
+                                                    <b><i class='bx bx-check'></i>&nbsp;ชำระเงินแล้ว</b>
                                                   </div>";
                                             } else if ($status == 0) {
                                                 echo "<b style='color: red;'>ยกเลิกการสั่งซื้อ</b>";
@@ -250,9 +250,9 @@ $row4 = mysqli_fetch_array($result4);
             </div>
     </div>
     </main>
+    </div>
+    </div>
     <?php include('footer.php') ?>
-    </div>
-    </div>
 </body>
 
 </html>

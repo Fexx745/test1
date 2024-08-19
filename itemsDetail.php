@@ -93,7 +93,9 @@ include('condb.php');
                                 <span>เหลือ <?= $row['amount'] ?> <?= $row['unit_name'] ?></span>
                             </div>
                             <div class="bc-showDetail-view">
-                                <span style="display:inline;">จำนวนผู้เข้าชมสินค้า <?= $row['p_view']; ?> <i class='bx bx-low-vision'></i></span>
+                                <span style="display:inline;">จำนวนผู้เข้าชมสินค้า <?= $row['p_view']; ?> <span class="material-symbols-outlined">
+                                        visibility
+                                    </span></span>
                             </div>
 
 
@@ -102,10 +104,11 @@ include('condb.php');
                                     <a href="order.php?id=<?= $row['p_id'] ?>" class="btn-me btn-cart" style="color: #333; font-size: 13px;"><i class='bx bx-cart-add'></i> &nbsp;เพิ่มใส่ตะกร้า</a>
                                     <a href="order.php?id=<?= $row['p_id'] ?>" class="btn-me btn-buy">ซื้อสินค้า</a>
                                 <?php } else { ?>
+                                    <button class="btn-me btn-out-of-stock me-2" onclick="window.location.href='index.php';">ย้อนกลับ</button>
                                     <button class="btn-me btn-out-of-stock me-2" disabled>สินค้าหมด</button>
                                 <?php } ?>
                             </div>
-                            
+
                         </div>
 
                     </div> <!-- bc-showDetail-top -->
@@ -213,7 +216,6 @@ include('condb.php');
     </section>
     <?php include('footer.php'); ?>
     <script>
-        
         // ฟังก์ชันสำหรับตั้งค่าคะแนน
         function setRating(rating) {
             document.getElementById('rating').value = rating;

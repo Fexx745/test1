@@ -379,7 +379,7 @@ nav {
                 .cart-count {
                     /* display: none; */
                     position: absolute;
-                    border: 2px solid var(--bs-orange);
+                    border: 2px solid var(--bs-danger);
                     top: -0px;
                     right: -5px;
                     color: var(--bs-danger);

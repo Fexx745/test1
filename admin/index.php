@@ -206,7 +206,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                 </div>
 
 
-                <div class="row mt-5">
+                <!-- <div class="row mt-5">
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
@@ -225,7 +225,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                             <div class="card-body"><canvas id="data_sale" width="100%" height="40"></canvas></div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- < class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
