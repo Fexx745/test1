@@ -88,27 +88,20 @@ include('condb.php');
                             <div class="bc-showDetail-count">
                                 <p>จำนวน</p>
                                 <button type="button" class="btn-decrement">-</button>
-                                <input type="number" name="quantity" id="quantity" class="txt txt-count" value="1" min="1">
+                                <input type="number" name="quantity" id="quantity" class="txt txt-count" value="1" min="1" max="<?= $row['amount'] ?>">
                                 <button type="button" class="btn-increment">+</button>
                                 <span>เหลือ <?= $row['amount'] ?> <?= $row['unit_name'] ?></span>
                             </div>
-                            <div class="bc-showDetail-view">
-                                <span style="display:inline;">จำนวนผู้เข้าชมสินค้า <?= $row['p_view']; ?> <span class="material-symbols-outlined">
-                                        visibility
-                                    </span></span>
-                            </div>
-
 
                             <div class="btn-control-buy">
                                 <?php if ($product_quantity > 0) { ?>
-                                    <a href="order.php?id=<?= $row['p_id'] ?>" class="btn-me btn-cart" style="color: #333; font-size: 13px;"><i class='bx bx-cart-add'></i> &nbsp;เพิ่มใส่ตะกร้า</a>
-                                    <a href="order.php?id=<?= $row['p_id'] ?>" class="btn-me btn-buy">ซื้อสินค้า</a>
+                                    <a href="#" class="btn-me btn-cart" style="color: #333; font-size: 13px;" onclick="addToCart(<?= $row['p_id'] ?>)"><i class='bx bx-cart-add'></i> &nbsp;เพิ่มใส่ตะกร้า</a>
+                                    <a href="#" class="btn-me btn-buy" onclick="buyNow(<?= $row['p_id'] ?>)">ซื้อสินค้า</a>
                                 <?php } else { ?>
                                     <button class="btn-me btn-out-of-stock me-2" onclick="window.location.href='index.php';">ย้อนกลับ</button>
                                     <button class="btn-me btn-out-of-stock me-2" disabled>สินค้าหมด</button>
                                 <?php } ?>
                             </div>
-
                         </div>
 
                     </div> <!-- bc-showDetail-top -->
@@ -215,6 +208,8 @@ include('condb.php');
         ?>
     </section>
     <?php include('footer.php'); ?>
+
+
     <script>
         // ฟังก์ชันสำหรับตั้งค่าคะแนน
         function setRating(rating) {
@@ -239,6 +234,36 @@ include('condb.php');
                     review.style.display = 'none';
                 }
             });
+        }
+
+        function addToCart(productId) {
+            const quantity = document.getElementById('quantity').value;
+            const maxQuantity = <?= $row['amount'] ?>;
+            if (quantity > maxQuantity) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'ไม่มีสินค้าเพียงพอในสต็อก',
+                    text: 'โปรดเลือกจำนวนที่น้อยกว่าหรือเท่ากับ ' + maxQuantity,
+                    confirmButtonText: 'ตกลง'
+                });
+            } else {
+                window.location.href = `order.php?id=${productId}&quantity=${quantity}`;
+            }
+        }
+
+        function buyNow(productId) {
+            const quantity = document.getElementById('quantity').value;
+            const maxQuantity = <?= $row['amount'] ?>;
+            if (quantity > maxQuantity) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'ไม่มีสินค้าเพียงพอในสต็อก',
+                    text: 'โปรดเลือกจำนวนที่น้อยกว่าหรือเท่ากับ ' + maxQuantity,
+                    confirmButtonText: 'ตกลง'
+                });
+            } else {
+                window.location.href = `order.php?id=${productId}&quantity=${quantity}`;
+            }
         }
 
         // เพิ่มเหตุการณ์สำหรับปุ่ม increment และ decrement

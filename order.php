@@ -2,39 +2,50 @@
 session_start();
 include 'condb.php';
 
-if (!isset($_SESSION["intLine"])) {
-    $_SESSION["intLine"] = 0;
-    $_SESSION["strProductID"][0] = $_GET["id"];
-    $_SESSION["strQty"][0] = 1;
-    header("location:cart.php");
-} else {
-    $key = array_search($_GET["id"], $_SESSION["strProductID"]);
-    if ((string)$key !== "") {
-        // ถ้า id มีอยู่ในตะกร้า
-        if ($_SESSION["strQty"][$key] < getStockQuantity($_GET["id"])) {
-            $_SESSION["strQty"][$key]++;
-        } else {
-            // ถ้าสินค้าในตะกร้าเต็มแล้ว
-            echo "สินค้าในตะกร้าเต็มแล้ว";
-        }
-    } else {
-        // ถ้า id ไม่มีในตะกร้า
-        if ($_SESSION["intLine"] < getStockQuantity($_GET["id"])) {
-            $_SESSION["intLine"]++;
-            $intNewLine = $_SESSION["intLine"];
-            $_SESSION["strProductID"][$intNewLine] = $_GET["id"];
-            $_SESSION["strQty"][$intNewLine] = 1;
-        } else {
-            // ถ้า stock มีน้อยกว่าที่ต้องการเพิ่ม
-            echo "สินค้าหมด";
-        }
+if (isset($_GET['id']) && isset($_GET['quantity'])) {
+    $productId = $_GET['id'];
+    $quantity = $_GET['quantity'];
+    $maxQuantity = getStockQuantity($productId);
+
+    if ($quantity > $maxQuantity) {
+        echo "ไม่มีสินค้าเพียงพอในสต็อก";
+        exit;
     }
-    header("location:cart.php");
+
+    if (!isset($_SESSION["intLine"])) {
+        $_SESSION["intLine"] = 0;
+        $_SESSION["strProductID"][0] = $productId;
+        $_SESSION["strQty"][0] = $quantity;
+        header("location:cart.php");
+    } else {
+        $key = array_search($productId, $_SESSION["strProductID"]);
+        if ((string)$key !== "") {
+            // ถ้า id มีอยู่ในตะกร้า
+            if ($_SESSION["strQty"][$key] + $quantity <= $maxQuantity) {
+                $_SESSION["strQty"][$key] += $quantity;
+            } else {
+                // ถ้าสินค้าในตะกร้าเต็มแล้ว
+                echo "สินค้าในตะกร้าเต็มแล้ว";
+            }
+        } else {
+            // ถ้า id ไม่มีในตะกร้า
+            if ($_SESSION["intLine"] < $maxQuantity) {
+                $_SESSION["intLine"]++;
+                $intNewLine = $_SESSION["intLine"];
+                $_SESSION["strProductID"][$intNewLine] = $productId;
+                $_SESSION["strQty"][$intNewLine] = $quantity;
+            } else {
+                // ถ้า stock มีน้อยกว่าที่ต้องการเพิ่ม
+                echo "สินค้าหมด";
+            }
+        }
+        header("location:cart.php");
+    }
 }
 
 function getStockQuantity($productId)
 {
-	include 'condb.php';
+    include 'condb.php';
     // ดึงข้อมูลจำนวน stock จากตาราง product ในฐานข้อมูล
     // ในที่นี้เป็นตัวอย่างเท่านั้น คุณต้องปรับเปลี่ยนตามโครงสร้างฐานข้อมูลของคุณ
     $sql = "SELECT amount FROM product WHERE p_id = $productId";

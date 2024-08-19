@@ -257,7 +257,7 @@ $row4 = mysqli_fetch_array($result4);
                                         <div class="text-center">
                                             <?php
                                             if ($status == 1) {
-                                                echo "<div class='' style='border-radius: 5px; background: #f8f9fa; color: #fd7e14; padding: 2px 0;'>
+                                                echo "<div class='' style='border-radius: 5px; background: #dee2e6; color: #333; padding: 2px 0;'>
                                                     <b><i class='bx bxs-hourglass'></i>&nbsp;รอตรวจสอบ</b>
                                                   </div>";
                                             } else if ($status == 2) {
@@ -271,7 +271,7 @@ $row4 = mysqli_fetch_array($result4);
                                     <td>
                                         <div class="text-center">
                                             <a href="report_order_detail.php?id=<?= $row['orderID'] ?>"
-                                                class="btn" style="background: linear-gradient(195deg, #fd7e14 0%, #ffc107 100%); color: #fff;"><i class='bx bx-message-detail'></i></a>
+                                                class="btn" style="background: linear-gradient(195deg, #343a40 0%, #adb5bd 100%); color: #fff;"><i class='bx bx-message-detail'></i></a>
                                         </div>
                                     <td>
                                         <div class="text-center">
@@ -298,13 +298,11 @@ $row4 = mysqli_fetch_array($result4);
                         </tbody>
 
                     </table>
-                    <div class="mt-4" class="mb-2">
+                    <div class="my-5">
                         <a href="index.php" class="btn btn-primary">ย้อนกลับ</a>
                     </div>
                 </div>
             </div>
-            <?php include('footer.php') ?>
-
     </div>
     </main>
     </div>

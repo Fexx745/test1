@@ -3,6 +3,7 @@
         <div class="d-flex align-items-center justify-content-between small">
             <div class="text-muted"><!-- Copyright &copy; Your Website 2023 --></div>
             <div>
+                <span style="letter-spacing: 6px; font-weight: 1000;">RMUTI SHOP</span>
                 <a href="#"><!-- Privacy Policy --></a>
                 &middot;
                 <a href="#"><!-- Terms &amp; Conditions --></a>

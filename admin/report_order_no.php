@@ -213,7 +213,7 @@ $row4 = mysqli_fetch_array($result4);
                                             } else if ($status == 2) {
                                                 echo "<b style='color: green;'>ชำระเงินแล้ว</b>";
                                             } else if ($status == 0) {
-                                                  echo "<div class='' style='border-radius: 5px; background: #f8f9fa; color: #dc3545; padding: 2px 0;'>
+                                                echo "<div class='' style='border-radius: 5px; background: #dc3545; color: #s; padding: 2px 0;'>
                                                     <b><i class='bx bx-rotate-right'></i>&nbsp;ยกเลิกคำสั่งซื้อ</b>
                                                   </div>";
                                             }
@@ -222,9 +222,9 @@ $row4 = mysqli_fetch_array($result4);
                                     </td>
                                     <td>
                                         <div class="text-center">
-                                            <a href="report_order_detail.php?id=<?= $row['orderID'] ?>"
-                                                class="btn btn-warning"><i class='bx bx-message-detail'></i></a>
-                                            <a class="btn btn-danger" href="javascript:void(0);"
+                                            <a href="report_order_detail.php?id=<?= $row['orderID'] ?>" style="background: linear-gradient(195deg, #343a40 0%, #adb5bd 100%); color: #fff;"
+                                                class="btn"><i class='bx bx-message-detail'></i></a>
+                                            <a class="btn" href="javascript:void(0);" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;"
                                                 onclick="confirmDelete('<?= $row['orderID'] ?>')"><i
                                                     class='bx bx-trash'></i></a>
                                         </div>
@@ -237,7 +237,7 @@ $row4 = mysqli_fetch_array($result4);
                         </tbody>
 
                     </table>
-                    <div class="mb-2">
+                    <div class="my-5">
                         <a href="report_order.php" class="btn btn-primary">ย้อนกลับ</a>
                     </div>
                 </div>
@@ -247,7 +247,6 @@ $row4 = mysqli_fetch_array($result4);
 
     </div>
     </div>
-    <?php include('footer.php') ?>
 
 </body>
 

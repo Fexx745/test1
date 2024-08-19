@@ -215,7 +215,7 @@ $row4 = mysqli_fetch_array($result4);
                                             if ($status == 1) {
                                                 echo "<b style='color: blue;'>ยังไม่ชำระเงิน</b>";
                                             } else if ($status == 2) {
-                                                  echo "<div class='' style='border-radius: 5px; background: #f8f9fa; color: #198754; padding: 2px 0;'>
+                                                  echo "<div class='' style='border-radius: 5px; background: #20c997; color: #fff; padding: 2px 0;'>
                                                     <b><i class='bx bx-check'></i>&nbsp;ชำระเงินแล้ว</b>
                                                   </div>";
                                             } else if ($status == 0) {
@@ -226,13 +226,13 @@ $row4 = mysqli_fetch_array($result4);
                                     </td>
                                     <td>
                                         <div class="text-center">
-                                            <a href="report_order_detail.php?id=<?= $row['orderID'] ?>" class="btn btn-warning"><i class='bx bx-car'></i></a>
+                                            <a href="report_order_detail.php?id=<?= $row['orderID'] ?>" style="background: linear-gradient(195deg, #343a40 0%, #adb5bd 100%); color: #fff;" class="btn"><i class='bx bx-car'></i></a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="text-center">
-                                            <a class="btn btn-primary" href="generate_receipt.php?id=<?= $row['orderID'] ?>"><i class='bx bx-printer'></i></a>
-                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['orderID'] ?>')"><i class='bx bx-trash'></i></a>
+                                            <a class="btn" style="background: linear-gradient(195deg, #343a40 0%, #adb5bd 100%); color: #fff;" href="generate_receipt.php?id=<?= $row['orderID'] ?>"><i class='bx bx-printer'></i></a>
+                                            <a class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;" href="javascript:void(0);" onclick="confirmDelete('<?= $row['orderID'] ?>')"><i class='bx bx-trash'></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -243,7 +243,7 @@ $row4 = mysqli_fetch_array($result4);
                         </tbody>
 
                     </table>
-                    <div class="mb-2">
+                    <div class="my-5">
                         <a href="report_order.php" class="btn btn-primary">ย้อนกลับ</a>
                     </div>
                 </div>
@@ -252,7 +252,6 @@ $row4 = mysqli_fetch_array($result4);
     </main>
     </div>
     </div>
-    <?php include('footer.php') ?>
 </body>
 
 </html>

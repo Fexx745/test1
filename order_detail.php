@@ -16,12 +16,14 @@ $orderID = intval($_GET['orderID']);
 
 $sql = "SELECT tb_order.orderID, tb_order.reg as order_date, tb_order.total_price, tb_order.order_status, tb_order.parcel_number,
                tb_order_detail.p_id, tb_order_detail.orderQty, tb_order_detail.Total,
-               product.p_name, product.image,  /* เพิ่มการดึงข้อมูลชื่อไฟล์รูปภาพ */
-               shipping_type.shipping_type_name
+               product.p_name, product.image, 
+               shipping_type.shipping_type_name,
+               tb_payment.slip_image  /* Retrieve slip image from tb_payment table */
         FROM tb_order
         JOIN tb_order_detail ON tb_order.orderID = tb_order_detail.orderID
         JOIN product ON tb_order_detail.p_id = product.p_id
         LEFT JOIN shipping_type ON tb_order.shipping_type_id = shipping_type.shipping_type_id
+        LEFT JOIN tb_payment ON tb_order.orderID = tb_payment.orderID  /* Join tb_payment table */
         WHERE tb_order.orderID = ?";
 
 $stmt = $conn->prepare($sql);
@@ -37,6 +39,7 @@ while ($row = $result->fetch_assoc()) {
         $order_details['order_status'] = $row['order_status'];
         $order_details['parcel_number'] = $row['parcel_number'];
         $order_details['shipping_type_name'] = $row['shipping_type_name'];
+        $order_details['slip_image'] = $row['slip_image'];  /* Store the slip image file path */
     }
     $order_details['items'][] = [
         'product_name' => $row['p_name'],
@@ -67,15 +70,15 @@ function getOrderStatus($status)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details</title>
-    <?php include ('script-css.php'); ?>
+    <?php include('script-css.php'); ?>
 </head>
 
 <body>
-    <?php include ('nav.php'); ?>
+    <?php include('nav.php'); ?>
 
     <div class="body-container">
 
-        <?php include ('bc-menu.php'); ?>
+        <?php include('bc-menu.php'); ?>
 
         <div class="view-history-menu">
             <div class="col-mb-12 mt-2" style="margin-bottom: 20px;">
@@ -114,7 +117,33 @@ function getOrderStatus($status)
                     <p><strong>สถานะ:</strong> <?php echo getOrderStatus($order_details['order_status']); ?></p>
                     <p><strong>เลขพัสดุ:</strong> <?php echo $order_details['parcel_number'] ?: 'รอจัดส่ง'; ?></p>
                     <p><strong>ประเภทขนส่ง:</strong> <?php echo $order_details['shipping_type_name']; ?></p>
+                    <?php if (!empty($order_details['slip_image'])): ?>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#slipModal">ดูสลิปการชำระเงิน
+                        </button>
+                    <?php else: ?>
+                        ไม่มีสลิปการชำระเงิน
+                    <?php endif; ?>
+                    </p>
                 </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="slipModal" tabindex="-1" role="dialog" aria-labelledby="slipModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="slipModalLabel">สลิปการชำระเงินของคุณ</h5>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="assets/images/slip_images/<?php echo htmlspecialchars($order_details['slip_image']); ?>" alt="Slip Image" style="width: 100%; height: auto; object-fit: cover;">
+                            </div>
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             <?php endif; ?>
             <div class="previous-button">
                 <a href="view-order-history.php" class="btn btn-dark">ย้อนกลับ</a>
@@ -123,11 +152,11 @@ function getOrderStatus($status)
         </div> <!-- end view-order-details -->
     </div> <!-- body-container -->
 
-    <?php include ('footer.php'); ?>
+    <?php include('footer.php'); ?>
 
 </body>
 
 </html>
 
-<?php include ('script-js.php'); ?>
+<?php include('script-js.php'); ?>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
