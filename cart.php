@@ -152,8 +152,8 @@ if (!isset($_SESSION['inPro'])) {
                                     <i class='bx bx-info-circle'></i>
                                     &nbsp;โปรดแนบสลิปการโอนทุกครั้งที่ทำการชำระเงิน
                                 </h4>
-                                <b>ธนาคารไทยพาณิชย์ (SCB) : 4070378747</b>
-                                <p>รองรับไฟล์ .png .jpg</p>
+                                <p>ธนาคารไทยพาณิชย์ (SCB) : 4070378747</p>
+                                <p style="font-size: 12px;">รองรับไฟล์ .png .jpg</p>
                                 <div class="text-end">
                                     <div class="input-group">
                                         <input type="hidden" class="form-control" name="payment_date" required>
