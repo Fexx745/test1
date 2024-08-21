@@ -62,7 +62,7 @@
         /* background-color: #0a58ca; */
 
         & ul li:first-child a {
-            border-top: 3px solid var(--bs-orange);
+            border-top: 3px solid var(--bs-danger);
         }
 
         & ul li a:hover {

@@ -46,6 +46,7 @@ if (!isset($_SESSION['inPro'])) {
                 <div class="col-md-12">
                     <div class="d-flex">
                         <h1>ตะกร้าสินค้า</h1>
+                        <h1 style="color: red;" id="cart-count-display"></h1>
                         <!-- <h1 style="color: red;">(<?php echo $_SESSION['inPro'] ?>)</h1> -->
                     </div>
 
@@ -68,6 +69,7 @@ if (!isset($_SESSION['inPro'])) {
 
                             for ($i = 0; $i <= (int) $_SESSION["intLine"]; $i++) {
                                 if (($_SESSION["strProductID"][$i]) != "") {
+
                                     //อันเดิม
                                     // $sql1 = "SELECT * FROM product WHERE p_id = '" . $_SESSION["strProductID"][$i] . "' ";
 
@@ -108,7 +110,7 @@ if (!isset($_SESSION['inPro'])) {
                                             <?= number_format($sum, 2) ?>
                                         </td>
                                         <td>
-                                            <a href="order.php?id=<?= $row_product['p_id'] ?>"><button type="button" class="btn" style="background: #fd7e14; color: #fff; font-weight: bold; border-radius: 5px; line-height: 1;">+</button></a>
+                                            <button type="button" class="btn" style="background: #fd7e14; color: #fff; font-weight: bold; border-radius: 5px; line-height: 1;" onclick="location.href='order.php?id=<?= $row_product['p_id'] ?>&quantity=1'">+</button>
                                             <!-- เชคจำนวนสินค้าถ้ามี 1 ปุ่ม - จะไม่มี -->
                                             <?php if ($_SESSION["strQty"][$i] > 1) { ?>
                                                 <a href="order_del.php?id=<?= $row_product['p_id'] ?>"><button type="button" class="btn" style="background: #f8f9fa; color: #fd7e14; font-weight: bold; border-radius: 5px; line-height: 1; border: 1px solid #fd7e14;">-</button></a>
@@ -148,12 +150,11 @@ if (!isset($_SESSION['inPro'])) {
                         <div class="row">
                             <div class="col-md-6 alert" style="background: rgba(229, 229, 229, 0.8); color: #333; border: none; outline: none;">
 
-                                <h4>
+                                <p style="font-size: 15px;">
                                     <i class='bx bx-info-circle'></i>
                                     &nbsp;โปรดแนบสลิปการโอนทุกครั้งที่ทำการชำระเงิน
-                                </h4>
-                                <p>ธนาคารไทยพาณิชย์ (SCB) : 4070378747</p>
-                                <p style="font-size: 12px;">รองรับไฟล์ .png .jpg</p>
+                                </p>
+                                <h6>ธนาคารไทยพาณิชย์ 4070378747</h6>
                                 <div class="text-end">
                                     <div class="input-group">
                                         <input type="hidden" class="form-control" name="payment_date" required>
@@ -251,4 +252,17 @@ if (isset($_SESSION['upload_error'])) {
             }
         });
     }
+
+    function updateCartCount() {
+        $.ajax({
+            url: 'get_cart_count.php',
+            type: 'GET',
+            success: function(count) {
+                // Display the cart count on the page
+                $('#cart-count-display').text('(' + count + ')');
+            }
+        });
+    }
+    updateCartCount();
+    setInterval(updateCartCount, 5000);
 </script>

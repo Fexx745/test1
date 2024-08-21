@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+var_dump($_GET);
+// var_dump($_SESSION);
+// rest of the code
 include 'condb.php';
 
 if (isset($_GET['id']) && isset($_GET['quantity'])) {

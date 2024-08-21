@@ -1,5 +1,3 @@
-<div?php include('condb.php'); $sql="SELECT * FROM tb_member" ; $result=mysqli_query($conn, $sql); $row=mysqli_fetch_array($result); ?>
-
     <!DOCTYPE html>
     <html lang="en">
 
@@ -69,7 +67,7 @@
                         </div>
                         <div class="nav-bottom-cart">
                             <div id="cartShop" class="cart-shop">
-                                <div class="cart-count">
+                                <div class="cart-count" id="cart-count">
                                     <?php
                                     if (isset($_SESSION['inPro']) && $_SESSION['inPro'] > 0) {
                                         echo $_SESSION['inPro'];
@@ -193,10 +191,9 @@
                                 <input type="password" class="form-control" id="psw" name="psw" placeholder="Password" required>
                             </div>
 
-                            <div class="d-flex justify-content-between mb-3">
-                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: #333;">ลืมรหัสผ่าน ?</a>
-
-                                <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon" class="material-symbols-outlined" style="color: #333;">visibility_off</span></a>
+                            <div class="d-flex justify-content-between mb-3 align-items-center">
+                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: #333; font-size: 14px;">ลืมรหัสผ่าน ?</a>
+                                <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon" class="material-symbols-outlined" style="color: #333; font-size: 18px;">visibility_off</span></a>
                             </div>
                             <div class="d-grid">
                                 <button class="btn" type="submit" style="background: #dc3545; color: #fff;">Login</button>
@@ -211,6 +208,7 @@
         </div>
 
         <script>
+
             function validatePasswords() {
                 var password = document.getElementById("reg_psw").value;
                 var confirmPassword = document.getElementById("confirm_psw").value;
