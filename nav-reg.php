@@ -149,7 +149,7 @@
                 </div>
                 <div class="nav-top-user">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">สมัครสมาชิก</a>
+                    <a href="reg.php">สมัครสมาชิก</a>
                 </div>
             </div>
             <div class="nav-bottom">

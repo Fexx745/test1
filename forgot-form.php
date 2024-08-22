@@ -35,7 +35,7 @@
 
             & a {
                 text-decoration: none;
-                color: green;
+                color: #0d6efd;
             }
 
             & a:hover {
@@ -56,7 +56,7 @@
 </head>
 
 <body>
-
+    <?php include('nav-reg.php'); ?>
     <div class="container">
         <div class="row mt-5">
             <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
@@ -67,10 +67,10 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="กรุณากรอกอีเมลล์" required>
                     </div>
                     <div class="d-grid">
-                        <button class="btn btn-danger" type="submit" name="submit" onclick="confirmSendEmail()">Submit</button>
+                        <button class="btn btn-danger" type="submit" name="submit" onclick="confirmSendEmail()">ยืนยัน</button>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <p class="mt-2">มีบัญชีแล้วไช่ไหม? <a href="login.php">เข้าสู่ระบบ</a></p>
+                        <p class="mt-2">มีบัญชีแล้วไช่ไหม? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a></p>
                     </div>
                 </form>
             </div>
@@ -82,7 +82,7 @@
 
 <?php
 if (isset($_SESSION['not-email'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "warning",
@@ -92,14 +92,14 @@ if (isset($_SESSION['not-email'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['not-email']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['send-email'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -110,7 +110,7 @@ if (isset($_SESSION['send-email'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['send-email']);
 }
 ?>

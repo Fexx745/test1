@@ -14,8 +14,8 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
 
     if (mysqli_num_rows($result) === 1) {
         // แสดงแบบฟอร์มสำหรับตั้งค่ารหัสผ่านใหม่
-        ?>
-        
+?>
+
         <!-- #bootrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script src="bootstrap/js/bootstrap.bundle.min.js"> </script>
@@ -56,7 +56,7 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
                 transition: .3s;
             }
         </style>
-
+        <?php include('nav-reg.php'); ?>
         <div class="container">
             <div class="row mt-5">
                 <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
@@ -90,5 +90,4 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
 
 // ปิดการเชื่อมต่อฐานข้อมูล
 mysqli_close($conn);
-?>
-
+        ?>
