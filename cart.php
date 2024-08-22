@@ -2,6 +2,7 @@
 session_start();
 include('condb.php');
 
+
 if (!isset($_SESSION['username'])) {
     header('Location: reg.php');
     exit();
@@ -202,7 +203,7 @@ if (isset($_SESSION['cart-success'])) {
             showConfirmButton: false,
             timer: 1500
         }).then(function() {
-            window.location.href = 'view-order-history.php';
+            window.location.href = 'order_detail.php?orderID=<?= $_SESSION['order_id'] ?>';
         });
     </script>
 

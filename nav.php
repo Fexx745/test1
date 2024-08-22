@@ -156,8 +156,14 @@
                     <a href="index.php">RMUTI SHOP</a>
                 </div>
                 <div class="nav-bottom-search">
-                    <input type="text" placeholder="Search...">
-                    <button type="button"><i class='bx bx-search-alt'></i></button>
+                    <form action="index_search.php" method="POST" class="nav-bottom-search" style="position: relative;">
+                        <input type="text" placeholder="Search..." id="search" name="search" autocomplete="off" required>
+                        <button type="submit" name="submit"><i class='bx bx-search-alt'></i></button>
+                        <div class="list-group" id="show-list"></div>
+                    </form>
+                    <div class="col-md-5">
+                        <div class="list-group" style="position: absolute; width: 490px;" id="show-list"></div>
+                    </div>
                 </div>
                 <div class="nav-bottom-cart">
                     <div class="cart-shop">
@@ -208,7 +214,6 @@
         </div>
 
         <script>
-
             function validatePasswords() {
                 var password = document.getElementById("reg_psw").value;
                 var confirmPassword = document.getElementById("confirm_psw").value;

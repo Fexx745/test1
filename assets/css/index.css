@@ -177,8 +177,9 @@
 
     /* bc-show */
     .bc-show {
-        /* position: relative; */
+        position: relative;
         width: 80%;
+        /* height: 100%; */
         padding: 20px;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -337,7 +338,13 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             /* เพิ่ม box-shadow ที่นี่ */
         }
+        
 
+        .pagination {
+            position: absolute;
+            left: 10px;
+            bottom: -25px;
+        }
 
     }
 }
