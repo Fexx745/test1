@@ -193,7 +193,7 @@
                             </div>
 
                             <div class="d-flex justify-content-between mb-3">
-                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: #000;">ลืมรหัสผ่าน ?</a>
+                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: #0d6efd;">ลืมรหัสผ่าน ?</a>
 
                                 <a href="#" onclick="togglePasswordVisibility()"><i id="togglePasswordIcon" class='bx bxs-low-vision fs-4' style="color: #000;"></i></a>
                             </div>

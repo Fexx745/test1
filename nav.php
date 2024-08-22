@@ -198,7 +198,7 @@
                             </div>
 
                             <div class="d-flex justify-content-between mb-3 align-items-center">
-                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: #333; font-size: 14px;">ลืมรหัสผ่าน ?</a>
+                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: #0d6efd; font-size: 14px;">ลืมรหัสผ่าน ?</a>
                                 <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon" class="material-symbols-outlined" style="color: #333; font-size: 18px;">visibility_off</span></a>
                             </div>
                             <div class="d-grid">
