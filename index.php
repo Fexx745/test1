@@ -155,3 +155,21 @@ if (isset($_SESSION['reg_success'])) {
     unset($_SESSION['reg_success']);
 }
 ?>
+
+<?php
+if (isset($_SESSION['psw_suc'])) {
+    ?>
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "เปลี่ยนรหัสสำเร็จ!",
+            text: "Change password successfully.",
+            // footer: '<span style="color: blue;">กรุณาตรวจสอบ Email ของคุณ</span>',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+    <?php
+    unset($_SESSION['psw_suc']);
+}
+?>

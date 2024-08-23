@@ -33,10 +33,6 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
                 box-sizing: border-box;
             }
 
-            .container {
-                margin: 200px auto;
-            }
-
             .wrapper {
                 border-top: 3px solid #ffc107;
 
@@ -57,7 +53,7 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
             }
         </style>
         <?php include('nav-reg.php'); ?>
-        <div class="container">
+        <div class="container-fluid p-5" style="background: #fff; margin-bottom: 450px;">
             <div class="row mt-5">
                 <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
                     <h2 class="text-center pt-3">New password</h2>
@@ -70,12 +66,14 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
                                 placeholder="รหัสผ่านใหม่" required>
                         </div>
                         <div class="d-grid">
-                            <button class="btn btn-warning" type="submit" name="submit"">Confirm password</button>
+                            <button class="btn btn-warning" type="submit" name="submit"">ยืนยัน</button>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
+
+        <?php include('footer.php'); ?>
 
         <?php
     } else {

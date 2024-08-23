@@ -198,20 +198,18 @@
                             </div>
 
                             <div class="d-flex justify-content-between mb-3 align-items-center">
-                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: #0d6efd; font-size: 14px;">ลืมรหัสผ่าน ?</a>
-                                <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon" class="material-symbols-outlined" style="color: #333; font-size: 18px;">visibility_off</span></a>
+                                <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: #00C300; font-size: 14px;">ลืมรหัสผ่าน ?</a>
+                                <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon" class="material-symbols-outlined" style="color: #000; font-size: 18px;">visibility_off</span></a>
                             </div>
                             <div class="d-grid">
-                                <button class="btn" type="submit" style="background: #dc3545; color: #fff;">Login</button>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <!-- <p class="mt-2">ยังไม่มีบัญชี? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" style="text-decoration: none; color: green;">สมัครสมาชิก</a></p> -->
+                                <button class="btn" type="submit" style="background: #00C300; color: #fff;">Login</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        
 
         <script>
             function validatePasswords() {

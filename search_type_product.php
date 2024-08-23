@@ -1,8 +1,7 @@
 <?php
 session_start();
-include ('condb.php');
+include('condb.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,19 +9,74 @@ include ('condb.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Results</title>
-    <?php include ('script-css.php'); ?>
+    <?php include('script-css.php'); ?>
+    <!-- <style>
+        /* Styles for pagination */
+        .pagination {
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a,
+        .pagination span {
+            display: block;
+            padding: 8px 12px;
+            color: #fff;
+            background-color: #fd7e14;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover {
+            background-color: #ee4d2d;
+            color: #fff;
+        }
+
+        .pagination .active {
+            background-color: #fd7e14;
+            color: #fff;
+        }
+
+        .pagination .disabled {
+            color: #aaa;
+            pointer-events: none;
+            background-color: #eee;
+        }
+    </style> -->
 </head>
 
 <body>
 
-    <?php include ('nav.php'); ?>
+    <?php include('nav.php'); ?>
     <div class="body-container">
 
-        <?php
-        include ('bc-menu.php');
+        <?php include('bc-menu.php'); ?>
 
+        <?php
+        // รับค่า type_id จาก URL และตรวจสอบความถูกต้อง
         $type_id = isset($_GET['type_id']) ? intval($_GET['type_id']) : 0;
 
+        // รับค่าหน้าปัจจุบันจาก URL และตรวจสอบความถูกต้อง
+        $page = isset($_GET['page']) && $_GET['page'] > 0 ? intval($_GET['page']) : 1;
+        $limit = 8; // จำนวนรายการต่อหน้า
+        $offset = ($page - 1) * $limit; // คำนวณตำแหน่งเริ่มต้นของรายการในแต่ละหน้า
+
+        // นับจำนวนสินค้าทั้งหมดในประเภทที่เลือก
+        $count_query = "
+            SELECT COUNT(*) AS total
+            FROM product p
+            JOIN price_history ph ON p.p_id = ph.p_id
+            WHERE p.type_id = $type_id AND ph.to_date IS NULL
+        ";
+        $count_result = mysqli_query($conn, $count_query);
+        $total_products = mysqli_fetch_assoc($count_result)['total'];
+        $total_pages = ceil($total_products / $limit); // คำนวณจำนวนหน้าทั้งหมด
+
+        // ดึงข้อมูลสินค้าสำหรับหน้าปัจจุบัน
         $query = "
             SELECT 
                 p.p_id, 
@@ -34,8 +88,8 @@ include ('condb.php');
                 ph.price, 
                 pt.type_name, 
                 ut.unit_name,
-                (SELECT COUNT(*) FROM tb_order_detail WHERE tb_order_detail.p_id = p.p_id) AS sales_count,
-                (SELECT AVG(rating) FROM product_reviews WHERE product_reviews.p_id = p.p_id) AS average_rating
+                COALESCE((SELECT COUNT(*) FROM tb_order_detail WHERE tb_order_detail.p_id = p.p_id), 0) AS sales_count,
+                COALESCE((SELECT AVG(rating) FROM product_reviews WHERE product_reviews.p_id = p.p_id), 0) AS average_rating
             FROM 
                 product p 
             JOIN 
@@ -49,6 +103,7 @@ include ('condb.php');
                 AND ph.to_date IS NULL 
             ORDER BY 
                 p.p_name
+            LIMIT $limit OFFSET $offset
         ";
 
         $result = mysqli_query($conn, $query);
@@ -58,19 +113,15 @@ include ('condb.php');
 
             <?php
             if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_array($result)) {
-                    // ตรวจสอบและกำหนดค่าพื้นฐานให้กับตัวแปร
-                    $average_rating = isset($row['average_rating']) ? round($row['average_rating'], 1) : 0; // คำนวณคะแนนเฉลี่ย (ถ้ามีรีวิว)
-                    $full_stars = floor($average_rating); // จำนวนดาวเต็ม
-                    $half_star = ($average_rating - $full_stars >= 0.5) ? true : false; // ตรวจสอบว่ามีครึ่งดาวหรือไม่
-                    $empty_stars = 5 - $full_stars - ($half_star ? 1 : 0); // จำนวนดาวที่ว่างเปล่า
-            
-                    ?>
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $average_rating = round($row['average_rating'], 1);
+                    $sales_count = $row['sales_count'];
+            ?>
                     <a href="itemsDetail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
                         <div class="bc-show-items-img">
-                            <img src="assets/images/product/<?= $row['image'] ?>" alt="<?= $row['p_name'] ?>">
+                            <img src="assets/images/product/<?= htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['p_name']) ?>">
                         </div>
-                        <p><?= $row['p_name'] ?></p>
+                        <p><?= htmlspecialchars($row['p_name']) ?></p>
                         <div class="bc-show-items-price">
                             <h5>
                                 ฿<?= number_format($row['price'], 2) ?>
@@ -80,34 +131,78 @@ include ('condb.php');
                         <div class="bc-show-items-view">
                             <div class="bc-show-items-view-product">
                                 <span>
-                                    <!-- <?php for ($i = 1; $i <= $full_stars; $i++) { ?>
-                                        <i class='bx bxs-star'></i>
-                                    <?php } ?>
-                                    <?php if ($half_star) { ?>
-                                        <i class='bx bxs-star-half'></i>
-                                    <?php } ?>
-                                    <?php for ($i = 1; $i <= $empty_stars; $i++) { ?>
-                                        <i class='bx bx-star'></i>
-                                    <?php } ?> -->
-                                    <b><i class='bx bxs-star'></i><?= $average_rating ?></b>
+                                    <b><i class='bx bxs-star'></i> <?= $average_rating ?></b>
                                 </span>
                             </div>
                             <div class="bc-show-items-detail">
-                                <span>ขายแล้ว&nbsp;<?= $row['sales_count'] ?>&nbsp;<?= $row['unit_name'] ?></span>
+                                <span>ขายแล้ว&nbsp;<?= $sales_count ?>&nbsp;<?= htmlspecialchars($row['unit_name']) ?></span>
                             </div>
                         </div>
                     </a>
-                    <?php
+            <?php
                 }
             } else {
-                echo "ไม่พบข้อมูลสินค้าในประเภทนี้";
+                echo "<p>ไม่พบข้อมูลสินค้าในประเภทนี้</p>";
             }
             mysqli_close($conn);
             ?>
+            <!-- แสดงปุ่มการแบ่งหน้า -->
+            <?php if ($total_pages > 1): ?>
+                <!-- แสดงปุ่มการแบ่งหน้า -->
+                <?php if ($total_pages > 1): ?>
+                    <div class="pagination">
+                        <?php
+                        // คำนวณจำนวนหน้าทั้งหมดตามประเภทสินค้า
+                        $total_pages = ceil($total_products / $limit);
+                        $current_page = $page;
 
-        </div>
+                        // ป้องกันการเลือกหน้าที่ไม่ถูกต้อง
+                        if ($page > $total_pages) {
+                            header('Location: index.php?page=' . $total_pages);
+                            exit;
+                        }
+
+                        echo '<ul class="pagination">';
+
+                        // แสดงปุ่ม "Previous"
+                        if ($current_page > 1) {
+                            echo '<li class="page-item">';
+                            echo '<a class="page-link" href="?type_id=' . $type_id . '&page=' . ($current_page - 1) . '" aria-label="Previous">';
+                            echo '<span aria-hidden="true"><i class="bx bx-chevron-left"></i></span>';
+                            echo '</a>';
+                            echo '</li>';
+                        }
+
+                        // แสดงปุ่มเลขหน้า
+                        for ($i = 1; $i <= $total_pages; $i++) {
+                            echo '<li class="page-item ' . ($i == $current_page ? 'active' : '') . '">';
+                            echo '<a class="page-link" href="?type_id=' . $type_id . '&page=' . $i . '">' . $i . '</a>';
+                            echo '</li>';
+                        }
+
+                        // แสดงปุ่ม "Next"
+                        if ($current_page < $total_pages) {
+                            echo '<li class="page-item">';
+                            echo '<a class="page-link" href="?type_id=' . $type_id . '&page=' . ($current_page + 1) . '" aria-label="Next">';
+                            echo '<span aria-hidden="true"><i class="bx bx-chevron-right"></i></span>';
+                            echo '</a>';
+                            echo '</li>';
+                        }
+
+                        echo '</ul>';
+                        ?>
+                    </div>
+
+                <?php endif; ?>
+
+            <?php endif; ?>
+        </div> <!-- bc-show -->
+
+
 
     </div>
+
+    <?php include('footer.php'); ?>
 </body>
 
 </html>

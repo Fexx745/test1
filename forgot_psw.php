@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -41,12 +42,17 @@ if (isset($_POST['submit'])) {
         $mail->Subject = 'Reset Password';
         $mail->Body = '
         <div style="font-family: \'Roboto\', sans-serif; background-color: #f4f4f4; padding: 20px; border-radius: 5px;">
-            <b style="font-size: 17px; color: #000;">สวัสดี, คุณ ' . $row['username'] . ' ได้ทำการร้องขอการรีเซ็ตรหัสผ่าน</b>
-            <p style="font-size: 16px; color: #000;">กรุณาคลิกที่ปุ่ม Reset Password ด้านล่างเพื่อรีเซ็ตรหัสผ่านของคุณ:</p>
-            <a href="http://localhost/MyShop_Online%20%5bNEW%5d/reset_password.php?email=' . urlencode($email) . '&token=' . $token . '" style="display: inline-block; 
-            background-color: #dc3545; color: #fff; text-decoration: none; padding: 7px 17px; border-radius: 5px; transition: opacity 0.5s; font-weight: 500;">Reset Password</a>
+            <h2 style="font-size: 20px; color: #333333; margin-bottom: 15px;">สวัสดี, คุณ ' . $row['username'] . '</h2>
+            <p style="font-size: 16px; color: #555555; line-height: 1.5; margin-bottom: 25px;">
+                คุณได้ทำการร้องขอการรีเซ็ตรหัสผ่าน กรุณาคลิกที่ปุ่มด้านล่างเพื่อดำเนินการต่อ:
+            </p>
+            <a href="http://localhost/test1/reset_password.php?email=' . urlencode($email) . '&token=' . $token . '" 
+               style="display: inline-block; background-color: #00C300; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; 
+               font-weight: 600; text-align: center; transition: background-color 0.3s;">
+               รีเซ็ตรหัสผ่าน
+            </a>
         </div>';
-        
+
 
 
 
@@ -67,4 +73,3 @@ if (isset($_POST['submit'])) {
     // ปิดการเชื่อมต่อฐานข้อมูล
     mysqli_close($conn);
 }
-?>

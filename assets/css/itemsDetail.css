@@ -15,6 +15,7 @@
     --bs-red: #dc3545;
     --bs-orange: #fd7e14;
     --bs-yellow: #ffc107;
+    --bs-green-btn: #00C300;
     --bs-green: #198754;
     --bs-teal: #20c997;
     --bs-cyan: #0dcaf0;
@@ -248,20 +249,21 @@
     }
 
     .btn-me:hover {
-        opacity: .8;
+        opacity: .5;
     }
 
 
     .btn-buy {
         /* background: linear-gradient(195deg, #fd7e14 0%, #ffc107 100%); */
-        background-color: #fd7e14;
+        background-color: var(--bs-green-btn);
         color: #fff;
         font-size: 1rem;
+        border: none;
     }
 
     .btn-cart {
-        background: #fcf5f4;
-        border: 1px solid var(--bs-orange);
+        background: #fefbfb;
+        border: 1px solid var(--bs-green);
         margin-right: 10px;
         font-size: 15px;
         font-weight: 600;
@@ -325,7 +327,7 @@
             display: flex;
             flex-direction: column;
             margin-right: 20px;
-            
+
             & label {
                 color: var(--bs-danger);
                 font-size: 30px;
@@ -355,6 +357,7 @@
                 color: var(--bs-warning);
             }
         }
+
         .rating-button:hover {
             opacity: 0.5;
         }

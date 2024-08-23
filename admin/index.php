@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('condb.php');
+include('condb.php');
 
 if (!isset($_SESSION['username'])) {
     header('Location: ../login.php');
@@ -87,7 +87,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
 
 <body class="sb-nav-fixed">
 
-    <?php include ('menu.php') ?>
+    <?php include('menu.php') ?>
     <div id="layoutSidenav_content" style="background: #fff;">
         <main>
             <div class="container-fluid px-4">
@@ -206,12 +206,12 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                 </div>
 
 
-                <!-- <div class="row mt-5">
+                <div class="row mt-5">
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-area me-1"></i>
-                                ยอดเข้าชมสินค้ามากที่สุด
+                                ยอดขายวันนี้
                             </div>
                             <div class="card-body"><canvas id="data_product" width="100%" height="40"></canvas></div>
                         </div>
@@ -225,23 +225,10 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                             <div class="card-body"><canvas id="data_sale" width="100%" height="40"></canvas></div>
                         </div>
                     </div>
-                </div> -->
-                <!-- < class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
-                        สินค้าทั้งหมด
-                    </div>
-                    <div class="card-body">
-                        <a href="addproduct.php" class="btn btn-dark mb-3"><i class='bx bxs-plus-circle'></i>
-                            เพิ่มสินค้า</a>
-                        <a href="addproducttype.php" class="btn btn-secondary mb-3"><i class='bx bxs-plus-circle'></i>
-                            เพิ่มประเภทสินค้า</a>
-                    </div> card-body
-                </> -->
-            </div>
+                </div>
         </main>
 
-        <?php include ('footer.php') ?>
+        <?php include('footer.php') ?>
     </div>
     </div>
 </body>
@@ -258,52 +245,41 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
     crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
 
+
 <!-- Chart -->
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/Chart.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         showGraph();
     });
 
 
     function showGraph() {
-        {
-            $.post("data_product.php",
-                function (data) {
-                    console.log(data);
-                    var name = [];
-                    var marks = [];
+        var totalSalesToday = <?= $total_sales_today ?>;
 
-                    for (var i in data) {
-                        name.push(data[i].p_name);
-                        marks.push(data[i].p_view);
-                    }
+        var chartdata = {
+            labels: ["ยอดขายวันนี้"],
+            datasets: [{
+                label: 'ยอดขายวันนี้',
+                backgroundColor: '#2ECC71',
+                borderColor: '#000',
+                hoverBackgroundColor: '#2ECC71',
+                hoverBorderColor: '#000',
+                data: [totalSalesToday]
+            }]
+        };
 
-                    var chartdata = {
-                        labels: name,
-                        datasets: [{
-                            label: 'ยอดเข้าชมสินค้ามากที่สุด',
-                            backgroundColor: '#2ECC71',
-                            borderColor: '#000',
-                            hoverBackgroundColor: '#2ECC71',
-                            hoverBorderColor: '#000',
-                            data: marks
-                        }]
-                    };
+        var graphTarget = $("#data_product");
 
-                    var graphTarget = $("#data_product");
-
-                    var barGraph = new Chart(graphTarget, {
-                        type: 'bar',
-                        data: chartdata
-                    });
-                });
-        }
+        var barGraph = new Chart(graphTarget, {
+            type: 'bar',
+            data: chartdata
+        });
     }
 </script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         showGraph1();
     });
 
@@ -311,7 +287,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
     function showGraph1() {
         {
             $.post("data_sale.php",
-                function (data) {
+                function(data) {
                     console.log(data);
                     var name = [];
                     var marks = [];
@@ -347,7 +323,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
 <!-- Your PHP code -->
 <?php
 if (isset($_SESSION['delete_product'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -357,7 +333,7 @@ if (isset($_SESSION['delete_product'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['delete_product']);
 }
 ?>
@@ -383,7 +359,7 @@ if (isset($_SESSION['delete_product'])) {
 
 <?php
 if (isset($_SESSION['edit_product'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             // position: "top-center",
@@ -392,19 +368,19 @@ if (isset($_SESSION['edit_product'])) {
             text: "Successfully",
             showConfirmButton: false,
             timer: 1500
-        }).then(function () {
+        }).then(function() {
             window.location.href = 'index.php';
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['edit_product']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['editprice'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -414,14 +390,14 @@ if (isset($_SESSION['editprice'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['editprice']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['addstock'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -431,7 +407,7 @@ if (isset($_SESSION['addstock'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['addstock']);
 }
 ?>
