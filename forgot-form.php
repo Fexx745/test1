@@ -72,37 +72,3 @@ if (isset($_SESSION['send-email'])) {
     unset($_SESSION['send-email']);
 }
 ?>
-
-
-<!-- <script>
-    function confirmSendEmail() {
-        Swal.fire({
-            title: "Confirm sending request to change password.",
-            text: "ยืนยันส่งคำขอเปลี่ยนรหัสผ่าน!",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonColor: "#198754",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "ยืนยัน",
-            cancelButtonText: "ยกเลิก"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "POST",
-                    url: "forgot_psw.php",
-                    data: {
-                        email: $("#email").val() // รับค่าอีเมลล์จากฟอร์ม
-                    },
-                    success: function(response) {
-                        // ดำเนินการหลังจากสำเร็จ
-                        window.location.href = `forgot_psw.php`;
-                    },
-                    error: function(xhr, status, error) {
-                        // ดำเนินการหลังจากเกิดข้อผิดพลาด
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
-        });
-    }
-</script> -->
