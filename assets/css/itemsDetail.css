@@ -44,6 +44,18 @@
     --bs-link-hover-color: #0a58ca;
     --bs-code-color: #f05da6;
     --bs-highlight-bg: #fff3cd;
+    --nc-primary: #ee4d2d;
+    --nc-primary-bg: #fef6f5;
+    --nc-primary-gradient: linear-gradient(#ee4d2d, #ff7337);
+    --nc-secondary-blue: #0046ab;
+    --nc-secondary-yellow: #eda500;
+    --nc-secondary-green: #26aa99;
+    --nc-error: #ee2c4a;
+    --nc-error-bg: #fff4f4;
+    --nc-caution: #f69113;
+    --nc-caution-bg: #fff8e4;
+    --nc-success: #30b566;
+    --nc-success-bg: #f7fffe;
 }
 
 .body-container {
@@ -255,7 +267,7 @@
 
     .btn-buy {
         /* background: linear-gradient(195deg, #fd7e14 0%, #ffc107 100%); */
-        background-color: var(--bs-green-btn);
+        background: linear-gradient(195deg, #198754 0%, #30b566 100%);
         color: #fff;
         font-size: 1rem;
         border: none;

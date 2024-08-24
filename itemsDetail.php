@@ -69,7 +69,7 @@ include('condb.php');
                 <div class="bc-showDetail">
                     <div class="bc-showDetail-top">
                         <div class="bc-showDetail-left">
-                            <div class="bc-showDetail-.bc-showDetail-viewphoto">
+                            <div class="bc-showDetail .bc-showDetail-viewphoto">
                                 <img src="assets/images/product/<?= $row['image'] ?>" alt="<?= $row['p_name'] ?>">
                             </div>
                         </div>

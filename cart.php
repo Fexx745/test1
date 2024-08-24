@@ -170,8 +170,8 @@ if (!isset($_SESSION['inPro'])) {
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <a href="index.php"><button type="button" class="btn" style="background: #fcf5f4; margin: 0 10px; border: 1px solid #fd7e14; color: #000; font-size: 15px; font-weight: 600;"><i class='bx bx-cart-add'></i> เลือกสินค้าต่อ</button></a>
-                                    <a href=""><button type="submit" class="btn" style="background: #fd7e14; border: none; color: #fff;">สั่งซื้อ</button></a>
+                                    <a href="index.php"><button type="button" class="btn" style="background: #fcf5f4; margin: 0 10px; border: 1px solid #198754; color: #000; font-size: 15px; font-weight: 600;"><i class='bx bx-cart-add'></i> เลือกสินค้าต่อ</button></a>
+                                    <a href=""><button type="submit" class="btn" style="background: linear-gradient(195deg, #198754 0%, #30b566 100%); border: none; color: #fff;">สั่งซื้อ</button></a>
                                 </div>
                             </div>
                         </div>

@@ -43,6 +43,18 @@
     --bs-link-hover-color: #0a58ca;
     --bs-code-color: #f05da6;
     --bs-highlight-bg: #fff3cd;
+    --nc-primary: #ee4d2d;
+    --nc-primary-bg: #fef6f5;
+    --nc-primary-gradient: linear-gradient(#ee4d2d, #ff7337);
+    --nc-secondary-blue: #0046ab;
+    --nc-secondary-yellow: #eda500;
+    --nc-secondary-green: #26aa99;
+    --nc-error: #ee2c4a;
+    --nc-error-bg: #fff4f4;
+    --nc-caution: #f69113;
+    --nc-caution-bg: #fff8e4;
+    --nc-success: #30b566;
+    --nc-success-bg: #f7fffe;
 }
 
 .edit-profile {
@@ -84,7 +96,7 @@
         width: 110px;
         height: 30px;
         padding: 5px;
-        background: linear-gradient(195deg, #38a06f 0%, #4fb786 100%);
+        background: linear-gradient(195deg, #198754 0%, #30b566 100%);
         border: 1px solid var(--bs-gray-100);
         color: #fff;
         display: flex;
@@ -99,10 +111,8 @@
         width: 110px;
         height: 30px;
         padding: 5px;
-        /* background: linear-gradient(195deg, #e5e5e5 0%, #fff 100%); */
-        background: linear-gradient(195deg, #0dcaf0 0%, #82e6fa 100%);
+        background: linear-gradient(195deg, #0dcaf0 0%, #0d6efd 100%);
         border: 1px solid var(--bs-gray-100);
-        /* background: linear-gradient(195deg, #ffc107 0%, #ffc107 100%); */
         color: #fff;
         display: flex;
         align-items: center;
@@ -116,7 +126,7 @@
         width: 110px;
         height: 30px;
         padding: 5px;
-        background: linear-gradient(195deg, #dc3545 0%, #ee7c88 100%);
+        background: var(--nc-primary-gradient);
         border: 1px solid var(--bs-gray-100);
         color: #fff;
         display: flex;

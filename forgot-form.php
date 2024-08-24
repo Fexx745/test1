@@ -8,47 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <!-- #bootrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="bootstrap/js/bootstrap.bundle.min.js"> </script>
-    <script src="assets/dist/sweetalert2.all.min.js"></script>
-
-    <!-- boxicons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-        * {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .wrapper {
-            border-top: 3px solid #00C300;
-
-            & a {
-                text-decoration: none;
-                color: #00C300;
-            }
-
-            & a:hover {
-                opacity: 0.5;
-                transition: .3s;
-            }
-        }
-
-        #forgotpsw {
-            color: #00C300;
-        }
-
-        #forgotpsw:hover {
-            opacity: 0.5;
-            transition: .3s;
-        }
-    </style>
+    <?php include('script-css.php'); ?>
 </head>
 
 <body>
@@ -63,8 +23,7 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="กรุณากรอกอีเมลล์ ที่คุณสมัครไว้" required>
                     </div>
                     <div class="d-grid">
-                        <!-- <button class="btn" style="background-color: #00C300; color: #fff;" name="submit" onclick="confirmSendEmail()">ยืนยัน</button> -->
-                        <button class="btn" style="background-color: #00C300; color: #fff;" name="submit">ยืนยัน</button>
+                        <button class="btn-submit">ยืนยัน</button>
                     </div>
                     <div class="d-flex justify-content-between">
                         <p class="mt-2"><span style="color: #6c757d;">มีบัญชีแล้วไช่ไหม?</span> <a href="login.php">เข้าสู่ระบบ</a></p>

@@ -9,18 +9,22 @@
             session_start();
         }
         if (isset($_SESSION['username'])) {
-        ?>
-            <li><a href="edit-profile.php?id=<?php echo $_SESSION['user_id']; ?>"><i class='bx bxs-user-circle'></i>&nbsp;ตั้งค่าผู้ใช้</a></li>
+            ?>
+            <li><a href="edit-profile.php?id=<?php echo $_SESSION['user_id']; ?>"><i
+                        class='bx bxs-user-circle'></i>&nbsp;ตั้งค่าผู้ใช้</a></li>
             <li><a href="view-order-history.php"><i class='bx bx-history'></i>&nbsp;ดูประวัติการสั่งซื้อ</a></li>
+            <li><a href="changepassword.php?id=<?php echo $_SESSION['user_id']; ?>"><span class="material-symbols-outlined">
+                        vpn_key
+                    </span>&nbsp;เปลี่ยนรหัสผ่าน</a></li>
             <!-- <li><a href="cart.php"><i class='bx bx-cart'></i>&nbsp;ตะกร้าสินค้า</a></li> -->
             <!-- <li><a href="logout.php"><i class='bx bx-log-out'></i>&nbsp;ออกจากระบบ</a></li> -->
 
-        <?php } else {  ?>
+        <?php } else { ?>
 
             <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a></li>
             <li><a href="reg.php">สมัครสมาชิก</a></li>
             <!-- <li><a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">สมัครสมาชิก</a></li> -->
-        <?php
+            <?php
         } ?>
     </ul>
     <form action="search_type_product.php" method="get">
@@ -36,12 +40,13 @@
             <?php
             mysqli_data_seek($result, 0);
             while ($row = mysqli_fetch_array($result)) {
-            ?>
+                ?>
                 <li><a href="search_type_product.php?type_id=<?= $row['type_id'] ?>">
-                        <img src="assets/images/type_product/<?= $row['type_image'] ?>" alt="" style="width: 15px; height: 15px; margin-right: 5px;">
+                        <img src="assets/images/type_product/<?= $row['type_image'] ?>" alt=""
+                            style="width: 15px; height: 15px; margin-right: 5px;">
                         <?= $row['type_name'] ?>
                     </a></li>
-            <?php
+                <?php
             }
             ?>
         </ul>
@@ -51,21 +56,20 @@
         session_start();
     }
     if (isset($_SESSION['username'])) {
-    ?>
+        ?>
         <div class="bc-menu-logout">
             <i class='bx bxs-log-out'></i>
             <h5>ออกจากระบบ</h5>
         </div>
         <ul style="margin-bottom: 20px;">
-
             <li><a href="logout.php" onclick="confirmLogout(event)"><i class='bx bx-log-out'></i>&nbsp;ออกจากระบบ</a></li>
 
 
-        <?php } else {  ?>
+        <?php } else { ?>
 
-        <?php
+            <?php
     } ?>
-        </ul>
+    </ul>
 </div>
 
 <script>
@@ -89,5 +93,3 @@
 </script>
 
 <?php include('script-js.php'); ?>
-
-

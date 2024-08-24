@@ -8,41 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สมัครสมาชิกเพื่อเริ่มต้นช้อปออนไลน์ได้ที่นี่ | RMUTI</title>
 
-    <!-- #bootrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="bootstrap/js/bootstrap.bundle.min.js"> </script>
-    <script src="assets/dist/sweetalert2.all.min.js"></script>
-
-    <!-- boxicons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-        * {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .wrapper {
-            border-top: 3px solid #00C300;
-
-            & a {
-                text-decoration: none;
-                color: #00C300;
-            }
-
-            & a:hover {
-                opacity: 0.6;
-                transition: .3s;
-                color: #00C300;
-            }
-        }
-
-    </style>
+    <?php include('script-css.php'); ?>
 </head>
 
 <body>
@@ -86,7 +52,8 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-user'></i></span>
-                        <input type="text" id="input_field" class="form-control" name="fname" placeholder="ชื่อ" required>
+                        <input type="text" id="input_field" class="form-control" name="fname" placeholder="ชื่อ"
+                            required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-user'></i></span>
@@ -98,7 +65,8 @@
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-map'></i></span>
-                        <textarea class="form-control" name="address" placeholder="ที่อยู่ ...." required style="resize: none;"></textarea>
+                        <textarea class="form-control" name="address" placeholder="ที่อยู่ ...." required
+                            style="resize: none;"></textarea>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-phone'></i></span>
@@ -115,11 +83,13 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-lock'></i></span>
-                        <input type="password" class="form-control" name="confirm_psw" placeholder="ยืนยันรหัสผ่าน" required>
+                        <input type="password" class="form-control" name="confirm_psw" placeholder="ยืนยันรหัสผ่าน"
+                            required>
                     </div>
                     <div class="d-grid">
-                        <button class="btn" style="background: #00C300; color: #fff;">ยืนยันการสมัคร</button>
-                        <p class="text-center mt-2"><span style="color: #6c757d;">หากมีบัญชีผู้ใช้แล้ว คุณสามารถ</span> <a href="login.php">เข้าสู่ระบบ</a></p>
+                        <button class="btn-submit">ยืนยันการสมัคร</button>
+                        <p class="text-center mt-2"><span style="color: #6c757d;">หากมีบัญชีผู้ใช้แล้ว คุณสามารถ</span>
+                            <a href="login.php">เข้าสู่ระบบ</a></p>
                     </div>
                 </form>
             </div>
@@ -133,12 +103,12 @@
 </html>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Get the input field
         var inputField = $('#input_field');
 
         // Add an event listener to the input field
-        inputField.on('input', function() {
+        inputField.on('input', function () {
             // Get the input value
             var inputValue = $(this).val();
 
@@ -149,7 +119,7 @@
                 data: {
                     input_value: inputValue
                 },
-                success: function(response) {
+                success: function (response) {
                     // Check the response
                     if (response == "duplicate") {
                         // Change the input border color to red

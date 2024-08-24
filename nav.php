@@ -195,7 +195,7 @@
                             <div class="input-group mb-1">
                                 <span class="input-group-text"><i class='bx bx-lock-alt'></i></span>
                                 <input type="password" class="form-control" id="psw" name="psw" placeholder="Password" required>
-                            </div>
+                            </div>  
 
                             <div class="d-flex justify-content-between mb-3 align-items-center">
                                 <a href="forgot-form.php" id="forgotpsw" class="mt-2" style="text-decoration: none; color: #00C300; font-size: 14px;">ลืมรหัสผ่าน ?</a>
