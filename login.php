@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>เข้าสู่ระบบเพื่อช้อปออนไลน์พร้อมรับดีลสุดพิเศษได้ที่นี่ | RMUTI</title>
 
     <!-- #bootrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -72,7 +72,7 @@
                     ?>
                 </p>
 
-                <form action="login_check.php" method="POST">
+                <form action="login_check2.php" method="POST">
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-user-circle'></i></span>
                         <input type="text" class="form-control" name="username" placeholder="ชื่อผู้ใช้งาน">
@@ -118,3 +118,29 @@
         }
     }
 </script>
+
+<?php
+if (isset($_SESSION['success']) || isset($_SESSION['success-admin']) || isset($_SESSION['error'])) {
+    $icon = isset($_SESSION['error']) ? "error" : "success";
+    $title = isset($_SESSION['error']) ? "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง!" : "เข้าสู่ระบบสำเร็จ!";
+    $text = isset($_SESSION['error']) ? "กรุณาลองใหม่อีกครั้ง" : "";
+    $timer = isset($_SESSION['error']) ? 1800 : 1500;
+    $redirectUrl = isset($_SESSION['success-admin']) ? 'admin/index.php' : 'index.php';
+
+    echo "<script>
+        Swal.fire({
+            icon: '$icon',
+            title: '$title',
+            text: '$text',
+            showConfirmButton: false,
+            timer: $timer
+        }).then(function() {
+            if ('$icon' === 'success') {
+                window.location.href = '$redirectUrl';
+            }
+        });
+    </script>";
+
+    unset($_SESSION['success'], $_SESSION['success-admin'], $_SESSION['error']);
+}
+?>

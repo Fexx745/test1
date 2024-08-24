@@ -209,7 +209,7 @@
                 </div>
             </div>
         </div>
-        
+
 
         <script>
             function validatePasswords() {
@@ -308,61 +308,31 @@
 
 
         <?php
-        if (isset($_SESSION['success'])) {
-        ?>
-            <script>
-                Swal.fire({
-                    icon: "success",
-                    title: "เข้าสู่ระบบสำเร็จ!",
-                    // text: "คุณได้เข้าสู่ระบบเรียบร้อยแล้ว",
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then(function() {
-                    window.location.href = 'index.php';
-                });
-            </script>
-        <?php
-            unset($_SESSION['success']);
+        if (isset($_SESSION['success']) || isset($_SESSION['success-admin']) || isset($_SESSION['error'])) {
+            $icon = isset($_SESSION['error']) ? "error" : "success";
+            $title = isset($_SESSION['error']) ? "ชื่อผู้ใช้หรือรหัสผ่านผิด!" : "เข้าสู่ระบบสำเร็จ!";
+            $text = isset($_SESSION['error']) ? "กรุณาลองใหม่อีกครั้ง" : "";
+            $timer = isset($_SESSION['error']) ? 1800 : 1500;
+            $redirectUrl = isset($_SESSION['success-admin']) ? 'admin/index.php' : 'index.php';
+
+            echo "<script>
+        Swal.fire({
+            icon: '$icon',
+            title: '$title',
+            text: '$text',
+            showConfirmButton: false,
+            timer: $timer
+        }).then(function() {
+            if ('$icon' === 'success') {
+                window.location.href = '$redirectUrl';
+            }
+        });
+    </script>";
+
+            unset($_SESSION['success'], $_SESSION['success-admin'], $_SESSION['error']);
         }
         ?>
 
-        <?php
-        if (isset($_SESSION['success-admin'])) {
-        ?>
-            <script>
-                Swal.fire({
-                    // position: "top-center",
-                    icon: "success",
-                    title: "เข้าสู่ระบบสำเร็จ!",
-                    // text: "",
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then(function() {
-                    window.location.href = 'admin/index.php';
-                });
-            </script>
-
-        <?php
-            unset($_SESSION['success-admin']);
-        }
-        ?>
-
-        <?php
-        if (isset($_SESSION['error'])) {
-        ?>
-            <script>
-                Swal.fire({
-                    icon: "error",
-                    title: "ชื่อผู้ใช้หรือรหัสผ่านผิด!",
-                    text: "กรุณาลองใหม่อีกครั้ง",
-                    showConfirmButton: false,
-                    timer: 1800
-                });
-            </script>
-        <?php
-            unset($_SESSION['error']);
-        }
-        ?>
 
         <?php
         if (isset($_SESSION['psw_suc'])) {
