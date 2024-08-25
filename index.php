@@ -1,6 +1,5 @@
 <?php
 // เริ่มต้น session
-session_start();
 include('condb.php');
 ?>
 
@@ -18,7 +17,7 @@ include('condb.php');
 <?php include('index_slideimg.php'); ?>
 
 <section class="body-container">
-    <?php include('bc-menu.php'); ?>
+    <?php include('index_Menu.php'); ?>
 
     <div class="bc-show">
         <?php
@@ -44,7 +43,7 @@ include('condb.php');
             $half_star = ($average_rating - $full_stars >= 0.5) ? true : false; // ตรวจสอบว่ามีครึ่งดาวหรือไม่
             $empty_stars = 5 - $full_stars - ($half_star ? 1 : 0); // จำนวนดาวที่ว่างเปล่า
         ?>
-            <a href="itemsDetail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
+            <a href="product_Detail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
                 <div class="bc-show-items-img">
                     <img src="assets/images/product/<?= $row['image'] ?>" alt="<?= $row['p_name'] ?>">
                 </div>

@@ -31,7 +31,7 @@ if (isset($_GET['id'])) {
 <body>
     <?php include('nav.php'); ?>
     <div class="body-container">
-        <?php include('bc-menu.php'); ?>
+        <?php include('index_Menu.php'); ?>
         <div class="edit-profile">
             <div class="row">
                 <div class="col-mb-12 mt-2">
@@ -99,12 +99,12 @@ $alerts = [
     'submit_edit_psw' => [
         'icon' => 'success',
         'title' => 'ดำเนินการสำเร็จ',
-        'text' => 'ข้อมูลถูกแก้ไขเรียบร้อยแล้ว'
+        'text' => 'เปลี่ยนรหัสผ่านเรียบร้อยแล้ว'
     ],
     'psw_old_incorrect' => [
         'icon' => 'info',
-        'title' => 'รหัสผ่านเดิมไม่ถูกต้อง',
-        'text' => 'โปรดลองอีกครั้ง'
+        'title' => 'โปรดลองอีกครั้ง',
+        'text' => 'รหัสผ่านปัจจุบันไม่ถูกต้อง'
     ],
     'psw_do_not_found' => [
         'icon' => 'warning',
@@ -122,7 +122,7 @@ foreach ($alerts as $key => $alert) {
                 title: "<?= $alert['title'] ?>",
                 text: "<?= $alert['text'] ?>",
                 showConfirmButton: false,
-                timer: 1500
+                timer: 3000
             });
         </script>
         <?php

@@ -10,7 +10,7 @@
         }
         if (isset($_SESSION['username'])) {
             ?>
-            <li><a href="edit-profile.php?id=<?php echo $_SESSION['user_id']; ?>"><i
+            <li><a href="index_editProfile.php?id=<?php echo $_SESSION['user_id']; ?>"><i
                         class='bx bxs-user-circle'></i>&nbsp;ตั้งค่าผู้ใช้</a></li>
             <li><a href="view-order-history.php"><i class='bx bx-history'></i>&nbsp;ดูประวัติการสั่งซื้อ</a></li>
             <li><a href="changepassword.php?id=<?php echo $_SESSION['user_id']; ?>"><span class="material-symbols-outlined">
@@ -27,7 +27,7 @@
             <?php
         } ?>
     </ul>
-    <form action="search_type_product.php" method="get">
+    <form action="index_search_type.php" method="get">
         <?php
         $sql = "SELECT * FROM product_type";
         $result = mysqli_query($conn, $sql);
@@ -41,7 +41,7 @@
             mysqli_data_seek($result, 0);
             while ($row = mysqli_fetch_array($result)) {
                 ?>
-                <li><a href="search_type_product.php?type_id=<?= $row['type_id'] ?>">
+                <li><a href="index_search_type.php?type_id=<?= $row['type_id'] ?>">
                         <img src="assets/images/type_product/<?= $row['type_image'] ?>" alt=""
                             style="width: 15px; height: 15px; margin-right: 5px;">
                         <?= $row['type_name'] ?>

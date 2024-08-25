@@ -1,6 +1,15 @@
 <?php
 
 session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+} else if ($_SESSION['status'] !== '0') {
+    header('Location: login.php');
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('condb.php');
 
@@ -14,19 +23,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = mysqli_real_escape_string($conn, $_POST['psw']);
     $confirmPassword = mysqli_real_escape_string($conn, $_POST['confirm_psw']);
 
+    // เก็บข้อมูลที่กรอกใน session
+    $_SESSION['form_data'] = [
+        'email' => $email,
+        'prefix' => $prefix,
+        'fname' => $fname,
+        'lname' => $lname,
+        'address' => $address,
+        'phone' => $phone,
+        'username' => $username
+    ];
+
     // ตรวจสอบชื่อผู้ใช้ที่มีอยู่แล้ว
     $username_check_query = "SELECT * FROM tb_member WHERE username='$username' LIMIT 1";
     $result_username_check = mysqli_query($conn, $username_check_query);
     if (mysqli_num_rows($result_username_check) > 0) {
-        $_SESSION['Username_Already'] = "ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว!!";
+        $_SESSION['Error'] = "ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว!!";
+        $_SESSION['Error_field'] = 'username'; // กำหนดฟิลด์ที่มีปัญหา
+        unset($_SESSION['form_data']['username']); // เคลียร์ข้อมูล username ใน session
         header('Location: reg.php');
         exit();
     }
-    // ตรวจสอบชื่อผู้ใช้ที่มีอยู่แล้ว
+
+    // ตรวจสอบอีเมลล์ที่มีอยู่แล้ว
     $email_check_query = "SELECT * FROM tb_member WHERE email='$email' LIMIT 1";
     $result_email_check = mysqli_query($conn, $email_check_query);
     if (mysqli_num_rows($result_email_check) > 0) {
-        $_SESSION['Email_Already'] = "อีเมลล์ถูกใช้ไปแล้ว!!";
+        $_SESSION['Error'] = "อีเมลล์ถูกใช้ไปแล้ว!!";
+        $_SESSION['Error_field'] = 'email'; // กำหนดฟิลด์ที่มีปัญหา
+        unset($_SESSION['form_data']['email']); // เคลียร์ข้อมูล email ใน session
         header('Location: reg.php');
         exit();
     }
@@ -35,14 +60,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone_check_query = "SELECT * FROM tb_member WHERE telephone='$phone' LIMIT 1";
     $result_phone_check = mysqli_query($conn, $phone_check_query);
     if (mysqli_num_rows($result_phone_check) > 0) {
-        $_SESSION['Phone_Already'] = "เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว!!";
+        $_SESSION['Error'] = "เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว!!";
+        $_SESSION['Error_field'] = 'phone'; // กำหนดฟิลด์ที่มีปัญหา
+        unset($_SESSION['form_data']['phone']); // เคลียร์ข้อมูล phone ใน session
         header('Location: reg.php');
         exit();
     }
 
     // ตรวจสอบรหัสผ่านที่ตรงกัน
     if ($password !== $confirmPassword) {
-        $_SESSION['PswDo_notMatch'] = "รหัสผ่านไม่ตรงกัน";
+        $_SESSION['Error'] = "รหัสผ่านไม่ตรงกัน";
+        $_SESSION['Error_field'] = 'psw'; // กำหนดฟิลด์ที่มีปัญหา
         header('Location: reg.php');
         exit();
     }
@@ -82,10 +110,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Location: index.php');
         exit();
     }
-
 } else {
     $_SESSION['Error'] = "Invalid request method.";
     header('Location: index.php');
     exit();
 }
-?>

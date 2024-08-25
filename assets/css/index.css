@@ -78,8 +78,8 @@
         }
 
         & ul li a:hover {
-            background: linear-gradient(90deg, #f7f7f7, #eaeaea);
-            color: var(--bs-orange);
+            background: var(--nc-primary-bg);
+            color: var(--nc-primary);
             /* border-bottom: 2px solid var(--bs-gray-900); */
             transition: background 0.3s ease, color 0.3s ease, border-bottom 0.3s ease, transform 0.3s ease;
             transform: scale(1.05);

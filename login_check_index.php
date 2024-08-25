@@ -38,12 +38,12 @@ if (mysqli_num_rows($result) > 0) {
             exit();
         }
     } else {
-        $_SESSION['error'] = "<p>Your username or password is invalid</p>";
+        $_SESSION['error'] = "<span>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง โปรดลองอีกครั้ง</span>";
         header('Location: login.php');
         exit();
     }
 } else {
-    $_SESSION['error'] = "<p>Your username or password is invalid</p>";
+    $_SESSION['error'] = "<span>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง โปรดลองอีกครั้ง</span>";
     header('Location: login.php');
     exit();
 }

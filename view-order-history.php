@@ -2,6 +2,14 @@
 session_start();
 include 'condb.php';
 
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+} else if ($_SESSION['status'] !== '0') {
+    header('Location: login.php');
+    exit();
+}
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
@@ -9,10 +17,8 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Determine the number of orders per page
 $orders_per_page = 11;
 
-// Find out how many orders the user has
 $sql_total_orders = "SELECT COUNT(*) FROM tb_order WHERE member_id = ?";
 $stmt_total = $conn->prepare($sql_total_orders);
 $stmt_total->bind_param("i", $user_id);
@@ -21,15 +27,12 @@ $stmt_total->bind_result($total_orders);
 $stmt_total->fetch();
 $stmt_total->close();
 
-// Calculate total pages
 $total_pages = ceil($total_orders / $orders_per_page);
 
-// Get the current page or set default to 1
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($current_page < 1) $current_page = 1;
 if ($current_page > $total_pages) $current_page = $total_pages;
 
-// Calculate the offset for the query
 $offset = ($current_page - 1) * $orders_per_page;
 
 $sql = "SELECT tb_order.orderID, tb_order.reg as order_date, tb_order.total_price, tb_order.order_status, tb_order.parcel_number,
@@ -67,7 +70,7 @@ function getOrderStatus($status)
 {
     switch ($status) {
         case '0':
-            return 'ยกเลิก';
+            return 'ยกเลิกสั่งซื้อ';
         case '1':
             return 'รอตรวจสอบ';
         case '2':
@@ -92,7 +95,7 @@ function getOrderStatus($status)
 
     <div class="body-container">
 
-        <?php include('bc-menu.php'); ?>
+        <?php include('index_Menu.php'); ?>
 
         <div class="view-history-menu">
             <div class="col-mb-12 mt-2" style="margin-bottom: 20px;">
@@ -145,7 +148,7 @@ function getOrderStatus($status)
                         <?php if ($current_page > 1) : ?>
                             <li class="page-item">
                                 <a class="page-link" href="?page=<?php echo $current_page - 1; ?>" aria-label="Previous">
-                                    <span aria-hidden="true"><i class='bx bx-chevron-left' ></i></span>
+                                    <span aria-hidden="true"><i class='bx bx-chevron-left'></i></span>
                                 </a>
                             </li>
                         <?php endif; ?>
@@ -157,7 +160,7 @@ function getOrderStatus($status)
                         <?php if ($current_page < $total_pages) : ?>
                             <li class="page-item">
                                 <a class="page-link" href="?page=<?php echo $current_page + 1; ?>" aria-label="Next">
-                                    <span aria-hidden="true"><i class='bx bx-chevron-right' ></i></span>
+                                    <span aria-hidden="true"><i class='bx bx-chevron-right'></i></span>
                                 </a>
                             </li>
                         <?php endif; ?>

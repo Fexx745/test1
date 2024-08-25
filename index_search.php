@@ -1,6 +1,14 @@
 <?php
 include('config.php');
 include('condb.php');
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+} else if ($_SESSION['status'] !== '0') {
+    header('Location: login.php');
+    exit();
+}
 ?>
 
 
@@ -20,7 +28,7 @@ include('condb.php');
     <div class="body-container">
 
         <!-- Slideshow -->
-        <?php include('bc-menu.php'); ?>
+        <?php include('index_Menu.php'); ?>
         <div class="bc-show">
             <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST") {

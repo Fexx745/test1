@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
 <body>
     <?php include('nav.php'); ?>
     <div class="body-container">
-        <?php include('bc-menu.php'); ?>
+        <?php include('index_Menu.php'); ?>
         <div class="edit-profile">
             <div class="row">
                 <div class="col-mb-12 mt-2">

@@ -2,6 +2,13 @@
 // เชื่อมต่อกับฐานข้อมูล (หรือดำเนินการตามความจำเป็น)
 session_start();
 include('condb.php');
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+} else if ($_SESSION['status'] !== '0') {
+    header('Location: login.php');
+    exit();
+}
 
 // ตรวจสอบว่ามีพารามิเตอร์ email และ token ใน URL หรือไม่
 if (isset($_GET['email']) && isset($_GET['token'])) {
@@ -57,7 +64,7 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
             <div class="row mt-5">
                 <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
                     <h2 class="text-center pt-3">New password</h2>
-                    <form action="process_reset_password.php" method="POST">
+                    <form action="forgot_reset_process.php" method="POST">
                         <input type="hidden" name="email" value="<?php echo htmlspecialchars($_GET['email']); ?>">
                         <input type="hidden" name="token" value="<?php echo htmlspecialchars($_GET['token']); ?>">
                         <div class="input-group mb-3">

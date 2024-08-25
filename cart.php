@@ -4,10 +4,10 @@ include('condb.php');
 
 
 if (!isset($_SESSION['username'])) {
-    header('Location: reg.php');
+    header('Location: login.php');
     exit();
 } else if ($_SESSION['status'] !== '0') {
-    header('Location: reg.php');
+    header('Location: login.php');
     exit();
 }
 // ตรวจสอบและกำหนดค่าเริ่มต้นให้กับ $_SESSION['inPro']

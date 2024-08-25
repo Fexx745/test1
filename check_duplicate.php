@@ -1,20 +1,26 @@
 <?php
-// Connect to database
 include('condb.php');
-// Get the input value from the request
-$fname = $_POST['fname'];
 
-// Check if the input value already exists in the database
-$query = "SELECT * FROM tb_member WHERE firstname = '$fname'";
+$input_value = mysqli_real_escape_string($conn, $_POST['input_value']);
+$input_name = mysqli_real_escape_string($conn, $_POST['input_name']);
+
+$query = "";
+
+if ($input_name == "email") {
+    $query = "SELECT * FROM tb_member WHERE email='$input_value'";
+} elseif ($input_name == "phone") {
+    $query = "SELECT * FROM tb_member WHERE telephone='$input_value'";
+} elseif ($input_name == "username") {
+    $query = "SELECT * FROM tb_member WHERE username='$input_value'";
+}
+
 $result = mysqli_query($conn, $query);
 
-// Check if the query returned any results
 if (mysqli_num_rows($result) > 0) {
     echo "duplicate";
 } else {
     echo "unique";
 }
 
-// Close the database connection
 mysqli_close($conn);
 ?>

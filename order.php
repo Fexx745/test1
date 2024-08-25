@@ -1,7 +1,13 @@
 <?php
 session_start();
-
-var_dump($_GET);
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+} else if ($_SESSION['status'] !== '0') {
+    header('Location: login.php');
+    exit();
+}
+// var_dump($_GET);
 // var_dump($_SESSION);
 // rest of the code
 include 'condb.php';
@@ -62,4 +68,3 @@ function getStockQuantity($productId)
         return 0; // หรือค่าอื่นที่คุณต้องการเมื่อไม่สามารถดึงข้อมูลได้
     }
 }
-?>

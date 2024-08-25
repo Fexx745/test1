@@ -1,6 +1,13 @@
 <?php
 session_start();
 include('condb.php');
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+} else if ($_SESSION['status'] !== '0') {
+    header('Location: login.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,43 +17,6 @@ include('condb.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Results</title>
     <?php include('script-css.php'); ?>
-    <!-- <style>
-        /* Styles for pagination */
-        .pagination {
-            position: absolute;
-            bottom: 10px;
-        }
-
-        .pagination li {
-            margin: 0 5px;
-        }
-
-        .pagination a,
-        .pagination span {
-            display: block;
-            padding: 8px 12px;
-            color: #fff;
-            background-color: #fd7e14;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .pagination a:hover {
-            background-color: #ee4d2d;
-            color: #fff;
-        }
-
-        .pagination .active {
-            background-color: #fd7e14;
-            color: #fff;
-        }
-
-        .pagination .disabled {
-            color: #aaa;
-            pointer-events: none;
-            background-color: #eee;
-        }
-    </style> -->
 </head>
 
 <body>
@@ -54,7 +24,7 @@ include('condb.php');
     <?php include('nav.php'); ?>
     <div class="body-container">
 
-        <?php include('bc-menu.php'); ?>
+        <?php include('index_Menu.php'); ?>
 
         <?php
         // รับค่า type_id จาก URL และตรวจสอบความถูกต้อง

@@ -15,7 +15,7 @@
     --bs-red: #dc3545;
     --bs-orange: #ee4d2d;
     --bs-yellow: #ffc107;
-    --bs-green: #198754;
+    --bs-green: #00c300;
     --bs-teal: #20c997;
     --bs-cyan: #0dcaf0;
     --bs-black: #000;
@@ -106,29 +106,64 @@ nav {
 }
 
 .wrapper {
-    border-top: 3px solid #00C300;
+    border-top: 3px solid #02e002;
 
     & a {
         text-decoration: none;
-        color: #00C300;
+        color: var(--bs-link-color);
     }
 
     & a:hover {
         opacity: 0.6;
         transition: .3s;
-        color: #00C300;
+        color: var(--bs-link-hover-color);
     }
 }
 
 .btn-submit {
-    background: linear-gradient(180deg, #00C300 0%, #00C300 100%);
+    background: #00c300;
     color: #fff;
     border: none;
     outline: none;
-    padding: 10px;
+    padding: 8px;
     border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .09);
 }
 
 .btn-submit:hover {
-    opacity: .9;
+    background: #02e002;
+    /* opacity: .8; */
+}
+
+.btn-login {
+    margin: 10px 0;
+    background-color: var(--nc-success-bg);
+    border: 1px solid var(--nc-success);
+    outline: none;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .09);
+
+}
+
+.btn-login:hover {
+    opacity: .7;
+}
+
+.is-invalid {
+    border-color: var(--nc-error);
+}
+
+.errorMessage {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff9fa;
+    border: 1px solid rgba(255, 66, 79, .2);
+    font-size: 15px;
+    & i {
+        color: var(--bs-danger);
+        margin-right: 15px;
+    }
 }

@@ -3,6 +3,14 @@
 session_start();
 include('condb.php');
 
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+} else if ($_SESSION['status'] !== '0') {
+    header('Location: login.php');
+    exit();
+}
+
 if(isset($_POST['submit'])) {
     // รับค่าอีเมลและโทเค็นการรีเซ็ตรหัสผ่านจากฟอร์ม
     $email = $_POST['email'];

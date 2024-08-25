@@ -2,6 +2,14 @@
 include('condb.php');
 session_start();
 
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+} else if ($_SESSION['status'] !== '0') {
+    header('Location: login.php');
+    exit();
+}
+
 $message = "";
 
 // Check if the form is submitted
