@@ -107,6 +107,23 @@
             /* background-color: #d63384; */
             border-radius: 5px;
 
+            .product-rating {
+                display: flex;
+                & span {
+                    color: var(--nc-primary);
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+
+                #ratingStars {
+                    margin: 0 10px;
+
+                    & i {
+                        color: var(--nc-secondary-yellow);
+                    }
+                }
+            }
+
             .bc-showDetail-price {
                 display: flex;
                 align-items: center;
@@ -128,16 +145,12 @@
 
             .bc-showTextDetail {
 
-                /* padding: 0 10px; */
                 & p {
                     color: var(--bs-gray-600);
-                    /* font-size: 13px; */
-                    /* padding: 0 10px; */
                 }
 
                 & span {
                     color: #333;
-                    /* font-size: 15px; */
                     padding: 0 10px;
                 }
             }

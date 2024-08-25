@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <?php include('nav-reg.php'); ?>
+    <?php include('nav_login.php'); ?>
     <div class="container-fluid p-5" style="background: #fff; margin-bottom: 400px;">
         <div class="row mt-5">
             <div class="col-lg-4 bg-white m-auto rounded-top wrapper">

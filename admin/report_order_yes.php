@@ -215,7 +215,7 @@ $row4 = mysqli_fetch_array($result4);
                                             if ($status == 1) {
                                                 echo "<b style='color: blue;'>ยังไม่ชำระเงิน</b>";
                                             } else if ($status == 2) {
-                                                  echo "<div class='' style='border-radius: 5px; background: #20c997; color: #fff; padding: 2px 0;'>
+                                                  echo "<div class='' style='border-radius: 5px; background: #20c997; color: #fff; padding: 5px 0;'>
                                                     <b><i class='bx bx-check'></i>&nbsp;ชำระเงินแล้ว</b>
                                                   </div>";
                                             } else if ($status == 0) {

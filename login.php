@@ -59,7 +59,7 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <p class="mt-2"><span style="color: #6c757d;">ยังไม่มีบัญชี?</span> <a href="reg.php">สมัครสมาชิก</a></p>
-                        <a href="forgot-form.php" id="forgotpsw" class="mt-2">ลืมรหัสผ่าน ?</a>
+                        <a href="forgot.php" id="forgotpsw" class="mt-2">ลืมรหัสผ่าน ?</a>
                     </div>
                 </form>
             </div>

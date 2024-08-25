@@ -14,7 +14,7 @@
                 echo '<a id="searchprd" class="list-group-item list-group-item-action border-1">' . $row['p_name'] . '</a>';
             }
         } else {
-            echo '<p class="list-group-item border-1">ไม่พบสินค้า..</p>';
+            echo '<span class="list-group-item border-1">ไม่พบสินค้า..</span>';
         }
     }
 

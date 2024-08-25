@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $sql = "INSERT INTO product_reviews (p_id, member_id, rating, comment) VALUES ('$product_id', '$user_id', '$rating', '$comment')";
     if (mysqli_query($conn, $sql)) {
-        header("Location: itemsDetail.php?id=$product_id"); // เปลี่ยนเส้นทางกลับไปที่หน้า product_detail
+        header("Location: product_Detail.php?id=$product_id"); // เปลี่ยนเส้นทางกลับไปที่หน้า product_detail
         exit();
     } else {
         echo "เกิดข้อผิดพลาดในการเพิ่มรีวิว: " . mysqli_error($conn);

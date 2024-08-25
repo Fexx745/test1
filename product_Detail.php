@@ -23,7 +23,8 @@ include('condb.php');
             $product_id = $_GET['id'];
 
             // ดึงข้อมูลสินค้า
-            $sql = "SELECT p.*, ph.price, u.unit_name, c.type_name, b.brand_name,p.p_view
+            $sql = "SELECT p.*, ph.price, u.unit_name, c.type_name, b.brand_name,p.p_view,
+                    (SELECT COUNT(*) FROM tb_order_detail WHERE tb_order_detail.p_id = p.p_id) AS sales_count
                     FROM product p
                     INNER JOIN product_type c ON p.type_id = c.type_id
                     LEFT JOIN price_history ph ON p.p_id = ph.p_id
@@ -75,14 +76,30 @@ include('condb.php');
                         </div>
 
                         <div class="bc-showDetail-right">
-                            <h2><?= $row['p_name'] ?></h2>
+                            <h3><?= $row['p_name'] ?></h3>
+                            <div class="product-rating">
+                                <div id="ratingStars">
+                                    <span><?= number_format($average_rating, 1) ?></span>
+                                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                        <i class='bx <?= $i <= round($average_rating) ? 'bxs-star' : 'bx-star' ?>'></i>
+                                    <?php } ?>
+                                </div>
+                                <span class="me-1">
+                                    <span style="color: #6c757d; font-weight: 200;">|&nbsp;&nbsp;</span>
+                                    <span style="color: #000;"><?= $total_reviews ?></span>
+                                    <span style="color: #6c757d; font-weight: 400; font-size: 15px;">รีวิว</span>
+                                    <span style=" color: #6c757d; font-weight: 200">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                </span>
+                                <span class="me-1" style="color: #000;"><?= $row['sales_count'] ?></span>
+                                <span style="color: #6c757d; font-weight: 400; font-size: 15px;">ขายแล้ว</span>
+                            </div> <!-- product_rating -->
                             <div class="bc-showDetail-price">
                                 <h3><?= number_format($row['price'], 2) ?> ฿</h3>
                             </div>
                             <div class="bc-showTextDetail">
                                 <div style="margin-bottom: 20px;">
                                     <span><?= $row['detail'] ?></span>
-                                    <p class="mt-2"><strong>ยี่ห้อสินค้า:</strong> <?= $row['brand_name'] ?></p>
+                                    <p class="mt-2"><span>ยี่ห้อสินค้า:</span> <?= $row['brand_name'] ?></p>
                                 </div>
                             </div>
                             <div class="bc-showDetail-count">
@@ -109,7 +126,7 @@ include('condb.php');
                         <div class="bc-showDetail-bottom">
                             <!-- Form for adding comments -->
                             <?php if (isset($_SESSION['username'])) { ?>
-                                <form action="add_review.php" method="POST" id="reviewForm">
+                                <form action="product_add_review.php" method="POST" id="reviewForm">
                                     <input type="hidden" name="product_id" value="<?= $product_id ?>">
                                     <input type="hidden" name="rating" id="rating" value="1">
                                     <div>

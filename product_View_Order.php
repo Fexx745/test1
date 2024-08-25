@@ -99,7 +99,8 @@ function getOrderStatus($status)
 
         <div class="view-history-menu">
             <div class="col-mb-12 mt-2" style="margin-bottom: 20px;">
-                <h3><i class='bx bx-history'></i>&nbsp;ประวัติการสั่งซื้อ</h3>
+                <h3><img src="assets/images/other/history.png" alt=""
+                        style="width: 50px; height: 50px; margin-top: -10px;">&nbsp;ประวัติการสั่งซื้อ</h3>
             </div>
             <?php if (empty($order_history)) : ?>
                 <p>ยังไม่มีประวัติการสั่งซื้อ</p>
@@ -136,7 +137,7 @@ function getOrderStatus($status)
                                     </td>
                                     <td><?php echo $order['parcel_number'] ?: 'รอจัดส่ง'; ?></td>
                                     <td><?php echo $order['shipping_type_name']; ?></td>
-                                    <td class="text-center"><a href="product_Order_detail.php?orderID=<?php echo $orderID; ?>" class="btn" style='border-radius: 10px; background: linear-gradient(195deg, #42424a 0%, #191919 100%); color: #fff;'><i class='bx bx-receipt'></i></a></td>
+                                    <td class="text-center"><a href="product_Order_detail.php?orderID=<?php echo $orderID; ?>" class="btn btn-view"><i class='bx bx-receipt'></i></a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

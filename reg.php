@@ -139,7 +139,7 @@
             } else {
                 $.ajax({
                     type: 'POST',
-                    url: 'check_duplicate.php',
+                    url: 'reg_check_duplicate.php',
                     data: {
                         input_value: inputValue,
                         input_name: inputName
