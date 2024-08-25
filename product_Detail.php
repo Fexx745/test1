@@ -16,7 +16,7 @@ include('condb.php');
 <body>
     <?php include('nav.php'); ?>
     <section class="body-container">
-        <?php include('bc-menu.php'); ?>
+        <?php include('index_Menu.php'); ?>
 
         <?php
         if (isset($_GET['id'])) {

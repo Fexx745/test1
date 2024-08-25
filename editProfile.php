@@ -30,7 +30,7 @@ if (isset($_GET['id'])) {
                 <div class="col-mb-12 mt-2">
                     <h3><img src="assets/images/other/User-Profile-PNG.png" alt="" style="width: 50px; height: 50px; margin-top: -20px;">&nbsp;<?= htmlspecialchars($_SESSION['username']); ?></h3>
                 </div>
-                <form method="POST" action="update_account.php" enctype="multipart/form-data">
+                <form method="POST" action="editProfile_update.php" enctype="multipart/form-data">
                     <div class="mb-3 mt-3">
                         <input type="hidden" class="form-control alert alert-success" name="id" value="<?= htmlspecialchars($_SESSION['user_id']); ?>" readonly>
                     </div>

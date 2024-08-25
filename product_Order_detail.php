@@ -9,14 +9,13 @@ if (!isset($_SESSION['username'])) {
 }
 
 include 'condb.php';
-
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
 
 if (!isset($_GET['orderID'])) {
-    header("Location: view_orders.php"); // Redirect back to orders page if no orderID is provided
+    header("Location: view_orders.php");
     exit;
 }
 
@@ -86,7 +85,7 @@ function getOrderStatus($status)
 
     <div class="body-container">
 
-        <?php include('bc-menu.php'); ?>
+        <?php include('index_Menu.php'); ?>
 
         <div class="view-history-menu">
             <div class="col-mb-12 mt-2" style="margin-bottom: 20px;">
@@ -154,7 +153,7 @@ function getOrderStatus($status)
 
             <?php endif; ?>
             <div class="previous-button">
-                <a href="view-order-history.php" class="btn btn-dark">ย้อนกลับ</a>
+                <a href="product_View_Order.php" class="btn btn-dark">ย้อนกลับ</a>
             </div>
 
         </div> <!-- end view-order-details -->

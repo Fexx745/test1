@@ -87,7 +87,7 @@ if (!isset($_SESSION['username'])) {
                     $average_rating = round($row['average_rating'], 1);
                     $sales_count = $row['sales_count'];
             ?>
-                    <a href="itemsDetail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
+                    <a href="product_Detail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
                         <div class="bc-show-items-img">
                             <img src="assets/images/product/<?= htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['p_name']) ?>">
                         </div>

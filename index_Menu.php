@@ -10,9 +10,9 @@
         }
         if (isset($_SESSION['username'])) {
             ?>
-            <li><a href="index_editProfile.php?id=<?php echo $_SESSION['user_id']; ?>"><i
+            <li><a href="editProfile.php?id=<?php echo $_SESSION['user_id']; ?>"><i
                         class='bx bxs-user-circle'></i>&nbsp;ตั้งค่าผู้ใช้</a></li>
-            <li><a href="view-order-history.php"><i class='bx bx-history'></i>&nbsp;ดูประวัติการสั่งซื้อ</a></li>
+            <li><a href="product_View_Order.php"><i class='bx bx-history'></i>&nbsp;ดูประวัติการสั่งซื้อ</a></li>
             <li><a href="changepassword.php?id=<?php echo $_SESSION['user_id']; ?>"><span class="material-symbols-outlined">
                         vpn_key
                     </span>&nbsp;เปลี่ยนรหัสผ่าน</a></li>
