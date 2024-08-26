@@ -408,3 +408,9 @@ nav {
         /* Full screen height */
     }
 }
+
+@media (min-width: 375px) and (max-width: 390px) {
+    .body-container {
+        background-color: #0046ab;
+    }
+}

@@ -2,14 +2,6 @@
 
 session_start();
 
-if (!isset($_SESSION['username'])) {
-    header('Location: login.php');
-    exit();
-} else if ($_SESSION['status'] !== '0') {
-    header('Location: login.php');
-    exit();
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('condb.php');
 

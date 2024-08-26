@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['submit_edit_profile'] = true;
 
         // Redirect to edit-profile.php
-        header("Location: edit-profile.php?id=" . htmlspecialchars($id));
+        header("Location: editProfile.php?id=" . htmlspecialchars($id));
         exit();
     } else {
         $message = "Error updating record: " . $conn->error;

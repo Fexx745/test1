@@ -175,8 +175,8 @@ $row4 = mysqli_fetch_array($result4);
                             <tr>
                                 <th>เลขที่ใบสั่งซื้อ</th>
                                 <th>ลูกค้า</th>
-                                <th>ที่อยู่จัดส่งสินค้า</th>
-                                <th>เบอร์โทรศัพท์</th>
+                                <!-- <th>ที่อยู่จัดส่งสินค้า</th> -->
+                                <!-- <th>เบอร์โทรศัพท์</th> -->
                                 <th>ราคารวมสุทธิ</th>
                                 <th>วันที่สั่งซื้อ</th>
                                 <th>สถานะ</th>
@@ -237,12 +237,12 @@ $row4 = mysqli_fetch_array($result4);
                                         <?= $row['firstname'] ?>
                                         <?= $row['lastname'] ?>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <?= $row['address'] ?>
                                     </td>
                                     <td>
                                         <?= $row['telephone'] ?>
-                                    </td>
+                                    </td> -->
                                     <td>
                                         <span>
                                             <?php echo number_format($row['total_price'], 2); ?>
@@ -257,8 +257,8 @@ $row4 = mysqli_fetch_array($result4);
                                         <div class="text-center">
                                             <?php
                                             if ($status == 1) {
-                                                echo "<div class='' style='border-radius: 5px; background: #dee2e6; color: #333; padding: 2px 0;'>
-                                                    <b><i class='bx bxs-hourglass'></i>&nbsp;รอตรวจสอบ</b>
+                                                echo "<div class='' style='border-radius: 7px; background: linear-gradient(195deg, #eda500 0%, #ffd556 100%); color: #FFF; padding: 4px 0;'>
+                                                    <b>รอตรวจสอบ</b>
                                                   </div>";
                                             } else if ($status == 2) {
                                                 echo "<b style='color: green;'>ชำระเงินแล้ว</b>";
@@ -271,7 +271,7 @@ $row4 = mysqli_fetch_array($result4);
                                     <td>
                                         <div class="text-center">
                                             <a href="report_order_detail.php?id=<?= $row['orderID'] ?>"
-                                                class="btn" style="background: linear-gradient(195deg, #343a40 0%, #adb5bd 100%); color: #fff;"><i class='bx bx-message-detail'></i></a>
+                                                class="btn" style="background: linear-gradient(195deg, #0d6efd 0%, #0046ab 100%);  color: #fff;"><i class='bx bx-message-detail'></i></a>
                                         </div>
                                     <td>
                                         <div class="text-center">

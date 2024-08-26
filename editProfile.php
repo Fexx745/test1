@@ -28,42 +28,53 @@ if (isset($_GET['id'])) {
         <div class="edit-profile">
             <div class="row">
                 <div class="col-mb-12 mt-2">
-                    <h3><img src="assets/images/other/User-Profile-PNG.png" alt="" style="width: 50px; height: 50px; margin-top: -20px;">&nbsp;<?= htmlspecialchars($_SESSION['username']); ?></h3>
+                    <h3><img src="assets/images/other/User-Profile-PNG.png" alt=""
+                            style="width: 50px; height: 50px; margin-top: -20px;">&nbsp;<?= htmlspecialchars($_SESSION['username']); ?>
+                    </h3>
                 </div>
                 <form method="POST" action="editProfile_update.php" enctype="multipart/form-data">
                     <div class="mb-3 mt-3">
-                        <input type="hidden" class="form-control alert alert-success" name="id" value="<?= htmlspecialchars($_SESSION['user_id']); ?>" readonly>
+                        <input type="hidden" class="form-control alert alert-success" name="id"
+                            value="<?= htmlspecialchars($_SESSION['user_id']); ?>" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bxs-user'></i></span>
                         <select class="form-select" name="prefix">
                             <option value="นาย" <?= ($_SESSION['prefix'] == 'นาย') ? 'selected' : ''; ?>>นาย</option>
                             <option value="นาง" <?= ($_SESSION['prefix'] == 'นาง') ? 'selected' : ''; ?>>นาง</option>
-                            <option value="นางสาว" <?= ($_SESSION['prefix'] == 'นางสาว') ? 'selected' : ''; ?>>นางสาว</option>
+                            <option value="นางสาว" <?= ($_SESSION['prefix'] == 'นางสาว') ? 'selected' : ''; ?>>นางสาว
+                            </option>
                         </select>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bxs-user-account'></i></span>
-                        <input type="text" class="form-control" name="fname" placeholder="ชื่อ" value="<?= htmlspecialchars($_SESSION['fname']); ?>">
+                        <input type="text" class="form-control" name="fname" placeholder="ชื่อ"
+                            value="<?= htmlspecialchars($_SESSION['fname']); ?>">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bxs-user-account'></i></span>
-                        <input type="text" class="form-control" name="lname" placeholder="นามสกุล" value="<?= htmlspecialchars($_SESSION['lname']); ?>">
+                        <input type="text" class="form-control" name="lname" placeholder="นามสกุล"
+                            value="<?= htmlspecialchars($_SESSION['lname']); ?>">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bxs-phone-call'></i></span>
-                        <input type="text" class="form-control" name="phone" placeholder="เบอร์โทรศัพท์" value="<?= htmlspecialchars($_SESSION['phone']); ?>">
+                        <input type="text" class="form-control" name="phone" placeholder="เบอร์โทรศัพท์"
+                            value="<?= htmlspecialchars($_SESSION['phone']); ?>">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bxs-envelope'></i></span>
-                        <input type="text" class="form-control" name="email" placeholder="อีเมลล์" value="<?= htmlspecialchars($_SESSION['email']); ?>">
+                        <input type="text" class="form-control" name="email" placeholder="อีเมลล์"
+                            value="<?= htmlspecialchars($_SESSION['email']); ?>">
                     </div>
                     <div class="mb-3" id="map" style="height: 400px; width: 100%;"></div>
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="ที่อยู่ ..." id="address" name="address" style="height: 200px; resize: none; margin: 0 0 100px 0;"><?= htmlspecialchars($_SESSION['address']); ?></textarea>
+                        <textarea class="form-control" placeholder="ที่อยู่ ..." id="address" name="address"
+                            style="height: 200px; resize: none; margin: 0 0 100px 0;"><?= htmlspecialchars($_SESSION['address']); ?></textarea>
                         <label for="address"><i class='bx bx-location-plus'></i> ที่อยู่ ...</label>
                     </div>
-                    <input type="hidden" class="form-control" name="username" placeholder="ชื่อผู้ใช้" value="<?= htmlspecialchars($_SESSION['username']); ?>" readonly>
+
+                    <input type="hidden" class="form-control" name="username" placeholder="ชื่อผู้ใช้"
+                        value="<?= htmlspecialchars($_SESSION['username']); ?>" readonly>
                     <div class="previous-button">
                         <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
                         <button class="btn btn-danger" type="submit">ยืนยัน</button>

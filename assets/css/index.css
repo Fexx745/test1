@@ -65,13 +65,11 @@
     padding: 10px;
     margin: 0 auto;
     border-radius: 10px;
-    /* background-color: var(--bs-gray-100); */
 
 
     /* bc-menu */
     .bc-menu {
         width: 20%;
-        /* background-color: #0a58ca; */
 
         & ul li:first-child a {
             border-top: 3px solid var(--bs-danger);
@@ -80,7 +78,6 @@
         & ul li a:hover {
             background: var(--nc-primary-bg);
             color: var(--nc-primary);
-            /* border-bottom: 2px solid var(--bs-gray-900); */
             transition: background 0.3s ease, color 0.3s ease, border-bottom 0.3s ease, transform 0.3s ease;
             transform: scale(1.05);
             position: relative;
@@ -425,3 +422,4 @@
     height: 300px;
     object-fit: contain;
 }
+
