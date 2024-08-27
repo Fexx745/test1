@@ -56,7 +56,7 @@
                 </div>
                 <div class="nav-bottom">
                     <div class="nav-bottom-logo">
-                        <a href="index.php">RMUTI SHOP</a>
+                        <a href="index.php">SHOP</a>
                     </div>
                     <div class="nav-bottom-search">
                         <form action="index_search.php" method="POST" class="nav-bottom-search" style="position: relative;">
@@ -157,7 +157,7 @@
             </div>
             <div class="nav-bottom">
                 <div class="nav-bottom-logo">
-                    <a href="index.php">RMUTI SHOP</a>
+                    <a href="index.php">SHOP</a>
                 </div>
                 <div class="nav-bottom-search">
                     <form action="index_search.php" method="POST" class="nav-bottom-search" style="position: relative;">
