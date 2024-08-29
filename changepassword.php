@@ -78,7 +78,7 @@ if (isset($_GET['id'])) {
                             placeholder="กรุณายืนยันรหัสผ่านใหม่">
                     </div>
 
-                    <div class="text-end my-4">
+                    <div class="text-start my-4">
                         <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
                         <button class="btn btn-danger" type="submit">ยืนยัน</button>
                     </div>

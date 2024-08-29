@@ -203,7 +203,7 @@ if (isset($_SESSION['cart-success'])) {
             showConfirmButton: false,
             timer: 1500
         }).then(function() {
-            window.location.href = 'order_detail.php?orderID=<?= $_SESSION['order_id'] ?>';
+            window.location.href = 'product_Detail.php?orderID=<?= $_SESSION['order_id'] ?>';
         });
     </script>
 

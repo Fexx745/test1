@@ -177,7 +177,7 @@
                     successIcon.show();
                 }
             } else if (inputName === 'username') {
-                if (inputValue.length < 6) { // Check if username has at least 6 characters
+                if (inputValue.length < 6) {
                     inputField.css('border-color', 'red');
                     errorLabel.text('ชื่อผู้ใช้ต้องมีอย่างน้อย 6 ตัวอักษร').show();
                     successIcon.hide();
@@ -220,7 +220,7 @@
             var pswFieldSuccessIcon = $('#psw_success_icon');
             var confirmPswSuccessIcon = $('#confirm_psw_success_icon');
 
-            if (pswField.val().length < 10) { // Check if password has at least 10 characters
+            if (pswField.val().length < 6) { // Check if password has at least 10 characters
                 pswField.css('border-color', 'red');
                 pswFieldSuccessIcon.hide();
             } else {
@@ -231,7 +231,7 @@
             if (confirmPswField.val() === '') {
                 confirmPswField.css('border-color', '');
                 confirmPswSuccessIcon.hide();
-            } else if (pswField.val() === confirmPswField.val() && pswField.val().length >= 10) {
+            } else if (pswField.val() === confirmPswField.val() && pswField.val().length >= 6) {
                 confirmPswField.css('border-color', 'green');
                 confirmPswSuccessIcon.show();
             } else {

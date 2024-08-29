@@ -109,15 +109,15 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #42424a 0%, #191919 100%);   ">
+                            style="background: linear-gradient(195deg, #495057 0%, #191919 100%);">
                             <div class="card-body">ลูกค้า<h5>
                                     <?= $row1['customer'] ?> คน
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-user-circle'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                <div><small><a href="show_account.php" style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bx-group'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
                                             จำนวนผู้ใช้งานบนเว็บไซต์</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
@@ -128,11 +128,12 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                             style="background: linear-gradient(195deg, #fb8be9 0%, #D81B60 100%);">
                             <div class="card-body">ยอดขายวันนี้<h5>
                                     <?= number_format($total_sales_today, 2) ?> บาท
+                                </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-money'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            <i class='bx bx-chart'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
                                             ยอดขายวันนี้</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
@@ -140,13 +141,13 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #58d68d 0%, #43A047 100%);">
+                            style="background: linear-gradient(195deg, #71cdf5 0%, #0d6efd 100%);">
                             <div class="card-body">ยอดการสั่งซื้อวันนี้<h5>
                                     <?= ($order_today) ?> รายการ</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-list-ul'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            <i class='bx bx-cart'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
                                             จำนวนการสั่งซื้อสินค้าวันนี้</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
@@ -154,15 +155,15 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #71cdf5 0%, #1A73E8 100%);">
+                            style="background: linear-gradient(195deg, #79f679 0%, #198754 100%);">
                             <div class="card-body">ยอดขายเดือนนี้<h5>
                                     <?= number_format($total_sales_this_month, 2); ?> บาท
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-box'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            <i class='bx bx-stats'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
                                             ยอดขายเดือนนี้</a></small>
                                 </div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>

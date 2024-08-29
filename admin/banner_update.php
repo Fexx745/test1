@@ -36,13 +36,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         
         $_SESSION['banner_update'] = "แก้ไขรูปสำเร็จ";
-        header('Location: editbanner.php');
+        header('Location: banner_add.php');
         exit();
     } else {
         echo "กรุณากรอกข้อมูลในฟิลด์ที่จำเป็นทั้งหมด";
     }
 } else {
-    header("Location: editbanner.php");
+    header("Location: banner_add.php");
     exit();
 }
 ?>

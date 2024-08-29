@@ -17,7 +17,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$orders_per_page = 11;
+$orders_per_page = 14;
 
 $sql_total_orders = "SELECT COUNT(*) FROM tb_order WHERE member_id = ?";
 $stmt_total = $conn->prepare($sql_total_orders);

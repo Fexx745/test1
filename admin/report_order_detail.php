@@ -70,7 +70,7 @@ $parcel_number = $order['parcel_number'];
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($result)) {
                                     $sum_total = $row['total_price'];
-                                    ?>
+                                ?>
                                     <tr>
                                         <td><?= $row['p_id'] ?></td>
                                         <td><?= $row['p_name'] ?></td>
@@ -78,112 +78,111 @@ $parcel_number = $order['parcel_number'];
                                         <td><?= $row['orderQty'] ?></td>
                                         <td><?= $row['Total'] ?></td>
                                     </tr>
-                                </tbody>
-                            </table>
-                            <p>ที่อยู่ลูกค้า</p>
-                            <span><?= $row['address'] ?></span>
-                            <div class="my-2">
-                                <b>เบอร์โทรศัพท์</b>
-                                <span><?= $row['telephone'] ?></span>
-                            </div>
-                            <div class="my-4"><b>ราคารวมสุทธิ</b>
-                                <span style="color: green; font-weight: bold;"><?= number_format($sum_total, 2) ?></span>
-                                <b>บาท</b>
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                            </tbody>
+                        </table>
+                        <b>ที่อยู่ลูกค้า</b>
+                        <span><?= $row['address'] ?></span>
+                        <div class="my-2">
+                            <b>เบอร์โทรศัพท์</b>
+                            <span><?= $row['telephone'] ?></span>
+                        </div>
+                        <div class="my-4"><b>ราคารวมสุทธิ</b>
+                            <span style="color: #ee4d2d; font-weight: bold; font-size: 20px;"><?= number_format($sum_total, 2) ?></span>
+                            <b>บาท</b>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#slipModal">
                                     ดูหลักฐานการโอน
                                 </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="slipModal" tabindex="-1" aria-labelledby="slipModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="slipModalLabel">หลักฐานการโอน</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <?php
-                                                $imagePath = "../assets/images/slip_images/" . $row['slip_image'];
-                                                $noImg = "../assets/images/no_img.png";
-                                                if (file_exists($imagePath)) {
-                                                    echo "<img src=\"$imagePath\" alt=\"Slip Image\" class=\"img-fluid\">";
-                                                } else {
-                                                    echo "<img src=\"$noImg\" alt=\"No Image\" class=\"img-fluid\">";
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">ปิด</button>
-                                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="slipModal" tabindex="-1" aria-labelledby="slipModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="slipModalLabel">หลักฐานการโอน</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?php
+                                            $imagePath = "../assets/images/slip_images/" . $row['slip_image'];
+                                            $noImg = "../assets/images/no_img.png";
+                                            if (file_exists($imagePath)) {
+                                                echo "<img src=\"$imagePath\" alt=\"Slip Image\" class=\"img-fluid\">";
+                                            } else {
+                                                echo "<img src=\"$noImg\" alt=\"No Image\" class=\"img-fluid\">";
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">ปิด</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <form action="update_order.php" method="post">
-                                <!-- ตัวแปร order_id ที่ถูกส่งมาจาก GET -->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <input type="hidden" name="order_id" value="<?php echo $idpd; ?>">
-                                        <label for="shipping_type">ประเภทขนส่ง&nbsp;&gt;</label>
-                                        <div class="input-group mb-3">
-                                            <label class="input-group-text" for="shipping_type"><i
-                                                    class='bx bx-layer-plus'></i></label>
-                                            <select name="shipping_type" id="shipping_type" class="form-select">
-                                                <?php
-                                                include('condb.php');
-                                                // Fetch shipping type for the current order
-                                                $query = "SELECT shipping_type_id FROM tb_order WHERE orderID = '$idpd'";
-                                                $result = mysqli_query($conn, $query);
-                                                $shipping_type_id = mysqli_fetch_assoc($result)['shipping_type_id'];
-
-                                                // Retrieve all shipping types
-                                                $sql = "SELECT shipping_type_id, shipping_type_name FROM shipping_type ORDER BY shipping_type_id";
-                                                $result = mysqli_query($conn, $sql);
-
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    while ($rows = mysqli_fetch_array($result)) {
-                                                        // Check if this option should be selected
-                                                        $selected = ($shipping_type_id == $rows['shipping_type_id']) ? 'selected' : '';
-                                                        echo "<option value='{$rows['shipping_type_id']}' $selected>{$rows['shipping_type_name']}</option>";
-                                                    }
-                                                } else {
-                                                    echo "<option value=''>No shipping types found</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="parcel_number">เลขพัสดุ&nbsp;&gt;</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text"><i class='bx bx-book-reader'></i></span>
-                                            <input type="text" class="form-control" name="parcel_number"
-                                                placeholder="กรอกเลขพัสดุ" value="<?php echo $parcel_number; ?>">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <a href="report_order.php" class="btn btn-warning">ย้อนกลับ</a>
-                                    <button type="submit" class="btn btn-success">ยืนยัน</button>
-                                </div>
-                            </form>
                         </div>
+                        <form action="update_order.php" method="post">
+                            <!-- ตัวแปร order_id ที่ถูกส่งมาจาก GET -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="hidden" name="order_id" value="<?php echo $idpd; ?>">
+                                    <label for="shipping_type">ประเภทขนส่ง&nbsp;&gt;</label>
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for="shipping_type"><i
+                                                class='bx bx-layer-plus'></i></label>
+                                        <select name="shipping_type" id="shipping_type" class="form-select">
+                                            <?php
+                                            include('condb.php');
+                                            // Fetch shipping type for the current order
+                                            $query = "SELECT shipping_type_id FROM tb_order WHERE orderID = '$idpd'";
+                                            $result = mysqli_query($conn, $query);
+                                            $shipping_type_id = mysqli_fetch_assoc($result)['shipping_type_id'];
+
+                                            // Retrieve all shipping types
+                                            $sql = "SELECT shipping_type_id, shipping_type_name FROM shipping_type ORDER BY shipping_type_id";
+                                            $result = mysqli_query($conn, $sql);
+
+                                            if (mysqli_num_rows($result) > 0) {
+                                                while ($rows = mysqli_fetch_array($result)) {
+                                                    // Check if this option should be selected
+                                                    $selected = ($shipping_type_id == $rows['shipping_type_id']) ? 'selected' : '';
+                                                    echo "<option value='{$rows['shipping_type_id']}' $selected>{$rows['shipping_type_name']}</option>";
+                                                }
+                                            } else {
+                                                echo "<option value=''>No shipping types found</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="parcel_number">เลขพัสดุ&nbsp;&gt;</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class='bx bx-book-reader'></i></span>
+                                        <input type="text" class="form-control" name="parcel_number"
+                                            placeholder="กรอกเลขพัสดุ" value="<?php echo $parcel_number; ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <a href="report_order.php" class="btn btn-dark">ย้อนกลับ</a>
+                                <button type="submit" class="btn btn-danger">ยืนยัน</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </main>
-            <?php
+            </div>
+        </main>
+    <?php
                                 }
                                 mysqli_close($conn);
-                                ?>
-        <?php include('footer.php'); ?>
+    ?>
+    <?php include('footer.php'); ?>
     </div>
 </body>
 
@@ -216,19 +215,18 @@ $parcel_number = $order['parcel_number'];
 
 <?php
 if (isset($_SESSION['success_message'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             // position: "top-center",
             icon: "success",
-            title: "แก้ไขสำเร็จ!",
-            text: "คำสั่งซื้อถูกอัพเดทแล้ว",
+            title: "การแก้ไขคำสั่งซื้อเสร็จสิ้นแล้ว!",
             showConfirmButton: false,
             timer: 1500
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['success_message']);
 }
 ?>

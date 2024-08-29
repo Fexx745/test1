@@ -1,14 +1,6 @@
 <?php
 include('config.php');
 include('condb.php');
-session_start();
-if (!isset($_SESSION['username'])) {
-    header('Location: login.php');
-    exit();
-} else if ($_SESSION['status'] !== '0') {
-    header('Location: login.php');
-    exit();
-}
 ?>
 
 
@@ -59,7 +51,7 @@ if (!isset($_SESSION['username'])) {
                     $half_star = ($average_rating - $full_stars >= 0.5) ? true : false; // ตรวจสอบว่ามีครึ่งดาวหรือไม่
                     $empty_stars = 5 - $full_stars - ($half_star ? 1 : 0); // จำนวนดาวที่ว่างเปล่า
             ?>
-                    <a href="itemsDetail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
+                    <a href="product_Detail.php?id=<?= $row['p_id'] ?>" class="bc-show-items">
                         <div class="bc-show-items-img">
                             <img src="assets/images/product/<?= $row['image'] ?>" alt="<?= $row['p_name'] ?>">
                         </div>
@@ -73,15 +65,6 @@ if (!isset($_SESSION['username'])) {
                         <div class="bc-show-items-view">
                             <div class="bc-show-items-view-product">
                                 <span>
-                                    <!-- <?php for ($i = 1; $i <= $full_stars; $i++) { ?>
-                                        <i class='bx bxs-star'></i>
-                                    <?php } ?>
-                                    <?php if ($half_star) { ?>
-                                        <i class='bx bxs-star-half'></i>
-                                    <?php } ?>
-                                    <?php for ($i = 1; $i <= $empty_stars; $i++) { ?>
-                                        <i class='bx bx-star'></i>
-                                    <?php } ?> -->
                                     <b><i class='bx bxs-star'></i><?= $average_rating ?></b>
                                 </span>
                             </div>
@@ -93,7 +76,7 @@ if (!isset($_SESSION['username'])) {
             <?php
                 }
 
-                // Only display the pagination if products are found
+                // Fetch total number of records to calculate total pages
                 $sql = "SELECT COUNT(*) FROM product WHERE product.p_name LIKE '%$search%'";
                 $result = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_row($result);
@@ -101,42 +84,39 @@ if (!isset($_SESSION['username'])) {
                 $total_pages = ceil($total_records / $limit);
                 $current_page = $page;
 
-                // ป้องกันการเลือกหน้าที่ไม่ถูกต้อง
-                if ($page > $total_pages) {
-                    header('Location: index.php?page=' . $total_pages . '&search=' . $search);
-                    exit;
+                // Display pagination only if more than one page exists
+                if ($total_pages > 1) {
+                    echo '<div class="pagination">';
+                    echo '<ul class="pagination">';
+
+                    // แสดงปุ่ม "Previous"
+                    if ($current_page > 1) {
+                        echo '<li class="page-item">';
+                        echo '<a class="page-link" href="?page=' . ($current_page - 1) . '&search=' . $search . '" aria-label="Previous">';
+                        echo '<span aria-hidden="true"><i class="bx bx-chevron-left"></i></span>';
+                        echo '</a>';
+                        echo '</li>';
+                    }
+
+                    // แสดงปุ่มเลขหน้า
+                    for ($i = 1; $i <= $total_pages; $i++) {
+                        echo '<li class="page-item ' . ($i == $current_page ? 'active' : '') . '">';
+                        echo '<a class="page-link" href="?page=' . $i . '&search=' . $search . '">' . $i . '</a>';
+                        echo '</li>';
+                    }
+
+                    // แสดงปุ่ม "Next"
+                    if ($current_page < $total_pages) {
+                        echo '<li class="page-item">';
+                        echo '<a class="page-link" href="?page=' . ($current_page + 1) . '&search=' . $search . '" aria-label="Next">';
+                        echo '<span aria-hidden="true"><i class="bx bx-chevron-right"></i></span>';
+                        echo '</a>';
+                        echo '</li>';
+                    }
+
+                    echo '</ul>';
+                    echo '</div>';
                 }
-
-                echo '<div class="pagination">';
-                echo '<ul class="pagination">';
-
-                // แสดงปุ่ม "Previous"
-                if ($current_page > 1) {
-                    echo '<li class="page-item">';
-                    echo '<a class="page-link" href="?page=' . ($current_page - 1) . '&search=' . $search . '" aria-label="Previous">';
-                    echo '<span aria-hidden="true"><i class="bx bx-chevron-left"></i></span>';
-                    echo '</a>';
-                    echo '</li>';
-                }
-
-                // แสดงปุ่มเลขหน้า
-                for ($i = 1; $i <= $total_pages; $i++) {
-                    echo '<li class="page-item ' . ($i == $current_page ? 'active' : '') . '">';
-                    echo '<a class="page-link" href="?page=' . $i . '&search=' . $search . '">' . $i . '</a>';
-                    echo '</li>';
-                }
-
-                // แสดงปุ่ม "Next"
-                if ($current_page < $total_pages) {
-                    echo '<li class="page-item">';
-                    echo '<a class="page-link" href="?page=' . ($current_page + 1) . '&search=' . $search . '" aria-label="Next">';
-                    echo '<span aria-hidden="true"><i class="bx bx-chevron-right"></i></span>';
-                    echo '</a>';
-                    echo '</li>';
-                }
-
-                echo '</ul>';
-                echo '</div>';
 
             } else {
                 echo '<div class="product-not-found">';

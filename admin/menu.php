@@ -83,10 +83,10 @@ $row5 = mysqli_fetch_assoc($result5);
                         </a>
                         <div class="collapse" id="edit-product" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="prd_show_product.php"><i class='bx bx-edit'></i>&nbsp;จัดการสินค้า</a>
-                                <a class="nav-link" href="addproducttype.php"><i class='bx bx-edit'></i>&nbsp;จัดการประเภทสินค้า</a>
-                                <a class="nav-link" href="addunit.php"><i class='bx bx-edit'></i>&nbsp;จัดการหน่วยสินค้า</a>
-                                <a class="nav-link" href="addbrand.php"><i class='bx bx-edit'></i>&nbsp;จัดการแบรนด์สินค้า</a>
+                                <a class="nav-link" href="product_List.php"><i class='bx bx-edit'></i>&nbsp;จัดการสินค้า</a>
+                                <a class="nav-link" href="producttype_List.php"><i class='bx bx-edit'></i>&nbsp;จัดการประเภทสินค้า</a>
+                                <a class="nav-link" href="unit_add.php"><i class='bx bx-edit'></i>&nbsp;จัดการหน่วยสินค้า</a>
+                                <a class="nav-link" href="brand_add.php"><i class='bx bx-edit'></i>&nbsp;จัดการแบรนด์สินค้า</a>
                             </nav>
                         </div>
 
@@ -98,8 +98,8 @@ $row5 = mysqli_fetch_assoc($result5);
                         </a>
                         <div class="collapse" id="customer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="addaccount.php"><i class='bx bxs-user-plus'></i>&nbsp;เพิ่มบัญชีลูกค้า</a>
-                                <a class="nav-link" href="show_account.php"><i class='bx bx-edit'></i>&nbsp;จัดการข้อมูลลูกค้า</a>
+                                <a class="nav-link" href="member_add.php"><i class='bx bxs-user-plus'></i>&nbsp;เพิ่มบัญชีลูกค้า</a>
+                                <a class="nav-link" href="member_List.php"><i class='bx bx-edit'></i>&nbsp;จัดการข้อมูลลูกค้า</a>
                             </nav>
                         </div>
 
@@ -111,9 +111,9 @@ $row5 = mysqli_fetch_assoc($result5);
                         </a>
                         <div class="collapse" id="setting" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="addaccount.php"><i class='bx bx-heading'></i>&nbsp;แก้ไข
-                                    Title</a>
-                                <a class="nav-link" href="editbanner.php"><i class='bx bx-image-alt'></i>&nbsp;แก้ไขรูปภาพ Banner</a>
+                                <!-- <a class="nav-link" href="addaccount.php"><i class='bx bx-heading'></i>&nbsp;แก้ไข
+                                    Title</a> -->
+                                <a class="nav-link" href="banner_add.php"><i class='bx bx-image-alt'></i>&nbsp;แก้ไขรูปภาพ Banner</a>
                             </nav>
                         </div>
 
@@ -125,7 +125,7 @@ $row5 = mysqli_fetch_assoc($result5);
                         </a>
                         <div class="collapse" id="shipping" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="addshipping.php"><i class='bx bxs-car-mechanic'></i>&nbsp;จัดการข้อมูลขนส่ง</a>
+                                <a class="nav-link" href="shipping_add.php"><i class='bx bxs-car-mechanic'></i>&nbsp;จัดการข้อมูลขนส่ง</a>
                             </nav>
                         </div>
 

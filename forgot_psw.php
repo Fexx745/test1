@@ -1,5 +1,4 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -61,12 +60,12 @@ if (isset($_POST['submit'])) {
         } else {
             // echo 'ลิงก์รีเซ็ตรหัสผ่านถูกส่งไปยังอีเมลของคุณแล้ว';
             $_SESSION['send-email'] = "ลิงก์รีเซ็ตรหัสผ่านถูกส่งไปยังอีเมลของคุณแล้ว";
-            header('Location: forgot-form.php');
+            header('Location: forgot.php');
             exit();
         }
     } else {
         $_SESSION['not-email'] = "ไม่พบอีเมลในระบบ";
-        header('Location: forgot-form.php');
+        header('Location: forgot.php');
         exit();
     }
 

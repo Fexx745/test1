@@ -189,38 +189,41 @@ include('condb.php');
                         </div>
                         <?php
                         // Pagination code
-                        echo '<ul class="pagination">';
-                        if ($current_page > 1) {
-                            echo '<li class="page-item">';
-                            echo '<a class="page-link" href="?id=' . $product_id . '&page=' . ($current_page - 1) . '" aria-label="Previous">';
-                            echo '<span aria-hidden="true"><i class="bx bx-chevron-left"></i></span>';
-                            echo '</a>';
-                            echo '</li>';
+                        if ($total_reviews > 4) {
+                            echo '<ul class="pagination">';
+                            if ($current_page > 1) {
+                                echo '<li class="page-item">';
+                                echo '<a class="page-link" href="?id=' . $product_id . '&page=' . ($current_page - 1) . '" aria-label="Previous">';
+                                echo '<span aria-hidden="true"><i class="bx bx-chevron-left"></i></span>';
+                                echo '</a>';
+                                echo '</li>';
+                            }
+                            for ($i = 1; $i <= $total_pages; $i++) {
+                                echo '<li class="page-item ' . ($i == $current_page ? 'active' : '') . '">';
+                                echo '<a class="page-link" href="?id=' . $product_id . '&page=' . $i . '">' . $i . '</a>';
+                                echo '</li>';
+                            }
+                            if ($current_page < $total_pages) {
+                                echo '<li class="page-item">';
+                                echo '<a class="page-link" href="?id=' . $product_id . '&page=' . ($current_page + 1) . '" aria-label="Next">';
+                                echo '<span aria-hidden="true"><i class="bx bx-chevron-right"></i></span>';
+                                echo '</a>';
+                                echo '</li>';
+                            }
+                            echo '</ul>';
                         }
-                        for ($i = 1; $i <= $total_pages; $i++) {
-                            echo '<li class="page-item ' . ($i == $current_page ? 'active' : '') . '">';
-                            echo '<a class="page-link" href="?id=' . $product_id . '&page=' . $i . '">' . $i . '</a>';
-                            echo '</li>';
-                        }
-                        if ($current_page < $total_pages) {
-                            echo '<li class="page-item">';
-                            echo '<a class="page-link" href="?id=' . $product_id . '&page=' . ($current_page + 1) . '" aria-label="Next">';
-                            echo '<span aria-hidden="true"><i class="bx bx-chevron-right"></i></span>';
-                            echo '</a>';
-                            echo '</li>';
-                        }
-                        echo '</ul>';
                         ?>
+
                     </section>
 
                 </div> <!-- bc-showDetail -->
 
         <?php
             } else {
-                echo "<h3>ไม่พบสินค้าที่คุณกำลังค้นหา</h3>";
+                echo "<div style='margin: 0 auto;' class='my-5'><h4>ไม่พบสินค้าที่คุณกำลังค้นหา</h4></div>";
             }
         } else {
-            echo "<h3>ไม่พบสินค้าที่คุณกำลังค้นหา</h3>";
+            echo "<div style='margin: 0 auto;' class='my-5'><h4>ไม่พบสินค้าที่คุณกำลังค้นหา</h4></div>";
         }
         ?>
     </section>

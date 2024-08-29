@@ -49,6 +49,31 @@ $row4 = mysqli_fetch_array($result4);
 $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_sales_this_month'] : 0;
 
 
+
+// Sales for the last 30 days
+$sql7 = "
+    SELECT DATE(reg) as sale_date, SUM(total_price) as daily_sales 
+    FROM tb_order 
+    WHERE reg >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+    GROUP BY DATE(reg)
+    ORDER BY DATE(reg)
+";
+$result7 = mysqli_query($conn, $sql7);
+// Initialize arrays to store data for the chart
+$sales_dates = [];
+$daily_sales = [];
+
+while ($row7 = mysqli_fetch_array($result7)) {
+    $sales_dates[] = $row7['sale_date'];
+    $daily_sales[] = $row7['daily_sales'];
+}
+
+// Find the day with the highest sales
+$max_sales = max($daily_sales);
+$max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -98,15 +123,15 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #42424a 0%, #191919 100%);   ">
+                            style="background: linear-gradient(195deg, #495057 0%, #191919 100%);">
                             <div class="card-body">ลูกค้า<h5>
                                     <?= $row['customer'] ?> คน
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-user-circle'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                <div><small><a href="show_account.php" style="text-decoration: none; color: white; font-size: 13px;">
+                                            <i class='bx bx-group'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
                                             จำนวนผู้ใช้งานบนเว็บไซต์</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
@@ -117,11 +142,12 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                             style="background: linear-gradient(195deg, #fb8be9 0%, #D81B60 100%);">
                             <div class="card-body">ยอดขายวันนี้<h5>
                                     <?= number_format($total_sales_today, 2) ?> บาท
+                                </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-money'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            <i class='bx bx-chart'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
                                             ยอดขายวันนี้</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
@@ -129,13 +155,13 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #58d68d 0%, #43A047 100%);">
+                            style="background: linear-gradient(195deg, #71cdf5 0%, #0d6efd 100%);">
                             <div class="card-body">ยอดการสั่งซื้อวันนี้<h5>
                                     <?= ($order_today) ?> รายการ</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-list-ul'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            <i class='bx bx-cart'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
                                             จำนวนการสั่งซื้อสินค้าวันนี้</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
@@ -143,15 +169,15 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #71cdf5 0%, #1A73E8 100%);">
+                            style="background: linear-gradient(195deg, #79f679 0%, #198754 100%);">
                             <div class="card-body">ยอดขายเดือนนี้<h5>
                                     <?= number_format($total_sales_this_month, 2); ?> บาท
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-box'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 50%; font-size: 20px;"></i>
+                                            <i class='bx bx-stats'
+                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
                                             ยอดขายเดือนนี้</a></small>
                                 </div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -169,16 +195,16 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                             </div>
                         </div>
                         <div class="card-body-details">
-                            <div class="1"><a href="prd_show_product.php"><i class='bx bx-basket'></i>จัดการสินค้า</a>
+                            <div class="1"><a href="product_List.php"><i class='bx bx-basket'></i>จัดการสินค้า</a>
                             </div>
-                            <div class="2"><a href="addproducttype.php"><i
+                            <div class="2"><a href="producttype_List.php"><i
                                         class='bx bx-category-alt'></i>จัดการประเภทสินค้า</a></div>
-                            <div class="3"><a href="addunit.php"><i class='bx bxl-unity'></i>จัดการหน่วยสินค้า</a></div>
-                            <div class="4"><a href="addbrand.php"><i class='bx bx-layout'></i>จัดการยี่ห้อสินค้า</a>
+                            <div class="3"><a href="unit_add.php"><i class='bx bxl-unity'></i>จัดการหน่วยสินค้า</a></div>
+                            <div class="4"><a href="brand_add.php"><i class='bx bx-layout'></i>จัดการยี่ห้อสินค้า</a>
                             </div>
-                            <div class="5"><a href="show_account.php"><i
+                            <div class="5"><a href="member_List.php"><i
                                         class='bx bx-user-pin'></i>จัดการข้อมูลลูกค้า</a></div>
-                            <div class="6"><a href="addshipping.php"><i class='bx bx-car'></i>จัดการข้อมูลขนส่ง</a>
+                            <div class="6"><a href="shipping_add.php"><i class='bx bx-car'></i>จัดการข้อมูลขนส่ง</a>
                             </div>
                         </div>
                     </div>
@@ -193,13 +219,13 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                             <div class="1"><a href="report_order.php"><i
                                         class='bx bx-notepad'></i>ตรวจสอบการสั่งซื้อ</a></div>
                             <div class="2"><a href="summary.php"><i class='bx bxs-calculator'></i>สร้างรายงานสรุปยอดขาย</a></div>
-                            <div class="3"><a href="editbanner.php"><i class='bx bxs-image'></i>แก้ไขรูปภาพแบนเนอร์</a>
+                            <div class="3"><a href="banner_add.php"><i class='bx bxs-image'></i>แก้ไขรูปภาพแบนเนอร์</a>
                             </div>
-                            <div class="5"><a href="#"><i class='bx bxs-cog'></i><b style="color: red;">Coming
+                            <div class="5"><a href="#"><i class='bx bx-cog'></i><b style="color: red;">Coming
                                         Soon...</b></a></div>
-                            <div class="5"><a href="#"><i class='bx bx-window-close'></i><b style="color: red;">Coming
+                            <div class="5"><a href="#"><i class='bx bx-cog'></i><b style="color: red;">Coming
                                         Soon...</b></a></div>
-                            <div class="6"><a href="#"><i class='bx bx-window-close'></i><b style="color: red;">Coming
+                            <div class="6"><a href="#"><i class='bx bx-cog'></i><b style="color: red;">Coming
                                         Soon...</b></a></div>
                         </div>
                     </div>
@@ -210,17 +236,68 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-chart-area me-1"></i>
-                                ยอดขายวันนี้
+                                <i class="fas fa-calendar me-1"></i>
+                                <strong>ยอดขายรายวัน (เลือกช่วงวันที่)</strong>
                             </div>
-                            <div class="card-body"><canvas id="data_product" width="100%" height="40"></canvas></div>
+                            <div class="card-body">
+                                <form id="dateRangeForm" method="GET" action="">
+                                    <div class="row" style="margin: 0 0 30px 0">
+                                        <div class="col-md-5">
+                                            <label for="startDate" style="color: #6c757d; font-size: 13px;">เริ่มวันที่</label>
+                                            <input type="date" id="startDate" name="start_date" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label for="endDate" style="color: #6c757d; font-size: 13px;">ถึงวันที่</label>
+                                            <input type="date" id="endDate" name="end_date" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-2 align-self-end">
+                                            <button type="submit" class="btn btn-primary">แสดง</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <canvas id="salesChart" width="100%" height="40"></canvas>
+                            </div>
                         </div>
                     </div>
+                    <?php
+                    if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
+                        $startDate = $_GET['start_date'];
+                        $endDate = $_GET['end_date'];
+
+                        $sql = "
+        SELECT DATE(reg) as sale_date, SUM(total_price) as daily_sales 
+        FROM tb_order 
+        WHERE DATE(reg) BETWEEN '$startDate' AND '$endDate'
+        GROUP BY DATE(reg)
+        ORDER BY DATE(reg)
+    ";
+                        $result = mysqli_query($conn, $sql);
+
+                        $sales_dates = [];
+                        $daily_sales = [];
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $sales_dates[] = $row['sale_date'];
+                            $daily_sales[] = $row['daily_sales'];
+                        }
+
+                        if (!empty($daily_sales)) {
+                            $max_sales = max($daily_sales);
+                            $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
+                        } else {
+                            $max_sales = 0;
+                            $max_sales_date = null;
+                        }
+                    }
+
+                    ?>
+
+
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-chart-bar me-1"></i>
-                                รายงานยอดขายในแต่ละเดือน
+                                <i class="fas fa-dollar-sign me-1"></i>
+                                <b>รายงานยอดขายในแต่ละเดือน</b>
                             </div>
                             <div class="card-body"><canvas id="data_sale" width="100%" height="40"></canvas></div>
                         </div>
@@ -250,33 +327,67 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/Chart.min.js"></script>
 <script>
+
+    
     $(document).ready(function() {
-        showGraph();
+        updateSalesChart();
     });
 
+    function updateSalesChart() {
+        var salesDates = <?php echo json_encode($sales_dates); ?>;
+        var dailySales = <?php echo json_encode($daily_sales); ?>;
+        var maxSales = <?php echo json_encode($max_sales); ?>;
+        var maxSalesDate = <?php echo json_encode($max_sales_date); ?>;
 
-    function showGraph() {
-        var totalSalesToday = <?= $total_sales_today ?>;
+        var backgroundColors = salesDates.map(function(date) {
+            return date === maxSalesDate ? '#eda500' : '#ffc107';
+        });
 
-        var chartdata = {
-            labels: ["ยอดขายวันนี้"],
+        var chartData = {
+            labels: salesDates,
             datasets: [{
-                label: 'ยอดขายวันนี้',
-                backgroundColor: '#2ECC71',
+                label: 'ยอดขายรายวัน',
+                backgroundColor: backgroundColors,
                 borderColor: '#000',
-                hoverBackgroundColor: '#2ECC71',
-                hoverBorderColor: '#000',
-                data: [totalSalesToday]
+                data: dailySales
             }]
         };
 
-        var graphTarget = $("#data_product");
-
-        var barGraph = new Chart(graphTarget, {
+        var ctx = document.getElementById("salesChart").getContext("2d");
+        new Chart(ctx, {
             type: 'bar',
-            data: chartdata
+            data: chartData,
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += new Intl.NumberFormat().format(context.raw);
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
         });
     }
+</script>
+
 </script>
 <script>
     $(document).ready(function() {
@@ -301,9 +412,9 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                         labels: name,
                         datasets: [{
                             label: 'ยอดขายในแต่ละเดือน',
-                            backgroundColor: '#28B463',
+                            backgroundColor: '#ffc107',
                             borderColor: '#000',
-                            hoverBackgroundColor: '#28B463',
+                            hoverBackgroundColor: '#eda500',
                             hoverBorderColor: '#000',
                             data: marks
                         }]
@@ -312,7 +423,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                     var graphTarget = $("#data_sale");
 
                     var barGraph = new Chart(graphTarget, {
-                        type: 'bar',
+                        type: 'pie',
                         data: chartdata
                     });
                 });
