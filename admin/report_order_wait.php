@@ -43,19 +43,6 @@ $row4 = mysqli_fetch_array($result4);
     <!-- Font -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-
-        * {
-            font-size: 16px;
-            font-family: 'K2D', sans-serif;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            /* ปรับตามความต้องการ */
-        }
-    </style>
 
 </head>
 
@@ -123,10 +110,12 @@ $row4 = mysqli_fetch_array($result4);
                     </div>
                 </div>
 
+
+
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class='bx bxs-x-circle'></i>
-                        แสดงข้อมูลการสั่งซื้อสินค้า (ยกเลิกคำสั่งซื้อ)
+                        <i class='bx bxs-car'></i>
+                        แสดงข้อมูลสินค้าที่รอการจัดส่ง
 
                         <div class="mt-3 mb-3">
                             <a href="report_order.php"><button type="button"
@@ -141,17 +130,18 @@ $row4 = mysqli_fetch_array($result4);
 
                     </div>
                 </div>
+
                 <div class="card-body">
                     <table id="datatablesSimple" class="table table-striped">
                         <thead>
                             <tr>
                                 <th>เลขที่ใบสั่งซื้อ</th>
-                                <th>ลูกค้า</th>
+                                <th>ชื่อลูกค้า</th>
                                 <th>ที่อยู่จัดส่งสินค้า</th>
                                 <th>เบอร์โทรศัพท์</th>
-                                <th>ราคารวมสุทธิ</th>
+                                <th>รวมสุทธิ</th>
                                 <th>วันที่สั่งซื้อ</th>
-                                <th>สถานะ</th>
+                                <th>สถานะการสั่งซื้อ</th>
                                 <th>จัดการข้อมูล</th>
                             </tr>
                         </thead>
@@ -164,16 +154,17 @@ $row4 = mysqli_fetch_array($result4);
                                 <th>telephone</th>
                                 <th>telephone</th>
                                 <th>telephone</th>
+                                <th>telephone</th>
                             </tr>
                         </tfoot>
 
                         <tbody>
                             <?php
                             $sql = "SELECT *
-                                 FROM tb_order as t
-                                 JOIN tb_member as tm ON t.member_id = tm.id
-                                 WHERE t.order_status = 0
-                                 ORDER BY t.reg DESC;";
+                                FROM tb_order as t
+                                JOIN tb_member as tm ON t.member_id = tm.id
+                                WHERE t.order_status = 3
+                                ORDER BY t.reg DESC;";
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_array($result)) {
                                 $status = $row['order_status'];
@@ -200,26 +191,21 @@ $row4 = mysqli_fetch_array($result4);
                                         <?= $row['reg'] ?>
                                     </td>
                                     <td>
-                                        <div class="text-center">
                                             <?php
                                             if ($status == 1) {
                                                 echo "<b style='color: blue;'>ยังไม่ชำระเงิน</b>";
                                             } else if ($status == 2) {
-                                                echo "<b style='color: green;'>ชำระเงินแล้ว</b>";
+                                                echo "<strong><i class='bx bx-check'></i>&nbsp;จัดส่งสำเร็จแล้ว</strong>";
+                                            } else if ($status == 3) {
+                                                echo "<strong><i class='bx bxs-car'></i>&nbsp;รอการจัดส่ง</strong>";
                                             } else if ($status == 0) {
-                                                echo "<strong><i class='bx bxs-x-circle'></i>&nbsp;ยกเลิกคำสั่งซื้อ</strong>";
+                                                echo "<b style='color: red;'>ยกเลิกการสั่งซื้อ</b>";
                                             }
                                             ?>
-                                        </div>
                                     </td>
                                     <td>
-                                        <div class="text-center">
-                                            <a href="report_order_detail.php?id=<?= $row['orderID'] ?>" style="background: linear-gradient(195deg, #6c757d 0%, #6c757d 100%); color: #fff;"
-                                                class="btn"><i class='bx bx-message-detail'></i></a>
-                                            <a class="btn" href="javascript:void(0);" style="background: linear-gradient(195deg, #6c757d 0%, #6c757d 100%); color: #fff;"
-                                                onclick="confirmDelete('<?= $row['orderID'] ?>')"><i
-                                                    class='bx bx-trash'></i></a>
-                                        </div>
+                                        <a href="report_order_detailShipping.php?id=<?= $row['orderID'] ?>"
+                                        class="btn" style="background: linear-gradient(195deg, #6c757d 0%, #6c757d 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;"><i class='bx bx-message-detail'></i></a>
                                     </td>
                                 </tr>
                             <?php
@@ -230,61 +216,38 @@ $row4 = mysqli_fetch_array($result4);
 
                     </table>
                     <div class="my-5">
-                        <a href="report_order.php" class="btn btn-primary">ย้อนกลับ</a>
+                        <a href="report_order.php" class="btn btn-dark">ย้อนกลับ</a>
                     </div>
                 </div>
             </div>
     </div>
     </main>
-
     </div>
     </div>
-
 </body>
 
 </html>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="js/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="assets/demo/chart-area-demo.js"></script>
 <script src="assets/demo/chart-bar-demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
 <?php
-if (isset($_SESSION['cancelOrder'])) {
+if (isset($_SESSION['confirmOrder'])) {
 ?>
     <script>
         Swal.fire({
             icon: "success",
-            title: "ยกเลิกคำสั่งซื้อสำเร็จ!",
-            text: "Order canceled successfully",
+            title: "ยืนยันคำสั่งซื้อสำเร็จ เตรียมจัดส่ง...!",
+            text: "Order confirm successfully",
             showConfirmButton: false,
             timer: 1500
         });
     </script>
 <?php
-    unset($_SESSION['cancelOrder']);
+    unset($_SESSION['confirmOrder']);
 }
 ?>
-
-<script>
-    function confirmDelete(id) {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "คุณต้องการลบคำสั่งซื้อหรือไม่?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "ยืนยัน",
-            cancelButtonText: "ยกเลิก"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = `delete_order.php?id=${id}`;
-            }
-        });
-    }
-</script>

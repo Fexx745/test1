@@ -36,7 +36,7 @@ if (isset($_POST['order_id'], $_POST['shipping_type'])) {
 
 // Redirect back to report_order_detail.php with original order_id
 if (isset($order_id)) {
-    header("Location: report_order_detail.php?id={$order_id}");
+    header("Location: report_order_yes.php?id={$order_id}");
 } else {
     header("Location: report_order.php"); // Default redirect if order_id is not set
 }

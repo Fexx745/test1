@@ -111,8 +111,7 @@ $row5 = mysqli_fetch_assoc($result5);
                         </a>
                         <div class="collapse" id="setting" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <!-- <a class="nav-link" href="addaccount.php"><i class='bx bx-heading'></i>&nbsp;แก้ไข
-                                    Title</a> -->
+                                <a class="nav-link" href="Line_notify.php"><i class='bx bxs-bell-ring' ></i>&nbsp;Line Nottify</a>
                                 <a class="nav-link" href="banner_add.php"><i class='bx bx-image-alt'></i>&nbsp;แก้ไขรูปภาพ Banner</a>
                             </nav>
                         </div>

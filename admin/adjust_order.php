@@ -4,11 +4,11 @@
 
     $idpd = $_GET['id'];
 
-    $sql = "UPDATE tb_order SET order_status = 2 WHERE orderID='$idpd' ";
+    $sql = "UPDATE tb_order SET order_status = 3 WHERE orderID='$idpd' ";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         $_SESSION['confirmOrder'] = "ยกเลิกคำสั่งซื้อ";
-        header('Location: report_order_yes.php');
+        header('Location: report_order_wait.php');
         exit();
     } else {
         echo "<script>alert('ไม่สามารถปรับสถานะได้!')</script>";

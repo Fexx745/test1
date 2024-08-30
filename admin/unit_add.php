@@ -34,19 +34,6 @@ $row = mysqli_fetch_array($result);
     <!-- boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-
-        * {
-            font-size: 16px;
-            font-family: 'K2D', sans-serif;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            /* ปรับตามความต้องการ */
-        }
-    </style>
 
 </head>
 
@@ -69,8 +56,8 @@ $row = mysqli_fetch_array($result);
                                 <input type="text" class="form-control" name="unitname" placeholder="หน่วยสินค้า" required>
                             </div>
                             <div class="mt-4" class="mb-2">
-                                <a href="index.php" class="btn btn-primary">ย้อนกลับ</a>
-                                <button class="btn btn-success" type="submit">ยืนยัน</button>
+                                <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
+                                <button class="btn btn-danger" type="submit">ยืนยัน</button>
                             </div>
                         </form>
                         <table id="datatablesSimple" class="table table-striped">

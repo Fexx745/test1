@@ -1,12 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Prompt", sans-serif;
+}
+
 :root {
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
     --bs-purple: #6f42c1;
     --bs-pink: #d63384;
     --bs-red: #dc3545;
-    --bs-orange: #fd7e14;
+    --bs-orange: #ee4d2d;
     --bs-yellow: #ffc107;
-    --bs-green: #198754;
+    --bs-green: #00c300;
     --bs-teal: #20c997;
     --bs-cyan: #0dcaf0;
     --bs-black: #000;
@@ -32,18 +41,23 @@
     --bs-dark: #212529;
     --bs-link-color: #0d6efd;
     --bs-link-hover-color: #0a58ca;
-    --bs-code-color: #d63384;
+    --bs-code-color: #f05da6;
     --bs-highlight-bg: #fff3cd;
+    --nc-primary: #ee4d2d;
+    --nc-primary-bg: #fef6f5;
+    --nc-primary-gradient: linear-gradient(#ee4d2d, #ff7337);
+    --nc-secondary-blue: #0046ab;
+    --nc-secondary-yellow: #eda500;
+    --nc-secondary-green: #26aa99;
+    --nc-error: #ee2c4a;
+    --nc-error-bg: #fff4f4;
+    --nc-caution: #f69113;
+    --nc-caution-bg: #fff8e4;
+    --nc-success: #30b566;
+    --nc-success-bg: #f7fffe;
 }
 
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-* {
-    font-size: 16px;
-    box-sizing: border-box;
-    font-family: "Prompt", sans-serif;
-}
 
 
 .card-head {
@@ -54,7 +68,7 @@
     .card-icons {
         width: 70px;
         height: 100%;
-        background: var(--bs-cyan);
+        background: var(--bs-dark);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -68,7 +82,7 @@
 
     .card-details {
         width: 100%;
-        border-bottom: 5px solid var(--bs-cyan);
+        border-bottom: 5px solid var(--bs-dark);
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -86,7 +100,7 @@
     .card-icons-2 {
         width: 70px;
         height: 100%;
-        background: var(--bs-warning);
+        background: var(--bs-dark);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -101,7 +115,7 @@
 
     .card-details-2 {
         width: 100%;
-        border-bottom: 5px solid var(--bs-warning);
+        border-bottom: 5px solid var(--bs-dark);
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -153,5 +167,77 @@
     & a:hover {
         color: var(--bs-gray-600);
         transition: .2s;
+    }
+}
+
+.dashboard-1 {
+    background: linear-gradient(195deg, #71cdf5 0%, #0d6efd 100%);
+
+    & a {
+        text-decoration: none;
+        color: white;
+        font-size: 13px;
+
+        & i {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 7px;
+            border-radius: 20%;
+            font-size: 20px;
+        }
+    }
+}
+
+.dashboard-2 {
+    background: linear-gradient(195deg, #20c997 0%, #198754 100%);
+
+    & a {
+        text-decoration: none;
+        color: white;
+        font-size: 13px;
+
+        & i {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 7px;
+            border-radius: 20%;
+            font-size: 20px;
+        }
+    }
+}
+
+.dashboard-3 {
+    background: linear-gradient(195deg, #ffc107 0%, #f69113 100%);
+
+    & a {
+        text-decoration: none;
+        color: white;
+        font-size: 13px;
+
+        & i {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 7px;
+            border-radius: 20%;
+            font-size: 20px;
+        }
+    }
+}
+
+.dashboard-4 {
+    background: linear-gradient(195deg, #ee4d2d 0%, #dc3545 100%);
+
+    & a {
+        text-decoration: none;
+        color: white;
+        font-size: 13px;
+
+        & i {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 7px;
+            border-radius: 20%;
+            font-size: 20px;
+        }
     }
 }

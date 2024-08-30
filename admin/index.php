@@ -95,19 +95,6 @@ $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
     <!-- boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-
-        * {
-            font-size: 16px;
-            font-family: 'K2D', sans-serif;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            /* ปรับตามความต้องการ */
-        }
-    </style>
 </head>
 
 <body class="sb-nav-fixed">
@@ -122,62 +109,54 @@ $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
                 </ol>
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #495057 0%, #191919 100%);">
+                        <div class="card text-white mb-4 dashboard-1">
                             <div class="card-body">ลูกค้า<h5>
                                     <?= $row['customer'] ?> คน
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="show_account.php" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-group'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                <div><small><a href="show_account.php">
+                                            <i class='bx bx-group'></i>
                                             จำนวนผู้ใช้งานบนเว็บไซต์</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #fb8be9 0%, #D81B60 100%);">
+                        <div class="card text-white mb-4 dashboard-2">
                             <div class="card-body">ยอดขายวันนี้<h5>
                                     <?= number_format($total_sales_today, 2) ?> บาท
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-chart'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                <div><small><a href="#">
+                                            <i class='bx bx-chart'></i>
                                             ยอดขายวันนี้</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #71cdf5 0%, #0d6efd 100%);">
+                        <div class="card text-white mb-4 dashboard-3">
                             <div class="card-body">ยอดการสั่งซื้อวันนี้<h5>
                                     <?= ($order_today) ?> รายการ</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-cart'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                <div><small><a href="#"">
+                                            <i class='bx bx-cart'></i>
                                             จำนวนการสั่งซื้อสินค้าวันนี้</a></small></div>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                <div class=" small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #79f679 0%, #198754 100%);">
+                        <div class="card text-white mb-4 dashboard-4">
                             <div class="card-body">ยอดขายเดือนนี้<h5>
                                     <?= number_format($total_sales_this_month, 2); ?> บาท
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-stats'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                <div><small><a href="#">
+                                            <i class='bx bx-stats'></i>
                                             ยอดขายเดือนนี้</a></small>
                                 </div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -221,8 +200,7 @@ $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
                             <div class="2"><a href="summary.php"><i class='bx bxs-calculator'></i>สร้างรายงานสรุปยอดขาย</a></div>
                             <div class="3"><a href="banner_add.php"><i class='bx bxs-image'></i>แก้ไขรูปภาพแบนเนอร์</a>
                             </div>
-                            <div class="5"><a href="#"><i class='bx bx-cog'></i><b style="color: red;">Coming
-                                        Soon...</b></a></div>
+                            <div class="5"><a href="Line_notify.php"><i class='bx bxs-bell-ring'></i>Line Notify</a></div>
                             <div class="5"><a href="#"><i class='bx bx-cog'></i><b style="color: red;">Coming
                                         Soon...</b></a></div>
                             <div class="6"><a href="#"><i class='bx bx-cog'></i><b style="color: red;">Coming
@@ -327,8 +305,6 @@ $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/Chart.min.js"></script>
 <script>
-
-    
     $(document).ready(function() {
         updateSalesChart();
     });

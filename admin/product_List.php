@@ -87,6 +87,7 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
 
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/index-admin.css" rel="stylesheet" />
     <!-- Font -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- boxicons -->
@@ -106,17 +107,15 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                 </ol>
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #495057 0%, #191919 100%);">
+                        <div class="card text-white mb-4 dashboard-1">
                             <div class="card-body">
                                 สินค้าทั้งหมด<h5><?= $row4['all_pd'] ?> รายการ</h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div>
                                     <small>
-                                        <a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bxs-store'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                        <a href="#">
+                                            <i class='bx bxs-store'></i>
                                             สินค้าทั้งหมด
                                         </a>
                                     </small>
@@ -126,18 +125,15 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #fb8be9 0%, #D81B60 100%);">
+                        <div class="card text-white mb-4 dashboard-2">
                             <div class="card-body">
                                 สินค้าต่ำกว่า 10 ชิ้น<h5><?= $low_stock_count ?> รายการ</h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div>
                                     <small>
-                                        <a href="#"
-                                            style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-error'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                        <a href="#">
+                                            <i class='bx bx-error'></i>
                                             สินค้าต่ำกว่าเกณฑ์
                                         </a>
                                     </small>
@@ -147,18 +143,15 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #71cdf5 0%, #0d6efd 100%);">
+                        <div class="card text-white mb-4 dashboard-3">
                             <div class="card-body">
                                 สินค้าหมดสต็อก<h5><?= $out_of_stock_count ?> รายการ</h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div>
                                     <small>
-                                        <a href="#"
-                                            style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-error-alt'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                        <a href="#">
+                                            <i class='bx bx-error-alt'></i>
                                             สินค้าหมดสต็อก
                                         </a>
                                     </small>
@@ -169,19 +162,16 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <!-- <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #FFC107 0%, #FF9800 100%);"> -->
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #79f679 0%, #198754 100%);">
+                            0 100%);"> -->
+                        <div class="card text-white mb-4 dashboard-4">
                             <div class="card-body">
                                 Comming Soon ... <h5> # </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div>
                                     <small>
-                                        <a href="#"
-                                            style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-error'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                        <a href="#">
+                                            <i class='bx bx-error'></i>
                                             Comming Soon ...
                                         </a>
                                     </small>

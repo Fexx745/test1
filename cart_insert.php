@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('condb.php');
+include('condb.php');
 
 // ตรวจสอบไฟล์สลิป
 $allowed_extensions = ['jpg', 'jpeg', 'png'];
@@ -41,11 +41,17 @@ mysqli_query($conn, $sql_insert_order);
 $orderID = mysqli_insert_id($conn);
 $_SESSION["order_id"] = $orderID;
 
-$sToken = "oUuMDZ2et5SgODlfhImzTIQ6rGAkybpRc4Bp1n63TY7";
+// Fetch sToken from the database
+$sql_token = "SELECT token FROM tb_tokens ORDER BY id DESC LIMIT 1";
+$result_token = mysqli_query($conn, $sql_token);
+$row_token = mysqli_fetch_assoc($result_token);
+$sToken = $row_token['token'];
+
 $sMessage = "มีรายการสั่งซื้อเข้าใหม่!\n";
 $sMessage .= "เลขที่สั่งซื้อ: " . sprintf("%010d", $_SESSION["order_id"]) . "\n";
 $sMessage .= "ชื่อผู้สั่งซื้อ: " . $fname . " " . $lname . "\n";
 $sMessage .= "ราคาสุทธิ: " . number_format($_SESSION["sum_price"], 2) . " บาท\n";
+
 
 $chOne = curl_init();
 curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
@@ -149,4 +155,3 @@ unset($_SESSION["sum_price"]);
 unset($_SESSION["inPro"]);
 unset($_SESSION["dePro"]);
 exit();
-?>

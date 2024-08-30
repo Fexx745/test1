@@ -58,30 +58,30 @@ $row = mysqli_fetch_array($result);
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class='bx bx-car'></i>
-                        การส่งสินค้า
+                        <i class='bx bxs-car'></i>
+                        ข้อมูลการส่งสินค้า
                     </div>
                     <div class="card-body">
                         <h3 class="alert alert-primary">เพิ่มขนส่ง</h3>
                         <form method="POST" action="shipping_insert.php" enctype="multipart/form-data">
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bxs-package'></i></span>
+                                <span class="input-group-text"><i class='bx bxs-car'></i></span>
                                 <input type="text" class="form-control" name="shipping_name" placeholder="ชื่อขนส่ง" required>
                             </div>
                             <div class="mt-4" class="mb-2">
-                                <a href="index.php" class="btn btn-primary">ย้อนกลับ</a>
-                                <button class="btn btn-success" type="submit">ยืนยัน</button>
+                                <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
+                                <button class="btn btn-danger" type="submit">ยืนยัน</button>
                             </div>
                         </form>
                         <table id="datatablesSimple" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>หน่วยสินค้า</th>
+                                    <th>ชื่อขนส่ง</th>
                                     <th>จัดการข้อมูล</th>
                                 </tr>
                             </thead>
-                            <h3 class="alert alert-secondary mt-3 mb-3">ขนส่งทั้งหมด</h3>
+                            <h3 class="alert alert-secondary mt-3 mb-3">ข้อมูลขนส่งทั้งหมด</h3>
                             <tbody>
                                 <?php
                                 $sql = "SELECT * FROM shipping_type";
