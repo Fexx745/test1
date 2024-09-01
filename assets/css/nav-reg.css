@@ -86,12 +86,13 @@ nav {
             & h3 {
                 color: #fff;
                 letter-spacing: 5px;
-
-                & span {
-                    font-size: 1.5rem;
-                    color: #fff;
-                    letter-spacing: 0;
-                }
+                margin-top: 12px;
+                margin-right: 10px;
+            }
+            & span {
+                font-size: 1.5rem;
+                color: #fff;
+                letter-spacing: 0;
             }
         }
     }
@@ -106,22 +107,22 @@ nav {
 }
 
 .wrapper {
-    border-top: 3px solid #02e002;
+    border-top: 3px solid var(--nc-primary);
 
     & a {
         text-decoration: none;
-        color: var(--bs-link-color);
+        color: var(--bs-success);
     }
 
     & a:hover {
         opacity: 0.6;
         transition: .3s;
-        color: var(--bs-link-hover-color);
+        color: var(--bs-teal);
     }
 }
 
 .btn-submit {
-    background: #00c300;
+    background: var(--nc-primary);
     color: #fff;
     border: none;
     outline: none;
@@ -131,14 +132,14 @@ nav {
 }
 
 .btn-submit:hover {
-    background: #02e002;
-    /* opacity: .8; */
+    background: var(--nc-primary);
+    opacity: .8;
 }
 
 .btn-login {
     margin: 10px 0;
-    background-color: var(--nc-success-bg);
-    border: 1px solid var(--nc-success);
+    background-color: var(--nc-primary-bg);
+    border: 1px solid var(--nc-primary);
     outline: none;
     padding: 8px;
     border-radius: 5px;
@@ -162,8 +163,20 @@ nav {
     background-color: #fff9fa;
     border: 1px solid rgba(255, 66, 79, .2);
     font-size: 15px;
+
     & i {
         color: var(--bs-danger);
         margin-right: 15px;
     }
+}
+
+@media only screen and (max-width: 375px) {
+    nav {
+        display: flex;
+        flex-direction: column;
+            & h3 {
+                display: none;
+            }
+    }
+
 }

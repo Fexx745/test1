@@ -29,7 +29,10 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
 
 // เงื่อนไขสำหรับการแจ้งเตือนผ่าน LINE
 // if ($low_stock_count > 0) {
-//     $sToken = "oUuMDZ2et5SgODlfhImzTIQ6rGAkybpRc4Bp1n63TY7";
+//     $sql_token = "SELECT token FROM tb_tokens ORDER BY id DESC LIMIT 1";
+//     $result_token = mysqli_query($conn, $sql_token);
+//     $row_token = mysqli_fetch_assoc($result_token);
+//     $sToken = $row_token['token'];
 //     $sMessage = "มีสินค้าในคลังที่เหลือน้อยกว่า 10 ชิ้น!\n";
 //     $sMessage .= "จำนวนสินค้า: " . $low_stock_count . " รายการ\n\n";
 
@@ -114,7 +117,7 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div>
                                     <small>
-                                        <a href="#">
+                                        <a href="product_List.php">
                                             <i class='bx bxs-store'></i>
                                             สินค้าทั้งหมด
                                         </a>
@@ -132,7 +135,7 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div>
                                     <small>
-                                        <a href="#">
+                                        <a href="product_Lower10.php">
                                             <i class='bx bx-error'></i>
                                             สินค้าต่ำกว่าเกณฑ์
                                         </a>
@@ -150,7 +153,7 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div>
                                     <small>
-                                        <a href="#">
+                                        <a href="product_Out_of_stock.php">
                                             <i class='bx bx-error-alt'></i>
                                             สินค้าหมดสต็อก
                                         </a>

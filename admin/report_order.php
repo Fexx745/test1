@@ -139,11 +139,11 @@ $row4 = mysqli_fetch_array($result4);
                             <a href="report_order.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
                             <a href="report_order_wait.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bx-car'></i>&nbsp;รอจัดส่ง</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-car'></i>&nbsp;รอจัดส่ง</button></a>
                             <a href="report_order_yes.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bx-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bxs-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
                             <a href="report_order_no.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;"><i class='bx bx-x-circle'></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;"><i class='bx bxs-x-circle'></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
                         </div>
 
                         <form name="form1" action="report_order.php" method="POST">
@@ -251,7 +251,7 @@ $row4 = mysqli_fetch_array($result4);
                                     <td>
 
                                         <a class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;" href="javascript:void(0);"
-                                            onclick="confirmOrder('<?= $row['orderID'] ?>')"><i class='bx bxs-check-circle'></i></a>
+                                            onclick="confirmOrder('<?= $row['orderID'] ?>')"><i class='bx bxs-car'></i></a>
                                         <a class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #dc3545 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;" href="javascript:void(0);"
                                             onclick="confirmCancelOrder('<?= $row['orderID'] ?>')"><i class='bx bxs-x-circle'></i></a>
 
@@ -327,8 +327,8 @@ $row4 = mysqli_fetch_array($result4);
 <script>
     function confirmOrder(id) {
         Swal.fire({
-            title: "Want to confirm your order?",
-            text: "คุณต้องการยืนยันคำสั่งซื้อ?",
+            title: "ปรับสถานะคำสั่งซื้อ",
+            text: "คุณต้องการเปลี่ยนสถานะคำสั่งซื้อนี้เป็น 'รอจัดส่ง' หรือไม่?",
             icon: "question",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -342,12 +342,11 @@ $row4 = mysqli_fetch_array($result4);
         });
     }
 </script>
-
 <script>
     function confirmCancelOrder(id) {
         Swal.fire({
-            title: "Want to cancel the order?",
-            text: "ต้องการยกเลิกคำสั่งซื้อหรือไม่?",
+            title: "ยกเลิกคำสั่งซื้อ",
+            text: "คุณต้องการยกเลิกคำสั่งซื้อนี้หรือไม่?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -362,6 +361,7 @@ $row4 = mysqli_fetch_array($result4);
     }
 </script>
 
+
 <?php
 if (isset($_SESSION['delete_order'])) {
 ?>
@@ -369,7 +369,7 @@ if (isset($_SESSION['delete_order'])) {
         Swal.fire({
             icon: "success",
             title: "ลบสำเร็จ!",
-            text: "Successfully deleted.",
+            text: "คำสั่งซื้อนี้ถูกลบเรียบร้อยแล้ว.",
             showConfirmButton: false,
             timer: 1000
         });

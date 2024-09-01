@@ -74,7 +74,9 @@ function getOrderStatus($status)
         case '1':
             return 'รอตรวจสอบ';
         case '2':
-            return 'ชำระเงินแล้ว';
+            return 'จัดส่งสำเร็จ';
+        case '3':
+            return 'รอจัดส่งสินค้า';
         default:
             return 'สถานะไม่ทราบ';
     }
@@ -131,6 +133,8 @@ function getOrderStatus($status)
                                             <div class="wait-status"><i class='bx bxs-time'></i>&nbsp;<?php echo getOrderStatus($order['order_status']); ?></div>
                                         <?php elseif ($order['order_status'] == '0') : ?>
                                             <div class="cancel-status"><i class='bx bxs-x-circle'></i>&nbsp;<?php echo getOrderStatus($order['order_status']); ?></div>
+                                        <?php elseif ($order['order_status'] == '3') : ?>
+                                            <div class="ship-status"><i class='bx bxs-car'></i>&nbsp;<?php echo getOrderStatus($order['order_status']); ?></div>
                                         <?php else : ?>
                                             <?php echo getOrderStatus($order['order_status']); ?>
                                         <?php endif; ?>

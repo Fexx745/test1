@@ -60,11 +60,13 @@ function getOrderStatus($status)
 {
     switch ($status) {
         case '0':
-            return 'ยกเลิก';
+            return 'ยกเลิกสั่งซื้อ';
         case '1':
             return 'รอตรวจสอบ';
         case '2':
-            return 'ชำระเงินแล้ว';
+            return 'จัดส่งสำเร็จ';
+        case '3':
+            return 'รอจัดส่งสินค้า';
         default:
             return 'สถานะไม่ทราบ';
     }

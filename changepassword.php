@@ -49,33 +49,33 @@ if (isset($_GET['id'])) {
                             value="<?= htmlspecialchars($_SESSION['user_id']); ?>" readonly>
                     </div>
                     <!-- Old Password -->
-                    <label for="old_psw">รหัสผ่านปัจจุบัน</label>
+                    <!-- <label for="old_psw">รหัสผ่านปัจจุบัน</label> -->
                     <div class="input-group mb-3">
                         <span class="input-group-text">
                             <i class="fas fa-lock"></i>
                         </span>
                         <input type="password" class="form-control" id="old_psw" name="old_psw"
-                            placeholder="กรุณากรอกรหัสผ่านปัจจุบัน">
+                            placeholder="รหัสผ่านปัจจุบัน">
                     </div>
 
                     <!-- New Password -->
-                    <label for="new_psw">รหัสผ่านใหม่</label>
+                    <!-- <label for="new_psw">รหัสผ่านใหม่</label> -->
                     <div class="input-group mb-3">
                         <span class="input-group-text">
                             <i class="fas fa-unlock-alt"></i>
                         </span>
                         <input type="password" class="form-control" id="new_psw" name="new_psw"
-                            placeholder="กรุณากรอกรหัสผ่านใหม่">
+                            placeholder="รหัสผ่านใหม่">
                     </div>
 
                     <!-- Confirm New Password -->
-                    <label for="confirm_new_psw">ยืนยันรหัสผ่านใหม่</label>
+                    <!-- <label for="confirm_new_psw">ยืนยันรหัสผ่านใหม่</label> -->
                     <div class="input-group mb-3">
                         <span class="input-group-text">
                             <i class="fas fa-unlock-alt"></i>
                         </span>
                         <input type="password" class="form-control" id="confirm_new_psw" name="confirm_new_psw"
-                            placeholder="กรุณายืนยันรหัสผ่านใหม่">
+                            placeholder="ยืนยันรหัสผ่านใหม่อีกครั้ง">
                     </div>
 
                     <div class="text-start my-4">

@@ -115,7 +115,7 @@ $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="show_account.php">
+                                <div><small><a href="member_List.php">
                                             <i class='bx bx-group'></i>
                                             จำนวนผู้ใช้งานบนเว็บไซต์</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>

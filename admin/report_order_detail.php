@@ -3,7 +3,7 @@ include('condb.php');
 session_start();
 if (!isset($_SESSION['username'])) {
     header('Location: ../login.php');
-    exit(); // คำสั่งออกจากการทำงานทันทีหลังจาก redirect
+    exit(); // Exit immediately after redirect
 }
 $idpd = $_GET['id'];
 
@@ -38,11 +38,11 @@ $parcel_number = $order['parcel_number'];
                             <a href="report_order.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
                             <a href="report_order_wait.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bx-car'></i>&nbsp;รอจัดส่ง</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-car'></i>&nbsp;รอจัดส่ง</button></a>
                             <a href="report_order_yes.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bx-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bxs-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
                             <a href="report_order_no.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;"><i class='bx bx-x-circle'></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;"><i class='bx bxs-x-circle'></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
                         </div>
                     </div>
                     <div class="container">
@@ -69,8 +69,15 @@ $parcel_number = $order['parcel_number'];
                                 WHERE d.orderID = '$idpd'
                                 ORDER BY p.p_id ASC";
                                 $result = mysqli_query($conn, $sql);
+
+                                $orderDetails = mysqli_fetch_assoc($result); // Fetch order details only once
+
+                                // Rewind result pointer to use it in the loop
+                                mysqli_data_seek($result, 0);
+
+                                $sum_total = 0;
                                 while ($row = mysqli_fetch_array($result)) {
-                                    $sum_total = $row['total_price'];
+                                    $sum_total += $row['Total']; // Accumulate total price
                                 ?>
                                     <tr>
                                         <td><?= $row['p_id'] ?></td>
@@ -79,6 +86,9 @@ $parcel_number = $order['parcel_number'];
                                         <td><?= $row['orderQty'] ?></td>
                                         <td><?= $row['Total'] ?></td>
                                     </tr>
+                                <?php
+                                }
+                                ?>
                             </tbody>
                         </table>
                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
@@ -87,13 +97,13 @@ $parcel_number = $order['parcel_number'];
                         </button><br><br>
                         <div class="my-2">
                             <b>เลขคำสั่งซื้อ</b>
-                            <span><?= $row['orderID'] ?></span>
+                            <span><?= $orderDetails['orderID'] ?></span>
                         </div>
                         <b>ที่อยู่ลูกค้า</b>
-                        <span><?= $row['address'] ?></span>
+                        <span><?= $orderDetails['address'] ?></span>
                         <div class="my-2">
                             <b>เบอร์โทรศัพท์</b>
-                            <span><?= $row['telephone'] ?></span>
+                            <span><?= $orderDetails['telephone'] ?></span>
                         </div>
                         <div class="my-4"><b>ราคารวมสุทธิ</b>
                             <span style="color: #ee4d2d; font-weight: bold; font-size: 18px;"><?= number_format($sum_total, 2) ?></span>
@@ -112,7 +122,7 @@ $parcel_number = $order['parcel_number'];
                                         </div>
                                         <div class="modal-body">
                                             <?php
-                                            $imagePath = "../assets/images/slip_images/" . $row['slip_image'];
+                                            $imagePath = "../assets/images/slip_images/" . $orderDetails['slip_image'];
                                             $noImg = "../assets/images/no_img.png";
                                             if (file_exists($imagePath)) {
                                                 echo "<img src=\"$imagePath\" alt=\"Slip Image\" class=\"img-fluid\">";
@@ -136,11 +146,10 @@ $parcel_number = $order['parcel_number'];
                 </div>
             </div>
         </main>
-    <?php
-                                }
-                                mysqli_close($conn);
-    ?>
-    <?php include('footer.php'); ?>
+        <?php
+        mysqli_close($conn);
+        ?>
+        <?php include('footer.php'); ?>
     </div>
 </body>
 

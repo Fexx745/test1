@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="assets/css/itemsDetail.css">
 <link rel="stylesheet" href="assets/css/view-container.css">
 
-
 <!-- Bootrap -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.bundle.min.js"> </script>

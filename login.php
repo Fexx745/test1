@@ -7,7 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>เข้าสู่ระบบเพื่อช้อปออนไลน์พร้อมรับดีลสุดพิเศษได้ที่นี่ | RMUTI</title>
-
+    <!-- Toastr.js
+    <link rel="stylesheet" href="assets/toastr-master/build/toastr.min.css">
+    <link rel="stylesheet" href="assets/toastr-master/build/toastr.min.js"> -->
+    <link rel="stylesheet" href="assets/css/nav-reg.css">
     <?php include('script-css.php'); ?>
 </head>
 

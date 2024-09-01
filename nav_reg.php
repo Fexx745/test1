@@ -11,10 +11,10 @@
 
     <body>
         <nav>
-            <a href="reg.php">
+            <a href="#">
                 <div class="nav-icon">
                     <i class="material-symbols-outlined">shopping_bag</i>
-                    <h3>RMUTI <span>สมัครสมาชิก</span></h3>
+                    <h3>RMUTI</h3><span>สมัครสมาชิก</span>
                 </div>
                 <div class="nav-help">
                     <a href="#">ต้องการความช่วยเหลือ?</a>

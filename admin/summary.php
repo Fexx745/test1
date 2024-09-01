@@ -181,7 +181,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                             </div>
                         </form>
                         <div class="mt-4" class="mb-2">
-                            <a href="index.php" class="btn btn-primary">ย้อนกลับ</a>
+                            <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
                         </div>
                     </div>
                 </div>
