@@ -22,7 +22,7 @@ $result3 = mysqli_query($conn, $sql3);
 $row3 = mysqli_fetch_array($result3);
 
 // //รายการสินค้าที่เหลือต่ำกว่า 10 ชิ้น
-$sql4 = "SELECT COUNT(p_id) as all_pd FROM product";
+$sql4 = "SELECT COUNT(orderID) as order_wait FROM tb_order WHERE order_status='3' ";
 $result4 = mysqli_query($conn, $sql4);
 $row4 = mysqli_fetch_array($result4);
 ?>
@@ -49,19 +49,6 @@ $row4 = mysqli_fetch_array($result4);
     <!-- Font -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-
-        * {
-            font-size: 16px;
-            font-family: 'K2D', sans-serif;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            /* ปรับตามความต้องการ */
-        }
-    </style>
 
 </head>
 
@@ -78,44 +65,44 @@ $row4 = mysqli_fetch_array($result4);
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4 dashboard-1">
-                            <div class="card-body">รายการสินค้าทั้งหมด<h4>
-                                    <?= $row4['all_pd'] ?>
+                            <div class="card-body">รายการคำสั่งซื้อที่รอตรวจสอบ<h4>
+                                    <?= $row['order_no'] ?>
                                 </h4>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="prd_show_product.php">
-                                            <i class='bx bxs-store'></i> สินค้าทั้งหมด</a></small></div>
+                                <div><small><a href="report_order.php">
+                                            <i class='bx bxs-store'></i> รอตรวจสอบ</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4 dashboard-2">
-                            <div class="card-body">รายการสั่งซื้อสินค้า (ยังไม่ชำระเงิน)<h4>
-                                    <?= $row['order_no'] ?>
+                            <div class="card-body">รายการคำสั่งซื้อที่รอจัดส่ง<h4>
+                                    <?= $row4['order_wait'] ?>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="report_order.php">
-                                            <i class='bx bxs-error-alt'></i> ยังไม่ชำระเงิน</a></small></div>
+                                <div><small><a href="report_order_wait.php">
+                                            <i class='bx bxs-car'></i> รอจัดส่งสินค้า</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4 dashboard-3">
-                            <div class="card-body">รายการสั่งซื้อสินค้า (ชำระเงินแล้ว)<h4>
+                            <div class="card-body">รายการคำสั่งซื้อที่จัดส่งสำเร็จ<h4>
                                     <?= $row3['order_yes'] ?>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div><small><a href="report_order_yes.php">
-                                            <i class='bx bxs-wallet'></i> ชำระเงินแล้ว</a></small></div>
+                                            <i class='bx bxs-wallet'></i> จัดส่งสำเร็จ</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4 dashboard-4">
-                            <div class="card-body">รายการสั่งซื้อสินค้า (ยกเลิก) 10 ชิ้น<h4>
+                            <div class="card-body">รายการที่ยกเลิกคำสั่งซื้อ<h4>
                                     <?= $row2['order_cancel'] ?>
                                 </h4>
                             </div>
@@ -243,14 +230,15 @@ $row4 = mysqli_fetch_array($result4);
 
                                     </td>
                                     <td>
-
-                                        <a href="report_order_detail.php?id=<?= $row['orderID'] ?>"
-                                            class="btn" style="background: linear-gradient(195deg, #6c757d 0%, #6c757d 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;"><i class='bx bx-message-detail'></i></a>
-
+                                        <button class="btn" style="background: linear-gradient(195deg, #0d6efd 0%, #0a58ca 100%); color: #fff; border: none; border-radius: 0.25rem;"
+                                            onclick="showOrderDetail('<?= $row['orderID'] ?>')">
+                                            <i class='bx bx-message-detail'></i>
+                                        </button>
                                     </td>
+
                                     <td>
 
-                                        <a class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;" href="javascript:void(0);"
+                                        <a class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;" href="javascript:void(0);"
                                             onclick="confirmOrder('<?= $row['orderID'] ?>')"><i class='bx bxs-car'></i></a>
                                         <a class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #dc3545 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;" href="javascript:void(0);"
                                             onclick="confirmCancelOrder('<?= $row['orderID'] ?>')"><i class='bx bxs-x-circle'></i></a>
@@ -273,6 +261,45 @@ $row4 = mysqli_fetch_array($result4);
             </div>
         </main>
     </div>
+    <script>
+        function showOrderDetail(orderID) {
+            $.ajax({
+                url: 'fetch_order_detail.php',
+                type: 'GET',
+                data: {
+                    id: orderID
+                },
+                success: function(data) {
+                    $('#modalContent').html(data);
+                    // Show the modal
+                    $('#orderDetailModal').modal('show');
+                },
+                error: function() {
+                    alert('เกิดข้อผิดพลาดในการดึงข้อมูลคำสั่งซื้อ');
+                }
+            });
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Modal Structure -->
+    <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderDetailModalLabel">รายละเอียดคำสั่งซื้อ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalContent">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

@@ -82,17 +82,8 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
-    <style>
-        * {
-            font-size: 16px;
-            font-family: 'K2D', sans-serif;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-    </style>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
@@ -108,62 +99,54 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                 </ol>
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #495057 0%, #191919 100%);">
+                        <div class="card text-white mb-4 dashboard-1">
                             <div class="card-body">ลูกค้า<h5>
                                     <?= $row1['customer'] ?> คน
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="show_account.php" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-group'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                <div><small><a href="show_account.php">
+                                            <i class='bx bx-group'></i>
                                             จำนวนผู้ใช้งานบนเว็บไซต์</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #fb8be9 0%, #D81B60 100%);">
+                        <div class="card text-white mb-4 dashboard-2">
                             <div class="card-body">ยอดขายวันนี้<h5>
                                     <?= number_format($total_sales_today, 2) ?> บาท
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-chart'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                <div><small><a href="#">
+                                            <i class='bx bx-chart'></i>
                                             ยอดขายวันนี้</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #71cdf5 0%, #0d6efd 100%);">
+                        <div class="card text-white mb-4 dashboard-3">
                             <div class="card-body">ยอดการสั่งซื้อวันนี้<h5>
                                     <?= ($order_today) ?> รายการ</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-cart'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                <div><small><a href="#">
+                                            <i class='bx bx-cart'></i>
                                             จำนวนการสั่งซื้อสินค้าวันนี้</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card text-white mb-4"
-                            style="background: linear-gradient(195deg, #79f679 0%, #198754 100%);">
+                        <div class="card text-white mb-4 dashboard-4">
                             <div class="card-body">ยอดขายเดือนนี้<h5>
                                     <?= number_format($total_sales_this_month, 2); ?> บาท
                                 </h5>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="#" style="text-decoration: none; color: white; font-size: 13px;">
-                                            <i class='bx bx-stats'
-                                                style="color: #fff; background: rgba(255, 255, 255, 0.3); padding: 7px; border-radius: 20%; font-size: 20px;"></i>
+                                <div><small><a href="#">
+                                            <i class='bx bx-stats'></i>
                                             ยอดขายเดือนนี้</a></small>
                                 </div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -223,7 +206,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                                             </tr>
                                         <?php } ?>
                                     </table>
-                                    <div class="alert mt-4" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff; border: none; outline: none;">
+                                    <div class="alert mt-4" style="background: linear-gradient(195deg, #f7fffe 0%, #f7fffe 100%); color: #333; border: 1px solid #00c300; outline: none;">
                                         <p>ตั้งแต่วันที่ <?php echo $dt1; ?> ถึงวันที่ <?php echo $dt2; ?> ยอดรวมสุทธิ</p>
                                         <strong style="font-size: 1.5rem;"><?php echo number_format($grand_total, 2); ?> บาท</strong>
                                     </div>
@@ -239,7 +222,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                             </div>
                         <?php } ?>
                         <div class="mt-3" class="mb-2">
-                            <a href="summary.php" class="btn btn-primary">ย้อนกลับ</a>
+                            <a href="summary.php" class="btn btn-dark">ย้อนกลับ</a>
                         </div>
                     </div>
                 </div>

@@ -22,7 +22,7 @@ $result3 = mysqli_query($conn, $sql3);
 $row3 = mysqli_fetch_array($result3);
 
 // //รายการสินค้าที่เหลือต่ำกว่า 10 ชิ้น
-$sql4 = "SELECT COUNT(p_id) as all_pd FROM product";
+$sql4 = "SELECT COUNT(orderID) as order_wait FROM tb_order WHERE order_status='3' ";
 $result4 = mysqli_query($conn, $sql4);
 $row4 = mysqli_fetch_array($result4);
 ?>
@@ -59,44 +59,44 @@ $row4 = mysqli_fetch_array($result4);
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4 dashboard-1">
-                            <div class="card-body">รายการสินค้าทั้งหมด<h4>
-                                    <?= $row4['all_pd'] ?>
+                            <div class="card-body">รายการคำสั่งซื้อที่รอตรวจสอบ<h4>
+                                    <?= $row['order_no'] ?>
                                 </h4>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="prd_show_product.php">
-                                            <i class='bx bxs-store'></i> สินค้าทั้งหมด</a></small></div>
+                                <div><small><a href="report_order.php">
+                                            <i class='bx bxs-store'></i> รอตรวจสอบ</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4 dashboard-2">
-                            <div class="card-body">รายการสั่งซื้อสินค้า (ยังไม่ชำระเงิน)<h4>
-                                    <?= $row['order_no'] ?>
+                            <div class="card-body">รายการคำสั่งซื้อที่รอจัดส่ง<h4>
+                                    <?= $row4['order_wait'] ?>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div><small><a href="report_order.php">
-                                            <i class='bx bxs-error-alt'></i> ยังไม่ชำระเงิน</a></small></div>
+                                <div><small><a href="report_order_wait.php">
+                                            <i class='bx bxs-car'></i> รอจัดส่งสินค้า</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4 dashboard-3">
-                            <div class="card-body">รายการสั่งซื้อสินค้า (ชำระเงินแล้ว)<h4>
+                            <div class="card-body">รายการคำสั่งซื้อที่จัดส่งสำเร็จ<h4>
                                     <?= $row3['order_yes'] ?>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div><small><a href="report_order_yes.php">
-                                            <i class='bx bxs-wallet'></i> ชำระเงินแล้ว</a></small></div>
+                                            <i class='bx bxs-wallet'></i> จัดส่งสำเร็จ</a></small></div>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card text-white mb-4 dashboard-4">
-                            <div class="card-body">รายการสั่งซื้อสินค้า (ยกเลิก) 10 ชิ้น<h4>
+                            <div class="card-body">รายการที่ยกเลิกคำสั่งซื้อ<h4>
                                     <?= $row2['order_cancel'] ?>
                                 </h4>
                             </div>
@@ -109,6 +109,7 @@ $row4 = mysqli_fetch_array($result4);
                         </div>
                     </div>
                 </div>
+
 
 
 
@@ -205,7 +206,7 @@ $row4 = mysqli_fetch_array($result4);
                                     </td>
                                     <td>
                                         <a href="report_order_detailShipping.php?id=<?= $row['orderID'] ?>"
-                                        class="btn" style="background: linear-gradient(195deg, #6c757d 0%, #6c757d 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;"><i class='bx bx-message-detail'></i></a>
+                                        class="btn" style="background: linear-gradient(195deg, #000 0%, #000 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;"><i class='bx bx-message-detail'></i></a>
                                     </td>
                                 </tr>
                             <?php

@@ -72,7 +72,35 @@ while ($row7 = mysqli_fetch_array($result7)) {
 $max_sales = max($daily_sales);
 $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
 
+// Fetch best-selling products of the month
+$sql8 = "
+SELECT 
+    p.p_name AS product_name, 
+    SUM(od.orderQty) AS total_quantity 
+FROM tb_order_detail od
+JOIN product p ON od.p_id = p.p_id
+JOIN tb_order ord ON od.orderID = ord.orderID
+WHERE MONTH(ord.reg) = MONTH(CURDATE())
+AND YEAR(ord.reg) = YEAR(CURDATE())
+GROUP BY p.p_name
+ORDER BY total_quantity DESC
+LIMIT 5;
+";
 
+$result8 = mysqli_query($conn, $sql8);
+
+if (!$result8) {
+    die('Error executing query: ' . mysqli_error($conn));
+}
+
+$best_selling_products = [];
+$product_names = [];
+$product_quantities = [];
+
+while ($row8 = mysqli_fetch_assoc($result8)) {
+    $product_names[] = $row8['product_name'];
+    $product_quantities[] = $row8['total_quantity'];
+}
 
 ?>
 
@@ -211,6 +239,96 @@ $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
 
 
                 <div class="row mt-5">
+
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-line me-1"></i>
+                                <b>รายงานยอดขายในแต่ละเดือน</b>
+                            </div>
+                            <div class="card-body"><canvas id="data_sale" width="100%" height="40"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-shopping-cart me-1"></i>
+
+                                <b>10 อันดับสินค้าขายดีที่สุดเดือนนี้</b>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="monthpd" width="100%" height="40"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const ctx = document.getElementById('monthpd').getContext('2d');
+
+                            // Pass PHP data to JavaScript
+                            const productNames = <?php echo json_encode($product_names); ?>;
+                            const productQuantities = <?php echo json_encode($product_quantities); ?>;
+
+                            console.log('Product Names:', productNames); // For debugging
+                            console.log('Product Quantities:', productQuantities); // For debugging
+
+                            new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels: productNames,
+                                    datasets: [{
+                                        label: 'ยอดขายเดือนนี้',
+                                        data: productQuantities,
+                                        backgroundColor: [
+                                            '#FFECB3', // Light Yellow
+                                            '#C8E6C9', // Light Green
+                                            '#FFCCBC', // Light Orange
+                                            '#C5CAE9', // Light Blue
+                                            '#F8BBD0', // Light Pink
+                                            '#B2EBF2', // Light Cyan
+                                            '#E1BEE7', // Light Purple
+                                            '#FFE0B2', // Light Orange
+                                            '#DCEDC8', // Light Green
+                                            '#B2DFDB', // Light Teal
+                                            '#FFF9C4', // Light Yellow
+                                            '#F0F4C3' // Light Lime
+                                        ],
+                                        borderColor: '#fff',
+                                        hoverBackgroundColor: [
+                                            '#FFD740', // Soft Yellow
+                                            '#A5D6A7', // Soft Green
+                                            '#FFAB91', // Soft Orange
+                                            '#9FA8DA', // Soft Blue
+                                            '#F48FB1', // Soft Pink
+                                            '#80DEEA', // Soft Cyan
+                                            '#CE93D8', // Soft Purple
+                                            '#FFCC80', // Soft Orange
+                                            '#C5E1A5', // Soft Green
+                                            '#80CBC4', // Soft Teal
+                                            '#FFF59D', // Soft Yellow
+                                            '#E6EE9C' // Soft Lime
+                                        ],
+                                        hoverBorderColor: '#e5e5e5',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    scales: {
+                                        x: {
+                                            beginAtZero: true
+                                        },
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    </script>
+
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
@@ -271,15 +389,6 @@ $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
                     ?>
 
 
-                    <div class="col-xl-6">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-dollar-sign me-1"></i>
-                                <b>รายงานยอดขายในแต่ละเดือน</b>
-                            </div>
-                            <div class="card-body"><canvas id="data_sale" width="100%" height="40"></canvas></div>
-                        </div>
-                    </div>
                 </div>
         </main>
 
@@ -302,110 +411,7 @@ $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
 
 
 <!-- Chart -->
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/Chart.min.js"></script>
-<script>
-    $(document).ready(function() {
-        updateSalesChart();
-    });
-
-    function updateSalesChart() {
-        var salesDates = <?php echo json_encode($sales_dates); ?>;
-        var dailySales = <?php echo json_encode($daily_sales); ?>;
-        var maxSales = <?php echo json_encode($max_sales); ?>;
-        var maxSalesDate = <?php echo json_encode($max_sales_date); ?>;
-
-        var backgroundColors = salesDates.map(function(date) {
-            return date === maxSalesDate ? '#eda500' : '#ffc107';
-        });
-
-        var chartData = {
-            labels: salesDates,
-            datasets: [{
-                label: 'ยอดขายรายวัน',
-                backgroundColor: backgroundColors,
-                borderColor: '#000',
-                data: dailySales
-            }]
-        };
-
-        var ctx = document.getElementById("salesChart").getContext("2d");
-        new Chart(ctx, {
-            type: 'bar',
-            data: chartData,
-            options: {
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                var label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                label += new Intl.NumberFormat().format(context.raw);
-                                return label;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-</script>
-
-</script>
-<script>
-    $(document).ready(function() {
-        showGraph1();
-    });
-
-
-    function showGraph1() {
-        {
-            $.post("data_sale.php",
-                function(data) {
-                    console.log(data);
-                    var name = [];
-                    var marks = [];
-
-                    for (var i in data) {
-                        name.push(data[i].reg_month);
-                        marks.push(data[i].sumTotal);
-                    }
-
-                    var chartdata = {
-                        labels: name,
-                        datasets: [{
-                            label: 'ยอดขายในแต่ละเดือน',
-                            backgroundColor: '#ffc107',
-                            borderColor: '#000',
-                            hoverBackgroundColor: '#eda500',
-                            hoverBorderColor: '#000',
-                            data: marks
-                        }]
-                    };
-
-                    var graphTarget = $("#data_sale");
-
-                    var barGraph = new Chart(graphTarget, {
-                        type: 'pie',
-                        data: chartdata
-                    });
-                });
-        }
-    }
-</script>
+<?php include('Chart.php'); ?>
 
 <!-- Your PHP code -->
 <?php

@@ -192,9 +192,7 @@ if (!isset($_SESSION['inPro'])) {
 </body>
 
 </html>
-<?php
-if (isset($_SESSION['cart-success'])) {
-?>
+<?php if (isset($_SESSION['cart-success'])): ?>
     <script>
         Swal.fire({
             icon: "success",
@@ -202,39 +200,23 @@ if (isset($_SESSION['cart-success'])) {
             text: "ขอบคุณสำหรับการสั่งซื้อ",
             showConfirmButton: false,
             timer: 1500
-        }).then(function() {
-            window.location.href = 'product_Detail.php?orderID=<?= $_SESSION['order_id'] ?>';
-        });
+        }).then(() => window.location.href = 'product_Order_detail.php?orderID=<?= $_SESSION['order_id'] ?>');
+        <?php unset($_SESSION['cart-success']); ?>
     </script>
+<?php endif; ?>
 
-<?php
-    unset($_SESSION['cart-success']);
-}
-?>
-
-
-<!-- upload_error -->
-<?php
-if (isset($_SESSION['upload_error'])) {
-?>
+<?php if (isset($_SESSION['upload_error'])): ?>
     <script>
         Swal.fire({
             icon: "info",
             title: "ข้อผิดพลาดในการอัปโหลดไฟล์!",
-            text: "<?php echo $_SESSION['upload_error']; ?>",
+            text: "<?= $_SESSION['upload_error'] ?>",
             showConfirmButton: true,
             timer: 5000
-        }).then(function() {
-            window.location.href = 'cart.php';
-        });
+        }).then(() => window.location.href = 'cart.php');
+        <?php unset($_SESSION['upload_error']); ?>
     </script>
-
-<?php
-    unset($_SESSION['upload_error']);
-}
-?>
-
-?>
+<?php endif; ?>
 
 <script>
     function confirmDeleteCart(Line) {
@@ -247,7 +229,7 @@ if (isset($_SESSION['upload_error'])) {
             cancelButtonColor: "#d33",
             confirmButtonText: "ตกลง",
             cancelButtonText: "ยกเลิก"
-        }).then((result) => {
+        }).then(result => {
             if (result.isConfirmed) {
                 window.location.href = `cart_delete.php?Line=${Line}`;
             }
@@ -255,15 +237,11 @@ if (isset($_SESSION['upload_error'])) {
     }
 
     function updateCartCount() {
-        $.ajax({
-            url: 'get_cart_count.php',
-            type: 'GET',
-            success: function(count) {
-                // Display the cart count on the page
-                $('#cart-count-display').text('(' + count + ')');
-            }
+        $.get('get_cart_count.php', count => {
+            $('#cart-count-display').text(`(${count})`);
         });
     }
+
     updateCartCount();
     setInterval(updateCartCount, 5000);
 </script>

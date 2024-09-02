@@ -280,7 +280,7 @@
 
     .btn-buy {
         /* background: linear-gradient(195deg, #fd7e14 0%, #ffc107 100%); */
-        background: linear-gradient(195deg, #198754 0%, #30b566 100%);
+        background: linear-gradient(195deg, #ee4d2d 0%, #ee4d2d 100%);
         color: #fff;
         font-size: 1rem;
         border: none;
@@ -288,7 +288,7 @@
 
     .btn-cart {
         background: #fefbfb;
-        border: 1px solid var(--bs-green);
+        border: 1px solid #ee4d2d;
         margin-right: 10px;
         font-size: 15px;
         font-weight: 600;
