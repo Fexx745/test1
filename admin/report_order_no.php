@@ -112,6 +112,7 @@ $row4 = mysqli_fetch_array($result4);
 
                 <div class="card mb-4">
                     <div class="card-header">
+                        <?php include('report_tutorial.php'); ?>
                         <i class='bx bxs-x-circle'></i>
                         แสดงข้อมูลการสั่งซื้อสินค้า (ยกเลิกคำสั่งซื้อ)
 

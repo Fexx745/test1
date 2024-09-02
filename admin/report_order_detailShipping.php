@@ -30,6 +30,7 @@ $parcel_number = $order['parcel_number'];
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
+                        <?php include('report_tutorial.php'); ?>
                         <i class='bx bxs-time-five'></i>
                         แสดงรายละเอียดคำสั่งซื้อ
                         <div class="mt-3 mb-3">
