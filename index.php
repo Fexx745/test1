@@ -1,5 +1,5 @@
 <?php
-// เริ่มต้น session
+session_start();
 include('condb.php');
 ?>
 
@@ -10,6 +10,8 @@ include('condb.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สวัสดี</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/js/bootstrap.bundle.min.js"> </script>
     <?php include('script-css.php'); ?>
 </head>
 <?php include('nav.php'); ?>
@@ -157,7 +159,7 @@ if (isset($_SESSION['reg_success'])) {
 
 <?php
 if (isset($_SESSION['psw_suc'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -168,7 +170,7 @@ if (isset($_SESSION['psw_suc'])) {
             timer: 1500
         })
     </script>
-    <?php
+<?php
     unset($_SESSION['psw_suc']);
 }
 ?>

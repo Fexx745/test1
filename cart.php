@@ -34,7 +34,7 @@ if (!isset($_SESSION['inPro'])) {
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap/js/bootstrap.bundle.min.js"> </script>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
-    <title>Cart</title>
+    <title>เว็บไซต์ขา</title>
 </head>
 
 <body>

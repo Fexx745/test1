@@ -6,178 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
     <link rel="stylesheet" href="./assets/css/nav.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        /* ซ่อนเมนูตั้งแต่แรกด้วย CSS */
-        #navUserToggle {
-            display: none;
-        }
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 
-        #cartShopToggle {
-            display: none;
-        }
-        
-    </style>
 </head>
 
 <body>
-    <nav>
-        <div class="nav-container">
-            <!-- Burger Icon -->
-            <?php
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-            if (isset($_SESSION['username'])) {
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="logo" href="index.php">SHOP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #e5e5e5;" href="index.php"><i class='bx bxs-home'></i> หน้าหลัก</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #e5e5e5;" href="#"><i class='bx bxs-phone-call'></i> ติดต่อ</a>
+                    </li>
+                </ul>
+                <form class="d-flex me-3 position-relative" action="index_search.php" method="POST">
+                    <input class="form-control me-2" type="search" placeholder="ค้นหาชื่อสินค้า..." id="search" name="search" autocomplete="off" required>
+                    <button class="btn btn-outline-success" type="submit" name="submit" style="width: 50px; padding: 10px; border: none; background-color: #333; color: #dfdfdf; border-radius: 0 5px 5px 0; cursor: pointer; font-size: 16px;">
+                        <i class='bx bx-search-alt'></i>
+                    </button>
+                    <div class="list-group position-absolute w-100" id="show-list" style="z-index: 1000;"></div>
+                </form>
+
+                <?php
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+                if (isset($_SESSION['username'])) {
                 ?>
-                <!-- if login -->
-                <div class="nav-top">
-                    <div class="nav-top-contract">
-                        <ul>
-                            <li><a href="index.php"><i class='bx bxs-home'></i> หน้าหลัก</a></li>
-                            <li><a href=""><i class='bx bxs-phone-call'></i> ติดต่อ</a></li>
+                    <!-- Logged in -->
+                    <div class="dropdown ms-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="background: linear-gradient(#ee2c4a, #dc3545); color: #fff; border: none; box-shadow: 0 3px 5px rgba(0, 0, 0, .4);">
+                            <img src="assets/images/other/profile.png" alt="" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
+                            <?php echo $_SESSION['fname']; ?>
+                        </button>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="editProfile.php?id=<?php echo $_SESSION['user_id']; ?>">
+                                    <i class='bx bx-cog'></i> ตั้งค่าผู้ใช้
+                                </a></li>
+                            <li><a class="dropdown-item" href="cart.php">
+                                    <i class='bx bx-cart'></i> ตะกร้าสินค้า
+                                </a></li>
+                            <li><a class="dropdown-item" href="logout.php" onclick="confirmLogout(event)">
+                                    <i class='bx bx-log-out'></i> ออกจากระบบ
+                                </a></li>
+
                         </ul>
                     </div>
-                    <div class="nav-top-user">
-                        <div class="nav-top-user-profile">
-                            <img src="assets/images/other/User-Profile-PNG.png" alt="">
-                        </div>
-                        <p id="navToggleProfile"><?php echo $_SESSION['fname'] . " " . $_SESSION['lname']; ?> <i
-                                class='bx bxs-chevron-down'></i></p>
-                        <div id="navUserToggle" class="nav-top-user-toggle">
-                            <ul>
-                                <li><a href="edit-profile.php?id=<?php echo $_SESSION['user_id']; ?>">ตั้งค่าผู้ใช้</a></li>
-                                <li><a href="cart.php">การซื้อของฉัน</a></li>
-                                <li><a href="logout.php" onclick="confirmLogout(event)">ออกจากระบบ</a></li>
-                            </ul>
-                        </div>
-
+                <?php } else { ?>
+                    <!-- Not logged in -->
+                    <div class="dropdown my-3">
+                        <a href="#" class="btn ms-2" style="background: #eda500; color: #fff;" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a>
+                        <a href="reg.php" class="btn ms-2" style="background: #30b566; color: #fff;">สมัครสมาชิก</a>
                     </div>
-                </div>
-                <div class="nav-bottom">
-                    <div class="nav-bottom-logo">
-                        <a href="index.php">SHOP</a>
-                    </div>
-                    <div class="nav-bottom-search">
-                        <form action="index_search.php" method="POST" class="nav-bottom-search" style="position: relative;">
-                            <input type="text" placeholder="Search..." id="search" name="search" autocomplete="off"
-                                required>
-                            <button type="submit" name="submit"><i class='bx bx-search-alt'></i></button>
-                            <div class="list-group" id="show-list"></div>
-                        </form>
-                        <div class="col-md-5">
-                            <div class="list-group" style="position: absolute; width: 490px;" id="show-list"></div>
-                        </div>
-                    </div>
-                    <div class="nav-bottom-cart">
-                        <div id="cartShop" class="cart-shop">
-                            <div class="cart-count" id="cart-count">
-                                <?php
-                                if (isset($_SESSION['inPro']) && $_SESSION['inPro'] > 0) {
-                                    echo $_SESSION['inPro'];
-                                } else {
-                                    echo "0";
-                                }
-                                ?>
-                            </div>
-                            <i class='bx bx-cart-alt'></i>
-                            <div id="cartShopToggle" class="cart-shop-toggle">
-                                <div class="cart-shop-toggle-header">
-                                    <p>สินค้าที่เพิ่งเพิ่มเข้าไป</p>
-                                </div>
-                                <?php
-                                $hasItems = false;
-                                $totalPrice = 0;
-                                $itemCount = 0; // ตัวนับจำนวนรายการสินค้า
-                                if (isset($_SESSION["intLine"])) {
-                                    for ($i = 0; $i <= (int) $_SESSION["intLine"]; $i++) {
-                                        if (($_SESSION["strProductID"][$i]) != "") {
-                                            $sql1 = "SELECT product.*, price_history.* 
-                    FROM product 
-                    LEFT JOIN price_history ON product.p_id = price_history.p_id 
-                    WHERE product.p_id = '" . $_SESSION["strProductID"][$i] . "'";
-                                            $result1 = mysqli_query($conn, $sql1);
-                                            $row_product = mysqli_fetch_array($result1);
-                                            $hasItems = true;
-                                            $total = $_SESSION["strQty"][$i] * $row_product['price'];
-                                            $totalPrice += $total;
-                                            $itemCount++; // เพิ่มจำนวนรายการสินค้า
-                                            if ($itemCount <= 3) { // แสดงแค่ 3 รายการสินค้า
-                                                ?>
-                                                <div class="cart-shop-toggle-items">
-                                                    <div class="cart-shop-toggle-items-img">
-                                                        <img src="assets/images/product/<?= $row_product['image'] ?>" alt="">
-                                                    </div>
-                                                    <p><?= $_SESSION["strQty"][$i] ?> ชิ้น</p>
-                                                    <p><?= number_format($total, 2) ?> บาท</p>
-                                                </div>
-                                                <?php
-                                            }
-                                        }
-                                    }
-                                }
-                                if (!$hasItems) {
-                                    echo "<p>ไม่มีสินค้าในตะกร้า ...</p>";
-                                } else {
-                                    ?>
-                                    <?php if ($itemCount >= 1) { // แสดงปุ่ม "ไปที่ตะกร้า" ถ้ามีสินค้ามากกว่า 3 รายการ 
-                                                    ?>
-                                        <div class="cart-shop-toggle-items-gotocart">
-                                            <p><?= $itemCount ?> สินค้าเพิ่มเติมในรถเข็น</p>
-                                            <a href="cart.php" class="btn-cart">ดูรถเข็นของคุณ</a>
-                                        </div>
-                                    <?php } ?>
-                                    <div class="cart-shop-toggle-items-totalprice">
-                                        <p>ราคารวมสุทธิ:</p>
-                                        <p><?= number_format($totalPrice, 2) ?> บาท</p>
-                                    </div>
-                                    <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                <?php } ?>
             </div>
-        <?php } else { ?>
-            <!-- if not login -->
-            <div class="nav-top">
-                <div class="nav-top-contract">
-                    <ul>
-                        <li><a href="index.php"><i class='bx bxs-home'></i> หน้าหลัก</a></li>
-                        <li><a href=""><i class='bx bxs-phone-call'></i> ติดต่อ</a></li>
-                    </ul>
-                </div>
-                <div class="nav-top-user">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a>
-                    <a href="reg.php">สมัครสมาชิก</a>
-                    <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">สมัครสมาชิก</a> -->
-                </div>
-            </div>
-            <div class="nav-bottom">
-                <div class="nav-bottom-logo">
-                    <a href="index.php">SHOP</a>
-                </div>
-                <div class="nav-bottom-search">
-                    <form action="index_search.php" method="POST" class="nav-bottom-search" style="position: relative;">
-                        <input type="text" placeholder="Search..." id="search" name="search" autocomplete="off" required>
-                        <button type="submit" name="submit"><i class='bx bx-search-alt'></i></button>
-                        <div class="list-group" id="show-list"></div>
-                    </form>
-                    <div class="col-md-5">
-                        <div class="list-group" style="position: absolute; width: 490px;" id="show-list"></div>
-                    </div>
-                </div>
-                <div class="nav-bottom-cart">
-                    <div class="cart-shop">
-                        <i class='bx bxs-cart-alt'></i>
-                    </div>
-                </div>
-            </div>
-            <?php
-            }
-            ?>
         </div>
     </nav>
 
@@ -204,13 +99,13 @@
 
                         <div class="d-flex justify-content-between mb-3 align-items-center">
                             <a href="forgot.php" id="forgotpsw" class="mt-2"
-                                style="text-decoration: none; color: #0d6efd; font-size: 14px;">ลืมรหัสผ่าน ?</a>
+                                style="text-decoration: none; color: #30b566; font-size: 14px;">ลืมรหัสผ่าน ?</a>
                             <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon"
                                     class="material-symbols-outlined"
                                     style="color: #333; font-size: 18px;">visibility_off</span></a>
                         </div>
                         <div class="d-grid">
-                            <button class="btn" type="submit" style="background: #ee2c4a; color: #fff;">Login</button>
+                            <button class="btn" type="submit" style="background: #eda500; color: #fff;">Login</button>
                         </div>
                     </form>
                 </div>
@@ -218,13 +113,6 @@
         </div>
     </div>
 
-
-    <script>
-        // Burger Menu Toggle Script
-        document.getElementById("burger-menu").addEventListener("click", function () {
-            document.querySelector(".nav-container").classList.toggle("active");
-        });
-    </script>
 
     <script>
         function validatePasswords() {
@@ -264,24 +152,24 @@
     <script src="search.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#navUserToggle").hide();
             $("#cartShopToggle").hide();
 
-            $("#navToggleProfile").click(function () {
+            $("#navToggleProfile").click(function() {
                 $("#navUserToggle").slideToggle();
             });
-            $("#navUserToggle").mouseleave(function () {
+            $("#navUserToggle").mouseleave(function() {
                 $(this).slideUp();
             });
 
             // เช็คว่ามีสินค้าในตะกร้าหรือไม่
             // if ($(".cart-count").text().trim() !== "0") {
-            $("#cartShop").click(function () {
+            $("#cartShop").click(function() {
                 $("#cartShopToggle").slideDown();
             });
 
-            $("#cartShopToggle").mouseleave(function () {
+            $("#cartShopToggle").mouseleave(function() {
                 $(this).slideUp();
             });
             // }
@@ -351,7 +239,7 @@
 
     <?php
     if (isset($_SESSION['psw_suc'])) {
-        ?>
+    ?>
         <script>
             Swal.fire({
                 icon: "success",
@@ -361,7 +249,7 @@
                 timer: 1500
             })
         </script>
-        <?php
+    <?php
         unset($_SESSION['psw_suc']);
     }
     ?>

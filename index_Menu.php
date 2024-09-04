@@ -16,14 +16,11 @@
             <li><a href="changepassword.php?id=<?php echo $_SESSION['user_id']; ?>"><span class="material-symbols-outlined">
                         vpn_key
                     </span>&nbsp;เปลี่ยนรหัสผ่าน</a></li>
-            <!-- <li><a href="cart.php"><i class='bx bx-cart'></i>&nbsp;ตะกร้าสินค้า</a></li> -->
-            <!-- <li><a href="logout.php"><i class='bx bx-log-out'></i>&nbsp;ออกจากระบบ</a></li> -->
 
         <?php } else { ?>
 
-            <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">เข้าสู่ระบบ</a></li>
-            <li><a href="reg.php">สมัครสมาชิก</a></li>
-            <!-- <li><a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">สมัครสมาชิก</a></li> -->
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"><i class='bx bx-log-in'></i>&nbsp;เข้าสู่ระบบ</a></li>
+            <li><a href="reg.php"><i class='bx bx-user-plus'></i>&nbsp;สมัครสมาชิก</a></li>
             <?php
         } ?>
     </ul>
