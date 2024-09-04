@@ -45,14 +45,14 @@ $row = mysqli_fetch_array($result);
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class='bx bxs-car'></i>
+                        <i class='bx bxs-truck'></i>
                         ข้อมูลการส่งสินค้า
                     </div>
                     <div class="card-body">
                         <h3 class="alert alert-primary">เพิ่มขนส่ง</h3>
                         <form method="POST" action="shipping_insert.php" enctype="multipart/form-data">
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bxs-car'></i></span>
+                                <span class="input-group-text"><i class='bx bxs-truck'></i></span>
                                 <input type="text" class="form-control" name="shipping_name" placeholder="ชื่อขนส่ง" required>
                             </div>
                             <div class="mt-4" class="mb-2">
@@ -118,7 +118,7 @@ if (isset($_SESSION['addshipping'])) {
             // position: "top-center",
             icon: "success",
             title: "เพิ่มขนส่งสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>เพิ่มขนส่งสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -156,7 +156,7 @@ if (isset($_SESSION['editunit'])) {
             // position: "top-center",
             icon: "success",
             title: "แก้ไขสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>แก้ไขสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -174,7 +174,7 @@ if (isset($_SESSION['deleteshipping'])) {
         Swal.fire({
             icon: "success",
             title: "ลบสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>ลบสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -185,19 +185,19 @@ if (isset($_SESSION['deleteshipping'])) {
 ?>
 
 <?php
-if (isset($_SESSION['error_unit_delete'])) {
+if (isset($_SESSION['error_shipping_delete'])) {
 ?>
     <script>
         Swal.fire({
             icon: "warning",
             title: "ลบไม่สำเร็จ!",
-            text: "มีหน่วยสินค้านี้ในสินค้าอยู่",
+            footer: "<span style='color: #ee2c4a'>มีหน่วยสินค้านี้ในสินค้าอยู่</span>",
             showConfirmButton: false,
             timer: 1500
         });
     </script>
 <?php
-    unset($_SESSION['error_unit_delete']);
+    unset($_SESSION['error_shipping_delete']);
 }
 ?>
 

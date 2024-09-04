@@ -119,7 +119,7 @@ if (isset($_SESSION['addunit'])) {
             // position: "top-center",
             icon: "success",
             title: "เพิ่มหน่วยสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>เพิ่มหน่วยสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -133,13 +133,13 @@ if (isset($_SESSION['addunit'])) {
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "ต้องการลบสินค้าช้านี้?",
-            text: "กดยืนยันเพื่อยินยอมในการลบสินค้า",
+            title: "คุณแน่ใจหรือไม่?",
+            text: "คุณต้องการลบหน่วยสินค้านี้หรือไม่?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ยืนยัน",
+            confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -157,7 +157,7 @@ if (isset($_SESSION['editunit'])) {
             // position: "top-center",
             icon: "success",
             title: "แก้ไขสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>แก้ไขหน่วยสินค้าสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -175,7 +175,7 @@ if (isset($_SESSION['deleteunit'])) {
         Swal.fire({
             icon: "success",
             title: "ลบสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>ลบหน่วยสินค้าสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -192,7 +192,7 @@ if (isset($_SESSION['error_unit_delete'])) {
         Swal.fire({
             icon: "warning",
             title: "ลบไม่สำเร็จ!",
-            text: "มีหน่วยสินค้านี้ในสินค้าอยู่",
+            footer: "<span style='color: #ee2c4a'>มีหน่วยสินค้านี้ในสินค้าอยู่</span>",
             showConfirmButton: false,
             timer: 1500
         });

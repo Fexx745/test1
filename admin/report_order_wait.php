@@ -115,7 +115,7 @@ $row4 = mysqli_fetch_array($result4);
 
                 <div class="card mb-4">
                     <div class="card-header">
-                    <?php include('report_tutorial.php'); ?>
+                        <?php include('report_tutorial.php'); ?>
                         <i class='bx bxs-car'></i>
                         แสดงข้อมูลสินค้าที่รอการจัดส่ง
 
@@ -123,7 +123,7 @@ $row4 = mysqli_fetch_array($result4);
                             <a href="report_order.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
                             <a href="report_order_wait.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-car'></i>&nbsp;รอจัดส่ง</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-truck'></i>&nbsp;รอจัดส่ง</button></a>
                             <a href="report_order_yes.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bxs-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
                             <a href="report_order_no.php"><button type="button"
@@ -193,21 +193,21 @@ $row4 = mysqli_fetch_array($result4);
                                         <?= $row['reg'] ?>
                                     </td>
                                     <td>
-                                            <?php
-                                            if ($status == 1) {
-                                                echo "<b style='color: blue;'>ยังไม่ชำระเงิน</b>";
-                                            } else if ($status == 2) {
-                                                echo "<strong><i class='bx bx-check'></i>&nbsp;จัดส่งสำเร็จแล้ว</strong>";
-                                            } else if ($status == 3) {
-                                                echo "<strong><i class='bx bxs-car'></i>&nbsp;รอการจัดส่ง</strong>";
-                                            } else if ($status == 0) {
-                                                echo "<b style='color: red;'>ยกเลิกการสั่งซื้อ</b>";
-                                            }
-                                            ?>
+                                        <?php
+                                        if ($status == 1) {
+                                            echo "<b style='color: blue;'>ยังไม่ชำระเงิน</b>";
+                                        } else if ($status == 2) {
+                                            echo "<strong><i class='bx bx-check'></i>&nbsp;จัดส่งสำเร็จแล้ว</strong>";
+                                        } else if ($status == 3) {
+                                            echo "<strong><i class='bx bxs-car'></i>&nbsp;รอการจัดส่ง</strong>";
+                                        } else if ($status == 0) {
+                                            echo "<b style='color: red;'>ยกเลิกการสั่งซื้อ</b>";
+                                        }
+                                        ?>
                                     </td>
                                     <td>
                                         <a href="report_order_detailShipping.php?id=<?= $row['orderID'] ?>"
-                                        class="btn" style="background: linear-gradient(195deg, #000 0%, #000 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;"><i class='bx bx-message-detail'></i></a>
+                                            class="btn" style="background: linear-gradient(195deg, #fff3cd 0%, #fff3cd 100%); color: #333; border: 1px solid #e5e5e5; border-radius: 0.25rem;"><i class='bx bx-message-detail'></i></a>
                                     </td>
                                 </tr>
                             <?php
@@ -243,10 +243,10 @@ if (isset($_SESSION['confirmOrder'])) {
     <script>
         Swal.fire({
             icon: "success",
-            title: "ยืนยันคำสั่งซื้อสำเร็จ เตรียมจัดส่ง...!",
-            text: "Order confirm successfully",
+            title: "ยืนยันคำสั่งซื้อสำเร็จ!",
+            footer: '<span style="color: #00c300;">อยู่ในสถานะรอจัดส่งสินค้า..</span>',
             showConfirmButton: false,
-            timer: 1500
+            timer: 3000
         });
     </script>
 <?php

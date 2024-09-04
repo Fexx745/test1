@@ -203,14 +203,14 @@
                         </div>
 
                         <div class="d-flex justify-content-between mb-3 align-items-center">
-                            <a href="forgot-form.php" id="forgotpsw" class="mt-2"
-                                style="text-decoration: none; color: #00C300; font-size: 14px;">ลืมรหัสผ่าน ?</a>
+                            <a href="forgot.php" id="forgotpsw" class="mt-2"
+                                style="text-decoration: none; color: #0d6efd; font-size: 14px;">ลืมรหัสผ่าน ?</a>
                             <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon"
                                     class="material-symbols-outlined"
-                                    style="color: #000; font-size: 18px;">visibility_off</span></a>
+                                    style="color: #333; font-size: 18px;">visibility_off</span></a>
                         </div>
                         <div class="d-grid">
-                            <button class="btn" type="submit" style="background: #00C300; color: #fff;">Login</button>
+                            <button class="btn" type="submit" style="background: #ee2c4a; color: #fff;">Login</button>
                         </div>
                     </form>
                 </div>

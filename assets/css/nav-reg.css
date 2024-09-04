@@ -63,7 +63,7 @@ nav {
     width: 100%;
     height: 100px;
     padding: 5px 0;
-    background: linear-gradient(180deg, #ee4d2d 0%, #fd7e14 100%);
+    background: linear-gradient(180deg, #ee2c4a 0%, #dc3545 100%);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -107,23 +107,24 @@ nav {
 }
 
 .wrapper {
-    border-top: 3px solid var(--nc-primary);
+    border-top: 3px solid var(--bs-warning);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
     & a {
         text-decoration: none;
-        color: var(--bs-success);
+        color: var(--nc-success);
     }
 
     & a:hover {
         opacity: 0.6;
         transition: .3s;
-        color: var(--bs-teal);
+        color: var(--nc-success);
     }
 }
 
 .btn-submit {
-    background: var(--nc-primary);
-    color: #fff;
+    background: var(--bs-warning);
+    color: #333;
     border: none;
     outline: none;
     padding: 8px;
@@ -132,14 +133,14 @@ nav {
 }
 
 .btn-submit:hover {
-    background: var(--nc-primary);
+    background: var(--bs-warning);
     opacity: .8;
 }
 
 .btn-login {
     margin: 10px 0;
     background-color: var(--nc-primary-bg);
-    border: 1px solid var(--nc-primary);
+    border: 1px solid var(--nc-caution);
     outline: none;
     padding: 8px;
     border-radius: 5px;

@@ -119,7 +119,7 @@ if (isset($_SESSION['addbrand'])) {
             // position: "top-center",
             icon: "success",
             title: "เพิ่มยี่ห้อสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>เพิ่มยี่ห้อสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -133,13 +133,13 @@ if (isset($_SESSION['addbrand'])) {
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "ต้องการลบสินค้าช้านี้?",
-            text: "กดยืนยันเพื่อยินยอมในการลบสินค้า",
+            title: "คุณแน่ใจหรือไม่?",
+            text: "คุณต้องการลบยี่ห้อสินค้านี้หรือไม่?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ยืนยัน",
+            confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -157,7 +157,7 @@ if (isset($_SESSION['editbrand'])) {
             // position: "top-center",
             icon: "success",
             title: "แก้ไขสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>แก้ไขยี่ห้อสินค้าสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -175,7 +175,7 @@ if (isset($_SESSION['deletebrand'])) {
         Swal.fire({
             icon: "success",
             title: "ลบสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>ลบยี่ห้อสินค้าสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -192,7 +192,7 @@ if (isset($_SESSION['delete_error'])) {
         Swal.fire({
             icon: "warning",
             title: "ลบไม่สำเร็จ!",
-            text: "มียี่ห้อสินค้านี้ในข้อมูลสินค้าอยู่",
+            footer: "<span style='color: #ee2c4a'>มียี่ห้อสินค้านี้ในข้อมูลสินค้าอยู่</span>",
             showConfirmButton: false,
             timer: 1500
         });

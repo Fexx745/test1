@@ -118,13 +118,13 @@ $row5 = mysqli_fetch_assoc($result5);
 
                         <!-- เกี่ยวกับขนส่ง -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">
-                            <div class="sb-nav-link-icon"><i class='bx bx-car'></i></div>
+                            <div class="sb-nav-link-icon"><i class='bx bxs-truck'></i></div>
                             การส่งสินค้า
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="shipping" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="shipping_add.php"><i class='bx bxs-car-mechanic'></i>&nbsp;จัดการข้อมูลขนส่ง</a>
+                                <a class="nav-link" href="shipping_add.php"><i class='bx bxs-truck'></i>&nbsp;จัดการข้อมูลขนส่ง</a>
                             </nav>
                         </div>
 

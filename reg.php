@@ -14,8 +14,8 @@
     <?php include('nav_reg.php'); ?>
 
     <div class="container-fluid p-5" style="background: #fff;">
-        <div class="row mt-5">
-            <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
+        <div class="row mt-1">
+            <div class="col-lg-4 bg-white m-auto rounded-top wrapper" style="padding: 25px;">
                 <h2 class="text-center pt-3">สมัครสมาชิก</h2>
                 <p class="text-center text-muted lead mb-3">
                     <?php

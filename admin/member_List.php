@@ -119,13 +119,14 @@ $row = mysqli_fetch_array($result);
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "Are you sure?",
-            text: "คุณต้องการลบหรือไม่?",
+            title: "คุณแน่ใจหรือไม่?",
+            text: "คุณต้องการลบสมาชิกนี้หรือไม่?",
+            footer: "<span style='color: #ee2c4a'>**ตรวจสอบให้มั่นใจแล้วกดลบ</span>",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ยืนยัน",
+            confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -142,7 +143,8 @@ if (isset($_SESSION['deleteaccount'])) {
         Swal.fire({
             icon: "success",
             title: "ลบผู้ใช้สำเร็จ!",
-            text: "Successfully",
+            // text: "Successfully",
+            footer: "<span style='color: #30b566'>ลบผู้ใช้สำเร็จแล้ว</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -159,7 +161,7 @@ if (isset($_SESSION['editaccount'])) {
         Swal.fire({
             icon: "success",
             title: "แก้ไขผู้ใช้สำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>แก้ไขข้อมูลผู้ใช้สำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });

@@ -37,7 +37,7 @@ $parcel_number = $order['parcel_number'];
                             <a href="report_order.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
                             <a href="report_order_wait.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-car'></i>&nbsp;รอจัดส่ง</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-truck'></i>&nbsp;รอจัดส่ง</button></a>
                             <a href="report_order_yes.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bxs-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
                             <a href="report_order_no.php"><button type="button"
@@ -80,10 +80,11 @@ $parcel_number = $order['parcel_number'];
                                     </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                            data-bs-target="#slipModal">
-                            ดูหลักฐานการโอน
-                        </button><br><br>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#slipModal"
+                        style="background: linear-gradient(195deg, #fff3cd 0%, #fff3cd 100%); color: #333; border: 1px solid #e5e5e5; border-radius: 0.25rem;">หลักฐานการโอน
+                        </button>
+
+                        <br><br>
                         <div class="my-2">
                             <b>เลขคำสั่งซื้อ</b>
                             <span><?= $row['orderID'] ?></span>
@@ -95,7 +96,7 @@ $parcel_number = $order['parcel_number'];
                             <span><?= $row['telephone'] ?></span>
                         </div>
                         <div class="my-4"><b>ราคารวมสุทธิ</b>
-                            <span style="color: #ee4d2d; font-weight: bold; font-size: 18px;"><?= number_format($sum_total, 2) ?></span>
+                            <span style="color: #26aa99; font-weight: bold; font-size: 18px;"><?= number_format($sum_total, 2) ?></span>
                             <b>บาท</b>
                         </div>
                         <div class="mb-3 mt-3">
@@ -134,49 +135,47 @@ $parcel_number = $order['parcel_number'];
                             <div class="row">
                                 <div class="col-md-6">
                                     <input type="hidden" name="order_id" value="<?php echo $idpd; ?>">
-                                    <label for="shipping_type">ประเภทขนส่ง&nbsp;&gt;</label>
-                                    <div class="input-group mb-3">
-                                        <label class="input-group-text" for="shipping_type"><i
-                                                class='bx bx-layer-plus'></i></label>
-                                        <select name="shipping_type" id="shipping_type" class="form-select">
-                                            <?php
-                                            include('condb.php');
-                                            // Fetch shipping type for the current order
-                                            $query = "SELECT shipping_type_id FROM tb_order WHERE orderID = '$idpd'";
-                                            $result = mysqli_query($conn, $query);
-                                            $shipping_type_id = mysqli_fetch_assoc($result)['shipping_type_id'];
+                                    <div class="col-md-6">
+                                        <label for="shipping_type">ประเภทขนส่ง&nbsp;&gt;</label>
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text" for="shipping_type"><i class='bx bxs-truck'></i></label>
+                                            <select name="shipping_type" id="shipping_type" class="form-select">
+                                                <?php
+                                                include('condb.php');
+                                                $query = "SELECT shipping_type_id FROM tb_order WHERE orderID = '$idpd'";
+                                                $result = mysqli_query($conn, $query);
+                                                $shipping_type_id = mysqli_fetch_assoc($result)['shipping_type_id'];
 
-                                            // Retrieve all shipping types
-                                            $sql = "SELECT shipping_type_id, shipping_type_name FROM shipping_type ORDER BY shipping_type_id";
-                                            $result = mysqli_query($conn, $sql);
+                                                $sql = "SELECT shipping_type_id, shipping_type_name FROM shipping_type ORDER BY shipping_type_id";
+                                                $result = mysqli_query($conn, $sql);
 
-                                            if (mysqli_num_rows($result) > 0) {
-                                                while ($rows = mysqli_fetch_array($result)) {
-                                                    // Check if this option should be selected
-                                                    $selected = ($shipping_type_id == $rows['shipping_type_id']) ? 'selected' : '';
-                                                    echo "<option value='{$rows['shipping_type_id']}' $selected>{$rows['shipping_type_name']}</option>";
+                                                if (mysqli_num_rows($result) > 0) {
+                                                    while ($rows = mysqli_fetch_array($result)) {
+                                                        $selected = ($shipping_type_id == $rows['shipping_type_id']) ? 'selected' : '';
+                                                        echo "<option value='{$rows['shipping_type_id']}' $selected>{$rows['shipping_type_name']}</option>";
+                                                    }
+                                                } else {
+                                                    echo "<option value=''>No shipping types found</option>";
                                                 }
-                                            } else {
-                                                echo "<option value=''>No shipping types found</option>";
-                                            }
-                                            ?>
-                                        </select>
+                                                ?>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-6">
-                                    <label for="parcel_number">เลขพัสดุ&nbsp;&gt;</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text"><i class='bx bx-book-reader'></i></span>
-                                        <input type="text" class="form-control" name="parcel_number"
-                                            placeholder="กรอกเลขพัสดุ" value="<?php echo $parcel_number; ?>">
+                                    <div class="col-md-6">
+                                        <label for="parcel_number">เลขพัสดุ&nbsp;&gt;</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"><i class='bx bx-barcode'></i></span>
+                                            <input type="text" class="form-control" name="parcel_number"
+                                                placeholder="กรอกเลขพัสดุ" value="<?php echo $parcel_number; ?>">
+                                        </div>
                                     </div>
+
                                 </div>
-                            </div>
-                            <div class="mb-2">
-                                <a href="report_order_wait.php" class="btn btn-dark">ย้อนกลับ</a>
-                                <button type="submit" class="btn btn-danger">ยืนยัน</button>
-                            </div>
+                                <div class="mb-2">
+                                    <a href="report_order_wait.php" class="btn btn-dark">ย้อนกลับ</a>
+                                    <button type="submit" class="btn btn-danger">ยืนยันการจัดส่ง</button>
+                                </div>
                         </form>
                     </div>
                 </div>
@@ -201,3 +200,23 @@ $parcel_number = $order['parcel_number'];
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
     crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+
+<!-- <script>
+    function confirmOrder(id) {
+        Swal.fire({
+            title: "ยืนยันการเปลี่ยนสถานะคำสั่งซื้อ",
+            text: "คุณต้องการเปลี่ยนสถานะคำสั่งซื้อนี้เป็น 'จัดส่งสำเร็จ' หรือไม่?",
+            footer: '<span style="color: #ee2c4a;">**โปรดตรวจสอบเลขพัสดุให้ถูกต้องก่อนยืนยัน</span>',
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#198754",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ยืนยัน",
+            cancelButtonText: "ยกเลิก"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `update_order.php`;
+            }
+        });
+    }
+</script> -->

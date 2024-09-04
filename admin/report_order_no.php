@@ -120,7 +120,7 @@ $row4 = mysqli_fetch_array($result4);
                             <a href="report_order.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
                             <a href="report_order_wait.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-car'></i>&nbsp;รอจัดส่ง</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-truck'></i>&nbsp;รอจัดส่ง</button></a>
                             <a href="report_order_yes.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bxs-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
                             <a href="report_order_no.php"><button type="button"
@@ -202,7 +202,7 @@ $row4 = mysqli_fetch_array($result4);
                                     </td>
                                     <td>
                                         <div class="text-center">
-                                            <button class="btn" style="background: linear-gradient(195deg, #0d6efd 0%, #0a58ca 100%); color: #fff; border: none; border-radius: 0.25rem;"
+                                            <button class="btn" style="background: linear-gradient(195deg, #fff3cd 0%, #fff3cd 100%); color: #333; border: 1px solid #e5e5e5; border-radius: 0.25rem;"
                                                 onclick="showOrderDetail('<?= $row['orderID'] ?>')">
                                                 <i class='bx bx-message-detail'></i>
                                             </button>
@@ -220,7 +220,7 @@ $row4 = mysqli_fetch_array($result4);
 
                     </table>
                     <div class="my-5">
-                        <a href="report_order.php" class="btn btn-primary">ย้อนกลับ</a>
+                        <a href="report_order.php" class="btn btn-dark">ย้อนกลับ</a>
                     </div>
                 </div>
             </div>
@@ -278,33 +278,18 @@ $row4 = mysqli_fetch_array($result4);
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
     crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
-<?php
-if (isset($_SESSION['cancelOrder'])) {
-?>
-    <script>
-        Swal.fire({
-            icon: "success",
-            title: "ยกเลิกคำสั่งซื้อสำเร็จ!",
-            text: "Order canceled successfully",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    </script>
-<?php
-    unset($_SESSION['cancelOrder']);
-}
-?>
 
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "Are you sure?",
-            text: "คุณต้องการลบคำสั่งซื้อหรือไม่?",
+            title: "คุณแน่ใจหรือไม่?",
+            text: "คุณต้องการลบคำสั่งซื้อนี้หรือไม่?",
+            footer: '<span style="color: #ee2c4a;">**โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนทำการลบ</span>',
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ยืนยัน",
+            confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -313,3 +298,21 @@ if (isset($_SESSION['cancelOrder'])) {
         });
     }
 </script>
+
+
+<?php
+if (isset($_SESSION['cancelOrder'])) {
+?>
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "ยกเลิกคำสั่งซื้อสำเร็จ",
+            footer: '<span style="color: #00c300;">ยกเลิกคำสั่งซื้อสำเร็จ!</span>',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+<?php
+    unset($_SESSION['cancelOrder']);
+}
+?>

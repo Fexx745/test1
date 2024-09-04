@@ -211,7 +211,7 @@ while ($row8 = mysqli_fetch_assoc($result8)) {
                             </div>
                             <div class="5"><a href="member_List.php"><i
                                         class='bx bx-user-pin'></i>จัดการข้อมูลลูกค้า</a></div>
-                            <div class="6"><a href="shipping_add.php"><i class='bx bx-car'></i>จัดการข้อมูลขนส่ง</a>
+                            <div class="6"><a href="shipping_add.php"><i class='bx bxs-truck'></i>จัดการข้อมูลขนส่ง</a>
                             </div>
                         </div>
                     </div>

@@ -18,9 +18,9 @@
 
     <?php include('nav_login.php'); ?>
 
-    <div class="container-fluid p-5" style="background: #fff; margin-bottom: 310px;">
+    <div class="container-fluid p-5" style="background: #fff; margin-bottom: 250px;">
         <div class="row mt-5">
-            <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
+            <div class="col-lg-4 bg-white m-auto rounded-top wrapper" style="padding: 25px;">
                 <h3 class="text-center pt-3">เข้าสู่ระบบ</h3>
                 <p class="text-center text-muted lead mb-3">
                     <?php

@@ -212,6 +212,8 @@ if (isset($_SESSION['edit_product'])) {
             footer: '<span style="color: #00c300;">แก้ไขข้อมูลสินค้าเรียบร้อยแล้ว</span>',
             showConfirmButton: false,
             timer: 2000
+        }).then(() => {
+            window.location.href = "product_List.php";
         });
     </script>
 

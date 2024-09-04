@@ -124,6 +124,8 @@ if (isset($_SESSION['editprice'])) {
             footer: '<span style="color: #00c300;">อัพเดทราคาเรียบร้อยแล้ว!</span>',
             showConfirmButton: false,
             timer: 1500
+        }).then(() => {
+            window.location.href = "product_List.php";
         });
     </script>
 <?php

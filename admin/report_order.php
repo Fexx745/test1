@@ -127,7 +127,7 @@ $row4 = mysqli_fetch_array($result4);
                             <a href="report_order.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
                             <a href="report_order_wait.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-car'></i>&nbsp;รอจัดส่ง</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-truck'></i>&nbsp;รอจัดส่ง</button></a>
                             <a href="report_order_yes.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bxs-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
                             <a href="report_order_no.php"><button type="button"
@@ -231,7 +231,7 @@ $row4 = mysqli_fetch_array($result4);
 
                                     </td>
                                     <td>
-                                        <button class="btn" style="background: linear-gradient(195deg, #0d6efd 0%, #0a58ca 100%); color: #fff; border: none; border-radius: 0.25rem;"
+                                        <button class="btn" style="background: linear-gradient(195deg, #fff3cd 0%, #fff3cd 100%); color: #333; border: 1px solid #e5e5e5; border-radius: 0.25rem;"
                                             onclick="showOrderDetail('<?= $row['orderID'] ?>')">
                                             <i class='bx bx-message-detail'></i>
                                         </button>
@@ -239,8 +239,8 @@ $row4 = mysqli_fetch_array($result4);
 
                                     <td>
 
-                                        <a class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;" href="javascript:void(0);"
-                                            onclick="confirmOrder('<?= $row['orderID'] ?>')"><i class='bx bxs-car'></i></a>
+                                        <a class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;" href="javascript:void(0);"
+                                            onclick="confirmOrder('<?= $row['orderID'] ?>')"><i class='bx bxs-truck'></i></a>
                                         <a class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #dc3545 100%); color: #fff; border: none; border-radius: 0.25rem; text-decoration: none;" href="javascript:void(0);"
                                             onclick="confirmCancelOrder('<?= $row['orderID'] ?>')"><i class='bx bxs-x-circle'></i></a>
 
@@ -357,9 +357,10 @@ $row4 = mysqli_fetch_array($result4);
         Swal.fire({
             title: "ปรับสถานะคำสั่งซื้อ",
             text: "คุณต้องการเปลี่ยนสถานะคำสั่งซื้อนี้เป็น 'รอจัดส่ง' หรือไม่?",
+            footer: '<span style="color: #ee2c4a;">**ตรวจสอบข้อมูลครบถ้วนแล้วใช่มั้ย?</span>',
             icon: "question",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
             confirmButtonText: "ยืนยัน",
             cancelButtonText: "ยกเลิก"
@@ -377,7 +378,7 @@ $row4 = mysqli_fetch_array($result4);
             text: "คุณต้องการยกเลิกคำสั่งซื้อนี้หรือไม่?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
             confirmButtonText: "ยืนยัน",
             cancelButtonText: "ยกเลิก"

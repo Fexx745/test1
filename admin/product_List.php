@@ -308,13 +308,13 @@ if (isset($_SESSION['delete_product'])) {
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "ต้องการลบสินค้าช้านี้?",
-            text: "กดยืนยันเพื่อยินยอมในการลบสินค้า",
+            title: "คุณแน่ใจหรือไม่?",
+            text: "คุณต้องการลบสินค้าชิ้นนี้หรือไม่?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ยืนยัน",
+            confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -323,6 +323,7 @@ if (isset($_SESSION['delete_product'])) {
         });
     }
 </script>
+
 
 
 

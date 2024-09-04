@@ -49,7 +49,17 @@ $row = mysqli_fetch_array($result);
                         ตั้งค่าแบนเนอร์
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">เพิ่มรูปภาพแบนเนอร์ ขนาดรูปภาพแนะนำ 1920x500</h3>
+                        <div class="alert mt-4" style="background: linear-gradient(195deg, #fef6f5 0%, #fef6f5 100%); color: #333; border: 1px solid #ee4d2d; outline: none;">
+                            <h3 style="font-weight: 1000;">
+                                <img src="../assets/images/other/tutorial.png" alt="Tutorial Icon" style="height: 30px; margin-right: 10px;">
+                                คำแนะนำ (Tutorial)
+                            </h3>
+                            <p>
+                                <i class='bx bx-image-alt'></i> <strong>ขนาดภาพที่แนะนำ</strong> <i class='bx bx-right-arrow-alt'></i> 1920px x 500px
+                                <strong style="color: #ee2c4a;">**รองรับไฟล์ .png .jpg .jpeg และ .gif เท่านั้น</strong>
+                            </p>
+                        </div>
+
                         <form method="POST" action="banner_insert.php" enctype="multipart/form-data">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bx-image-alt'></i></span>
@@ -138,7 +148,7 @@ if (isset($_SESSION['success'])) {
             // position: "top-center",
             icon: "success",
             title: "เพิ่มรูปภาพเรียบร้อย!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>เพิ่มรูปภาพเรียบร้อย</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -149,16 +159,17 @@ if (isset($_SESSION['success'])) {
 }
 ?>
 
+
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "Are you sure?",
-            text: "คุณต้องการลบหรือไม่?",
+            title: "คุณแน่ใจหรือไม่?",
+            text: "คุณต้องการลบรูปภาพนี้หรือไม่?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ยืนยัน",
+            confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -176,7 +187,7 @@ if (isset($_SESSION['banner_update'])) {
             // position: "top-center",
             icon: "success",
             title: "แก้ไขสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>แก้ไขรูปภาพสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -194,7 +205,7 @@ if (isset($_SESSION['deletebanner'])) {
         Swal.fire({
             icon: "success",
             title: "ลบสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>ลบรูปภาพสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });

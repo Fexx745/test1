@@ -34,19 +34,6 @@ $row = mysqli_fetch_array($result);
     <!-- boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-
-        * {
-            font-size: 16px;
-            font-family: 'K2D', sans-serif;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            /* ปรับตามความต้องการ */
-        }
-    </style>
 
 </head>
 
@@ -154,13 +141,13 @@ if (isset($_SESSION['edit_producttype'])) {
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "ต้องการลบสินค้าช้านี้?",
-            text: "กดยืนยันเพื่อยินยอมในการลบสินค้า",
+            title: "คุณแน่ใจหรือไม่?",
+            text: "คุณต้องการลบประเภทสินค้าหรือไม่?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ยืนยัน",
+            confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -177,7 +164,7 @@ if (isset($_SESSION['delete_typeproduct'])) {
         Swal.fire({
             icon: "success",
             title: "ลบสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>ลบประเภทสินค้าสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -194,7 +181,7 @@ if (isset($_SESSION['addproducttype'])) {
         Swal.fire({
             icon: "success",
             title: "เพิ่มประเภทสินค้าสำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>เพิ่มประเภทสินค้าสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -211,9 +198,9 @@ if (isset($_SESSION['delete_error'])) {
         Swal.fire({
             icon: "warning",
             title: "ลบไม่สำเร็จ!",
-            text: "มีประเภทสินค้านี้ในสินค้าอยู่",
+            footer: "<span style='color: #ee2c4a'>**มีประเภทสินค้านี้ในสินค้าอยู่</span>",
             showConfirmButton: false,
-            timer: 1500
+            timer: 2500
         });
     </script>
 <?php

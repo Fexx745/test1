@@ -327,6 +327,10 @@
     background: var(--bs-orange);
 }
 
+.btn-increment:hover, .btn-decrement:hover {
+    opacity: .5;
+}
+
 .reviews-section {
     /* margin-top: 20px; */
     width: 100%;

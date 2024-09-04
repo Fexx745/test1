@@ -149,13 +149,14 @@ if (!isset($_SESSION['inPro'])) {
                     </table>
                     <div class="container" style="margin-top: 20px; margin-bottom: 100px;">
                         <div class="row">
-                            <div class="col-md-6 alert" style="background: rgba(229, 229, 229, 0.8); color: #333; border: none; outline: none;">
+                            <div class="col-md-6 alert" style="background: #e9ecef; color: #333; border: none; outline: none;">
 
                                 <p style="font-size: 15px;">
-                                    <i class='bx bx-info-circle'></i>
+                                    <i class='bx bxs-bank'></i>
                                     &nbsp;โปรดแนบสลิปการโอนทุกครั้งที่ทำการชำระเงิน
                                 </p>
-                                <h6>ธนาคารไทยพาณิชย์ 4070378747</h6>
+                                <h5>ธนาคารไทยพาณิชย์ 407xxxxxxx</h5>
+                                <span style="color: #ee2c4a;">**รองรับไฟล์ .png, .jpg, และ .jpeg</span>
                                 <div class="text-end">
                                     <div class="input-group">
                                         <input type="hidden" class="form-control" name="payment_date" required>
@@ -170,8 +171,8 @@ if (!isset($_SESSION['inPro'])) {
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <a href="index.php"><button type="button" class="btn" style="background: #fcf5f4; margin: 0 10px; border: 1px solid #198754; color: #000; font-size: 15px; font-weight: 600;"><i class='bx bx-cart-add'></i> เลือกสินค้าต่อ</button></a>
-                                    <a href=""><button type="submit" class="btn" style="background: linear-gradient(195deg, #198754 0%, #30b566 100%); border: none; color: #fff;">สั่งซื้อ</button></a>
+                                    <a href="index.php"><button type="button" class="btn" style="background: #fcf5f4; margin: 0 10px; border: 1px solid #ee4d2d; color: #000; font-size: 15px; font-weight: 600;"><i class='bx bx-cart-add'></i> เลือกสินค้าต่อ</button></a>
+                                    <a href=""><button type="submit" class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ee4d2d 100%); border: none; color: #fff;">สั่งซื้อ</button></a>
                                 </div>
                             </div>
                         </div>

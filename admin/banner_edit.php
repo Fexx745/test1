@@ -37,20 +37,6 @@ $row = mysqli_fetch_array($result);
     <!-- boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-
-        * {
-            font-size: 16px;
-            font-family: 'K2D', sans-serif;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            /* ปรับตามความต้องการ */
-        }
-    </style>
-
 </head>
 
 <body class="sb-nav-fixed">
@@ -72,19 +58,19 @@ $row = mysqli_fetch_array($result);
                                     value="<?= $row['banner_id']; ?>" readonly>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-basket'></i></span>
-                                <input type="text" class="form-control" name="b_name" value="<?= $row['banner_name']; ?>">
+                                <span class="input-group-text"><i class='bx bx-image-alt'></i></span>
+                                <input type="text" class="form-control" name="b_name" value="<?= $row['banner_name']; ?>" placeholder="ชื่อรูปภาพ">
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bx-book-reader'></i></span>
-                                <input type="text" class="form-control" name="b_detail" value="<?= $row['banner_detail']; ?>">
+                                <input type="text" class="form-control" name="b_detail" value="<?= $row['banner_detail']; ?>" placeholder="รายละเอียดรูปภาพ">
                             </div>
                             <div class="mb-3 mt-3">
                                 <p style="margin-bottom: -40px;">รูปภาพปัจจุบัน:</p>
                                 <img src="../assets/images/banner/<?= $row['image'] ?>" alt="รูปภาพปัจจุบัน"
                                     style="margin: 0 0 0; width: 1000px; height: 300px; object-fit: contain;">
                                 <p>อัพโหลดรูปภาพ:</ห>
-                                <input type="file" class="form-control" name="b_image">
+                                    <input type="file" class="form-control" name="b_image">
                             </div>
                             <div class="mt-4">
                                 <a href="editbanner.php" class="btn btn-primary">ย้อนกลับ</a>
