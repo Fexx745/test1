@@ -29,11 +29,11 @@ include('condb.php');
         $sql = "SELECT * FROM banners";
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_array($result)) {
-        ?>
+            ?>
             <div class="mySlides">
                 <img src="assets/images/banner/<?php echo $row['image']; ?>">
             </div>
-        <?php
+            <?php
         }
         ?>
         <a class="prev" onclick="plusSlides(-1)"><i class='bx bxs-chevron-left'></i></a>
@@ -48,6 +48,11 @@ include('condb.php');
     let slideIndex = 1;
     showSlides(slideIndex);
 
+    // เพิ่ม setInterval เพื่อให้สไลด์เลื่อนอัตโนมัติทุกๆ 5 วินาที
+    setInterval(function () {
+        plusSlides(1);
+    }, 5000); // 5000 มิลลิวินาที = 5 วินาที
+
     function plusSlides(n) {
         showSlides(slideIndex += n);
     }
@@ -61,10 +66,10 @@ include('condb.php');
         let slides = document.getElementsByClassName("mySlides");
         let dots = document.getElementsByClassName("dot");
         if (n > slides.length) {
-            slideIndex = 1
+            slideIndex = 1;
         }
         if (n < 1) {
-            slideIndex = slides.length
+            slideIndex = slides.length;
         }
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
@@ -73,6 +78,9 @@ include('condb.php');
             dots[i].className = dots[i].className.replace(" active", "");
         }
         slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
+        if (dots.length > 0) {
+            dots[slideIndex - 1].className += " active";
+        }
     }
+
 </script>

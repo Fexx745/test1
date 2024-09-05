@@ -55,10 +55,8 @@
                     </label>
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-user'></i></span>
-                        <input type="text" id="fname_field" class="form-control" name="fname" placeholder="ชื่อ"
-                            value="<?php echo htmlspecialchars($_SESSION['form_data']['fname'] ?? ''); ?>" required>
-                        <i id="fname_success_icon" class="fas fa-check-circle text-success position-absolute"
-                            style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
+                        <input type="text" id="fname_field" class="form-control" name="fname" placeholder="ชื่อ" value="<?php echo htmlspecialchars($_SESSION['form_data']['fname'] ?? ''); ?>" required>
+                        <i id="fname_success_icon" class="fas fa-check-circle text-success position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
                     </div>
 
                     <!-- Last Name Field -->
@@ -67,35 +65,23 @@
                     </label>
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-user'></i></span>
-                        <input type="text" id="lname_field" class="form-control" name="lname" placeholder="นามสกุล"
-                            value="<?php echo htmlspecialchars($_SESSION['form_data']['lname'] ?? ''); ?>" required>
-                        <i id="lname_success_icon" class="fas fa-check-circle text-success position-absolute"
-                            style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
+                        <input type="text" id="lname_field" class="form-control" name="lname" placeholder="นามสกุล" value="<?php echo htmlspecialchars($_SESSION['form_data']['lname'] ?? ''); ?>" required>
+                        <i id="lname_success_icon" class="fas fa-check-circle text-success position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
                     </div>
 
 
-                    <label id="username_error_label" class="text-danger" style="display:none;"><i
-                            class="fas fa-exclamation-circle"></i> ชื่อผู้ใช้นี้ถูกใช้แล้ว</label>
+                    <label id="username_error_label" class="text-danger" style="display:none;"><i class="fas fa-exclamation-circle"></i> ชื่อผู้ใช้นี้ถูกใช้แล้ว</label>
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-user-circle'></i></span>
-                        <input type="text" id="username_field"
-                            class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'username' ? 'is-invalid' : ''; ?>"
-                            name="username" placeholder="ชื่อผู้ใช้"
-                            value="<?php echo htmlspecialchars($_SESSION['form_data']['username'] ?? ''); ?>" required>
-                        <i id="username_success_icon" class="fas fa-check-circle text-success position-absolute"
-                            style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
+                        <input type="text" id="username_field" class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'username' ? 'is-invalid' : ''; ?>" name="username" placeholder="ชื่อผู้ใช้" value="<?php echo htmlspecialchars($_SESSION['form_data']['username'] ?? ''); ?>" required>
+                        <i id="username_success_icon" class="fas fa-check-circle text-success position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
                     </div>
 
-                    <label id="email_error_label" class="text-danger" style="display:none;"><i
-                            class="fas fa-exclamation-circle"></i> อีเมลล์นี้ถูกใช้แล้ว</label>
+                    <label id="email_error_label" class="text-danger" style="display:none;"><i class="fas fa-exclamation-circle"></i> อีเมลล์นี้ถูกใช้แล้ว</label>
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-envelope'></i></span>
-                        <input type="email" id="email_field"
-                            class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'email' ? 'is-invalid' : ''; ?>"
-                            name="email" placeholder="อีเมลล์"
-                            value="<?php echo htmlspecialchars($_SESSION['form_data']['email'] ?? ''); ?>" required>
-                        <i id="email_success_icon" class="fas fa-check-circle text-success position-absolute"
-                            style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
+                        <input type="email" id="email_field" class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'email' ? 'is-invalid' : ''; ?>" name="email" placeholder="อีเมลล์" value="<?php echo htmlspecialchars($_SESSION['form_data']['email'] ?? ''); ?>" required>
+                        <i id="email_success_icon" class="fas fa-check-circle text-success position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
                     </div>
 
                     <label id="phone_error_label" class="text-danger" style="display:none;">
@@ -104,70 +90,33 @@
                     </label>
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-phone'></i></span>
-                        <input type="text" id="phone_field"
-                            class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'phone' ? 'is-invalid' : ''; ?>"
-                            name="phone" placeholder="เบอร์โทรศัพท์"
-                            value="<?php echo htmlspecialchars($_SESSION['form_data']['phone'] ?? ''); ?>" required>
-                        <i id="phone_success_icon" class="fas fa-check-circle text-success position-absolute"
-                            style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
+                        <input type="text" id="phone_field" class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'phone' ? 'is-invalid' : ''; ?>" name="phone" placeholder="เบอร์โทรศัพท์" value="<?php echo htmlspecialchars($_SESSION['form_data']['phone'] ?? ''); ?>" required>
+                        <i id="phone_success_icon" class="fas fa-check-circle text-success position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
                     </div>
 
 
 
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-lock'></i></span>
-                        <input type="password" id="psw_field"
-                            class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'psw' ? 'is-invalid' : ''; ?>"
-                            name="psw" placeholder="รหัสผ่าน" required>
-                        <i id="psw_success_icon" class="fas fa-check-circle text-success position-absolute"
-                            style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
+                        <input type="password" id="psw_field" class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'psw' ? 'is-invalid' : ''; ?>" name="psw" placeholder="รหัสผ่าน" required>
+                        <i id="psw_success_icon" class="fas fa-check-circle text-success position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
                     </div>
 
 
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-lock'></i></span>
-                        <input type="password" id="confirm_psw_field"
-                            class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'psw' ? 'is-invalid' : ''; ?>"
-                            name="confirm_psw" placeholder="ยืนยันรหัสผ่าน" required>
-                        <i id="confirm_psw_success_icon" class="fas fa-check-circle text-success position-absolute"
-                            style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
+                        <input type="password" id="confirm_psw_field" class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'psw' ? 'is-invalid' : ''; ?>" name="confirm_psw" placeholder="ยืนยันรหัสผ่าน" required>
+                        <i id="confirm_psw_success_icon" class="fas fa-check-circle text-success position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-map'></i></span>
-                        <select id="province" name="province" class="form-control" required>
-                            <option value="" selected disabled hidden>** เลือกจังหวัด **</option>
-                            <!-- Options will be loaded dynamically via jQuery -->
-                        </select>
+                        <textarea class="form-control" name="address" placeholder="ที่อยู่ ...." style="resize: none;" required><?php echo htmlspecialchars($_SESSION['form_data']['address'] ?? ''); ?></textarea>
                     </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class='bx bx-map'></i></span>
-                        <select id="district" name="district" class="form-control" required disabled>
-                            <option value="" selected disabled hidden>** เลือกอำเภอ **</option>
-                            <!-- Options will be loaded dynamically via jQuery -->
-                        </select>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class='bx bx-map'></i></span>
-                        <select id="subdistrict" name="subdistrict" class="form-control" required disabled>
-                            <option value="" selected disabled hidden>** เลือกตำบล **</option>
-                            <!-- Options will be loaded dynamically via jQuery -->
-                        </select>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class='bx bx-map'></i></span>
-                        <input type="text" id="postal_code" name="postal_code" class="form-control"
-                            placeholder="รหัสไปรษณีย์" readonly>
-                    </div>
-
                     <div class="d-grid">
                         <button class="btn-reg">ยืนยันการสมัคร</button>
                         <button onclick="window.location.href='login.php'" class="btn-login">เข้าสู่ระบบ</button>
-                        <p class="text-center mt-2"><span style="color: #6c757d;">หากมีบัญชีผู้ใช้แล้ว
-                                คุณสามารถเข้าสู่ระบบได้เลย</span>
+                        <p class="text-center mt-2"><span style="color: #6c757d;">หากมีบัญชีผู้ใช้แล้ว คุณสามารถเข้าสู่ระบบได้เลย</span>
                         </p>
                     </div>
                 </form>
@@ -181,7 +130,7 @@
 
 </html>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         function validateField(inputField, successIcon, errorLabel, inputValue, inputName) {
             if (inputValue === '') {
                 inputField.css('border-color', '');
@@ -195,7 +144,7 @@
                         input_value: inputValue,
                         input_name: inputName
                     },
-                    success: function (response) {
+                    success: function(response) {
                         if (response == "duplicate") {
                             inputField.css('border-color', 'red');
                             errorLabel.show();
@@ -210,7 +159,7 @@
             }
         }
 
-        $('#email_field, #phone_field, #username_field').on('input', function () {
+        $('#email_field, #phone_field, #username_field').on('input', function() {
             var inputField = $(this);
             var inputValue = inputField.val();
             var inputName = inputField.attr('name');
@@ -228,7 +177,7 @@
                     successIcon.show();
                 }
             } else if (inputName === 'username') {
-                if (inputValue.length < 6) { // Check if username has at least 6 characters
+                if (inputValue.length < 6) {
                     inputField.css('border-color', 'red');
                     errorLabel.text('ชื่อผู้ใช้ต้องมีอย่างน้อย 6 ตัวอักษร').show();
                     successIcon.hide();
@@ -241,7 +190,7 @@
         });
 
         // Handle first name and last name fields
-        $('#fname_field, #lname_field').on('input', function () {
+        $('#fname_field, #lname_field').on('input', function() {
             var inputField = $(this);
             var inputValue = inputField.val();
             var fieldId = inputField.attr('id');
@@ -265,13 +214,13 @@
         });
 
         // Password confirmation check
-        $('#psw_field, #confirm_psw_field').on('input', function () {
+        $('#psw_field, #confirm_psw_field').on('input', function() {
             var pswField = $('#psw_field');
             var confirmPswField = $('#confirm_psw_field');
             var pswFieldSuccessIcon = $('#psw_success_icon');
             var confirmPswSuccessIcon = $('#confirm_psw_success_icon');
 
-            if (pswField.val().length < 10) { // Check if password has at least 10 characters
+            if (pswField.val().length < 6) { // Check if password has at least 10 characters
                 pswField.css('border-color', 'red');
                 pswFieldSuccessIcon.hide();
             } else {
@@ -282,7 +231,7 @@
             if (confirmPswField.val() === '') {
                 confirmPswField.css('border-color', '');
                 confirmPswSuccessIcon.hide();
-            } else if (pswField.val() === confirmPswField.val() && pswField.val().length >= 10) {
+            } else if (pswField.val() === confirmPswField.val() && pswField.val().length >= 6) {
                 confirmPswField.css('border-color', 'green');
                 confirmPswSuccessIcon.show();
             } else {
@@ -291,69 +240,4 @@
             }
         });
     });
-
-
-    $(document).ready(function () {
-        // Load provinces on page load
-        $.ajax({
-            url: 'get_provinces.php',
-            method: 'GET',
-            success: function (response) {
-                $('#province').append(response);
-            }
-        });
-
-        // Load districts based on selected province
-        $('#province').change(function () {
-            var provinceId = $(this).val();
-            $('#district').prop('disabled', false);
-
-            $.ajax({
-                url: 'get_districts.php',
-                method: 'POST',
-                data: { province_id: provinceId },
-                success: function (response) {
-                    $('#district').html(response);
-                    $('#subdistrict').html('<option value="" selected disabled hidden>** เลือกตำบล **</option>');
-                    $('#postal_code').val('');
-                }
-            });
-        });
-
-        // Load subdistricts based on selected district
-        $('#district').change(function () {
-            var districtId = $(this).val();
-            $('#subdistrict').prop('disabled', false);
-
-            $.ajax({
-                url: 'get_subdistricts.php',
-                method: 'POST',
-                data: { district_id: districtId },
-                success: function (response) {
-                    $('#subdistrict').html(response);
-                    $('#postal_code').val('');
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error loading subdistricts:", status, error);
-                }
-            });
-        });
-
-
-
-        // Load postal code based on selected subdistrict
-        $('#subdistrict').change(function () {
-            var subdistrictId = $(this).val();
-
-            $.ajax({
-                url: 'get_postal_code.php',
-                method: 'POST',
-                data: { subdistrict_id: subdistrictId },
-                success: function (response) {
-                    $('#postal_code').val(response);
-                }
-            });
-        });
-    });
-
 </script>

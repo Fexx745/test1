@@ -83,7 +83,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
@@ -164,13 +164,16 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                         <form name="form2" action="sales_summary.php" method="POST">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <input type="text" name="dt1" id="datepicker1" class="form-control" placeholder="ค้นหาตั้งแต่วันที่" readonly>
+                                    <input type="text" name="dt1" id="datepicker1" class="form-control"
+                                        placeholder="ค้นหาตั้งแต่วันที่" readonly>
                                 </div>
                                 <div class="col-sm-3">
-                                    <input type="text" name="dt2" id="datepicker2" class="form-control" placeholder="ถึงวันที่ ..." readonly>
+                                    <input type="text" name="dt2" id="datepicker2" class="form-control"
+                                        placeholder="ถึงวันที่ ..." readonly>
                                 </div>
                                 <div class="col-sm-3">
-                                    <button type="submit" class="btn btn-block" style="background: linear-gradient(195deg, #0a58ca 0%, #0d6efd 100%); color: #fff;">
+                                    <button type="submit" class="btn btn-block"
+                                        style="background: linear-gradient(195deg, #0a58ca 0%, #0d6efd 100%); color: #fff;">
                                         <i class='bx bx-search-alt'></i> ค้นหา
                                     </button>
                                 </div>
@@ -181,7 +184,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                             <div class="card-body">
                                 <?php if (mysqli_num_rows($result) > 0) {
                                     $grand_total = 0; // Total sum variable
-                                ?>
+                                    ?>
                                     <div class="mb-3">
                                         <h4>สรุปยอดขายระหว่างวันที่ <?php echo $dt1; ?> ถึงวันที่ <?php echo $dt2; ?></h4>
                                     </div>
@@ -196,19 +199,24 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                                         </thead>
                                         <?php while ($row = mysqli_fetch_assoc($result)) {
                                             $grand_total += $row['total_price']; // Calculate total sum
-                                        ?>
+                                            ?>
                                             <tr>
                                                 <td><img src="../assets/images/product/<?= htmlspecialchars($row['image']); ?>"
-                                                        alt="Product Image" style="width: 50px; height: 70px; object-fit: cover;"></td>
+                                                        alt="Product Image" style="width: 50px; height: 70px; object-fit: cover;">
+                                                </td>
                                                 <td><?php echo $row['p_name']; ?></td>
                                                 <td><?php echo $row['total_quantity'] . ' ' . $row['unit_name']; ?></td>
                                                 <td><?php echo number_format($row['total_price'], 2); ?></td>
                                             </tr>
                                         <?php } ?>
                                     </table>
-                                    <div class="alert mt-4" style="background: linear-gradient(195deg, #f7fffe 0%, #f7fffe 100%); color: #333; border: 1px solid #00c300; outline: none;">
+                                    <div class="alert mt-4"
+                                        style="background: linear-gradient(195deg, #f7fffe 0%, #f7fffe 100%); color: #333; border: 1px solid #00c300; outline: none;">
                                         <p>ตั้งแต่วันที่ <?php echo $dt1; ?> ถึงวันที่ <?php echo $dt2; ?> ยอดรวมสุทธิ</p>
-                                        <strong style="font-size: 1.5rem;"><?php echo number_format($grand_total, 2); ?> บาท</strong>
+                                        <img src="../assets/images/other/pngegg.png" alt="pngegg"
+                                            style="height: 80px; margin-right: 10px;">
+                                        <strong style="font-size: 1.5rem;"><?php echo number_format($grand_total, 2); ?>
+                                            บาท</strong>
                                     </div>
                                 <?php } else { ?>
                                     <div class="mt-3" class="mb-2">
@@ -228,7 +236,7 @@ $total_sales_this_month = isset($row4['total_sales_this_month']) ? $row4['total_
                 </div>
 
                 <script>
-                    $(function() {
+                    $(function () {
                         $("#datepicker1").datepicker({
                             dateFormat: 'yy-mm-dd'
                         });

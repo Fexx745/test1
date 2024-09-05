@@ -98,13 +98,13 @@
 
                         <div class="d-flex justify-content-between mb-3 align-items-center">
                             <a href="forgot.php" id="forgotpsw" class="mt-2"
-                                style="text-decoration: none; color: #30b566; font-size: 14px;">ลืมรหัสผ่าน ?</a>
+                                style="text-decoration: none; color: #0046ab; font-size: 14px;">ลืมรหัสผ่าน ?</a>
                             <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon"
                                     class="material-symbols-outlined"
                                     style="color: #333; font-size: 18px;">visibility_off</span></a>
                         </div>
                         <div class="d-grid">
-                            <button class="btn" type="submit" style="background: #eda500; color: #fff;">Login</button>
+                            <button class="btn" type="submit" style="background: #ffc107; color: #fff; font-size: 18px; font-weight: 600;">Login</button>
                         </div>
                     </form>
                 </div>

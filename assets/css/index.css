@@ -402,7 +402,7 @@
 
     .prev:hover,
     .next:hover {
-        opacity: 0.8;
+        opacity: 0.4;
     }
 }
 

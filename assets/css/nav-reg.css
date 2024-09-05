@@ -85,10 +85,12 @@ nav {
 
             & h3 {
                 color: #fff;
-                letter-spacing: 5px;
+                letter-spacing: 3px;
+                font-weight: 900;
                 margin-top: 12px;
                 margin-right: 10px;
             }
+
             & span {
                 font-size: 1.5rem;
                 color: #fff;
@@ -112,14 +114,20 @@ nav {
 
     & a {
         text-decoration: none;
-        color: var(--nc-success);
+        color: var(--nc-secondary-blue);
     }
 
     & a:hover {
         opacity: 0.6;
         transition: .3s;
-        color: var(--nc-success);
+        color: var(--bs-link-hover-color    );
     }
+}
+
+.wrapper-reg {
+    border-top: 3px solid var(--bs-green);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
 }
 
 .btn-submit {
@@ -127,20 +135,39 @@ nav {
     color: #333;
     border: none;
     outline: none;
-    padding: 8px;
+    padding: 10px;
     border-radius: 5px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, .09);
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .btn-submit:hover {
     background: var(--bs-warning);
-    opacity: .8;
+    opacity: .9;
+}
+
+.btn-reg {
+    background-color: var(--nc-success);
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .09);
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.btn-reg:hover {
+    background-color: var(--nc-success);
+    opacity: .9;
 }
 
 .btn-login {
     margin: 10px 0;
-    background-color: var(--nc-primary-bg);
-    border: 1px solid var(--nc-caution);
+    background-color: var(--nc-success-bg);
+    border: 1px solid var(--nc-success);
     outline: none;
     padding: 8px;
     border-radius: 5px;
@@ -149,7 +176,7 @@ nav {
 }
 
 .btn-login:hover {
-    opacity: .7;
+    opacity: .6;
 }
 
 .is-invalid {
@@ -175,9 +202,10 @@ nav {
     nav {
         display: flex;
         flex-direction: column;
-            & h3 {
-                display: none;
-            }
+
+        & h3 {
+            display: none;
+        }
     }
 
 }

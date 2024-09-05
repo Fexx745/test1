@@ -11,7 +11,7 @@
 
     <body>
         <nav>
-            <a href="#">
+            <a href="index.php">
                 <div class="nav-icon">
                     <i class="material-symbols-outlined">shopping_bag</i>
                     <h3>SHOP</h3><span>เข้าสู่ระบบ</span>

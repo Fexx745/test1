@@ -170,7 +170,7 @@ if (isset($_SESSION['addaccount'])) {
             // position: "top-center",
             icon: "success",
             title: "เพิ่มผู้ใช้สำเร็จ!",
-            text: "Successfully",
+            footer: "<span style='color: #30b566'>เพิ่มผู้ใช้สำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         }).then(function () {
