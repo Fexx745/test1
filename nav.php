@@ -25,10 +25,10 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #e5e5e5;" href="index.php"><i class='bx bxs-home'></i> หน้าหลัก</a>
+                        <a class="nav-link" style="color: #fff;" href="index.php"><i class='bx bxs-home'></i> หน้าหลัก</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #e5e5e5;" href="#"><i class='bx bxs-phone-call'></i> ติดต่อ</a>
+                        <a class="nav-link" style="color: #fff;" href="#"><i class='bx bxs-phone-call'></i> ติดต่อ</a>
                     </li>
                 </ul>
                 <form class="d-flex me-3 position-relative" action="index_search.php" method="POST">
@@ -62,7 +62,6 @@
                             <li><a class="dropdown-item" href="logout.php" onclick="confirmLogout(event)">
                                     <i class='bx bx-log-out'></i> ออกจากระบบ
                                 </a></li>
-
                         </ul>
                     </div>
                 <?php } else { ?>
