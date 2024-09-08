@@ -49,7 +49,13 @@ $row = mysqli_fetch_array($result);
                         ข้อมูลการส่งสินค้า
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">เพิ่มขนส่ง</h3>
+                    <div class="alert" style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
+                            <div class="d-flex"><img src="../assets/images/other/truck.png" alt="Line Notify Logo" style="height: 50px; margin-right: 10px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                    เพิ่มขนส่ง
+                                </h3>
+                            </div>
+                        </div>
                         <form method="POST" action="shipping_insert.php" enctype="multipart/form-data">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bxs-truck'></i></span>
@@ -203,39 +209,39 @@ if (isset($_SESSION['error_shipping_delete'])) {
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-function editShipping(id, currentName) {
-    Swal.fire({
-        title: 'แก้ไขข้อมูลการขนส่ง',
-        input: 'text',
-        inputValue: currentName,
-        inputAttributes: {
-            autocapitalize: 'off'
-        },
-        showCancelButton: true,
-        confirmButtonText: 'บันทึก',
-        showLoaderOnConfirm: true,
-        preConfirm: (newName) => {
-            return fetch(`shipping_edit.php?id=${id}&name=${newName}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(response.statusText)
-                    }
-                    return response.json()
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(`Request failed: ${error}`)
-                })
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: 'แก้ไขเรียบร้อย!',
-                icon: 'success'
-            }).then(() => {
-                location.reload();
-            });
-        }
-    });
-}
+    function editShipping(id, currentName) {
+        Swal.fire({
+            title: 'แก้ไขข้อมูลการขนส่ง',
+            input: 'text',
+            inputValue: currentName,
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'บันทึก',
+            showLoaderOnConfirm: true,
+            preConfirm: (newName) => {
+                return fetch(`shipping_edit.php?id=${id}&name=${newName}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText)
+                        }
+                        return response.json()
+                    })
+                    .catch(error => {
+                        Swal.showValidationMessage(`Request failed: ${error}`)
+                    })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'แก้ไขเรียบร้อย!',
+                    icon: 'success'
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+    }
 </script>

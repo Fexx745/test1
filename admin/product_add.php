@@ -33,7 +33,7 @@ $row = mysqli_fetch_array($result);
     <!-- boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
-    
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -44,11 +44,17 @@ $row = mysqli_fetch_array($result);
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
+                        <i class='bx bxs-plus-circle'></i>
                         เพิ่มสินค้า
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">เพิ่มสินค้า</h3>
+                        <div class="alert" style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
+                            <div class="d-flex"><img src="../assets/images/other/addStock.png" style="height: 50px; margin-right: 10px;">
+                                <h3 style="font-weight: 1000; margin-top: 20px;">
+                                เพิ่มสินค้า
+                                </h3>
+                            </div>
+                        </div>
                         <form method="POST" action="product_insert.php" enctype="multipart/form-data">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bx-package'></i></span>

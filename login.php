@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end mb-3">
-                        <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon" class="material-symbols-outlined" style="color: #000; font-size: 18px;">visibility_off</span></a>
+                        <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon" class="material-symbols-outlined" style="color: #000; font-size: 20px; font-weight: 800;">visibility_off</span></a>
                     </div>
 
                     <div class="d-grid">

@@ -150,13 +150,13 @@ if (!isset($_SESSION['inPro'])) {
                     <div class="container" style="margin-top: 20px; margin-bottom: 100px;">
                         <div class="row">
                             <div class="col-md-6 alert" style="background: #e9ecef; color: #333; border: none; outline: none;">
-
+<!-- 
                                 <p style="font-size: 15px;">
                                     <i class='bx bxs-bank'></i>
                                     &nbsp;โปรดแนบสลิปการโอนทุกครั้งที่ทำการชำระเงิน
-                                </p>
+                                </p> -->
                                 <h5>ธนาคารไทยพาณิชย์ 407xxxxxxx</h5>
-                                <span style="color: #ee2c4a;">**รองรับไฟล์ .png, .jpg, และ .jpeg</span>
+                                <strong style="color: #ee2c4a;">*รองรับไฟล์ .png, .jpg, และ .jpeg</strong>
                                 <div class="text-end">
                                     <div class="input-group">
                                         <input type="hidden" class="form-control" name="payment_date" required>

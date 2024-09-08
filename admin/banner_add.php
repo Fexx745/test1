@@ -49,14 +49,14 @@ $row = mysqli_fetch_array($result);
                         ตั้งค่าแบนเนอร์
                     </div>
                     <div class="card-body">
-                        <div class="alert mt-4" style="background: linear-gradient(195deg, #fef6f5 0%, #fef6f5 100%); color: #333; border: 1px solid #ee4d2d; outline: none;">
+                        <div class="alert" style="background: linear-gradient(195deg, #fef6f5 0%, #fef6f5 100%); color: #333; border: none; outline: none;">
                             <h3 style="font-weight: 1000;">
                                 <img src="../assets/images/other/tutorial.png" alt="Tutorial Icon" style="height: 30px; margin-right: 10px;">
                                 คำแนะนำ (Tutorial)
                             </h3>
                             <p>
                                 <i class='bx bx-image-alt'></i> <strong>ขนาดภาพที่แนะนำ</strong> <i class='bx bx-right-arrow-alt'></i> 1920px x 500px
-                                <strong style="color: #ee2c4a;">**รองรับไฟล์ .png .jpg .jpeg และ .gif เท่านั้น</strong>
+                                <strong style="color: #ee2c4a;">*รองรับไฟล์ .png .jpg .jpeg และ .gif เท่านั้น</strong>
                             </p>
                         </div>
 

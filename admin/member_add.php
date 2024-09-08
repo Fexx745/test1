@@ -48,7 +48,14 @@ $row = mysqli_fetch_array($result);
                         เพิ่มบัญชีผู้ใช้งาน
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">สมัครสมาชิก</h3>
+                    <div class="alert" style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
+                            <div class="d-flex">
+                                <img src="../assets/images/other/customer.png" alt="Line Notify Logo" style="height: 60px; margin-right: 5px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                    สมัครสมาชิก
+                                </h3>
+                            </div>
+                        </div>
                         <h1 class="text-center text-muted lead mb-3">
                             <?php
                             if (session_status() == PHP_SESSION_NONE) {
@@ -164,7 +171,7 @@ $row = mysqli_fetch_array($result);
 
 <?php
 if (isset($_SESSION['addaccount'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             // position: "top-center",
@@ -173,12 +180,12 @@ if (isset($_SESSION['addaccount'])) {
             footer: "<span style='color: #30b566'>เพิ่มผู้ใช้สำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
-        }).then(function () {
+        }).then(function() {
             window.location.href = 'show_account.php';
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['addaccount']);
 }
 ?>

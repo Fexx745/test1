@@ -25,10 +25,10 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #fff;" href="index.php"><i class='bx bxs-home'></i> หน้าหลัก</a>
+                        <a class="nav-link" style="color: #e5e5e5;" href="index.php"><i class='bx bxs-home'></i> หน้าหลัก</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #fff;" href="#"><i class='bx bxs-phone-call'></i> ติดต่อ</a>
+                        <a class="nav-link" style="color: #e5e5e5;" href="#"><i class='bx bxs-phone-call'></i> ติดต่อ</a>
                     </li>
                 </ul>
                 <form class="d-flex me-3 position-relative" action="index_search.php" method="POST">
@@ -46,12 +46,14 @@
                 if (isset($_SESSION['username'])) {
                 ?>
                     <!-- Logged in -->
-                    <div class="dropdown ms-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="background: linear-gradient(#ee2c4a, #dc3545); color: #fff; border: none; box-shadow: 0 3px 5px rgba(0, 0, 0, .4);">
-                            <img src="assets/images/other/profile.png" alt="" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
-                            <?php echo $_SESSION['fname']; ?>
+                    <div class="dropdown my-2">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="outline: none; border: none;">
+                            <img src="assets/images/other/man.png" alt="" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
+                            <span class="text-white"><?php echo $_SESSION['username']; ?></span>
                         </button>
-
+                        <!-- <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="box-shadow: 0 3px 2px rgba(0, 0, 0, .8); color: #fff;">
+                            <img src="assets/images/other/profile.png" alt="" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
+                        </button> -->
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="editProfile.php?id=<?php echo $_SESSION['user_id']; ?>">
                                     <i class='bx bx-cog'></i> ตั้งค่าผู้ใช้
@@ -101,10 +103,10 @@
                                 style="text-decoration: none; color: #0046ab; font-size: 14px;">ลืมรหัสผ่าน ?</a>
                             <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon"
                                     class="material-symbols-outlined"
-                                    style="color: #333; font-size: 18px;">visibility_off</span></a>
+                                    style="color: #000; font-size: 20px; font-weight: 800;">visibility_off</span></a>
                         </div>
                         <div class="d-grid">
-                            <button class="btn" type="submit" style="background: #ffc107; color: #fff; font-size: 18px; font-weight: 600;">Login</button>
+                            <button class="btn" type="submit" style="background: #eda500; color: #fff;">Login</button>
                         </div>
                     </form>
                 </div>

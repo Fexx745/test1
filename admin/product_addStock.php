@@ -45,11 +45,17 @@ $row = mysqli_fetch_array($result);
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
+                        <i class='bx bxs-plus-circle'></i>
                         เพิ่มสต็อกสินค้า
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">เพิ่มสต็อกสินค้า</h3>
+                        <div class="alert" style="background: linear-gradient(195deg, #f7fffe 0%, #f7fffe 100%); color: #333; border: 1px solid #30b566; outline: none;">
+                            <div class="d-flex"><img src="../assets/images/other/cart.png" style="height: 50px; margin-right: 10px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                    เพิ่มสต็อกสินค้า
+                                </h3>
+                            </div>
+                        </div>
                         <form method="POST" action="product_update_Stock.php">
                             <div class="mb-3 mt-3">
                                 <input type="hidden" class="form-control-plaintext alert alert-warning" name="pid" value="<?= $row['p_id']; ?>" readonly>
@@ -65,7 +71,7 @@ $row = mysqli_fetch_array($result);
                             </div>
                             <div class="mt-3">
                                 <a href="product_List.php" class="btn btn-dark">ย้อนกลับ</a>
-                                <button class="btn btn-danger" type="submit">ตกลง</button>
+                                <button class="btn btn-danger" type="submit">บันทึก</button>
                             </div>
                         </form>
                     </div> <!-- card-body -->

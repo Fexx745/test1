@@ -1,7 +1,13 @@
 <?php
 session_start();
 include('condb.php');
+
+if (isset($_SESSION['status']) && $_SESSION['status'] === '1') {
+    header('Location: admin/index.php');
+    exit();
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

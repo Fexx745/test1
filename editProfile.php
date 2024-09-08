@@ -66,10 +66,10 @@ if (isset($_GET['id'])) {
                         <input type="text" class="form-control" name="email" placeholder="อีเมลล์"
                             value="<?= htmlspecialchars($_SESSION['email']); ?>">
                     </div>
-                    <div class="mb-3" id="map" style="height: 400px; width: 100%;"></div>
+                    <!-- <div class="mb-3" id="map" style="height: 400px; width: 100%;"></div> -->
                     <div class="form-floating mb-3">
                         <textarea class="form-control" placeholder="ที่อยู่ ..." id="address" name="address"
-                            style="height: 200px; resize: none; margin: 0 0 100px 0;"><?= htmlspecialchars($_SESSION['address']); ?></textarea>
+                            style="height: 200px; resize: none; margin: 0 0 0 0;"><?= htmlspecialchars($_SESSION['address']); ?></textarea>
                         <label for="address"><i class='bx bx-location-plus'></i> ที่อยู่ ...</label>
                     </div>
 
@@ -84,7 +84,7 @@ if (isset($_GET['id'])) {
         </div> <!-- end edit-profile -->
     </div> <!-- end container-card2 -->
     <?php include('footer.php'); ?>
-    <script>
+    <!-- <script>
         function initMap() {
             try {
                 const map = new google.maps.Map(document.getElementById("map"), {
@@ -108,7 +108,7 @@ if (isset($_GET['id'])) {
         }
 
         window.onload = initMap;
-    </script>
+    </script> -->
 </body>
 
 </html>
@@ -118,7 +118,7 @@ if (isset($_GET['id'])) {
 
 <?php
 if (isset($_SESSION['submit_edit_profile'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -127,8 +127,12 @@ if (isset($_SESSION['submit_edit_profile'])) {
             showConfirmButton: false,
             timer: 1500
         });
+
+        // ลิ้งไปที่หน้า index.php หลังจากรอ 1.5 วินาที (1500ms)
+        setTimeout(function() {
+            window.location.href = "index.php";
+        }, 1500);
     </script>
-    <?php
+<?php
     unset($_SESSION['submit_edit_profile']);
 }
-?>

@@ -207,7 +207,7 @@ $row4 = mysqli_fetch_array($result4);
                                     </td>
                                     <td>
                                         <div class="text-center">
-                                            <button class="btn" style="background: linear-gradient(195deg, #fff3cd 0%, #fff3cd 100%); color: #333; border: 1px solid #e5e5e5; border-radius: 0.25rem;"
+                                            <button class="btn" style="background: linear-gradient(195deg, #c8dcf9 0%, #c8dcf9 100%); color: #333; border: 1px solid #0046ab; border-radius: 0.25rem;"
                                                 onclick="showOrderDetail('<?= $row['orderID'] ?>')">
                                                 <i class='bx bx-message-detail'></i>
                                             </button>
@@ -283,13 +283,14 @@ $row4 = mysqli_fetch_array($result4);
 <script>
     function confirmDelete(id) {
         Swal.fire({
-            title: "Are you sure?",
-            text: "คุณต้องการลบคำสั่งซื้อหรือไม่?",
+            title: "คุณแน่ใจหรือไม่?",
+            text: "คุณต้องการลบคำสั่งซื้อนี้หรือไม่?",
+            footer: '<span style="color: #ee2c4a;">**โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนทำการลบ</span>',
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ยืนยัน",
+            confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {

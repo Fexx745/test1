@@ -49,7 +49,14 @@ $row = mysqli_fetch_array($result);
                         แก้ไขข้อมูลลูกค้า
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">แก้ไขข้อมูลลูกค้า</h3>
+                        <div class="alert" style="background: linear-gradient(195deg, #fff8e4 0%, #fff8e4 100%); color: #333; border: 1px solid #eda500; outline: none;">
+                            <div class="d-flex"><img src="../assets/images/other/Male-user-edit-icon.png" alt="Line Notify Logo" style="height: 50px; margin-right: 10px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                    แก้ไขข้อมูลลูกค้า
+                                </h3>
+                            </div>
+                            <strong style="color: #ee2c4a;">*ไม่สามารถแก้ไข Username และ Email ได้</strong>
+                        </div>
                         <form method="POST" action="member_update.php" enctype="multipart/form-data">
                             <div class="mb-3 mt-3">
                                 <input type="hidden" class="form-control alert alert-success" name="id"
@@ -106,7 +113,7 @@ $row = mysqli_fetch_array($result);
 
                             <div class="mt-4">
                                 <a href="member_List.php" class="btn btn-dark">ย้อนกลับ</a>
-                                <button class="btn btn-danger" type="submit">ตกลง</button>
+                                <button class="btn btn-danger" type="submit">บันทึก</button>
                             </div>
                         </form>
                     </div> <!-- card-body -->

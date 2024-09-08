@@ -125,7 +125,7 @@ $row4 = mysqli_fetch_array($result4);
 
                         <div class="mt-3 mb-3">
                             <a href="report_order.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
+                                    class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;รอตรวจสอบ</button></a>
                             <a href="report_order_wait.php"><button type="button"
                                     class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-truck'></i>&nbsp;รอจัดส่ง</button></a>
                             <a href="report_order_yes.php"><button type="button"
@@ -231,7 +231,7 @@ $row4 = mysqli_fetch_array($result4);
 
                                     </td>
                                     <td>
-                                        <button class="btn" style="background: linear-gradient(195deg, #fff3cd 0%, #fff3cd 100%); color: #333; border: 1px solid #e5e5e5; border-radius: 0.25rem;"
+                                        <button class="btn" style="background: linear-gradient(195deg, #c8dcf9 0%, #c8dcf9 100%); color: #333; border: 1px solid #0046ab; border-radius: 0.25rem;"
                                             onclick="showOrderDetail('<?= $row['orderID'] ?>')">
                                             <i class='bx bx-message-detail'></i>
                                         </button>

@@ -49,8 +49,15 @@ $row = mysqli_fetch_array($result);
                         จัดการข้อมูลลูกค้า
                     </div>
                     <div class="card-body">
-                    <h3 class="alert alert-primary mt-3 mb-3">จัดการข้อมูลลูกค้า</h3>
-                    <a href="member_add.php" class="btn btn-success mb-3"><i class='bx bxs-plus-circle'></i> เพิ่มผู้ใช้งาน</a>
+                    <div class="alert" style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
+                            <div class="d-flex">
+                                <img src="../assets/images/other/customer3.png" alt="Line Notify Logo" style="height: 60px; margin-right: 5px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                    จัดการข้อมูลลูกค้า
+                                </h3>
+                            </div>
+                        </div>
+                        <a href="member_add.php" class="btn btn-success mb-3"><i class='bx bxs-plus-circle'></i> เพิ่มผู้ใช้งาน</a>
                         <table id="datatablesSimple" class="table table-striped">
                             <thead>
                                 <tr>
@@ -94,8 +101,8 @@ $row = mysqli_fetch_array($result);
 
                         </table>
                         <div class="mt-4" class="mb-2">
-                                <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
-                            </div>
+                            <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
+                        </div>
                     </div> <!-- card-body -->
                 </div>
             </div>
@@ -138,7 +145,7 @@ $row = mysqli_fetch_array($result);
 
 <?php
 if (isset($_SESSION['deleteaccount'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -149,14 +156,14 @@ if (isset($_SESSION['deleteaccount'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['deleteaccount']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['editaccount'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -166,7 +173,7 @@ if (isset($_SESSION['editaccount'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['editaccount']);
 }
 ?>

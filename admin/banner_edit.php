@@ -47,11 +47,18 @@ $row = mysqli_fetch_array($result);
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
+                        <i class='bx bx-image-alt'></i>
                         แก้ไขรูปภาพแบนเนอร์
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">แก้ไขรูปภาพแบนเนอร์</h3>
+                        <div class="alert" style="background: linear-gradient(195deg, #fff8e4 0%, #fff8e4 100%); color: #333; border: 1px solid #eda500; outline: none;">
+                            <div class="d-flex">
+                                <img src="../assets/images/other/edit.png" style="height: 50px; margin-right: 5px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                    แก้ไขรูปภาพแบนเนอร์
+                                </h3>
+                            </div>
+                        </div>
                         <form method="POST" action="banner_update.php" enctype="multipart/form-data">
                             <div class="mb-3 mt-3">
                                 <input type="hidden" class="form-control alert alert-success" name="pid"
@@ -73,8 +80,8 @@ $row = mysqli_fetch_array($result);
                                     <input type="file" class="form-control" name="b_image">
                             </div>
                             <div class="mt-4">
-                                <a href="editbanner.php" class="btn btn-primary">ย้อนกลับ</a>
-                                <button class="btn btn-success" type="submit">ตกลง</button>
+                                <a href="banner_add.php" class="btn btn-dark">ย้อนกลับ</a>
+                                <button class="btn btn-danger" type="submit">บันทึก</button>
                             </div>
                         </form>
                     </div> <!-- card-body -->

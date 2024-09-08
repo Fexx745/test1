@@ -45,11 +45,17 @@ $row = mysqli_fetch_array($result);
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
+                        <i class='bx bx-grid'></i>
                         ประเภทสินค้า
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">เพิ่มประเภทสินค้า</h3>
+                        <div class="alert" style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
+                            <div class="d-flex"><img src="../assets/images/other/type_product.png" alt="Line Notify Logo" style="height: 50px; margin-right: 10px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                    เพิ่มประเภทสินค้า
+                                </h3>
+                            </div>
+                        </div>
                         <form method="POST" action="producttype_insert.php" enctype="multipart/form-data">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bx-grid'></i></span>

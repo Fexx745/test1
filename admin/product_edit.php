@@ -48,11 +48,18 @@ $row = mysqli_fetch_array($result);
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
+                        <i class='bx bx-edit'></i>
                         แก้ไขข้อมูลสินค้า
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">แก้ไขข้อมูลสินค้า</h3>
+                        <div class="alert" style="background: linear-gradient(195deg, #fff8e4 0%, #fff8e4 100%); color: #333; border: 1px solid #eda500; outline: none;">
+                            <div class="d-flex">
+                                <img src="../assets/images/other/edit.png" alt="Line Notify Logo" style="height: 50px; margin-right: 5px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                    แก้ไขข้อมูลสินค้า
+                                </h3>
+                            </div>
+                        </div>
                         <form method="POST" action="product_update.php" enctype="multipart/form-data">
                             <div class="mb-3 mt-3">
                                 <input type="hidden" class="form-control alert alert-success" name="pid"
@@ -177,7 +184,7 @@ $row = mysqli_fetch_array($result);
                             </div>
                             <div class="mt-4">
                                 <a href="product_List.php" class="btn btn-dark">ย้อนกลับ</a>
-                                <button class="btn btn-danger" type="submit">ยืนยัน</button>
+                                <button class="btn btn-danger" type="submit">บันทึก</button>
                             </div>
                         </form>
                     </div> <!-- card-body -->

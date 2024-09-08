@@ -34,19 +34,6 @@ $row = mysqli_fetch_array($result);
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-
-        * {
-            font-size: 16px;
-            font-family: 'K2D', sans-serif;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            /* ปรับตามความต้องการ */
-        }
-    </style>
 
 </head>
 
@@ -58,31 +45,38 @@ $row = mysqli_fetch_array($result);
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
+                        <i class='bx bxs-grid'></i>
                         แก้ไขประเภทสินค้า
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">แก้ไขประเภทสินค้า</h3>
+                        <div class="alert" style="background: linear-gradient(195deg, #fff8e4 0%, #fff8e4 100%); color: #333; border: 1px solid #eda500; outline: none;">
+                            <div class="d-flex"><img src="../assets/images/other/edit.png" alt="Line Notify Logo" style="height: 50px; margin-right: 10px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                    แก้ไขประเภทสินค้า
+                                </h3>
+                            </div>
+                            <strong style="color: #ee2c4a;">*รองรับรูปภาพ .png .jpg และ .jpeg</strong>
+                        </div>
                         <form method="POST" action="producttype_update.php" enctype="multipart/form-data">
                             <div class="mb-3 mt-3">
                                 <input type="hidden" class="form-control alert alert-success" name="typeid"
                                     value="<?= $row['type_id']; ?>" readonly>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bxs-basket'></i></span>
+                                <span class="input-group-text"><i class='bx bxs-grid'></i></span>
                                 <input type="text" class="form-control" name="typename"
                                     value="<?= $row['type_name']; ?>">
                             </div>
-                                <?php
-                                $imageURL = !empty($row['type_image']) ? "../assets/images/type_product/{$row['type_image']}" : "../assets/images/other/no_img.png";
-                                ?>
-                                <img src="<?= $imageURL ?>"
-                                    style="margin: 0 0 10px 0; width: 100px; height: 150px; object-fit: contain;">
+                            <?php
+                            $imageURL = !empty($row['type_image']) ? "../assets/images/type_product/{$row['type_image']}" : "../assets/images/other/no_img.png";
+                            ?>
+                            <img src="<?= $imageURL ?>"
+                                style="margin: 0 0 10px 0; width: 100px; height: 150px; object-fit: contain;">
 
-                                <input type="file" class="form-control" name="image">
+                            <input type="file" class="form-control" name="image">
                             <div class="mt-4">
                                 <a href="producttype_List.php" class="btn btn-dark">ย้อนกลับ</a>
-                                <button class="btn btn-danger" type="submit">ยืนยัน</button>
+                                <button class="btn btn-danger" type="submit">บันทึก</button>
                             </div>
                         </form>
                     </div> <!-- card-body -->

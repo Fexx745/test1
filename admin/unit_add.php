@@ -45,11 +45,17 @@ $row = mysqli_fetch_array($result);
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
+                        <i class="bx bxs-package"></i>
                         หน่วยสินค้า
                     </div>
                     <div class="card-body">
-                        <h3 class="alert alert-primary">เพิ่มหน่วยสินค้า</h3>
+                    <div class="alert" style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
+                            <div class="d-flex"><img src="../assets/images/other/unit.png" alt="Line Notify Logo" style="height: 50px; margin-right: 10px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                    เพิ่มหน่วยสินค้า
+                                </h3>
+                            </div>
+                        </div>
                         <form method="POST" action="unit_insert.php" enctype="multipart/form-data">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bxs-package'></i></span>
@@ -203,45 +209,48 @@ if (isset($_SESSION['error_unit_delete'])) {
 ?>
 
 <script>
-function editUnit(id, currentName) {
-    Swal.fire({
-        title: 'แก้ไขชื่อหน่วย',
-        input: 'text',
-        inputValue: currentName,
-        inputAttributes: {
-            autocapitalize: 'off'
-        },
-        showCancelButton: true,
-        confirmButtonText: 'บันทึก',
-        showLoaderOnConfirm: true,
-        preConfirm: (newName) => {
-            return fetch('unit_edit.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ unitid: id, unitname: newName })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(response.statusText);
-                }
-                return response.json();
-            })
-            .catch(error => {
-                Swal.showValidationMessage(`Request failed: ${error}`);
-            });
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: 'แก้ไขเรียบร้อย!',
-                icon: 'success'
-            }).then(() => {
-                location.reload();
-            });
-        }
-    });
-}
+    function editUnit(id, currentName) {
+        Swal.fire({
+            title: 'แก้ไขชื่อหน่วย',
+            input: 'text',
+            inputValue: currentName,
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'บันทึก',
+            showLoaderOnConfirm: true,
+            preConfirm: (newName) => {
+                return fetch('unit_edit.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            unitid: id,
+                            unitname: newName
+                        })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .catch(error => {
+                        Swal.showValidationMessage(`Request failed: ${error}`);
+                    });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'แก้ไขเรียบร้อย!',
+                    icon: 'success'
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+    }
 </script>

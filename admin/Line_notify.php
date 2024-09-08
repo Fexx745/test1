@@ -45,13 +45,15 @@ if (!isset($_SESSION['username'])) {
                         Line Notify
                     </div>
                     <div class="card-body">
-                        <div class="alert alert-success">
+                        <div class="alert" style="background: linear-gradient(195deg, #f7fffe 0%, #f7fffe 100%); color: #333; border: none; outline: none;">
                             <h3 style="font-weight: 1000;">
                                 <img src="../assets/images/other/line.png" alt="Line Notify Logo" style="height: 30px; margin-right: 10px;">
                                 Line Notify
                             </h3>
-                            <p style="color: #000;">คุณสามารถรับรหัส Token ได้ที่ลิงก์นี้และอ่านคำแนะนำก่อนใช้งาน</p>
-                            <a href="https://notify-bot.line.me/th/" target="_blank">https://notify-bot.line.me/th/</a>
+                            <p>
+                                <strong>คุณสามารถรับรหัส Token ได้ที่ลิงก์นี้และอ่านคำแนะนำก่อนใช้งาน</strong><br>
+                                <a href="https://notify-bot.line.me/th/" target="_blank">https://notify-bot.line.me/th/</a>
+                            </p>
                         </div>
                         <table class="table table-striped">
                             <thead>

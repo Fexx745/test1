@@ -116,7 +116,7 @@ $row4 = mysqli_fetch_array($result4);
                 <div class="card mb-4">
                     <div class="card-header">
                         <?php include('report_tutorial.php'); ?>
-                        <i class='bx bxs-car'></i>
+                        <i class='bx bxs-truck'></i>
                         แสดงข้อมูลสินค้าที่รอการจัดส่ง
 
                         <div class="mt-3 mb-3">
@@ -207,7 +207,7 @@ $row4 = mysqli_fetch_array($result4);
                                     </td>
                                     <td>
                                         <a href="report_order_detailShipping.php?id=<?= $row['orderID'] ?>"
-                                            class="btn" style="background: linear-gradient(195deg, #fff3cd 0%, #fff3cd 100%); color: #333; border: 1px solid #e5e5e5; border-radius: 0.25rem;"><i class='bx bx-message-detail'></i></a>
+                                            class="btn" style="background: linear-gradient(195deg, #c8dcf9 0%, #c8dcf9 100%); color: #333; border: 1px solid #0046ab; border-radius: 0.25rem;"><i class='bx bx-message-detail'></i></a>
                                     </td>
                                 </tr>
                             <?php

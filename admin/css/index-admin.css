@@ -54,7 +54,7 @@
     --nc-caution: #f69113;
     --nc-caution-bg: #fff8e4;
     --nc-success: #30b566;
-    --nc-success-bg: #f7fffe;
+    --nc-success-bg: #d9fddb;
 }
 
 
@@ -68,7 +68,7 @@
     .card-icons {
         width: 70px;
         height: 100%;
-        background: var(--bs-dark);
+        background: var(--bs-gray-700);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -82,7 +82,7 @@
 
     .card-details {
         width: 100%;
-        border-bottom: 5px solid var(--bs-dark);
+        border-bottom: 5px solid var(--bs-gray-700);
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -100,7 +100,7 @@
     .card-icons-2 {
         width: 70px;
         height: 100%;
-        background: var(--bs-dark);
+        background: var(--bs-gray-700);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -115,7 +115,7 @@
 
     .card-details-2 {
         width: 100%;
-        border-bottom: 5px solid var(--bs-dark);
+        border-bottom: 5px solid var(--bs-gray-700);
         display: flex;
         justify-content: flex-start;
         align-items: center;

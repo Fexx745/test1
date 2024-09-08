@@ -50,10 +50,18 @@ $row = mysqli_fetch_array($result);
             <div class="container-fluid px-4 mt-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
+                        <i class='bx bx-wallet'></i>
                         แก้ไขราคาสินค้า
                     </div>
                     <div class="card-body">
+                        <div class="alert" style="background: linear-gradient(195deg, #f7fffe 0%, #f7fffe 100%); color: #333; border: 1px solid #30b566; outline: none;">
+                            <div class="d-flex"><img src="../assets/images/other/pngegg.png" alt="Line Notify Logo" style="height: 50px; margin-right: 10px;">
+                                <h3 style="font-weight: 1000; margin-top: 10px;">
+                                แก้ไขราคาสินค้า
+                                </h3>
+                            </div>
+                            <strong style="color: #ee2c4a;">*แก้ไขวันเริ่มต้น และวันสิ้นสุดการใช้ราคา</strong>
+                        </div>
                         <form method="POST" action="product_update_Price.php">
                             <!-- get p_id ส่งค่าไป -->
                             <input type="text" name="price_id" value="<?= $row['p_id']; ?>" hidden>
@@ -69,22 +77,22 @@ $row = mysqli_fetch_array($result);
                                 <input type="text" class="form-control" name="pname" value="<?= $row['p_name']; ?>" readonly>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bxs-wallet' ></i></span>
+                                <span class="input-group-text"><i class='bx bxs-wallet'></i></span>
                                 <input type="text" class="form-control" name="price" value="<?= number_format($row['price'], 2); ?>">
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class='bx bx-calendar-x' ></i>&nbsp;วันที่สิ้นสุดการใช้ราคา</span>
+                                <span class="input-group-text"><i class='bx bx-calendar-x'></i>&nbsp;วันที่สิ้นสุดการใช้ราคา</span>
                                 <input type="text" class="form-control" name="showto_date" value="<?= date('d/m/Y', strtotime($row['to_date'])); ?>" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bx-calendar-minus'></i>&nbsp;แก้ไขวันที่เริ่มใช้ราคา</span>
                                 <input type="date" class="form-control" name="from_date" id="from_date">
-                                <span class="input-group-text"><i class='bx bx-calendar-x' ></i>&nbsp;แก้ไขวันที่สิ้นสุดใช้ราคา</span>
+                                <span class="input-group-text"><i class='bx bx-calendar-x'></i>&nbsp;แก้ไขวันที่สิ้นสุดใช้ราคา</span>
                                 <input type="date" class="form-control" name="to_date">
                             </div>
                             <div class="mt-4">
                                 <a href="product_List.php" class="btn btn-dark">ย้อนกลับ</a>
-                                <button class="btn btn-danger" type="submit">ยืนยัน</button>
+                                <button class="btn btn-danger" type="submit">บันทึก</button>
                             </div>
                         </form>
 
