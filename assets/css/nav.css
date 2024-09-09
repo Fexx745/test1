@@ -88,9 +88,8 @@ nav {
     text-decoration: none;
     font-weight: 1000;
 }
-
 .logo:hover {
-    color: #e5e5e5;
+    color: #fff;
     letter-spacing: 3px;
     border-radius: 5px;
     padding: 0px 20px;
@@ -99,3 +98,18 @@ nav {
     font-weight: 1000;
 }
 
+.nav-link {
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    background-color: #333;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.nav-item {
+    margin-right: 10px;
+}

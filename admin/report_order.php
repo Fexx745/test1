@@ -122,17 +122,7 @@ $row4 = mysqli_fetch_array($result4);
                         <?php include('report_tutorial.php'); ?>
                         <i class='bx bxs-time-five'></i>
                         แสดงข้อมูลการสั่งซื้อสินค้าที่รอตรวจสอบการชำระเงิน
-
-                        <div class="mt-3 mb-3">
-                            <a href="report_order.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;รอตรวจสอบ</button></a>
-                            <a href="report_order_wait.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-truck'></i>&nbsp;รอจัดส่ง</button></a>
-                            <a href="report_order_yes.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bxs-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
-                            <a href="report_order_no.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;"><i class='bx bxs-x-circle'></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
-                        </div>
+                        <?php include('report_button.php'); ?>
 
                         <form name="form1" action="report_order.php" method="POST">
                             <div class="row">
@@ -221,7 +211,7 @@ $row4 = mysqli_fetch_array($result4);
 
                                         <?php
                                         if ($status == 1) {
-                                            echo "<span><i class='bx bxs-time'></i>&nbsp;รอตรวจสอบ</span>";
+                                            echo "<span style='color: #333;'><i class='bx bxs-time'></i>&nbsp;รอตรวจสอบ</span>";
                                         } else if ($status == 2) {
                                             echo "<b style='color: #28a745;'>ชำระเงินแล้ว</b>";
                                         } else if ($status == 0) {
@@ -231,7 +221,7 @@ $row4 = mysqli_fetch_array($result4);
 
                                     </td>
                                     <td>
-                                        <button class="btn" style="background: linear-gradient(195deg, #c8dcf9 0%, #c8dcf9 100%); color: #333; border: 1px solid #0046ab; border-radius: 0.25rem;"
+                                        <button class="btn" style="background: linear-gradient(195deg, #30b566 0%, #30b566 100%); color: #fff; border: none; border-radius: 0.25rem;"
                                             onclick="showOrderDetail('<?= $row['orderID'] ?>')">
                                             <i class='bx bx-message-detail'></i>
                                         </button>
@@ -377,14 +367,24 @@ $row4 = mysqli_fetch_array($result4);
             title: "ยกเลิกคำสั่งซื้อ",
             text: "คุณต้องการยกเลิกคำสั่งซื้อนี้หรือไม่?",
             icon: "warning",
+            input: 'textarea',
+            inputPlaceholder: 'กรุณากรอกหมายเหตุ...',
             showCancelButton: true,
             confirmButtonColor: "#30b566",
             cancelButtonColor: "#d33",
             confirmButtonText: "ยืนยัน",
-            cancelButtonText: "ยกเลิก"
+            cancelButtonText: "ยกเลิก",
+            preConfirm: (annotation) => {
+                if (!annotation) {
+                    Swal.showValidationMessage("กรุณากรอกหมายเหตุ");
+                    return false;
+                }
+                return annotation;
+            }
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = `cancel_order.php?id=${id}`;
+                const annotation = result.value;
+                window.location.href = `cancel_order.php?id=${id}&annotation=${encodeURIComponent(annotation)}`;
             }
         });
     }

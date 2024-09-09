@@ -17,7 +17,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$orders_per_page = 14;
+$orders_per_page = 12;
 
 $sql_total_orders = "SELECT COUNT(*) FROM tb_order WHERE member_id = ?";
 $stmt_total = $conn->prepare($sql_total_orders);
@@ -35,7 +35,7 @@ if ($current_page > $total_pages) $current_page = $total_pages;
 
 $offset = ($current_page - 1) * $orders_per_page;
 
-$sql = "SELECT tb_order.orderID, tb_order.reg as order_date, tb_order.total_price, tb_order.order_status, tb_order.parcel_number,
+$sql = "SELECT tb_order.orderID, tb_order.reg as order_date, tb_order.total_price, tb_order.order_status, tb_order.parcel_number, tb_order.annotation,
                tb_order_detail.p_id, tb_order_detail.orderQty, tb_order_detail.Total,
                product.p_name,
                shipping_type.shipping_type_name
@@ -58,6 +58,7 @@ while ($row = $result->fetch_assoc()) {
     $order_history[$row['orderID']]['total_price'] = $row['total_price'];
     $order_history[$row['orderID']]['order_status'] = $row['order_status'];
     $order_history[$row['orderID']]['parcel_number'] = $row['parcel_number'];
+    $order_history[$row['orderID']]['annotation'] = $row['annotation'];
     $order_history[$row['orderID']]['shipping_type_name'] = $row['shipping_type_name'];
     $order_history[$row['orderID']]['items'][] = [
         'product_name' => $row['p_name'],
@@ -115,8 +116,9 @@ function getOrderStatus($status)
                                 <th scope="col">วันที่สั่งซื้อ</th>
                                 <th scope="col">ยอดรวม (บาท)</th>
                                 <th scope="col">สถานะ</th>
-                                <th scope="col">เลขพัสดุ</th>
-                                <th scope="col">ประเภทขนส่ง</th>
+                                <!-- <th scope="col">เลขพัสดุ</th> -->
+                                <!-- <th scope="col">ประเภทขนส่ง</th> -->
+                                <th scope="col">หมายเหตุ</th>
                                 <th scope="col">รายละเอียด</th>
                             </tr>
                         </thead>
@@ -139,8 +141,9 @@ function getOrderStatus($status)
                                             <?php echo getOrderStatus($order['order_status']); ?>
                                         <?php endif; ?>
                                     </td>
-                                    <td><?php echo $order['parcel_number'] ?: 'รอจัดส่ง'; ?></td>
-                                    <td><?php echo $order['shipping_type_name']; ?></td>
+                                    <!-- <td><?php echo $order['parcel_number'] ?: 'รอจัดส่ง'; ?></td>
+                                    <td><?php echo $order['shipping_type_name']; ?></td> -->
+                                    <td><?php echo $order['annotation']; ?></td>
                                     <td class="text-center"><a href="product_Order_detail.php?orderID=<?php echo $orderID; ?>" class="btn btn-view"><i class='bx bx-receipt'></i></a></td>
                                 </tr>
                             <?php endforeach; ?>

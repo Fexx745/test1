@@ -21,7 +21,7 @@ if (!isset($_GET['orderID'])) {
 
 $orderID = intval($_GET['orderID']);
 
-$sql = "SELECT tb_order.orderID, tb_order.reg as order_date, tb_order.total_price, tb_order.order_status, tb_order.parcel_number,
+$sql = "SELECT tb_order.orderID, tb_order.reg as order_date, tb_order.total_price, tb_order.order_status, tb_order.parcel_number, tb_order.annotation,
                tb_order_detail.p_id, tb_order_detail.orderQty, tb_order_detail.Total,
                product.p_name, product.image, 
                shipping_type.shipping_type_name,
@@ -45,6 +45,7 @@ while ($row = $result->fetch_assoc()) {
         $order_details['total_price'] = $row['total_price'];
         $order_details['order_status'] = $row['order_status'];
         $order_details['parcel_number'] = $row['parcel_number'];
+        $order_details['annotation'] = $row['annotation'];
         $order_details['shipping_type_name'] = $row['shipping_type_name'];
         $order_details['slip_image'] = $row['slip_image'];  /* Store the slip image file path */
     }
@@ -120,19 +121,21 @@ function getOrderStatus($status)
                     </table>
                 </div>
                 <div class="order-summary">
-                    <p><strong>เลขที่ใบสั่งซื้อ:</strong> <?php echo str_pad($orderID, 10, '0', STR_PAD_LEFT); ?></p>
-                    <p><strong>วันที่สั่งซื้อ:</strong> <?php echo $order_details['order_date']; ?></p>
-                    <p><strong>ยอดรวม:</strong> ฿<?php echo $order_details['total_price']; ?></p>
-                    <p><strong>สถานะ:</strong> <?php echo getOrderStatus($order_details['order_status']); ?></p>
-                    <p><strong>เลขพัสดุ:</strong> <?php echo $order_details['parcel_number'] ?: 'รอจัดส่ง'; ?></p>
-                    <p><strong>ประเภทขนส่ง:</strong> <?php echo $order_details['shipping_type_name']; ?></p>
+                    <p><strong><i class='bx bx-receipt'></i> เลขที่ใบสั่งซื้อ:</strong> <?php echo str_pad($orderID, 10, '0', STR_PAD_LEFT); ?></p>
+                    <p><strong><i class='bx bx-calendar'></i> วันที่สั่งซื้อ:</strong> <?php echo $order_details['order_date']; ?></p>
+                    <p><strong><i class='bx bx-dollar'></i> ยอดรวม:</strong> ฿<?php echo $order_details['total_price']; ?></p>
+                    <p><strong><i class='bx bxs-info-circle'></i> สถานะ:</strong> <?php echo getOrderStatus($order_details['order_status']); ?></p>
+                    <p><strong><i class='bx bx-package'></i> เลขพัสดุ:</strong> <?php echo $order_details['parcel_number'] ?: 'รอจัดส่ง'; ?></p>
+                    <p><strong><i class='bx bxs-truck'></i> ประเภทขนส่ง:</strong> <?php echo $order_details['shipping_type_name']; ?></p>
+                    <p><strong><i class='bx bx-note'></i> หมายเหตุ:</strong> <?php echo $order_details['annotation']; ?></p>
+
                     <?php if (!empty($order_details['slip_image'])): ?>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#slipModal">ดูสลิปการชำระเงิน
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#slipModal">
+                            <i class='bx bx-receipt'></i> หลักฐานการชำระเงิน
                         </button>
                     <?php else: ?>
-                        ไม่มีสลิปการชำระเงิน
+                        <p>ไม่มีสลิปการชำระเงิน</p>
                     <?php endif; ?>
-                    </p>
                 </div>
 
                 <!-- Modal -->

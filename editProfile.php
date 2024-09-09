@@ -77,7 +77,7 @@ if (isset($_GET['id'])) {
                         value="<?= htmlspecialchars($_SESSION['username']); ?>" readonly>
                     <div class="previous-button">
                         <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
-                        <button class="btn btn-danger" type="submit">ยืนยัน</button>
+                        <button class="btn btn-danger" type="submit">บันทึก</button>
                     </div>
                 </form>
             </div>

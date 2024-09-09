@@ -29,7 +29,45 @@ if (!isset($_SESSION['inPro'])) {
         .container {
             margin-top: 120px;
         }
+
+        .btn-custom {
+            background: #f7fffe;
+            margin: 0 10px;
+            border: 1px solid #30b566;
+            color: #000;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 7px;
+            border-radius: 3px;
+        }
+
+        .btn-custom:hover {
+            background: #e0f2f1;
+            /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+            border-color: #28a745;
+            /* เปลี่ยนสีของ border เมื่อ hover */
+            color: #000;
+            /* เปลี่ยนสีข้อความเมื่อ hover */
+        }
+
+        .btn-confirm {
+            background: linear-gradient(195deg, #30b566 0%, #30b566 100%);
+            border: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            padding: 7px;
+            border-radius: 3px;
+        }
+
+        .btn-confirm:hover {
+            background: linear-gradient(195deg, #2c8c5e 0%, #2c8c5e 100%);
+            /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+            color: #fff;
+            /* สีข้อความที่ต้องการเมื่อ hover */
+        }
     </style>
+
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap/js/bootstrap.bundle.min.js"> </script>
@@ -111,16 +149,28 @@ if (!isset($_SESSION['inPro'])) {
                                             <?= number_format($sum, 2) ?>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn" style="background: #fd7e14; color: #fff; font-weight: bold; border-radius: 5px; line-height: 1;" onclick="location.href='order.php?id=<?= $row_product['p_id'] ?>&quantity=1'">+</button>
-                                            <!-- เชคจำนวนสินค้าถ้ามี 1 ปุ่ม - จะไม่มี -->
+                                            <!-- เพิ่ม hover effect ด้วย inline style -->
+                                            <button type="button" class="btn"
+                                                style="background: #fd7e14; color: #fff; font-weight: bold; border-radius: 5px; line-height: 1; transition: background-color 0.3s, transform 0.3s;"
+                                                onmouseover="this.style.backgroundColor='#e67e22'; this.style.transform='scale(1.05)';"
+                                                onmouseout="this.style.backgroundColor='#fd7e14'; this.style.transform='scale(1)';"
+                                                onclick="location.href='order.php?id=<?= $row_product['p_id'] ?>&quantity=1'">
+                                                +
+                                            </button>
+
+                                            <!-- เพิ่ม hover effect ด้วย inline style -->
                                             <?php if ($_SESSION["strQty"][$i] > 1) { ?>
-                                                <a href="order_del.php?id=<?= $row_product['p_id'] ?>"><button type="button" class="btn" style="background: #f8f9fa; color: #fd7e14; font-weight: bold; border-radius: 5px; line-height: 1; border: 1px solid #fd7e14;">-</button></a>
+                                                <a href="order_del.php?id=<?= $row_product['p_id'] ?>">
+                                                    <button type="button" class="btn"
+                                                        style="background: #f8f9fa; color: #fd7e14; font-weight: bold; border-radius: 5px; line-height: 1; border: 1px solid #fd7e14; transition: background-color 0.3s, transform 0.3s;"
+                                                        onmouseover="this.style.backgroundColor='#e2e6e8'; this.style.transform='scale(1.05)';"
+                                                        onmouseout="this.style.backgroundColor='#f8f9fa'; this.style.transform='scale(1)';">
+                                                        -
+                                                    </button>
+                                                </a>
                                             <?php } ?>
+
                                         </td>
-                                        <!-- <td>
-                                            <a href="cart_delete.php?Line=<?= $i ?>"><button type="button"
-                                                    class="btn btn-danger"><i class='bx bx-trash' ></i></button></a>
-                                        </td> -->
                                         <td>
                                             <button type="button" class="btn btn-danger" style="line-height: 1;" onclick="confirmDeleteCart(<?= $i ?>)">
                                                 <i class='bx bx-trash-alt'></i>
@@ -150,13 +200,17 @@ if (!isset($_SESSION['inPro'])) {
                     <div class="container" style="margin-top: 20px; margin-bottom: 100px;">
                         <div class="row">
                             <div class="col-md-6 alert" style="background: #e9ecef; color: #333; border: none; outline: none;">
-<!-- 
+                                <!-- 
                                 <p style="font-size: 15px;">
                                     <i class='bx bxs-bank'></i>
                                     &nbsp;โปรดแนบสลิปการโอนทุกครั้งที่ทำการชำระเงิน
                                 </p> -->
-                                <h5>ธนาคารไทยพาณิชย์ 407xxxxxxx</h5>
-                                <strong style="color: #ee2c4a;">*รองรับไฟล์ .png, .jpg, และ .jpeg</strong>
+                                <h5>ธนาคารไทยพาณิชย์ 4370378747</h5>
+                                <b>นายจตุพล สิงห์กระโจม</b>
+                                <span style="color: #ee2c4a; font-size: 15px;">
+                                    * รองรับไฟล์ .png, .jpg, และ .jpeg ขนาดไฟล์ไม่เกิน 10MB
+                                </span>
+
                                 <div class="text-end">
                                     <div class="input-group">
                                         <input type="hidden" class="form-control" name="payment_date" required>
@@ -171,8 +225,14 @@ if (!isset($_SESSION['inPro'])) {
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <a href="index.php"><button type="button" class="btn" style="background: #fcf5f4; margin: 0 10px; border: 1px solid #ee4d2d; color: #000; font-size: 15px; font-weight: 600;"><i class='bx bx-cart-add'></i> เลือกสินค้าต่อ</button></a>
-                                    <a href=""><button type="submit" class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ee4d2d 100%); border: none; color: #fff;">สั่งซื้อ</button></a>
+                                    <a href="index.php">
+                                        <button type="button" class="btn-custom">
+                                            <i class='bx bx-cart-add'></i> เลือกสินค้าต่อ
+                                        </button>
+                                    </a>
+                                    <button type="submit" class="btn-confirm">
+                                        ยืนยันการสั่งซื้อ
+                                    </button>
                                 </div>
                             </div>
                         </div>

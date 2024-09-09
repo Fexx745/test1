@@ -8,10 +8,11 @@ if (!isset($_SESSION['username'])) {
 $idpd = $_GET['id'];
 
 // Fetch parcel_number from tb_order table
-$query = "SELECT parcel_number FROM tb_order WHERE orderID = '$idpd'";
+$query = "SELECT parcel_number, annotation FROM tb_order WHERE orderID = '$idpd'";
 $result = mysqli_query($conn, $query);
 $order = mysqli_fetch_assoc($result);
 $parcel_number = $order['parcel_number'];
+$annotation = $order['annotation'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,16 +34,7 @@ $parcel_number = $order['parcel_number'];
                         <?php include('report_tutorial.php'); ?>
                         <i class='bx bxs-time-five'></i>
                         แสดงรายละเอียดคำสั่งซื้อ
-                        <div class="mt-3 mb-3">
-                            <a href="report_order.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
-                            <a href="report_order_wait.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-truck'></i>&nbsp;รอจัดส่ง</button></a>
-                            <a href="report_order_yes.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bxs-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
-                            <a href="report_order_no.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;"><i class='bx bxs-x-circle'></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
-                        </div>
+                        <?php include('report_button.php'); ?>
                     </div>
                     <div class="container">
                     </div>
@@ -80,11 +72,6 @@ $parcel_number = $order['parcel_number'];
                                     </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#slipModal"
-                        style="background: linear-gradient(195deg, #fff3cd 0%, #fff3cd 100%); color: #333; border: 1px solid #e5e5e5; border-radius: 0.25rem;">หลักฐานการโอน
-                        </button>
-
-                        <br><br>
                         <div class="my-2">
                             <b>เลขคำสั่งซื้อ</b>
                             <span><?= $row['orderID'] ?></span>
@@ -96,9 +83,13 @@ $parcel_number = $order['parcel_number'];
                             <span><?= $row['telephone'] ?></span>
                         </div>
                         <div class="my-4"><b>ราคารวมสุทธิ</b>
-                            <span style="color: #26aa99; font-weight: bold; font-size: 18px;"><?= number_format($sum_total, 2) ?></span>
+                            <span style="color: #ee2c4a; font-weight: bold; font-size: 18px;"><?= number_format($sum_total, 2) ?></span>
                             <b>บาท</b>
                         </div>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#slipModal"
+                            style="background: linear-gradient(195deg, #30b566 0%, #30b566 100%); color: #fff; border: none; border-radius: 0.25rem;">
+                            <i class='bx bx-receipt' style="margin-right: 5px;"></i>สลิป
+                        </button>
                         <div class="mb-3 mt-3">
 
                             <!-- Modal -->
@@ -136,7 +127,7 @@ $parcel_number = $order['parcel_number'];
                                 <div class="col-md-6">
                                     <input type="hidden" name="order_id" value="<?php echo $idpd; ?>">
                                     <div class="col-md-6">
-                                        <label for="shipping_type">ประเภทขนส่ง&nbsp;&gt;</label>
+                                        <label for="shipping_type">ประเภทขนส่ง&nbsp;<i class='bx bx-chevron-right'></i></label>
                                         <div class="input-group mb-3">
                                             <label class="input-group-text" for="shipping_type"><i class='bx bxs-truck'></i></label>
                                             <select name="shipping_type" id="shipping_type" class="form-select">
@@ -163,13 +154,22 @@ $parcel_number = $order['parcel_number'];
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="parcel_number">เลขพัสดุ&nbsp;&gt;</label>
+                                        <label for="parcel_number">เลขพัสดุ&nbsp;<i class='bx bx-chevron-right'></i></label>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text"><i class='bx bx-barcode'></i></span>
                                             <input type="text" class="form-control" name="parcel_number"
-                                                placeholder="กรอกเลขพัสดุ" value="<?php echo $parcel_number; ?>">
+                                                placeholder="กรอกเลขพัสดุ" value="<?php echo $parcel_number; ?>" required>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <label for="annotation">หมายเหตุ&nbsp;<strong style="color: #ee2c4a;">* ไม่บังคับ</strong></label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"><i class='bx bx-note'></i></span>
+                                            <input type="text" class="form-control" name="annotation" placeholder="กรอกหมายเหตุ"
+                                                value="<?php echo $annotation; ?>">
+                                        </div>
+                                    </div>
+
 
                                 </div>
                                 <div class="mb-2">

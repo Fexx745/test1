@@ -15,7 +15,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] === '1') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สวัสดี</title>
+    <title>SHOP | ซื้อขายผ่านเว็บไซต์ออนไลน์</title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap/js/bootstrap.bundle.min.js"> </script>
     <?php include('script-css.php'); ?>

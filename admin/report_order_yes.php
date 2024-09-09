@@ -119,16 +119,7 @@ $row4 = mysqli_fetch_array($result4);
                         <i class='bx bxs-check-circle'></i>
                         รายการสั่งซื้อที่ชำระเงินแล้ว (จัดส่งสำเร็จ)
 
-                        <div class="mt-3 mb-3">
-                            <a href="report_order.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #eda500 0%, #f69113 100%); color: #fff;"><i class='bx bxs-time-five'></i>&nbsp;ยังไม่ชำระเงิน</button></a>
-                            <a href="report_order_wait.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #ee4d2d 0%, #ff7337 100%); color: #fff;"><i class='bx bxs-truck'></i>&nbsp;รอจัดส่ง</button></a>
-                            <a href="report_order_yes.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #20c997 0%, #198754 100%); color: #fff;"><i class='bx bxs-check-circle'></i>&nbsp;จัดส่งเรียบร้อย</button></a>
-                            <a href="report_order_no.php"><button type="button"
-                                    class="btn" style="background: linear-gradient(195deg, #dc3545 0%, #e35866 100%); color: #fff;"><i class='bx bxs-x-circle'></i>&nbsp;ยกเลิกการสั่งซื้อ</button></a>
-                        </div>
+                        <?php include('report_button.php'); ?>
 
                     </div>
                 </div>
@@ -198,7 +189,7 @@ $row4 = mysqli_fetch_array($result4);
                                             if ($status == 1) {
                                                 echo "<b style='color: blue;'>ยังไม่ชำระเงิน</b>";
                                             } else if ($status == 2) {
-                                                echo "<strong><i class='bx bx-check'></i>&nbsp;จัดส่งสำเร็จแล้ว</strong>";
+                                                echo "<strong style='color: #00c300;'><i class='bx bx-check'></i>&nbsp;จัดส่งสำเร็จแล้ว</strong>";
                                             } else if ($status == 0) {
                                                 echo "<b style='color: red;'>ยกเลิกการสั่งซื้อ</b>";
                                             }
@@ -207,7 +198,7 @@ $row4 = mysqli_fetch_array($result4);
                                     </td>
                                     <td>
                                         <div class="text-center">
-                                            <button class="btn" style="background: linear-gradient(195deg, #c8dcf9 0%, #c8dcf9 100%); color: #333; border: 1px solid #0046ab; border-radius: 0.25rem;"
+                                            <button class="btn" style="background: linear-gradient(195deg, #30b566 0%, #30b566 100%); color: #fff; border: none; border-radius: 0.25rem;"
                                                 onclick="showOrderDetail('<?= $row['orderID'] ?>')">
                                                 <i class='bx bx-message-detail'></i>
                                             </button>
