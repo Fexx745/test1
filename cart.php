@@ -72,7 +72,7 @@ if (!isset($_SESSION['inPro'])) {
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap/js/bootstrap.bundle.min.js"> </script>
     <script src="assets/dist/sweetalert2.all.min.js"></script>
-    <title>เว็บไซต์ขา</title>
+    <title>SHOP | ซื้อขายผ่านเว็บไซต์ออนไลน์</title>
 </head>
 
 <body>

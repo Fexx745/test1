@@ -151,9 +151,9 @@ if (isset($_SESSION['edit_producttype'])) {
             text: "คุณต้องการลบประเภทสินค้าหรือไม่?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#30b566",
+            confirmButtonColor: "#0d6efd",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ลบ",
+            confirmButtonText: "ยืนยัน",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {

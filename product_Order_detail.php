@@ -79,7 +79,7 @@ function getOrderStatus($status)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Details</title>
+    <title>SHOP | ซื้อขายผ่านเว็บไซต์ออนไลน์</title>
     <?php include('script-css.php'); ?>
 </head>
 

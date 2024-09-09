@@ -312,7 +312,7 @@ if (isset($_SESSION['delete_product'])) {
             text: "คุณต้องการลบสินค้าชิ้นนี้หรือไม่?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#30b566",
+            confirmButtonColor: "#0d6efd",
             cancelButtonColor: "#d33",
             confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก"

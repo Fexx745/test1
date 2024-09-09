@@ -278,7 +278,7 @@ $row4 = mysqli_fetch_array($result4);
             footer: '<span style="color: #ee2c4a;">**โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนทำการลบ</span>',
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#30b566",
+            confirmButtonColor: "#0d6efd",
             cancelButtonColor: "#d33",
             confirmButtonText: "ลบ",
             cancelButtonText: "ยกเลิก"

@@ -54,7 +54,7 @@ $row5 = mysqli_fetch_assoc($result5);
                                                                                                                                                                                         ?></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <!-- <li><a class="dropdown-item" href="#!"><i class='bx bxs-cog'></i>&nbsp;การตั้งค่า</a></li> -->
-                    <li><a class="dropdown-item" href="show_account.php?id=<?= $row5['id'] ?>"><i class='bx bxs-user-account'></i>&nbsp;จัดการข้อมูลลูกค้า</a></li>
+                    <li><a class="dropdown-item" href="member_List.php?id=<?= $row5['id'] ?>"><i class='bx bxs-user-account'></i>&nbsp;จัดการข้อมูลลูกค้า</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>

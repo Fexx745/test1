@@ -143,9 +143,9 @@ if (isset($_SESSION['addunit'])) {
             text: "คุณต้องการลบหน่วยสินค้านี้หรือไม่?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#30b566",
+            confirmButtonColor: "#0d6efd",
             cancelButtonColor: "#d33",
-            confirmButtonText: "ลบ",
+            confirmButtonText: "ยืนยัน",
             cancelButtonText: "ยกเลิก"
         }).then((result) => {
             if (result.isConfirmed) {

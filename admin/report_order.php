@@ -330,7 +330,7 @@ $row4 = mysqli_fetch_array($result4);
             text: "คุณต้องการลบคำสั่งซื้อหรือไม่?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#0d6efd",
             cancelButtonColor: "#d33",
             confirmButtonText: "ยืนยัน",
             cancelButtonText: "ยกเลิก"
@@ -350,7 +350,7 @@ $row4 = mysqli_fetch_array($result4);
             footer: '<span style="color: #ee2c4a;">**ตรวจสอบข้อมูลครบถ้วนแล้วใช่มั้ย?</span>',
             icon: "question",
             showCancelButton: true,
-            confirmButtonColor: "#30b566",
+            confirmButtonColor: "#0d6efd",
             cancelButtonColor: "#d33",
             confirmButtonText: "ยืนยัน",
             cancelButtonText: "ยกเลิก"
@@ -370,7 +370,7 @@ $row4 = mysqli_fetch_array($result4);
             input: 'textarea',
             inputPlaceholder: 'กรุณากรอกหมายเหตุ...',
             showCancelButton: true,
-            confirmButtonColor: "#30b566",
+            confirmButtonColor: "#0d6efd",
             cancelButtonColor: "#d33",
             confirmButtonText: "ยืนยัน",
             cancelButtonText: "ยกเลิก",
