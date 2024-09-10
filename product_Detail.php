@@ -85,10 +85,10 @@ include('condb.php');
                                     <?php } ?>
                                 </div>
                                 <span class="me-1">
-                                    <span style="color: #6c757d; font-weight: 200;">|&nbsp;&nbsp;</span>
+                                    <span style="color: #6c757d; font-weight: 200;"></span>
                                     <span style="color: #000;"><?= $total_reviews ?></span>
                                     <span style="color: #6c757d; font-weight: 400; font-size: 15px;">รีวิว</span>
-                                    <span style=" color: #6c757d; font-weight: 200">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                    <span style=" color: #6c757d; font-weight: 200"></span>
                                 </span>
                                 <span class="me-1" style="color: #000;"><?= $row['sales_count'] ?></span>
                                 <span style="color: #6c757d; font-weight: 400; font-size: 15px;">ขายแล้ว</span>

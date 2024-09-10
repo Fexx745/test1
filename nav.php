@@ -61,6 +61,9 @@
                             <li><a class="dropdown-item" href="cart.php">
                                     <i class='bx bx-cart'></i> ตะกร้าสินค้า
                                 </a></li>
+                            <li><a class="dropdown-item" href="product_View_Order.php">
+                                    <i class='bx bx-history'></i> ประวัติการสั่งซื้อ
+                                </a></li>
                             <li><a class="dropdown-item" href="logout.php" onclick="confirmLogout(event)">
                                     <i class='bx bx-log-out'></i> ออกจากระบบ
                                 </a></li>

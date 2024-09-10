@@ -60,7 +60,7 @@
 .edit-profile {
     width: 80%;
     background-color: var(--bs-gray-100);
-    padding: 20px;
+    padding: 20px 20px 70px 20px;
     margin-left: 20px;
     border-radius: 20px;
     position: relative;
@@ -75,7 +75,7 @@
 .view-history-menu {
     width: 80%;
     background-color: var(--bs-gray-100);
-    padding: 20px;
+    padding: 20px 20px 70px 20px;
     margin-left: 20px;
     border-radius: 20px;
     position: relative;
@@ -158,11 +158,52 @@
         border: none;
         transition: .1s;
     }
+
     .btn-view:hover {
         color: #fff;
-        background: linear-gradient(195deg, #0d6efd 0%, #0046ab 100%); 
+        background: linear-gradient(195deg, #0d6efd 0%, #0046ab 100%);
         opacity: .8;
         outline: none;
         border: none;
     }
+}
+
+@media (max-width: 948px) {
+    .edit-profile {
+        width: 100%;
+        background-color: var(--bs-gray-100);
+        padding: 20px 20px 70px 20px;
+        margin-left: 20px;
+        border-radius: 20px;
+        position: relative;
+
+        .previous-button {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+        }
+    }
+
+    .view-history-menu {
+        width: 100%;
+        background-color: var(--bs-gray-100);
+        padding: 20px 20px 70px 20px;
+        margin-left: 20px;
+        border-radius: 20px;
+        position: relative;
+    
+        .page-order-view {
+            position: absolute;
+            right: 20px;
+            bottom: 0;
+        }
+    
+        .previous-button {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+        }
+
+    }
+    
 }

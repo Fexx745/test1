@@ -77,138 +77,137 @@ if (!isset($_SESSION['inPro'])) {
 
 <body>
     <?php include('nav.php'); ?>
-    <!-- <br><br> -->
     <div class="container">
-        <!-- <div style="border: 2px solid #adb5bd; border-radius: 10px; padding: 20px;"> -->
         <form action="cart_insert.php" id="form1" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-12">
                     <div class="d-flex">
                         <h1>ตะกร้าสินค้า</h1>
                         <h1 style="color: red;" id="cart-count-display"></h1>
-                        <!-- <h1 style="color: red;">(<?php echo $_SESSION['inPro'] ?>)</h1> -->
                     </div>
 
-                    <table class="table table-hover my-3">
-                        <tr>
-                            <th>ลำดับที่</th>
-                            <th>รูปภาพ</th>
-                            <th>ชื่อสินค้า</th>
-                            <th>ราคา</th>
-                            <th>จำนวน</th>
-                            <th>ราคารวม</th>
-                            <th>ปริมาณ</th>
-                            <th></th>
-                        </tr>
-                        <?php
-                        $Total = 0;
-                        $sumPrice = 0;
-                        $m = 1;
-                        if (isset($_SESSION["intLine"])) {   //ถ้าไม่เป็นค่าว่างให้ทำงานใน {}
+                    <div class="table-responsive my-3">
+                        <table class="table table-hover my-3">
+                            <tr>
+                                <th>ลำดับที่</th>
+                                <th>รูปภาพ</th>
+                                <th>ชื่อสินค้า</th>
+                                <th>ราคา</th>
+                                <th>จำนวน</th>
+                                <th>ราคารวม</th>
+                                <th>ปริมาณ</th>
+                                <th></th>
+                            </tr>
+                            <?php
+                            $Total = 0;
+                            $sumPrice = 0;
+                            $m = 1;
+                            if (isset($_SESSION["intLine"])) {   //ถ้าไม่เป็นค่าว่างให้ทำงานใน {}
 
-                            for ($i = 0; $i <= (int) $_SESSION["intLine"]; $i++) {
-                                if (($_SESSION["strProductID"][$i]) != "") {
+                                for ($i = 0; $i <= (int) $_SESSION["intLine"]; $i++) {
+                                    if (($_SESSION["strProductID"][$i]) != "") {
 
-                                    //อันเดิม
-                                    // $sql1 = "SELECT * FROM product WHERE p_id = '" . $_SESSION["strProductID"][$i] . "' ";
+                                        //อันเดิม
+                                        // $sql1 = "SELECT * FROM product WHERE p_id = '" . $_SESSION["strProductID"][$i] . "' ";
 
-                                    //join ตาราง price_history
-                                    $sql1 = "SELECT product.*, price_history.*, unit_type.*
+                                        //join ตาราง price_history
+                                        $sql1 = "SELECT product.*, price_history.*, unit_type.*
                                     FROM product 
                                     LEFT JOIN price_history ON product.p_id = price_history.p_id 
                                     LEFT JOIN unit_type ON product.unit_id = unit_type.unit_id
                                     WHERE product.p_id = '" . $_SESSION["strProductID"][$i] . "'";
 
-                                    $result1 = mysqli_query($conn, $sql1);
-                                    $row_product = mysqli_fetch_array($result1);
+                                        $result1 = mysqli_query($conn, $sql1);
+                                        $row_product = mysqli_fetch_array($result1);
 
-                                    $_SESSION["price"] = $row_product['price'];
-                                    $Total = $_SESSION["strQty"][$i]; //จำนวน
-                                    $sum = $Total * $row_product['price']; //ผลรวม
-                                    $sumPrice = $sumPrice + $sum; // ราคารวม
-                                    $_SESSION["sum_price"] = $sumPrice;
+                                        $_SESSION["price"] = $row_product['price'];
+                                        $Total = $_SESSION["strQty"][$i]; //จำนวน
+                                        $sum = $Total * $row_product['price']; //ผลรวม
+                                        $sumPrice = $sumPrice + $sum; // ราคารวม
+                                        $_SESSION["sum_price"] = $sumPrice;
 
-                        ?>
-                                    <tr>
-                                        <td>
-                                            <?= $m ?>
-                                        </td>
-                                        <td>
-                                            <img src="assets/images/product/<?= $row_product['image'] ?>" width="80px" height="100" class="border" style="object-fit: cover;">
-                                        </td>
-                                        <td>
-                                            <?= $row_product['p_name'] ?>
-                                        </td>
-                                        <td>
-                                            <?= number_format($row_product['price'], 2) ?>
-                                        </td>
-                                        <td>
-                                            <?= $_SESSION["strQty"][$i] . " " . $row_product['unit_name'] ?>
-                                        </td>
-                                        <td>
-                                            <?= number_format($sum, 2) ?>
-                                        </td>
-                                        <td>
-                                            <!-- เพิ่ม hover effect ด้วย inline style -->
-                                            <button type="button" class="btn"
-                                                style="background: #fd7e14; color: #fff; font-weight: bold; border-radius: 5px; line-height: 1; transition: background-color 0.3s, transform 0.3s;"
-                                                onmouseover="this.style.backgroundColor='#e67e22'; this.style.transform='scale(1.05)';"
-                                                onmouseout="this.style.backgroundColor='#fd7e14'; this.style.transform='scale(1)';"
-                                                onclick="location.href='order.php?id=<?= $row_product['p_id'] ?>&quantity=1'">
-                                                +
-                                            </button>
+                            ?>
+                                        <tr>
+                                            <td>
+                                                <?= $m ?>
+                                            </td>
+                                            <td>
+                                                <img src="assets/images/product/<?= $row_product['image'] ?>" width="80px" height="100" class="border" style="object-fit: cover;">
+                                            </td>
+                                            <td>
+                                                <?= $row_product['p_name'] ?>
+                                            </td>
+                                            <td>
+                                                <?= number_format($row_product['price'], 2) ?>
+                                            </td>
+                                            <td>
+                                                <?= $_SESSION["strQty"][$i] . " " . $row_product['unit_name'] ?>
+                                            </td>
+                                            <td>
+                                                <?= number_format($sum, 2) ?>
+                                            </td>
+                                            <td>
+                                                <!-- เพิ่ม hover effect ด้วย inline style -->
+                                                <button type="button" class="btn"
+                                                    style="background: #fd7e14; color: #fff; font-weight: bold; border-radius: 5px; line-height: 1; transition: background-color 0.3s, transform 0.3s;"
+                                                    onmouseover="this.style.backgroundColor='#e67e22'; this.style.transform='scale(1.05)';"
+                                                    onmouseout="this.style.backgroundColor='#fd7e14'; this.style.transform='scale(1)';"
+                                                    onclick="location.href='order.php?id=<?= $row_product['p_id'] ?>&quantity=1'">
+                                                    +
+                                                </button>
 
-                                            <!-- เพิ่ม hover effect ด้วย inline style -->
-                                            <?php if ($_SESSION["strQty"][$i] > 1) { ?>
-                                                <a href="order_del.php?id=<?= $row_product['p_id'] ?>">
-                                                    <button type="button" class="btn"
-                                                        style="background: #f8f9fa; color: #fd7e14; font-weight: bold; border-radius: 5px; line-height: 1; border: 1px solid #fd7e14; transition: background-color 0.3s, transform 0.3s;"
-                                                        onmouseover="this.style.backgroundColor='#e2e6e8'; this.style.transform='scale(1.05)';"
-                                                        onmouseout="this.style.backgroundColor='#f8f9fa'; this.style.transform='scale(1)';">
-                                                        -
-                                                    </button>
-                                                </a>
-                                            <?php } ?>
+                                                <!-- เพิ่ม hover effect ด้วย inline style -->
+                                                <?php if ($_SESSION["strQty"][$i] > 1) { ?>
+                                                    <a href="order_del.php?id=<?= $row_product['p_id'] ?>">
+                                                        <button type="button" class="btn"
+                                                            style="background: #f8f9fa; color: #fd7e14; font-weight: bold; border-radius: 5px; line-height: 1; border: 1px solid #fd7e14; transition: background-color 0.3s, transform 0.3s;"
+                                                            onmouseover="this.style.backgroundColor='#e2e6e8'; this.style.transform='scale(1.05)';"
+                                                            onmouseout="this.style.backgroundColor='#f8f9fa'; this.style.transform='scale(1)';">
+                                                            -
+                                                        </button>
+                                                    </a>
+                                                <?php } ?>
 
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" style="line-height: 1;" onclick="confirmDeleteCart(<?= $i ?>)">
-                                                <i class='bx bx-trash-alt'></i>
-                                            </button>
-                                        </td>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" style="line-height: 1;" onclick="confirmDeleteCart(<?= $i ?>)">
+                                                    <i class='bx bx-trash-alt'></i>
+                                                </button>
+                                            </td>
 
-                                    </tr>
-                        <?php
-                                    $m = $m + 1;
-                                    $_SESSION['dePro'] = $m - 1;
+                                        </tr>
+                            <?php
+                                        $m = $m + 1;
+                                        $_SESSION['dePro'] = $m - 1;
+                                    }
                                 }
-                            }
-                            // Update the number of products in cart
-                            $_SESSION['inPro'] = $m - 1;
-                        } //end if
-                        ?>
-                        <tr>
-                            <td class="text-end fs-5" colspan="6">รวมเป็นเงิน</td>
-                            <td>
-                                <span class="fs-5" style="color: #dc3545; font-weight: 600;">
-                                    <?= number_format($sumPrice, 2) ?>
-                                </span>
-                            </td>
-                            <td class="text-start fs-5">บาท</td>
-                        </tr>
-                    </table>
+                                // Update the number of products in cart
+                                $_SESSION['inPro'] = $m - 1;
+                            } //end if
+                            ?>
+                            <tr>
+                                <td class="text-end fs-5" colspan="6">รวมเป็นเงิน</td>
+                                <td>
+                                    <span class="fs-5" style="color: #dc3545; font-weight: 600;">
+                                        <?= number_format($sumPrice, 2) ?>
+                                    </span>
+                                </td>
+                                <td class="text-start fs-5">บาท</td>
+                            </tr>
+                        </table>
+                    </div>
                     <div class="container" style="margin-top: 20px; margin-bottom: 100px;">
                         <div class="row">
-                            <div class="col-md-6 alert" style="background: #e9ecef; color: #333; border: none; outline: none;">
+                            <div class="col-md-6 alert" style="background: #fff3cd; color: #333; border: 1px solid #eda500; outline: none;">
                                 <!-- 
                                 <p style="font-size: 15px;">
                                     <i class='bx bxs-bank'></i>
                                     &nbsp;โปรดแนบสลิปการโอนทุกครั้งที่ทำการชำระเงิน
                                 </p> -->
-                                <h5>ธนาคารไทยพาณิชย์ 4370378747</h5>
-                                <b>นายจตุพล สิงห์กระโจม</b>
+                                <h6>ธนาคารไทยพาณิชย์ 4370378747</h6>
+                                <strong>นายจตุพล สิงห์กระโจม</strong><br>
                                 <span style="color: #ee2c4a; font-size: 15px;">
-                                    * รองรับไฟล์ .png, .jpg, และ .jpeg ขนาดไฟล์ไม่เกิน 10MB
+                                    * รองรับไฟล์ .png, .jpeg ขนาดไฟล์ไม่เกิน 10MB
                                 </span>
 
                                 <div class="text-end">
