@@ -46,29 +46,60 @@
                 if (isset($_SESSION['username'])) {
                 ?>
                     <!-- Logged in -->
-                    <div class="dropdown my-2">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="outline: none; border: none;">
-                            <img src="assets/images/other/man.png" alt="" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
-                            <span class="text-white"><?php echo $_SESSION['username']; ?></span>
-                        </button>
-                        <!-- <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="box-shadow: 0 3px 2px rgba(0, 0, 0, .8); color: #fff;">
-                            <img src="assets/images/other/profile.png" alt="" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
-                        </button> -->
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="editProfile.php?id=<?php echo $_SESSION['user_id']; ?>">
-                                    <i class='bx bx-cog'></i> ตั้งค่าผู้ใช้
-                                </a></li>
-                            <li><a class="dropdown-item" href="cart.php">
-                                    <i class='bx bx-cart'></i> ตะกร้าสินค้า
-                                </a></li>
-                            <li><a class="dropdown-item" href="product_View_Order.php">
-                                    <i class='bx bx-history'></i> ประวัติการสั่งซื้อ
-                                </a></li>
-                            <li><a class="dropdown-item" href="logout.php" onclick="confirmLogout(event)">
-                                    <i class='bx bx-log-out'></i> ออกจากระบบ
-                                </a></li>
-                        </ul>
+                    <!-- Parent container with flexbox -->
+                    <div class="d-flex justify-content-between align-items-center my-2" style="gap: 15px;">
+
+
+
+                        <!-- Dropdown Menu for Category Search -->
+                        <div class="dropdown">
+                            <button class="btn text-white dropdown-toggle" style="outline: none; border: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                เลือกหมวดหมู่สินค้า
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <?php
+                                $sql = "SELECT * FROM product_type";
+                                $result = mysqli_query($conn, $sql);
+                                while ($row = mysqli_fetch_array($result)) {
+                                ?>
+                                    <li>
+                                        <a class="dropdown-item" href="index_search_type.php?type_id=<?= $row['type_id'] ?>">
+                                            <img src="assets/images/type_product/<?= $row['type_image'] ?>" alt=""
+                                                style="width: 15px; height: 15px; margin-right: 5px;">
+                                            <?= $row['type_name'] ?>
+                                        </a>
+                                    </li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+
+                        <!-- User Profile Dropdown -->
+                        <div class="dropdown">
+                            <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="outline: none; border: none;">
+                                <img src="assets/images/other/man.png" alt="" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
+                                <span class="text-white"><?php echo $_SESSION['username']; ?></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="editProfile.php?id=<?php echo $_SESSION['user_id']; ?>">
+                                        <i class='bx bx-cog'></i> ตั้งค่าผู้ใช้
+                                    </a></li>
+                                <li><a class="dropdown-item" href="cart.php">
+                                        <i class='bx bx-cart'></i> ตะกร้าสินค้า
+                                    </a></li>
+                                <li><a class="dropdown-item" href="product_View_Order.php">
+                                        <i class='bx bx-history'></i> ประวัติการสั่งซื้อ
+                                    </a></li>
+                                <li><a class="dropdown-item" href="logout.php" onclick="confirmLogout(event)">
+                                        <i class='bx bx-log-out'></i> ออกจากระบบ
+                                    </a></li>
+                            </ul>
+                        </div>
+
                     </div>
+
+
                 <?php } else { ?>
                     <!-- Not logged in -->
                     <div class="dropdown my-3">

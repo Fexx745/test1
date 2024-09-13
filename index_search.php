@@ -18,7 +18,6 @@ include('condb.php');
     <?php include('nav.php'); ?>
 
     <div class="body-container">
-
         <!-- Slideshow -->
         <?php include('index_Menu.php'); ?>
         <div class="bc-show">
@@ -117,11 +116,10 @@ include('condb.php');
                     echo '</ul>';
                     echo '</div>';
                 }
-
             } else {
-                echo '<div class="product-not-found">';
-                echo '<img src="assets/images/other/nopd.jpg">';
-                echo '<p>ไม่พบสินค้าที่คุณกำลังค้นหา ...</p>';
+                echo '<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">';
+                echo '<img src="assets/images/other/nopd.jpg" style="margin-bottom: 20px;">'; // Adjust margin as needed
+                echo '<button class="btn btn-dark" onclick="window.location.href=\'index.php\'">ย้อนกลับ</button>';
                 echo '</div>';
             }
             mysqli_close($conn);

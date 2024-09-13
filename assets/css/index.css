@@ -194,22 +194,7 @@
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(auto-fill, 380px);
         grid-gap: 15px;
-
-        .product-not-found {
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            flex-direction: column;
-            margin: 100px 300px;
-            /* margin: 0 auto; */
-            /* width: 800px; */
-            /* height: 600px; */
-
-            & p {
-                margin: 0 auto;
-            }
-        }
-
+        
         .bc-show-items-img {
             width: 100%;
             height: 280px;
@@ -436,18 +421,6 @@
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(auto-fill, 380px);
             grid-gap: 15px;
-
-            .product-not-found {
-                display: flex;
-                justify-content: center;
-                align-content: center;
-                flex-direction: column;
-                margin: 100px 300px;
-
-                & p {
-                    margin: 0 auto;
-                }
-            }
 
             .bc-show-items-img {
                 width: 100%;
