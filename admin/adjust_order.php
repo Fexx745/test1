@@ -7,7 +7,7 @@
     $sql = "UPDATE tb_order SET order_status = 3 WHERE orderID='$idpd' ";
     $result = mysqli_query($conn, $sql);
     if ($result) {
-        $_SESSION['confirmOrder'] = "ยกเลิกคำสั่งซื้อ";
+        $_SESSION['confirmOrder'] = "เปลี่ยนสถาะเป็นการัจดส่ง";
         header('Location: report_order_wait.php');
         exit();
     } else {
