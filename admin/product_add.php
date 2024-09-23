@@ -48,17 +48,22 @@ $row = mysqli_fetch_array($result);
                         เพิ่มสินค้า
                     </div>
                     <div class="card-body">
-                        <div class="alert" style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
-                            <div class="d-flex"><img src="../assets/images/other/addStock.png" style="height: 50px; margin-right: 10px;">
+                        <div class="alert"
+                            style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
+                            <div class="d-flex"><img src="../assets/images/other/addStock.png"
+                                    style="height: 50px; margin-right: 10px;">
                                 <h3 style="font-weight: 1000; margin-top: 20px;">
-                                เพิ่มสินค้า
+                                    เพิ่มสินค้า
                                 </h3>
                             </div>
                         </div>
+
                         <form method="POST" action="product_insert.php" enctype="multipart/form-data">
+                            <div id="nameFeedback" class="my-2" style="display: none;"></div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bx-package'></i></span>
-                                <input type="text" class="form-control" name="p_name" placeholder="ชื่อสินค้า" required>
+                                <input type="text" class="form-control" name="p_name" id="p_name"
+                                    placeholder="ชื่อสินค้า" required>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bx-detail'></i></span>
@@ -70,7 +75,8 @@ $row = mysqli_fetch_array($result);
                                 <div class="col-md-4">
                                     <label for="">ประเภท&nbsp;&gt;</label>
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="typeprd"><i class='bx bx-category'></i></label>
+                                        <label class="input-group-text" for="typeprd"><i
+                                                class='bx bx-category'></i></label>
                                         <select name="typeprd" id="typeprd" class="form-select">
                                             <?php
                                             include('condb.php');
@@ -79,16 +85,16 @@ $row = mysqli_fetch_array($result);
 
                                             if (mysqli_num_rows($result) > 0) {
                                                 while ($rows = mysqli_fetch_array($result)) {
-                                            ?>
+                                                    ?>
                                                     <option value='<?php echo $rows['type_id']; ?>'>
                                                         <?php echo $rows['type_name']; ?>
                                                     </option>
-                                                <?php
+                                                    <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value=''>No types found</option>
-                                            <?php
+                                                <?php
                                             }
                                             ?>
                                         </select>
@@ -98,7 +104,8 @@ $row = mysqli_fetch_array($result);
                                 <div class="col-md-4">
                                     <label for="">หน่วย&nbsp;&gt;</label>
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="unittype"><i class='bx bx-cube'></i></label>
+                                        <label class="input-group-text" for="unittype"><i
+                                                class='bx bx-cube'></i></label>
                                         <select name="unittype" id="unittype" class="form-select">
                                             <?php
                                             include('condb.php');
@@ -107,16 +114,16 @@ $row = mysqli_fetch_array($result);
 
                                             if (mysqli_num_rows($result2) > 0) {
                                                 while ($row2 = mysqli_fetch_array($result2)) {
-                                            ?>
+                                                    ?>
                                                     <option value='<?php echo $row2['unit_id']; ?>'>
                                                         <?php echo $row2['unit_name']; ?>
                                                     </option>
-                                                <?php
+                                                    <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value=''>No types found</option>
-                                            <?php
+                                                <?php
                                             }
                                             ?>
                                         </select>
@@ -135,16 +142,16 @@ $row = mysqli_fetch_array($result);
 
                                             if (mysqli_num_rows($result3) > 0) {
                                                 while ($row3 = mysqli_fetch_array($result3)) {
-                                            ?>
+                                                    ?>
                                                     <option value='<?php echo $row3['brand_id']; ?>'>
                                                         <?php echo $row3['brand_name']; ?>
                                                     </option>
-                                                <?php
+                                                    <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value=''>No types found</option>
-                                            <?php
+                                                <?php
                                             }
                                             ?>
                                         </select>
@@ -160,7 +167,8 @@ $row = mysqli_fetch_array($result);
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bx-package'></i></span>
-                                <input type="text" class="form-control" name="amount" placeholder="จำนวนสินค้า" required>
+                                <input type="text" class="form-control" name="amount" placeholder="จำนวนสินค้า"
+                                    required>
                             </div>
 
                             <div class="mb-3 mt-3">
@@ -197,7 +205,7 @@ $row = mysqli_fetch_array($result);
 
 <?php
 if (isset($_SESSION['addproduct'])) {
-?>
+    ?>
     <script>
         Swal.fire({
             icon: "success",
@@ -205,12 +213,65 @@ if (isset($_SESSION['addproduct'])) {
             footer: '<span style="color: #00c300;">เพิ่มข้อมูลสินค้าเรียบร้อยแล้ว</span>',
             showConfirmButton: false,
             timer: 1500
-        }).then(function() {
+        }).then(function () {
             window.location.href = 'product_List.php';
         });
     </script>
 
-<?php
+    <?php
     unset($_SESSION['addproduct']);
 }
 ?>
+<?php
+if (isset($_SESSION['check_name'])) {
+    ?>
+    <script>
+        Swal.fire({
+            icon: "warning",
+            title: "ชื่อสินค้าซ้ำกับในระบบ!",
+            footer: '<span style="color: #00c300;">กรุณาเปลี่ยนชื่อสินค้าใหม่</span>',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(function () {
+            window.location.href = 'product_add.php';
+        });
+    </script>
+
+    <?php
+    unset($_SESSION['check_name']);
+}
+?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#p_name').on('input', function () {
+            var p_name = $(this).val();
+
+            if (p_name.length > 0) {
+                $.ajax({
+                    url: 'product_check_name.php',
+                    type: 'POST',
+                    data: { p_name: p_name },
+                    success: function (response) {
+                        if (response == "available") {
+                            // Name is available, show green border
+                            $('#p_name').css('border', '1px solid green');
+                            $('#nameFeedback').html('<span style="color: green;">ชื่อสินค้านี้ใช้ได้</span>');
+                            $('#nameFeedback').show();
+                        } else {
+                            // Name is already taken, show red border
+                            $('#p_name').css('border', '1px solid red');
+                            $('#nameFeedback').html('<span style="color: red;">ชื่อสินค้านี้มีอยู่แล้วในระบบ</span>');
+                            $('#nameFeedback').show();
+                        }
+                    }
+                });
+            } else {
+                // Reset the input if the field is empty
+                $('#p_name').css('border', '');
+                $('#nameFeedback').hide();
+            }
+        });
+    });
+</script>

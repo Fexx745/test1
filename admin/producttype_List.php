@@ -49,18 +49,26 @@ $row = mysqli_fetch_array($result);
                         ประเภทสินค้า
                     </div>
                     <div class="card-body">
-                        <div class="alert" style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
-                            <div class="d-flex"><img src="../assets/images/other/type_product.png" alt="Line Notify Logo" style="height: 50px; margin-right: 10px;">
+                        <div class="alert"
+                            style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
+                            <div class="d-flex"><img src="../assets/images/other/type_product.png"
+                                    alt="Line Notify Logo" style="height: 50px; margin-right: 10px;">
                                 <h3 style="font-weight: 1000; margin-top: 10px;">
                                     เพิ่มประเภทสินค้า
                                 </h3>
                             </div>
                         </div>
                         <form method="POST" action="producttype_insert.php" enctype="multipart/form-data">
+                            <div id="typeFeedback" class="form-text" style="display: none;"></div>
+                            <span id="checkIcon" style="display: none;"><i class='bx bx-check'
+                                    style="color: green; font-size: 1.5rem;"></i></span>
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bx-grid'></i></span>
-                                <input type="text" class="form-control" name="typename" placeholder="ชื่อประเภทสินค้า" required>
+                                <input type="text" class="form-control" name="typename" id="typename"
+                                    placeholder="ชื่อประเภทสินค้า" required>
                             </div>
+
+
                             <div class="mb-3 mt-3">
                                 <label for="" class="mb-1">เลือกรูปภาพ:</label>
                                 <input type="file" class="form-control" name="fileimage">
@@ -85,20 +93,26 @@ $row = mysqli_fetch_array($result);
                                 $sql = "SELECT * FROM product_type";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($result)) {
-                                ?>
+                                    ?>
                                     <tr>
                                         <td><?= $row['type_id'] ?></td>
                                         <td>
-                                            <img style="width: 100px; height: 100px; object-fit: cover;" src="../assets/images/type_product/<?= $row['type_image'] ?>" alt="รูปภาพ" onerror="this.src='../assets/images/other/no_img.png';">
+                                            <img style="width: 100px; height: 100px; object-fit: cover;"
+                                                src="../assets/images/type_product/<?= $row['type_image'] ?>" alt="รูปภาพ"
+                                                onerror="this.src='../assets/images/other/no_img.png';">
                                         </td>
                                         <td><?= $row['type_name'] ?></td>
                                         <td>
-                                            <a class="btn btn-warning" href="producttype_edit.php?id=<?= $row['type_id'] ?>"><i class='bx bx-pencil'></i></a>
-                                            <a class="btn btn-danger" href="javascript:void(0);" onclick="confirmDelete('<?= $row['type_id'] ?>')"><i class='bx bx-trash-alt'></i></a>
+                                            <a class="btn btn-warning"
+                                                href="producttype_edit.php?id=<?= $row['type_id'] ?>"><i
+                                                    class='bx bx-pencil'></i></a>
+                                            <a class="btn btn-danger" href="javascript:void(0);"
+                                                onclick="confirmDelete('<?= $row['type_id'] ?>')"><i
+                                                    class='bx bx-trash-alt'></i></a>
                                         </td>
                                     </tr>
 
-                                <?php
+                                    <?php
                                 }
                                 mysqli_close($conn);
                                 ?>
@@ -117,17 +131,19 @@ $row = mysqli_fetch_array($result);
 
 </html>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
 <script src="js/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="assets/demo/chart-area-demo.js"></script>
 <script src="assets/demo/chart-bar-demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+    crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
 
 <?php
 if (isset($_SESSION['edit_producttype'])) {
-?>
+    ?>
     <script>
         Swal.fire({
             // position: "top-center",
@@ -139,7 +155,7 @@ if (isset($_SESSION['edit_producttype'])) {
         });
     </script>
 
-<?php
+    <?php
     unset($_SESSION['edit_producttype']);
 }
 ?>
@@ -165,7 +181,7 @@ if (isset($_SESSION['edit_producttype'])) {
 
 <?php
 if (isset($_SESSION['delete_typeproduct'])) {
-?>
+    ?>
     <script>
         Swal.fire({
             icon: "success",
@@ -175,14 +191,14 @@ if (isset($_SESSION['delete_typeproduct'])) {
             timer: 1500
         });
     </script>
-<?php
+    <?php
     unset($_SESSION['delete_typeproduct']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['addproducttype'])) {
-?>
+    ?>
     <script>
         Swal.fire({
             icon: "success",
@@ -192,14 +208,14 @@ if (isset($_SESSION['addproducttype'])) {
             timer: 1500
         });
     </script>
-<?php
+    <?php
     unset($_SESSION['addproducttype']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['delete_error'])) {
-?>
+    ?>
     <script>
         Swal.fire({
             icon: "warning",
@@ -209,57 +225,43 @@ if (isset($_SESSION['delete_error'])) {
             timer: 2500
         });
     </script>
-<?php
+    <?php
     unset($_SESSION['delete_error']);
 }
 ?>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function editTypeProduct(id, currentName, currentImage) {
-    Swal.fire({
-        title: 'แก้ไขประเภทสินค้า',
-        html: `
-            <form id="editTypeProductForm" enctype="multipart/form-data">
-                <label for="typeName">ชื่อประเภทสินค้า:</label>
-                <input type="text" id="typeName" name="typeName" class="swal2-input" value="${currentName}">
-                <label for="currentImage">รูปภาพปัจจุบัน:</label>
-                <img id="currentImage" src="../assets/images/type_product/${currentImage}" alt="รูปภาพ" style="width: 100px; height: 100px; object-fit: cover;" onerror="this.src='../assets/images/other/no_img.png';">
-                <label for="typeImage">อัปโหลดรูปภาพใหม่:</label>
-                <input type="file" id="typeImage" name="typeImage" class="swal2-file">
-            </form>
-        `,
-        showCancelButton: true,
-        confirmButtonText: 'บันทึก',
-        showLoaderOnConfirm: true,
-        preConfirm: () => {
-            const form = document.getElementById('editTypeProductForm');
-            const formData = new FormData(form);
-            formData.append('typeid', id);
-            return fetch('edittype.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(response.statusText);
-                }
-                return response.json();
-            })
-            .catch(error => {
-                Swal.showValidationMessage(`Request failed: ${error}`);
-            });
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: 'แก้ไขเรียบร้อย!',
-                icon: 'success'
-            }).then(() => {
-                location.reload();
-            });
-        }
+    $(document).ready(function () {
+        $('#typename').on('input', function () {
+            var typename = $(this).val();
+
+            if (typename.length > 0) {
+                $.ajax({
+                    url: 'producttype_check_name.php', // Path to the server-side script to check for duplicates
+                    type: 'POST',
+                    data: { typename: typename },
+                    success: function (response) {
+                        if (response == "available") {
+                            // Name is available, show green border and the checkmark icon
+                            $('#typename').css('border', '1px solid green');
+                            $('#typeFeedback').hide(); // Hide the error message
+                            $('#checkIcon').show(); // Show the checkmark icon
+                        } else {
+                            // Name is taken, show red border and error message
+                            $('#typename').css('border', '1px solid red');
+                            $('#typeFeedback').html('ชื่อประเภทสินค้านี้มีอยู่แล้ว').show(); // Show error message
+                            $('#checkIcon').hide(); // Hide the checkmark icon
+                        }
+                    }
+                });
+            } else {
+                // Reset the input if empty
+                $('#typename').css('border', '');
+                $('#typeFeedback').hide();
+                $('#checkIcon').hide();
+            }
+        });
     });
-}
-</script> -->
+</script>
