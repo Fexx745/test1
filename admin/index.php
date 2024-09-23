@@ -244,7 +244,7 @@ while ($row8 = mysqli_fetch_assoc($result8)) {
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-line me-1"></i>
-                                <b>รายงานยอดขายในแต่ละเดือน</b>
+                                <b>รายงานยอดขายในแต่ละเดือน </b><span style="font-size: 14px;">( ฿ )</span>
                             </div>
                             <div class="card-body"><canvas id="data_sale" width="100%" height="40"></canvas></div>
                         </div>
@@ -254,14 +254,14 @@ while ($row8 = mysqli_fetch_assoc($result8)) {
                             <div class="card-header">
                                 <i class="fas fa-shopping-cart me-1"></i>
 
-                                <b>10 อันดับสินค้าขายดีที่สุดเดือนนี้</b>
+                                <b>10 อันดับสินค้าขายดีที่สุดเดือนนี้ </b><span style="font-size: 14px;">( ชิ้น )</span>
                             </div>
                             <div class="card-body">
                                 <canvas id="monthpd" width="100%" height="40"></canvas>
                             </div>
                         </div>
                     </div>
-
+    
                     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
                     <script>
                         document.addEventListener('DOMContentLoaded', function() {
@@ -333,17 +333,17 @@ while ($row8 = mysqli_fetch_assoc($result8)) {
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-calendar me-1"></i>
-                                <strong>ยอดขายรายวัน (เลือกช่วงวันที่)</strong>
+                                <strong>ยอดขายรายวันเลือกช่วงวันที่ </strong><span style="font-size: 14px;">( ฿ )</span>
                             </div>
                             <div class="card-body">
                                 <form id="dateRangeForm" method="GET" action="">
                                     <div class="row" style="margin: 0 0 30px 0">
                                         <div class="col-md-5">
-                                            <label for="startDate" style="color: #6c757d; font-size: 13px;">เริ่มวันที่</label>
+                                            <label for="startDate" style="color: #6c757d; font-size: 13px;">เลือกวันที่เริ่มต้น</label>
                                             <input type="date" id="startDate" name="start_date" class="form-control" required>
                                         </div>
                                         <div class="col-md-5">
-                                            <label for="endDate" style="color: #6c757d; font-size: 13px;">ถึงวันที่</label>
+                                            <label for="endDate" style="color: #6c757d; font-size: 13px;">เลือกวันที่สิ้นสุด</label>
                                             <input type="date" id="endDate" name="end_date" class="form-control" required>
                                         </div>
                                         <div class="col-md-2 align-self-end">

@@ -229,7 +229,7 @@ if (isset($_SESSION['check_name'])) {
         Swal.fire({
             icon: "warning",
             title: "ชื่อสินค้าซ้ำกับในระบบ!",
-            footer: '<span style="color: #00c300;">กรุณาเปลี่ยนชื่อสินค้าใหม่</span>',
+            footer: '<span style="color: #ee2c4a;">**กรุณาเปลี่ยนชื่อสินค้าใหม่</span>',
             showConfirmButton: false,
             timer: 1500
         }).then(function () {

@@ -208,6 +208,20 @@ if (isset($_SESSION['delete_error'])) {
 }
 ?>
 
+<?php if (isset($_SESSION['error_brand'])) { ?>
+    <script>
+        Swal.fire({
+            icon: "warning",
+            title: "ชื่อยี่ห้อซ้ำ!",
+            text: "<?php echo $_SESSION['error_brand']; ?>",
+            footer: "<span style='color: #ee2c4a'>กรุณาใช้ชื่อยี่ห้อที่แตกต่างกัน</span>",
+            showConfirmButton: true
+        });
+    </script>
+    <?php unset($_SESSION['error_brand']); ?>
+<?php } ?>
+
+
 <script>
     function editBrand(id, currentName) {
         Swal.fire({

@@ -59,9 +59,8 @@ $row = mysqli_fetch_array($result);
                             </div>
                         </div>
                         <form method="POST" action="producttype_insert.php" enctype="multipart/form-data">
-                            <div id="typeFeedback" class="form-text" style="display: none;"></div>
-                            <span id="checkIcon" style="display: none;"><i class='bx bx-check'
-                                    style="color: green; font-size: 1.5rem;"></i></span>
+                            <p id="typeFeedback" class="form-text" style="display: none; color: red;"></p>
+
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bx-grid'></i></span>
                                 <input type="text" class="form-control" name="typename" id="typename"
@@ -93,7 +92,7 @@ $row = mysqli_fetch_array($result);
                                 $sql = "SELECT * FROM product_type";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($result)) {
-                                    ?>
+                                ?>
                                     <tr>
                                         <td><?= $row['type_id'] ?></td>
                                         <td>
@@ -112,7 +111,7 @@ $row = mysqli_fetch_array($result);
                                         </td>
                                     </tr>
 
-                                    <?php
+                                <?php
                                 }
                                 mysqli_close($conn);
                                 ?>
@@ -143,7 +142,7 @@ $row = mysqli_fetch_array($result);
 
 <?php
 if (isset($_SESSION['edit_producttype'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             // position: "top-center",
@@ -155,7 +154,7 @@ if (isset($_SESSION['edit_producttype'])) {
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['edit_producttype']);
 }
 ?>
@@ -181,7 +180,7 @@ if (isset($_SESSION['edit_producttype'])) {
 
 <?php
 if (isset($_SESSION['delete_typeproduct'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -191,14 +190,14 @@ if (isset($_SESSION['delete_typeproduct'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['delete_typeproduct']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['addproducttype'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -208,14 +207,14 @@ if (isset($_SESSION['addproducttype'])) {
             timer: 1500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['addproducttype']);
 }
 ?>
 
 <?php
 if (isset($_SESSION['delete_error'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "warning",
@@ -225,34 +224,49 @@ if (isset($_SESSION['delete_error'])) {
             timer: 2500
         });
     </script>
-    <?php
+<?php
     unset($_SESSION['delete_error']);
 }
 ?>
 
+<?php
+if (isset($_SESSION['check_name'])) {
+    ?>
+    <script>
+        Swal.fire({
+            icon: "warning",
+            title: "ชื่อประเภทสินค้าซ้ำกับในระบบ!",
+            footer: '<span style="color: #ee2c4a;">กรุณาเปลี่ยนชื่อสินค้าใหม่</span>',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+
+    <?php
+    unset($_SESSION['check_name']);
+}
+?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#typename').on('input', function () {
+    $(document).ready(function() {
+        $('#typename').on('input', function() {
             var typename = $(this).val();
 
             if (typename.length > 0) {
                 $.ajax({
                     url: 'producttype_check_name.php', // Path to the server-side script to check for duplicates
                     type: 'POST',
-                    data: { typename: typename },
-                    success: function (response) {
+                    data: {
+                        typename: typename
+                    },
+                    success: function(response) {
                         if (response == "available") {
-                            // Name is available, show green border and the checkmark icon
                             $('#typename').css('border', '1px solid green');
-                            $('#typeFeedback').hide(); // Hide the error message
-                            $('#checkIcon').show(); // Show the checkmark icon
+                            $('#typeFeedback').html('ชื่อประเภทสินค้านี้สามารถใช้ได้').css('color', 'green').show(); // Show success message
                         } else {
-                            // Name is taken, show red border and error message
                             $('#typename').css('border', '1px solid red');
-                            $('#typeFeedback').html('ชื่อประเภทสินค้านี้มีอยู่แล้ว').show(); // Show error message
-                            $('#checkIcon').hide(); // Hide the checkmark icon
+                            $('#typeFeedback').html('ชื่อประเภทสินค้านี้มีอยู่แล้ว').css('color', 'red').show(); // Show error message
                         }
                     }
                 });

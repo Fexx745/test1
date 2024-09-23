@@ -96,7 +96,7 @@
             var marks = [];
 
             for (var i in data) {
-                name.push(data[i].reg_month);
+                name.push(data[i].reg_month); // ชื่อเดือน
                 marks.push(data[i].sumTotal);
             }
 
@@ -105,33 +105,33 @@
                 datasets: [{
                     label: 'ยอดขายในแต่ละเดือน',
                     backgroundColor: [
-                        '#FFECB3', // Light Yellow
-                        '#C8E6C9', // Light Green
-                        '#FFCCBC', // Light Orange
-                        '#C5CAE9', // Light Blue
-                        '#F8BBD0', // Light Pink
-                        '#B2EBF2', // Light Cyan
-                        '#E1BEE7', // Light Purple
-                        '#FFE0B2', // Light Orange
-                        '#DCEDC8', // Light Green
-                        '#B2DFDB', // Light Teal
-                        '#FFF9C4', // Light Yellow
-                        '#F0F4C3' // Light Lime
+                        '#FFB74D', // ส้มอ่อน
+                        '#64B5F6', // น้ำเงินอ่อน
+                        '#81C784', // เขียวอ่อน
+                        '#FFD54F', // เหลืองอ่อน
+                        '#F06292', // ชมพู
+                        '#64B5F6', // น้ำเงินอ่อน
+                        '#BA68C8', // ม่วงอ่อน
+                        '#4DB6AC', // เขียวฟ้าอ่อน
+                        '#FF8A65', // ส้ม
+                        '#A1887F', // น้ำตาลอ่อน
+                        '#7986CB', // น้ำเงินเข้ม
+                        '#FFF59D' // เหลืองอ่อน
                     ],
                     borderColor: '#fff',
                     hoverBackgroundColor: [
-                        '#FFD740', // Soft Yellow
-                        '#A5D6A7', // Soft Green
-                        '#FFAB91', // Soft Orange
-                        '#9FA8DA', // Soft Blue
-                        '#F48FB1', // Soft Pink
-                        '#80DEEA', // Soft Cyan
-                        '#CE93D8', // Soft Purple
-                        '#FFCC80', // Soft Orange
-                        '#C5E1A5', // Soft Green
-                        '#80CBC4', // Soft Teal
-                        '#FFF59D', // Soft Yellow
-                        '#E6EE9C' // Soft Lime
+                        '#FFA726', // ส้มเข้ม
+                        '#42A5F5', // น้ำเงินเข้ม
+                        '#66BB6A', // เขียวเข้ม
+                        '#FFCA28', // เหลืองเข้ม
+                        '#EC407A', // ชมพูเข้ม
+                        '#42A5F5', // น้ำเงินเข้ม
+                        '#AB47BC', // ม่วงเข้ม
+                        '#26A69A', // เขียวฟ้าเข้ม
+                        '#FF7043', // ส้มเข้ม
+                        '#8D6E63', // น้ำตาลเข้ม
+                        '#5C6BC0', // น้ำเงินเข้ม
+                        '#FBC02D' // เหลืองเข้ม
                     ],
                     hoverBorderColor: '#e5e5e5',
                     data: marks

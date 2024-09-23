@@ -5,6 +5,17 @@ include('condb.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $typename = $_POST['typename']; // รับค่าชื่อประเภทสินค้า
 
+    // ตรวจสอบว่าชื่อประเภทสินค้านี้มีอยู่ในฐานข้อมูลหรือไม่
+    $checkSql = "SELECT * FROM product_type WHERE type_name = '$typename'";
+    $checkResult = $conn->query($checkSql);
+
+    if ($checkResult->num_rows > 0) {
+        // ชื่อประเภทสินค้าซ้ำ
+        $_SESSION['check_name'] = "ชื่อประเภทสินค้านี้มีอยู่แล้ว";
+        header('Location: producttype_List.php');
+        exit();
+    }
+
     // Check if a file is selected for upload
     if (isset($_FILES['fileimage']) && $_FILES['fileimage']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['fileimage']['tmp_name'];
@@ -40,8 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO product_type (type_name) VALUES ('$typename')";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['addproducttype'] = "เพิ่มประเภทสินค้าสำเร็จ";
-                header('Location: producttype_List.php');
-                exit();
+            header('Location: producttype_List.php');
+            exit();
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -49,4 +60,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     mysqli_close($conn);
 }
-?>

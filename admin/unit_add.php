@@ -208,6 +208,24 @@ if (isset($_SESSION['error_unit_delete'])) {
 }
 ?>
 
+<?php
+if (isset($_SESSION['error_unit'])) {
+?>
+    <script>
+        Swal.fire({
+            icon: "warning",
+            title: "ชื่อหน่วยซ้ำ!",
+            text: "<?php echo $_SESSION['error_unit']; ?>",
+            footer: "<span style='color: #ee2c4a'>กรุณาใช้ชื่อหน่วยที่แตกต่างกัน</span>",
+            showConfirmButton: true
+        });
+    </script>
+<?php
+    unset($_SESSION['error_unit']);
+}
+?>
+
+
 <script>
     function editUnit(id, currentName) {
         Swal.fire({

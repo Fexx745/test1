@@ -15,7 +15,7 @@
     <?php include('nav_login.php'); ?>
     <div class="container-fluid p-5" style="background: #fff; margin-bottom: 400px;">
         <div class="row mt-5">
-            <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
+            <div class="col-lg-4 bg-white m-auto rounded-top wrapper-forgot">
                 <h2 class="text-center pt-3">ลืมรหัสผ่าน</h2>
                 <form action="forgot_psw.php" method="POST">
                     <div class="input-group mb-3">
@@ -23,10 +23,10 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="กรุณากรอกอีเมลล์ ที่คุณสมัครไว้" required>
                     </div>
                     <div class="d-grid">
-                        <button class="btn-submit" name="submit">ยืนยัน</button>
+                        <button class="btn-reg" name="submit">ยืนยัน</button>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <p class="mt-2"><span style="color: #6c757d;">มีบัญชีแล้วไช่ไหม?</span> <a href="login.php">เข้าสู่ระบบ</a></p>
+                        <p class="mt-2"><span style="color: #6c757d;">มีบัญชีแล้วไช่ไหม?</span> <a href="login.php" style="text-decoration: none;">เข้าสู่ระบบ</a></p>
                     </div>
                 </form>
             </div>
