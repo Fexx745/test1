@@ -10,16 +10,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $unit_id = $data['unitid'];
         $unit_name = $data['unitname'];
 
-        // เขียนคำสั่ง SQL สำหรับการอัปเดตข้อมูล
-        $update_query = "UPDATE unit_type SET unit_name = '$unit_name' WHERE unit_id = '$unit_id'";
-        
-        // ทำการอัปเดตข้อมูลในฐานข้อมูล
-        $result = mysqli_query($conn, $update_query);
+        // ตรวจสอบว่า unit_name ซ้ำหรือไม่
+        $check_query = "SELECT * FROM unit_type WHERE unit_name = '$unit_name' AND unit_id != '$unit_id'";
+        $check_result = mysqli_query($conn, $check_query);
 
-        if ($result) {
-            echo json_encode(["status" => "success"]);
+        if (mysqli_num_rows($check_result) > 0) {
+            // ถ้าชื่อซ้ำ
+            echo json_encode(["status" => "error", "message" => "มีชื่อหน่วยอยู่แล้ว"]);
         } else {
-            echo json_encode(["status" => "error", "message" => "Error updating record: " . mysqli_error($conn)]);
+            // เขียนคำสั่ง SQL สำหรับการอัปเดตข้อมูล
+            $update_query = "UPDATE unit_type SET unit_name = '$unit_name' WHERE unit_id = '$unit_id'";
+            
+            // ทำการอัปเดตข้อมูลในฐานข้อมูล
+            $result = mysqli_query($conn, $update_query);
+
+            if ($result) {
+                echo json_encode(["status" => "success"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Error updating record: " . mysqli_error($conn)]);
+            }
         }
     } else {
         echo json_encode(["status" => "error", "message" => "Invalid input"]);

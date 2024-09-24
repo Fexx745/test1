@@ -224,6 +224,22 @@ if (isset($_SESSION['error_unit'])) {
     unset($_SESSION['error_unit']);
 }
 ?>
+<?php
+if (isset($_SESSION['error_check'])) {
+?>
+    <script>
+        Swal.fire({
+            icon: "warning",
+            title: "ชื่อหน่วยซ้ำ!",
+            text: "<?php echo $_SESSION['error_unit']; ?>",
+            footer: "<span style='color: #ee2c4a'>กรุณาใช้ชื่อหน่วยที่แตกต่างกัน</span>",
+            showConfirmButton: true
+        });
+    </script>
+<?php
+    unset($_SESSION['error_check']);
+}
+?>
 
 
 <script>
@@ -255,8 +271,14 @@ if (isset($_SESSION['error_unit'])) {
                         }
                         return response.json();
                     })
+                    .then(data => {
+                        if (data.status === 'error') {
+                            throw new Error(data.message); // ส่ง error message จากเซิร์ฟเวอร์กลับ
+                        }
+                        return data;
+                    })
                     .catch(error => {
-                        Swal.showValidationMessage(`Request failed: ${error}`);
+                        Swal.showValidationMessage(`Request failed: ${error.message}`);
                     });
             },
             allowOutsideClick: () => !Swal.isLoading()
@@ -266,7 +288,7 @@ if (isset($_SESSION['error_unit'])) {
                     title: 'แก้ไขเรียบร้อย!',
                     icon: 'success'
                 }).then(() => {
-                    location.reload();
+                    location.reload(); // รีโหลดหน้าหลังจากแก้ไขเสร็จ
                 });
             }
         });

@@ -140,7 +140,7 @@
                                     style="color: #000; font-size: 18px; font-weight: 1000;">visibility_off</span></a>
                         </div>
                         <div class="d-grid">
-                            <button class="btn" type="submit" style="background: #eda500; color: #fff;">Login</button>
+                            <button class="btn" type="submit" style="background: #eda500; color: #333; font-weight: 600;">ล็อคอิน</button>
                         </div>
                     </form>
                 </div>

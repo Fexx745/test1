@@ -251,8 +251,14 @@ if (isset($_SESSION['delete_error'])) {
                         }
                         return response.json();
                     })
+                    .then(data => {
+                        if (data.status === 'error') {
+                            throw new Error(data.message); // แจ้งข้อผิดพลาดจากฝั่งเซิร์ฟเวอร์
+                        }
+                        return data;
+                    })
                     .catch(error => {
-                        Swal.showValidationMessage(`Request failed: ${error}`);
+                        Swal.showValidationMessage(`เกิดข้อผิดพลาด: ${error.message}`);
                     });
             },
             allowOutsideClick: () => !Swal.isLoading()
@@ -262,7 +268,12 @@ if (isset($_SESSION['delete_error'])) {
                     title: 'แก้ไขเรียบร้อย!',
                     icon: 'success'
                 }).then(() => {
-                    location.reload();
+                    location.reload(); // รีโหลดหน้าเมื่อสำเร็จ
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    title: 'ยกเลิกการแก้ไข',
+                    icon: 'info'
                 });
             }
         });

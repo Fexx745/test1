@@ -24,57 +24,6 @@ $row4 = mysqli_fetch_array($result4);
 $sql_low_stock = "SELECT p_name, amount FROM product WHERE amount < 10";
 $result_low_stock = mysqli_query($conn, $sql_low_stock);
 $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสินค้าที่น้อยกว่า 10 ชิ้น
-
-
-
-// เงื่อนไขสำหรับการแจ้งเตือนผ่าน LINE
-// if ($low_stock_count > 0) {
-//     $sql_token = "SELECT token FROM tb_tokens ORDER BY id DESC LIMIT 1";
-//     $result_token = mysqli_query($conn, $sql_token);
-//     $row_token = mysqli_fetch_assoc($result_token);
-//     $sToken = $row_token['token'];
-//     $sMessage = "มีสินค้าในคลังที่เหลือน้อยกว่า 10 ชิ้น!\n";
-//     $sMessage .= "จำนวนสินค้า: " . $low_stock_count . " รายการ\n\n";
-
-//     while ($row = mysqli_fetch_assoc($result_low_stock)) {
-//         $sMessage .= "ชื่อสินค้า: " . $row['p_name'] . "\n";
-//         $sMessage .= "จำนวนคงเหลือ: " . $row['amount'] . " ชิ้น\n\n";
-//     }
-
-//     $chOne = curl_init();
-//     curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
-//     curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
-//     curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
-//     curl_setopt($chOne, CURLOPT_POST, 1);
-//     curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=" . urlencode($sMessage));
-//     $headers = array(
-//         'Content-type: application/x-www-form-urlencoded',
-//         'Authorization: Bearer ' . $sToken,
-//     );
-//     curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
-//     curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
-//     $result = curl_exec($chOne);
-
-//     $logStatus = 'unknown'; // ตั้งค่าเริ่มต้นให้กับ $logStatus
-//     $logMessage = '';
-//     if (curl_error($chOne)) {
-//         $logStatus = 'fail';
-//         $logMessage = 'cURL error: ' . curl_error($chOne);
-//         echo $logMessage;
-//     } else {
-//         $result_ = json_decode($result, true);
-//         $logStatus = $result_['status'] == 200 ? 'success' : 'fail';
-//         $logMessage = $result_['message'];
-//         if ($result_['status'] == 200) {
-//             echo "Notification sent successfully.";
-//         } else {
-//             echo "Error sending notification: " . $result_['message'];
-//         }
-//         echo "Status: " . $result_['status'] . "<br>";
-//         echo "Message: " . $result_['message'];
-//     }
-//     curl_close($chOne);
-// }
 ?>
 
 <!DOCTYPE html>
