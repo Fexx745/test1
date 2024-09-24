@@ -228,3 +228,21 @@ if (isset($_SESSION['edit_product'])) {
     unset($_SESSION['edit_product']);
 }
 ?>
+<?php
+session_start();
+if (isset($_SESSION['error'])) {
+?>
+    <script>
+        Swal.fire({
+            icon: "warning",
+            title: "ชื่อสินค้านี้มีอยู่แล้ว",
+            text: "กรุณาใช้ชื่อใหม่",
+            // footer: '<span style="color: #ee2c4a;">แก้ไขข้อมูลสินค้าเรียบร้อยแล้ว</span>',
+            showConfirmButton: true,
+            timer: 2000
+        })
+    </script>
+<?php
+    unset($_SESSION['error']);
+}
+?>

@@ -167,7 +167,7 @@ nav {
     background-color: var(--nc-success);
     opacity: .9;
 }
-.btn-reg {
+.btn-forgot {
     background-color: #00c300;
     color: #fff;
     padding: 10px;
@@ -179,7 +179,7 @@ nav {
     font-weight: 600;
 }
 
-.btn-reg:hover {
+.btn-forgot:hover {
     background-color: #00c300;
     opacity: .7;
 }

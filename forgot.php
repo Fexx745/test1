@@ -20,10 +20,10 @@
                 <form action="forgot_psw.php" method="POST">
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bx-envelope'></i></span>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="กรุณากรอกอีเมลล์ ที่คุณสมัครไว้" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="กรุณากรอกอีเมล ที่คุณสมัครไว้" required>
                     </div>
                     <div class="d-grid">
-                        <button class="btn-reg" name="submit">ยืนยัน</button>
+                        <button class="btn-forgot" name="submit">ยืนยัน</button>
                     </div>
                     <div class="d-flex justify-content-between">
                         <p class="mt-2"><span style="color: #6c757d;">มีบัญชีแล้วไช่ไหม?</span> <a href="login.php" style="text-decoration: none;">เข้าสู่ระบบ</a></p>

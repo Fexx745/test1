@@ -65,7 +65,7 @@ $row = mysqli_fetch_array($result);
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bxs-grid'></i></span>
                                 <input type="text" class="form-control" name="typename"
-                                    value="<?= $row['type_name']; ?>">
+                                    value="<?= $row['type_name']; ?>" required>
                             </div>
                             <?php
                             $imageURL = !empty($row['type_image']) ? "../assets/images/type_product/{$row['type_image']}" : "../assets/images/other/no_img.png";

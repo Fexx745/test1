@@ -54,7 +54,7 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
                             </span>
                         </div>
                         <div class="d-grid">
-                            <button class="btn-reg" type="submit" name="submit">ยืนยัน</button>
+                            <button class="btn-forgot" type="submit" name="submit">ยืนยัน</button>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="mt-2"><span style="color: #6c757d;">คุณจำรหัสผ่านได้แล้ว ใช่หรือไม่?</span> <a href="login.php" style="text-decoration: none;">เข้าสู่ระบบ</a></p>

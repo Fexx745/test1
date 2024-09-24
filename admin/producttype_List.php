@@ -147,8 +147,8 @@ if (isset($_SESSION['edit_producttype'])) {
         Swal.fire({
             // position: "top-center",
             icon: "success",
-            title: "แก้ไขสินค้าสำเร็จ!",
-            text: "Successfully",
+            title: "สำเร็จ!",
+            footer: "<span style='color: #30b566'>แก้ไขประเภทสินค้าสำเร็จ</span>",
             showConfirmButton: false,
             timer: 1500
         });
@@ -229,24 +229,6 @@ if (isset($_SESSION['delete_error'])) {
 }
 ?>
 
-<?php
-if (isset($_SESSION['check_name'])) {
-    ?>
-    <script>
-        Swal.fire({
-            icon: "warning",
-            title: "ชื่อประเภทสินค้าซ้ำกับในระบบ!",
-            footer: '<span style="color: #ee2c4a;">กรุณาเปลี่ยนชื่อสินค้าใหม่</span>',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    </script>
-
-    <?php
-    unset($_SESSION['check_name']);
-}
-?>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -279,3 +261,4 @@ if (isset($_SESSION['check_name'])) {
         });
     });
 </script>
+

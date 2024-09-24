@@ -14,6 +14,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $brandprd = mysqli_real_escape_string($conn, $_POST['brandprd']);
     $amount = mysqli_real_escape_string($conn, $_POST['amount']);
 
+    // Check if the new product name already exists
+    $checkQuery = "SELECT * FROM product WHERE p_name = '$pname' AND p_id != '$pid'";
+    $checkResult = mysqli_query($conn, $checkQuery);
+
+    if (mysqli_num_rows($checkResult) > 0) {
+        $_SESSION['error'] = "ชื่อสินค้านี้มีอยู่แล้ว กรุณาใช้ชื่อใหม่";
+        header('Location: product_edit.php?id=' . $pid);
+        exit();
+    }
+
     // Check if a new image file is uploaded
     if ($_FILES['image']['name']) {
         // Process image upload
@@ -43,6 +53,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: product_List.php");
     exit();
 }
-
 ?>
-

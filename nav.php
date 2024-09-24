@@ -91,7 +91,7 @@
                                 <li><a class="dropdown-item" href="product_View_Order.php">
                                         <i class='bx bx-history'></i> ประวัติการสั่งซื้อ
                                     </a></li>
-                                <li><a class="dropdown-item" href="logout.php" onclick="confirmLogout(event)">
+                                <li><a class="dropdown-item" href="logout.php">
                                         <i class='bx bx-log-out'></i> ออกจากระบบ
                                     </a></li>
                             </ul>
@@ -134,7 +134,7 @@
 
                         <div class="d-flex justify-content-between mb-3 align-items-center">
                             <a href="forgot.php" id="forgotpsw" class="mt-2"
-                                style="text-decoration: none; color: #0d6efd; font-size: 15px; font-weight: 600;">ลืมรหัสผ่าน ?</a>
+                                style="text-decoration: none; color: #0d6efd; font-size: 15px; font-weight: 400;">ลืมรหัสผ่าน ?</a>
                             <a href="#" onclick="togglePasswordVisibility()"> <span id="togglePasswordIcon"
                                     class="material-symbols-outlined"
                                     style="color: #000; font-size: 18px; font-weight: 1000;">visibility_off</span></a>
@@ -225,23 +225,23 @@
         }
 
 
-        function confirmLogout(event) {
-            event.preventDefault(); // ป้องกันการโหลดหน้าต่อไปทันที
-            Swal.fire({
-                title: 'คุณแน่ใจหรือไม่?',
-                text: "คุณต้องการออกจากระบบหรือไม่?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'ใช่, ออกจากระบบ!',
-                cancelButtonText: 'ยกเลิก'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = 'logout.php';
-                }
-            });
-        }
+        // function confirmLogout(event) {
+        //     event.preventDefault(); // ป้องกันการโหลดหน้าต่อไปทันที
+        //     Swal.fire({
+        //         title: 'คุณแน่ใจหรือไม่?',
+        //         text: "คุณต้องการออกจากระบบหรือไม่?",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'ใช่, ออกจากระบบ!',
+        //         cancelButtonText: 'ยกเลิก'
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             window.location.href = 'logout.php';
+        //         }
+        //     });
+        // }
     </script>
 
 

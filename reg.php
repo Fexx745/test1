@@ -87,12 +87,12 @@
                     </div>
 
                     <label id="email_error_label" class="text-danger" style="display:none;"><i
-                            class="fas fa-exclamation-circle"></i> อีเมลล์นี้ถูกใช้แล้ว</label>
+                            class="fas fa-exclamation-circle"></i> อีเมลนี้ถูกใช้แล้ว</label>
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-envelope'></i></span>
                         <input type="email" id="email_field"
                             class="form-control <?php echo isset($_SESSION['Error_field']) && $_SESSION['Error_field'] == 'email' ? 'is-invalid' : ''; ?>"
-                            name="email" placeholder="อีเมลล์"
+                            name="email" placeholder="อีเมล"
                             value="<?php echo htmlspecialchars($_SESSION['form_data']['email'] ?? ''); ?>" required>
                         <i id="email_success_icon" class="fas fa-check-circle text-success position-absolute"
                             style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
