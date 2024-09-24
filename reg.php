@@ -161,7 +161,7 @@
 
 </html>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         function validateField(inputField, successIcon, errorLabel, inputValue, inputName) {
             if (inputValue === '') {
                 inputField.css('border-color', '');
@@ -175,7 +175,7 @@
                         input_value: inputValue,
                         input_name: inputName
                     },
-                    success: function (response) {
+                    success: function(response) {
                         if (response == "duplicate") {
                             inputField.css('border-color', 'red');
                             errorLabel.show();
@@ -192,21 +192,30 @@
 
 
 
-        $('#phone_field, #username_field').on('input', function () {
+        $('#phone_field, #username_field').on('input', function() {
             var inputField = $(this);
             var inputValue = inputField.val();
             var inputName = inputField.attr('name');
             var successIcon = $('#' + inputName + '_success_icon');
             var errorLabel = $('#' + inputName + '_error_label');
 
-            if (inputValue === '') { // If input is empty, hide both error and success icons
+            // ถ้าฟิลด์ว่าง ให้ซ่อนไอคอนทั้งสอง
+            if (inputValue === '') {
                 inputField.css('border-color', '');
                 errorLabel.hide();
                 successIcon.hide();
             } else if (inputName === 'phone') {
-                if (!/^\d*$/.test(inputValue)) { // Check if the value contains only digits
+                if (!/^\d*$/.test(inputValue)) { // ตรวจสอบว่าค่าเป็นตัวเลขทั้งหมด
                     inputField.css('border-color', 'red');
                     errorLabel.text('กรุณาใส่เบอร์โทรศัพท์เป็นตัวเลขเท่านั้น').show();
+                    successIcon.hide();
+                } else if (inputValue.length < 10) { // ตรวจสอบความยาวของเบอร์โทรศัพท์
+                    inputField.css('border-color', 'red');
+                    errorLabel.text('กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 ตัว').show();
+                    successIcon.hide();
+                } else if (inputValue.length > 10) { // ตรวจสอบว่ามีความยาวมากกว่า 10 ตัว
+                    inputField.css('border-color', 'red');
+                    errorLabel.text('เบอร์โทรศัพท์ต้องมี 10 ตัว').show();
                     successIcon.hide();
                 } else {
                     inputField.css('border-color', 'green');
@@ -214,12 +223,12 @@
                     successIcon.show();
                 }
             } else if (inputName === 'username') {
-                if (inputValue.length < 4) { // Check if username has at least 6 characters
+                if (inputValue.length < 4) { // ตรวจสอบชื่อผู้ใช้ต้องมีอย่างน้อย 4 ตัวอักษร
                     inputField.css('border-color', 'red');
                     errorLabel.text('ชื่อผู้ใช้ต้องมีอย่างน้อย 4 ตัวอักษร').show();
                     successIcon.hide();
                 } else {
-                    // Length is sufficient, now check for duplicates in the database
+                    // ตรวจสอบความซ้ำซ้อนในฐานข้อมูล
                     checkDuplicate(inputValue, inputName, inputField, successIcon, errorLabel);
                 }
             }
@@ -234,7 +243,7 @@
                     input_value: inputValue,
                     input_name: inputName
                 },
-                success: function (response) {
+                success: function(response) {
                     if (response === 'duplicate') {
                         inputField.css('border-color', 'red');
                         errorLabel.text('ชื่อผู้ใช้นี้ถูกใช้แล้ว').show();
@@ -249,7 +258,7 @@
         }
 
 
-        $('#email_field').on('input', function () {
+        $('#email_field').on('input', function() {
             var inputField = $(this);
             var inputValue = inputField.val();
             var successIcon = $('#email_success_icon');
@@ -273,7 +282,7 @@
                         input_value: inputValue,
                         input_name: 'email'
                     },
-                    success: function (response) {
+                    success: function(response) {
                         if (response == "duplicate") {
                             inputField.css('border-color', 'red');
                             errorLabel.text('อีเมลล์นี้ถูกใช้แล้วงาน').show();
@@ -290,7 +299,7 @@
 
 
         // Handle first name and last name fields
-        $('#fname_field, #lname_field').on('input', function () {
+        $('#fname_field, #lname_field').on('input', function() {
             var inputField = $(this);
             var inputValue = inputField.val();
             var fieldId = inputField.attr('id');
@@ -314,7 +323,7 @@
         });
 
         // Password confirmation check
-        $('#psw_field, #confirm_psw_field').on('input', function () {
+        $('#psw_field, #confirm_psw_field').on('input', function() {
             var pswField = $('#psw_field');
             var confirmPswField = $('#confirm_psw_field');
             var pswFieldSuccessIcon = $('#psw_success_icon');

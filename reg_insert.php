@@ -26,6 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'username' => $username
     ];
 
+    // ตรวจสอบเบอร์โทรศัพท์ความยาว
+    if (strlen($phone) < 10) {
+        $_SESSION['Error'] = "กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 ตัว";
+        $_SESSION['Error_field'] = 'phone'; // กำหนดฟิลด์ที่มีปัญหา
+        unset($_SESSION['form_data']['phone']); // เคลียร์ข้อมูล phone ใน session
+        header('Location: reg.php');
+        exit();
+    } elseif (strlen($phone) > 10) {
+        $_SESSION['Error'] = "เบอร์โทรศัพท์ต้องมี 10 ตัว";
+        $_SESSION['Error_field'] = 'phone'; // กำหนดฟิลด์ที่มีปัญหา
+        unset($_SESSION['form_data']['phone']); // เคลียร์ข้อมูล phone ใน session
+        header('Location: reg.php');
+        exit();
+    }
+
     // ตรวจสอบชื่อผู้ใช้ที่มีอยู่แล้ว
     $username_check_query = "SELECT * FROM tb_member WHERE username='$username' LIMIT 1";
     $result_username_check = mysqli_query($conn, $username_check_query);
@@ -107,3 +122,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header('Location: index.php');
     exit();
 }
+?>

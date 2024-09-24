@@ -17,7 +17,7 @@
                     <h3>SHOP</h3><span>เข้าสู่ระบบ</span>
                 </div>
                 <div class="nav-help">
-                    <a href="#">ต้องการความช่วยเหลือ?</a>
+                    <a href="https://filetools23.pdf24.org/client.php?mode=inline&file=joinPdf_66f2fd6532bd2_4562323002357129522.pdf&action=getFile" target="_blank">คู่มือการใช้งาน</a>
                 </div>
             </a>
         </nav>
