@@ -16,6 +16,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['psw'];
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Hash the password
 
+    // Check if telephone number is valid
+    if (strlen($telephone) > 10) {
+        $_SESSION['Error'] = "หมายเลขโทรศัพท์ต้องไม่เกิน 10 ตัวอักษร";
+        header('Location: member_List.php');
+        exit();
+    }
+
     // Check if telephone number is unique
     $checkTelephoneQuery = "SELECT * FROM tb_member WHERE telephone = '$telephone'";
     $resultTelephone = mysqli_query($conn, $checkTelephoneQuery);

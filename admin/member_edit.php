@@ -80,6 +80,7 @@ $row = mysqli_fetch_array($result);
                                 <span class="input-group-text"><i class='bx bxs-user-account'></i></span>
                                 <input type="text" class="form-control" name="lname" value="<?= $row['lastname']; ?>">
                             </div>
+                            <div id="phone-feedback" class="my-2" style="color: red; margin-top: 10px;"></div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class='bx bxs-phone-call'></i></span>
                                 <input type="text" class="form-control" name="phone" value="<?= $row['telephone']; ?>">
@@ -137,3 +138,48 @@ $row = mysqli_fetch_array($result);
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
     crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const phoneInput = document.querySelector('input[name="phone"]');
+        const feedbackDiv = document.getElementById('phone-feedback');
+
+        phoneInput.addEventListener('input', function() {
+            const phoneValue = this.value;
+
+            feedbackDiv.textContent = '';
+            this.style.border = '';
+
+            if (phoneValue.length < 10) {
+                this.style.border = '1px solid red'; // Invalid phone number
+                feedbackDiv.textContent = 'หมายเลขโทรศัพท์ต้องมีอย่างน้อย 10 หลัก';
+                return;
+            }
+            if (phoneValue.length > 10) {
+                this.style.border = '1px solid red';
+                feedbackDiv.textContent = 'หมายเลขโทรศัพท์ต้องไม่เกิน 10 หลัก';
+                return;
+            }
+
+            fetch('check_phone.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'phone=' + encodeURIComponent(phoneValue)
+                })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === 'exists') {
+                        phoneInput.style.border = '1px solid red'; // Phone number exists
+                        feedbackDiv.textContent = 'หมายเลขโทรศัพท์นี้ถูกใช้แล้ว';
+                    } else {
+                        phoneInput.style.border = ''; // Phone number is available
+                        feedbackDiv.textContent = ''; // Clear feedback
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+</script>

@@ -57,15 +57,29 @@ if (isset($_GET['id'])) {
                             value="<?= htmlspecialchars($_SESSION['lname']); ?>">
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text"><i class='bx bxs-phone-call'></i></span>
-                        <input type="text" class="form-control" name="phone" placeholder="เบอร์โทรศัพท์"
-                            value="<?= htmlspecialchars($_SESSION['phone']); ?>">
-                    </div>
-                    <div class="input-group mb-3">
                         <span class="input-group-text"><i class='bx bxs-envelope'></i></span>
-                        <input type="text" class="form-control" name="email" placeholder="อีเมลล์"
-                            value="<?= htmlspecialchars($_SESSION['email']); ?>">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="อีเมลล์" value="<?= htmlspecialchars($_SESSION['email']); ?>" required>
+                        <div class="valid-feedback" id="email-valid" style="display: none;">
+                            อีเมลล์นี้ใช้ได้
+                        </div>
+                        <div class="invalid-feedback" id="email-error" style="display: none;">
+                            อีเมลล์นี้ถูกใช้ไปแล้ว
+                        </div>
                     </div>
+
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class='bx bxs-phone-call'></i></span>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="เบอร์โทรศัพท์" value="<?= htmlspecialchars($_SESSION['phone']); ?>" pattern="\d{10}" maxlength="10" required>
+                        <div class="valid-feedback" id="phone-valid" style="display: none;">
+                            เบอร์โทรศัพท์นี้ใช้ได้
+                        </div>
+                        <div class="invalid-feedback" id="phone-error" style="display: none;">
+                            เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว
+                        </div>
+                    </div>
+
+
                     <!-- <div class="mb-3" id="map" style="height: 400px; width: 100%;"></div> -->
                     <div class="form-floating mb-3">
                         <textarea class="form-control" placeholder="ที่อยู่ ..." id="address" name="address"
@@ -84,31 +98,6 @@ if (isset($_GET['id'])) {
         </div> <!-- end edit-profile -->
     </div> <!-- end container-card2 -->
     <?php include('footer.php'); ?>
-    <!-- <script>
-        function initMap() {
-            try {
-                const map = new google.maps.Map(document.getElementById("map"), {
-                    center: { lat: 13.7563, lng: 100.5018 },
-                    zoom: 12,
-                });
-
-                const marker = new google.maps.Marker({
-                    position: { lat: 13.7563, lng: 100.5018 },
-                    map: map,
-                    draggable: true,
-                });
-
-                marker.addListener('position_changed', function () {
-                    const position = marker.getPosition();
-                    document.getElementById('address').value = `Lat: ${position.lat()}, Lng: ${position.lng()}`;
-                });
-            } catch (error) {
-                console.error('Error initializing map:', error);
-            }
-        }
-
-        window.onload = initMap;
-    </script> -->
 </body>
 
 </html>
@@ -136,3 +125,81 @@ if (isset($_SESSION['submit_edit_profile'])) {
 <?php
     unset($_SESSION['submit_edit_profile']);
 }
+?>
+
+<script>
+    document.getElementById('phone').addEventListener('input', function() {
+        var phone = this.value;
+        var errorDiv = document.getElementById('phone-error');
+        var validDiv = document.getElementById('phone-valid');
+
+        // Validate the phone number: must be 10 digits long and numeric
+        if (phone.length > 0 && !/^\d{10}$/.test(phone)) {
+            this.classList.remove('input-valid');
+            this.classList.add('is-invalid');
+            errorDiv.style.display = 'none'; // Hide error feedback
+            validDiv.style.display = 'none'; // Hide valid feedback
+        } else if (phone.length === 10) {
+            // Check if the phone number exists in the database
+            fetch(`editProfile_check.php?type=phone&value=${encodeURIComponent(phone)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.exists) {
+                        this.classList.remove('input-valid');
+                        this.classList.add('is-invalid');
+                        errorDiv.style.display = 'block';
+                        validDiv.style.display = 'none'; // Hide valid feedback
+                    } else {
+                        this.classList.remove('is-invalid');
+                        this.classList.add('input-valid');
+                        errorDiv.style.display = 'none'; // Hide error feedback
+                        validDiv.style.display = 'block'; // Show valid feedback
+                    }
+                });
+        } else {
+            this.classList.remove('is-invalid');
+            this.classList.remove('input-valid');
+            errorDiv.style.display = 'none';
+            validDiv.style.display = 'none';
+        }
+    });
+
+
+    document.getElementById('email').addEventListener('input', function() {
+        var email = this.value;
+        var errorDiv = document.getElementById('email-error');
+        var validDiv = document.getElementById('email-valid');
+
+        // Validate the email format
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email pattern
+
+        if (email.length > 0 && !emailPattern.test(email)) {
+            this.classList.remove('input-valid');
+            this.classList.add('is-invalid');
+            errorDiv.style.display = 'none'; // Hide error feedback
+            validDiv.style.display = 'none'; // Hide valid feedback
+        } else if (email.length > 0) {
+            // Check if the email exists in the database
+            fetch(`editProfile_check.php?type=email&value=${encodeURIComponent(email)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.exists) {
+                        this.classList.remove('input-valid');
+                        this.classList.add('is-invalid');
+                        errorDiv.style.display = 'block';
+                        validDiv.style.display = 'none'; // Hide valid feedback
+                    } else {
+                        this.classList.remove('is-invalid');
+                        this.classList.add('input-valid');
+                        errorDiv.style.display = 'none'; // Hide error feedback
+                        validDiv.style.display = 'block'; // Show valid feedback
+                    }
+                });
+        } else {
+            this.classList.remove('is-invalid');
+            this.classList.remove('input-valid');
+            errorDiv.style.display = 'none';
+            validDiv.style.display = 'none';
+        }
+    });
+</script>

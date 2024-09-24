@@ -13,11 +13,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = $_POST['address'];
     $status = $_POST['status'];
 
+    // Check if the new phone number is unique
+    $checkPhoneQuery = "SELECT * FROM tb_member WHERE telephone='$phone' AND id != $id";
+    $resultPhone = $conn->query($checkPhoneQuery);
+
+    if ($resultPhone->num_rows > 0) {
+        $_SESSION['Error'] = "หมายเลขโทรศัพท์นี้ถูกใช้แล้ว!";
+        header('Location: member_edit.php?id=' . $id);
+        exit();
+    }
+
     // Update the record in the database
-    $sql = "UPDATE tb_member SET prefix='$prefix', firstname='$fname', lastname='$lname', telephone='$phone', address='$address', status='$status' WHERE id=$id";
+    $sql = "UPDATE tb_member SET 
+        prefix='$prefix', 
+        firstname='$fname', 
+        lastname='$lname', 
+        telephone='$phone', 
+        address='$address', 
+        status='$status' 
+        WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {
-        $_SESSION['editaccount'] = "แก้ไขผู้ใช้";
+        $_SESSION['editaccount'] = "แก้ไขผู้ใช้เรียบร้อยแล้ว";
         header('Location: member_List.php');
         exit();
     } else {
@@ -26,5 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Close the database connection
     $conn->close();
+} else {
+    echo "Invalid request method.";
 }
 ?>
