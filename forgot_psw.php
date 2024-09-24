@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
             <p style="font-size: 16px; color: #555555; line-height: 1.5; margin-bottom: 25px;">
                 คุณได้ทำการร้องขอการรีเซ็ตรหัสผ่าน กรุณาคลิกที่ปุ่มด้านล่างเพื่อดำเนินการต่อ:
             </p>
-            <a href="http://localhost/test1/forgot_reset.php?email=' . urlencode($email) . '&token=' . $token . '" 
+            <a href="http://103.216.158.180/test1/forgot_reset.php?email=' . urlencode($email) . '&token=' . $token . '" 
                style="display: inline-block; background-color: #00C300; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; 
                font-weight: 600; text-align: center; transition: background-color 0.3s;">
                รีเซ็ตรหัสผ่าน

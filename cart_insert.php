@@ -52,7 +52,6 @@ $sMessage .= "เลขที่สั่งซื้อ: " . sprintf("%010d", $
 $sMessage .= "ชื่อผู้สั่งซื้อ: " . $fname . " " . $lname . "\n";
 $sMessage .= "ราคาสุทธิ: " . number_format($_SESSION["sum_price"], 2) . " บาท\n";
 
-
 $chOne = curl_init();
 curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
 curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
@@ -129,6 +128,33 @@ for ($i = 0; $i <= (int) $_SESSION["intLine"]; $i++) {
                 $sql_update_stock = "UPDATE product SET amount = amount - '" . $_SESSION["strQty"][$i] . "'
                     WHERE p_id = '" . $_SESSION["strProductID"][$i] . "'";
                 mysqli_query($conn, $sql_update_stock);
+
+                // Check stock level
+                $sql_check_stock = "SELECT amount FROM product WHERE p_id = '" . $_SESSION["strProductID"][$i] . "'";
+                $result_check = mysqli_query($conn, $sql_check_stock);
+                if ($result_check && $row_check = mysqli_fetch_array($result_check)) {
+                    $stock_amount = $row_check['amount'];
+                    if ($stock_amount < 10) {
+                        // Send notification for low stock
+                        $low_stock_message = "สินค้า '" . $row_product['p_name'] . "' จำนวนคงเหลือต่ำกว่า 10 ชิ้นในสต็อก: " . $stock_amount . " ชิ้น";
+                        
+                        // Prepare to send Line notification for low stock
+                        $low_stock_ch = curl_init();
+                        curl_setopt($low_stock_ch, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+                        curl_setopt($low_stock_ch, CURLOPT_SSL_VERIFYHOST, 0);
+                        curl_setopt($low_stock_ch, CURLOPT_SSL_VERIFYPEER, 0);
+                        curl_setopt($low_stock_ch, CURLOPT_POST, 1);
+                        curl_setopt($low_stock_ch, CURLOPT_POSTFIELDS, "message=" . urlencode($low_stock_message));
+                        $low_stock_headers = array(
+                            'Content-type: application/x-www-form-urlencoded',
+                            'Authorization: Bearer ' . $sToken,
+                        );
+                        curl_setopt($low_stock_ch, CURLOPT_HTTPHEADER, $low_stock_headers);
+                        curl_setopt($low_stock_ch, CURLOPT_RETURNTRANSFER, 1);
+                        curl_exec($low_stock_ch);
+                        curl_close($low_stock_ch);
+                    }
+                }
             } else {
                 echo "<script> alert('Error: Unable to insert order details.'); </script>";
             }
@@ -155,3 +181,4 @@ unset($_SESSION["sum_price"]);
 unset($_SESSION["inPro"]);
 unset($_SESSION["dePro"]);
 exit();
+?>
