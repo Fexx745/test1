@@ -1,6 +1,14 @@
 <?php
 include('config.php');
 include('condb.php');
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+} else if ($_SESSION['status'] !== '0') {
+    header('Location: login.php');
+    exit();
+}
 ?>
 
 

@@ -146,8 +146,8 @@ function getOrderStatus($status)
                                 <h5 class="modal-title" id="slipModalLabel">สลิปการชำระเงินของคุณ</h5>
                                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
-                                <img src="assets/images/slip_images/<?php echo htmlspecialchars($order_details['slip_image']); ?>" alt="Slip Image" style="width: 100%; height: auto; object-fit: cover;">
+                            <div class="modal-body d-flex justify-content-center align-items-center" style="height: 700px;">
+                                <img src="assets/images/slip_images/<?php echo htmlspecialchars($order_details['slip_image']); ?>" alt="Slip Image" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                             </div>
                             <div class="modal-footer">
                                 <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button> -->
@@ -155,6 +155,7 @@ function getOrderStatus($status)
                         </div>
                     </div>
                 </div>
+
 
             <?php endif; ?>
             <div class="previous-button">

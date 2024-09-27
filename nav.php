@@ -29,7 +29,7 @@
                     </li>
                     <li class="nav-item">
                         <!-- <a class="nav-link" style="color: #fff;" href="contact.php"><i class='bx bxs-phone-call'></i> ติดต่อ</a> -->
-                        <a class="nav-link" style="color: #fff;" href="https://filetools23.pdf24.org/client.php?mode=inline&file=joinPdf_66f2fd6532bd2_4562323002357129522.pdf&action=getFile" target="_blank">
+                        <a class="nav-link" style="color: #fff;" href="https://drive.google.com/file/d/1wru5D1u6hxiEBaqZ7nERzha8OUzVgSng/view?usp=sharing" target="_blank">
                             <i class="bx bx-file" style="margin-right: 5px;"></i> คู่มือการใช้งาน
                         </a>
                     </li>

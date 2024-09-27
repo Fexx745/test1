@@ -102,10 +102,10 @@ if (!isset($_SESSION['inPro'])) {
                             $Total = 0;
                             $sumPrice = 0;
                             $m = 1;
-                            if (isset($_SESSION["intLine"])) {   //ถ้าไม่เป็นค่าว่างให้ทำงานใน {}
-
+                            if (isset($_SESSION["intLine"])) { // ถ้าไม่เป็นค่าว่างให้ทำงานใน {}
                                 for ($i = 0; $i <= (int) $_SESSION["intLine"]; $i++) {
-                                    if (($_SESSION["strProductID"][$i]) != "") {
+                                    // Check if the index exists in the array before accessing it
+                                    if (isset($_SESSION["strProductID"][$i]) && $_SESSION["strProductID"][$i] != "") {
 
                                         //อันเดิม
                                         // $sql1 = "SELECT * FROM product WHERE p_id = '" . $_SESSION["strProductID"][$i] . "' ";

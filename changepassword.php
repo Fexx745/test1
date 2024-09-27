@@ -45,44 +45,40 @@ if (isset($_GET['id'])) {
                 </div>
                 <form method="POST" action="changepassword_update.php" enctype="multipart/form-data">
                     <div class="mb-3 mt-3">
-                        <input type="hidden" class="form-control alert alert-success" name="id"
-                            value="<?= htmlspecialchars($_SESSION['user_id']); ?>" readonly>
+                        <input type="hidden" class="form-control alert alert-success" name="id" value="<?= htmlspecialchars($_SESSION['user_id']); ?>" readonly>
                     </div>
                     <!-- Old Password -->
-                    <!-- <label for="old_psw">รหัสผ่านปัจจุบัน</label> -->
                     <div class="input-group mb-3">
-                        <span class="input-group-text">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                        <input type="password" class="form-control" id="old_psw" name="old_psw"
-                            placeholder="รหัสผ่านปัจจุบัน">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control" id="old_psw" name="old_psw" placeholder="รหัสผ่านปัจจุบัน" required>
                     </div>
 
                     <!-- New Password -->
-                    <!-- <label for="new_psw">รหัสผ่านใหม่</label> -->
                     <div class="input-group mb-3">
-                        <span class="input-group-text">
-                            <i class="fas fa-unlock-alt"></i>
+                        <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
+                        <input type="password" class="form-control" id="new_psw" name="new_psw" placeholder="รหัสผ่านใหม่" required oninput="validateNewPassword()">
+                        <span id="new_psw_icon" class="input-group-text" style="display: none; color: green;">
+                            <i class="fas fa-check"></i>
                         </span>
-                        <input type="password" class="form-control" id="new_psw" name="new_psw"
-                            placeholder="รหัสผ่านใหม่">
                     </div>
 
                     <!-- Confirm New Password -->
-                    <!-- <label for="confirm_new_psw">ยืนยันรหัสผ่านใหม่</label> -->
                     <div class="input-group mb-3">
-                        <span class="input-group-text">
-                            <i class="fas fa-unlock-alt"></i>
+                        <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
+                        <input type="password" class="form-control" id="confirm_new_psw" name="confirm_new_psw" placeholder="ยืนยันรหัสผ่านใหม่อีกครั้ง" required oninput="validateConfirmPassword()">
+                        <span id="confirm_psw_icon" class="input-group-text" style="display: none; color: green;">
+                            <i class="fas fa-check"></i>
                         </span>
-                        <input type="password" class="form-control" id="confirm_new_psw" name="confirm_new_psw"
-                            placeholder="ยืนยันรหัสผ่านใหม่อีกครั้ง">
                     </div>
+
+                    <p id="error-message" style="color: red;"></p> <!-- พื้นที่สำหรับแสดงข้อความผิดพลาด -->
 
                     <div class="text-start my-4">
                         <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
                         <button class="btn btn-danger" type="submit">ยืนยัน</button>
                     </div>
                 </form>
+
             </div>
         </div> <!-- end edit-profile -->
     </div> <!-- end container-card2 -->
@@ -90,6 +86,43 @@ if (isset($_GET['id'])) {
 </body>
 
 </html>
+<script>
+    function validateNewPassword() {
+        var newPsw = document.getElementById("new_psw").value;
+        var errorMessage = document.getElementById("error-message");
+        var validPasswordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/; // ต้องมีอย่างน้อย 6 ตัวอักษรและต้องมีตัวอักษรและตัวเลข
+
+        // ล้างข้อความผิดพลาดและ border แดง
+        errorMessage.textContent = "";
+        document.getElementById("new_psw").style.border = "";
+
+        if (!validPasswordPattern.test(newPsw)) {
+            errorMessage.textContent = "รหัสผ่านใหม่ต้องมีอย่างน้อย 6 ตัวอักษรและต้องมีทั้งตัวอักษรภาษาอังกฤษและตัวเลข";
+            document.getElementById("new_psw").style.border = "1px solid red";
+        } else {
+            document.getElementById("new_psw").style.border = "1px solid green"; // เปลี่ยนเป็นสีเขียว
+        }
+    }
+
+    function validateConfirmPassword() {
+        var newPsw = document.getElementById("new_psw").value;
+        var confirmNewPsw = document.getElementById("confirm_new_psw").value;
+        var errorMessage = document.getElementById("error-message");
+
+        // ล้างข้อความผิดพลาดและ border แดง
+        errorMessage.textContent = "";
+        document.getElementById("confirm_new_psw").style.border = "";
+
+        if (newPsw !== confirmNewPsw) {
+            errorMessage.textContent = "รหัสผ่านใหม่ไม่ตรงกัน กรุณายืนยันรหัสผ่านใหม่อีกครั้ง";
+            document.getElementById("confirm_new_psw").style.border = "1px solid red";
+        } else {
+            document.getElementById("confirm_new_psw").style.border = "1px solid green"; // เปลี่ยนเป็นสีเขียว
+        }
+    }
+</script>
+
+
 
 <?php include('script-js.php'); ?>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
@@ -115,7 +148,7 @@ $alerts = [
 
 foreach ($alerts as $key => $alert) {
     if (isset($_SESSION[$key])) {
-        ?>
+?>
         <script>
             Swal.fire({
                 icon: "<?= $alert['icon'] ?>",
@@ -125,7 +158,7 @@ foreach ($alerts as $key => $alert) {
                 timer: 3000
             });
         </script>
-        <?php
+<?php
         unset($_SESSION[$key]);
     }
 }

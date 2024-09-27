@@ -17,7 +17,7 @@
                     <h3>SHOP</h3><span>สมัครสมาชิก</span>
                 </div>
                 <div class="nav-help">
-                    <a href="https://filetools23.pdf24.org/client.php?mode=inline&file=joinPdf_66f2fd6532bd2_4562323002357129522.pdf&action=getFile" target="_blank"><i class="bx bx-file" style="margin-right: 5px;"></i>คู่มือการใช้งาน</a>
+                    <a href="https://drive.google.com/file/d/1wru5D1u6hxiEBaqZ7nERzha8OUzVgSng/view?usp=sharing" target="_blank"><i class="bx bx-file" style="margin-right: 5px;"></i>คู่มือการใช้งาน</a>
                 </div>
             </a>
         </nav>

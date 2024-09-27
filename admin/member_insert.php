@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Include database connection file
     session_start();
@@ -59,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conn, $insertUserQuery)) {
         $_SESSION['addaccount'] = "เพิ่มผู้ใช้";
-        header('Location: member_List.php');
+        header('Location: member_add.php');
         exit();
     } else {
         echo "<script>alert('เกิดข้อผิดพลาดในการลงทะเบียน!');</script>";

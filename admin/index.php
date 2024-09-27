@@ -68,9 +68,16 @@ while ($row7 = mysqli_fetch_array($result7)) {
     $daily_sales[] = $row7['daily_sales'];
 }
 
-// Find the day with the highest sales
-$max_sales = max($daily_sales);
-$max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
+if (!empty($daily_sales)) {
+    // Find the day with the highest sales
+    $max_sales = max($daily_sales);
+    $max_sales_date = $sales_dates[array_search($max_sales, $daily_sales)];
+} else {
+    // Handle the case where there are no sales
+    $max_sales = 0;
+    $max_sales_date = 'No sales data available';
+}
+
 
 // Fetch best-selling products of the month
 $sql8 = "

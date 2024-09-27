@@ -147,8 +147,8 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                         <table id="datatablesSimple" class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th>รหัสสินค้า</th>
                                     <th>รูปภาพ</th>
-                                    <!-- <th>รหัสสินค้า</th> -->
                                     <th>ชื่อสินค้า</th>
                                     <!-- <th>รายละเอียด</th> -->
                                     <th>ประเภท</th>
@@ -171,12 +171,12 @@ $low_stock_count = mysqli_num_rows($result_low_stock); // จำนวนสิ�
                                 while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                     <tr>
+                                        <td><?= $row['p_id'] ?></td>
                                         <td>
                                             <img style="width: 100px; height: 100px; object-fit: cover;"
                                                 src="../assets/images/product/<?= $row['image'] ?>" alt="รูปภาพ"
                                                 onerror="this.src='../assets/images/other/no_img.png';">
                                         </td>
-                                        <!-- <td><?= $row['p_id'] ?></td> -->
                                         <td>
                                             <?= $row['p_name'] ?>
                                         </td>

@@ -189,7 +189,7 @@ if (isset($_SESSION['addaccount'])) {
             showConfirmButton: false,
             timer: 1500
         }).then(function() {
-            window.location.href = 'show_account.php';
+            window.location.href = 'member_List.php';
         });
     </script>
 
