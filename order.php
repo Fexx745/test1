@@ -7,14 +7,26 @@ if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit();
 }
-// var_dump($_GET);
-// var_dump($_SESSION);
-// rest of the code
+
 include 'condb.php';
 
+// ตรวจสอบว่าเซสชันสำหรับตะกร้าถูกสร้างแล้วหรือยัง
+if (!isset($_SESSION["strProductID"])) {
+    $_SESSION["strProductID"] = array(); // สร้าง array สำหรับเก็บ ID ของสินค้า
+    $_SESSION["strQty"] = array(); // สร้าง array สำหรับเก็บจำนวนสินค้า
+    $_SESSION["intLine"] = 0; // ตัวนับจำนวนสินค้าในตะกร้า
+}
+
+// ตรวจสอบค่า ID ของสินค้า
+echo "ID ของสินค้า: " . $_GET['id'];
+
+// ตรวจสอบค่า ID ของสินค้าในเซสชัน
+echo "ID ของสินค้าในเซสชัน: ";
+print_r($_SESSION["strProductID"]);
+
 if (isset($_GET['id']) && isset($_GET['quantity'])) {
-    $productId = $_GET['id'];
-    $quantity = $_GET['quantity'];
+    $productId = (int)$_GET['id']; // แปลง ID เป็นจำนวนเต็ม
+    $quantity = (int)$_GET['quantity']; // แปลงจำนวนเป็นจำนวนเต็ม
     $maxQuantity = getStockQuantity($productId);
 
     if ($quantity > $maxQuantity) {
@@ -22,49 +34,43 @@ if (isset($_GET['id']) && isset($_GET['quantity'])) {
         exit;
     }
 
-    if (!isset($_SESSION["intLine"])) {
-        $_SESSION["intLine"] = 0;
-        $_SESSION["strProductID"][0] = $productId;
-        $_SESSION["strQty"][0] = $quantity;
-        header("location:cart.php");
-    } else {
-        $key = array_search($productId, $_SESSION["strProductID"]);
-        if ((string)$key !== "") {
-            // ถ้า id มีอยู่ในตะกร้า
-            if ($_SESSION["strQty"][$key] + $quantity <= $maxQuantity) {
-                $_SESSION["strQty"][$key] += $quantity;
-            } else {
-                // ถ้าสินค้าในตะกร้าเต็มแล้ว
-                echo "สินค้าในตะกร้าเต็มแล้ว";
-            }
+    // ตรวจสอบว่ามีสินค้าหรือไม่ในตะกร้า
+    $key = array_search($productId, $_SESSION["strProductID"]);
+
+    if ($key !== false) {
+        // ถ้า id มีอยู่ในตะกร้า
+        if ($_SESSION["strQty"][$key] + $quantity <= $maxQuantity) {
+            $_SESSION["strQty"][$key] += $quantity;
         } else {
-            // ถ้า id ไม่มีในตะกร้า
-            if ($_SESSION["intLine"] < $maxQuantity) {
-                $_SESSION["intLine"]++;
-                $intNewLine = $_SESSION["intLine"];
-                $_SESSION["strProductID"][$intNewLine] = $productId;
-                $_SESSION["strQty"][$intNewLine] = $quantity;
-            } else {
-                // ถ้า stock มีน้อยกว่าที่ต้องการเพิ่ม
-                echo "สินค้าหมด";
-            }
+            echo "สินค้าในตะกร้าเต็มแล้ว";
         }
-        header("location:cart.php");
+    } else {
+        // ถ้า id ไม่มีอยู่ในตะกร้า
+        if ($_SESSION["intLine"] < 100) { // สมมุติว่าจำนวนสินค้าสูงสุดในตะกร้าเป็น 100
+            $_SESSION["strProductID"][$_SESSION["intLine"]] = $productId;
+            $_SESSION["strQty"][$_SESSION["intLine"]] = $quantity;
+            $_SESSION["intLine"]++;
+        } else {
+            echo "สินค้าหมด";
+        }
     }
+    header("location:cart.php");
 }
 
 function getStockQuantity($productId)
 {
     include 'condb.php';
-    // ดึงข้อมูลจำนวน stock จากตาราง product ในฐานข้อมูล
-    // ในที่นี้เป็นตัวอย่างเท่านั้น คุณต้องปรับเปลี่ยนตามโครงสร้างฐานข้อมูลของคุณ
-    $sql = "SELECT amount FROM product WHERE p_id = $productId";
-    $result = mysqli_query($conn, $sql);
 
-    if ($result) {
-        $row = mysqli_fetch_assoc($result);
-        return $row['amount'];
+    // ใช้การเตรียมคำสั่ง SQL เพื่อป้องกัน SQL Injection
+    $stmt = $conn->prepare("SELECT amount FROM product WHERE p_id = ?");
+    $stmt->bind_param("i", $productId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return (int)$row['amount']; // แปลงเป็นจำนวนเต็ม
     } else {
-        return 0; // หรือค่าอื่นที่คุณต้องการเมื่อไม่สามารถดึงข้อมูลได้
+        return 0; // ถ้าไม่พบสินค้า ให้คืนค่า 0
     }
 }

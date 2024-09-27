@@ -75,26 +75,26 @@ $row = mysqli_fetch_array($result);
                                 <div class="col-md-4">
                                     <label for="">ประเภท&nbsp;&gt;</label>
                                     <div class="input-group mb-3">
-                                        <label class="input-group-text" for="typeprd"><i
-                                                class='bx bx-category'></i></label>
+                                        <label class="input-group-text" for="typeprd"><i class='bx bx-category'></i></label>
                                         <select name="typeprd" id="typeprd" class="form-select">
                                             <?php
                                             include('condb.php');
-                                            $sql = "SELECT DISTINCT t.type_id, t.type_name FROM product as p INNER JOIN product_type as t ON p.type_id = t.type_id ORDER BY t.type_id";
+                                            // ใช้ query ใหม่ที่ไม่เชื่อมโยงกับตารางสินค้า
+                                            $sql = "SELECT type_id, type_name FROM product_type ORDER BY type_id";
                                             $result = mysqli_query($conn, $sql);
 
                                             if (mysqli_num_rows($result) > 0) {
                                                 while ($rows = mysqli_fetch_array($result)) {
-                                                    ?>
+                                            ?>
                                                     <option value='<?php echo $rows['type_id']; ?>'>
                                                         <?php echo $rows['type_name']; ?>
                                                     </option>
-                                                    <?php
+                                                <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value=''>No types found</option>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </select>
@@ -114,16 +114,16 @@ $row = mysqli_fetch_array($result);
 
                                             if (mysqli_num_rows($result2) > 0) {
                                                 while ($row2 = mysqli_fetch_array($result2)) {
-                                                    ?>
+                                            ?>
                                                     <option value='<?php echo $row2['unit_id']; ?>'>
                                                         <?php echo $row2['unit_name']; ?>
                                                     </option>
-                                                    <?php
+                                                <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value=''>No types found</option>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </select>
@@ -142,16 +142,16 @@ $row = mysqli_fetch_array($result);
 
                                             if (mysqli_num_rows($result3) > 0) {
                                                 while ($row3 = mysqli_fetch_array($result3)) {
-                                                    ?>
+                                            ?>
                                                     <option value='<?php echo $row3['brand_id']; ?>'>
                                                         <?php echo $row3['brand_name']; ?>
                                                     </option>
-                                                    <?php
+                                                <?php
                                                 }
                                             } else {
                                                 ?>
                                                 <option value=''>No types found</option>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </select>
@@ -205,7 +205,7 @@ $row = mysqli_fetch_array($result);
 
 <?php
 if (isset($_SESSION['addproduct'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "success",
@@ -213,18 +213,18 @@ if (isset($_SESSION['addproduct'])) {
             footer: '<span style="color: #00c300;">เพิ่มข้อมูลสินค้าเรียบร้อยแล้ว</span>',
             showConfirmButton: false,
             timer: 1500
-        }).then(function () {
+        }).then(function() {
             window.location.href = 'product_List.php';
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['addproduct']);
 }
 ?>
 <?php
 if (isset($_SESSION['check_name'])) {
-    ?>
+?>
     <script>
         Swal.fire({
             icon: "warning",
@@ -232,28 +232,30 @@ if (isset($_SESSION['check_name'])) {
             footer: '<span style="color: #ee2c4a;">**กรุณาเปลี่ยนชื่อสินค้าใหม่</span>',
             showConfirmButton: false,
             timer: 1500
-        }).then(function () {
+        }).then(function() {
             window.location.href = 'product_add.php';
         });
     </script>
 
-    <?php
+<?php
     unset($_SESSION['check_name']);
 }
 ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#p_name').on('input', function () {
+    $(document).ready(function() {
+        $('#p_name').on('input', function() {
             var p_name = $(this).val();
 
             if (p_name.length > 0) {
                 $.ajax({
                     url: 'product_check_name.php',
                     type: 'POST',
-                    data: { p_name: p_name },
-                    success: function (response) {
+                    data: {
+                        p_name: p_name
+                    },
+                    success: function(response) {
                         if (response == "available") {
                             // Name is available, show green border
                             $('#p_name').css('border', '1px solid green');

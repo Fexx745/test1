@@ -244,9 +244,9 @@ if (isset($_SESSION['delete_product'])) {
         Swal.fire({
             icon: "success",
             title: "ลบสำเร็จ",
-            footer: '<span style="color: #00c300;">ลบสินค้าสำเร็จ!</span>',
+            footer: '<span style="color: #dc3545;">* รูปภาพสินค้าจะถูกลบไปด้วย!</span>',
             showConfirmButton: false,
-            timer: 1500
+            timer: 2500
         });
     </script>
 <?php
@@ -290,5 +290,21 @@ if (isset($_SESSION['addstock'])) {
     </script>
 <?php
     unset($_SESSION['addstock']);
+}
+?>
+<?php
+if (isset($_SESSION['error_delete'])) {
+?>
+    <script>
+        Swal.fire({
+            icon: "warning",
+            title: "ไม่สามารถลบสินค้าได้!",
+            footer: '<span style="color: #dc3545;">* ไม่สามารถลบสินค้าได้ เนื่องจากมีรายการสั่งซื้อสินค้ารายการนี้!</span>',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+<?php
+    unset($_SESSION['error_delete']);
 }
 ?>
