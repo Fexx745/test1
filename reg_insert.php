@@ -27,14 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ];
 
     // ตรวจสอบเบอร์โทรศัพท์ความยาว
-    if (strlen($phone) < 10) {
-        $_SESSION['Error'] = "กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 ตัว";
+    if (strlen($phone) < 9) {
+        $_SESSION['Error'] = "กรุณาใส่เบอร์โทรศัพท์ให้ครบ 9-10 ตัว";
         $_SESSION['Error_field'] = 'phone'; // กำหนดฟิลด์ที่มีปัญหา
         unset($_SESSION['form_data']['phone']); // เคลียร์ข้อมูล phone ใน session
         header('Location: reg.php');
         exit();
     } elseif (strlen($phone) > 10) {
-        $_SESSION['Error'] = "เบอร์โทรศัพท์ต้องมี 10 ตัว";
+        $_SESSION['Error'] = "เบอร์โทรศัพท์ต้องมี 9-10 ตัว";
         $_SESSION['Error_field'] = 'phone'; // กำหนดฟิลด์ที่มีปัญหา
         unset($_SESSION['form_data']['phone']); // เคลียร์ข้อมูล phone ใน session
         header('Location: reg.php');
@@ -45,8 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username_check_query = "SELECT * FROM tb_member WHERE username='$username' LIMIT 1";
     $result_username_check = mysqli_query($conn, $username_check_query);
     if (mysqli_num_rows($result_username_check) > 0) {
-        $_SESSION['error'] = 'ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว!! กรุณาเลือกชื่อผู้ใช้อื่น';
-        header("Location: reg.php"); // เปลี่ยนเส้นทางไปยัง reg.php
+        $_SESSION['Error_field'] = 'username'; // เก็บฟิลด์ที่เกิดข้อผิดพลาด
+        $_SESSION['form_data']['username'] = $username; // เก็บค่าชื่อผู้ใช้ที่กรอก
+        $_SESSION['error_message'] = 'ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว!! กรุณาเลือกชื่อผู้ใช้อื่น';
+        header("Location: reg.php");
         exit();
     }
 
@@ -54,8 +56,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_check_query = "SELECT * FROM tb_member WHERE email='$email' LIMIT 1";
     $result_email_check = mysqli_query($conn, $email_check_query);
     if (mysqli_num_rows($result_email_check) > 0) {
-        $_SESSION['error'] = 'อีเมลล์ถูกใช้ไปแล้ว!! กรุณาใช้อีเมลล์อื่น';
-        header("Location: reg.php"); // เปลี่ยนเส้นทางไปยัง reg.php
+        $_SESSION['Error_field'] = 'email'; // เก็บฟิลด์ที่เกิดข้อผิดพลาด
+        $_SESSION['form_data']['email'] = $email; // เก็บค่าอีเมลล์ที่กรอก
+        $_SESSION['error_message'] = 'อีเมลล์ถูกใช้ไปแล้ว!! กรุณาใช้อีเมลล์อื่น';
+        header("Location: reg.php");
         exit();
     }
 
@@ -63,10 +67,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone_check_query = "SELECT * FROM tb_member WHERE telephone='$phone' LIMIT 1";
     $result_phone_check = mysqli_query($conn, $phone_check_query);
     if (mysqli_num_rows($result_phone_check) > 0) {
-        $_SESSION['error'] = 'เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว!! กรุณาใช้เบอร์โทรศัพท์อื่น';
-        header("Location: reg.php"); // เปลี่ยนเส้นทางไปยัง reg.php
+        $_SESSION['Error_field'] = 'phone'; // เก็บฟิลด์ที่เกิดข้อผิดพลาด
+        $_SESSION['form_data']['phone'] = $phone; // เก็บค่าเบอร์โทรศัพท์ที่กรอก
+        $_SESSION['error_message'] = 'เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว!! กรุณาใช้เบอร์โทรศัพท์อื่น';
+        header("Location: reg.php");
         exit();
     }
+
 
     // ตรวจสอบรหัสผ่านที่ตรงกัน
     if ($password !== $confirmPassword) {

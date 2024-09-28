@@ -278,12 +278,13 @@ if (isset($_SESSION['addaccount'])) {
         telephoneInput.addEventListener('input', function() {
             const telephone = telephoneInput.value;
             const telephoneMessage = document.getElementById('telephoneMessage');
-            const telephonePattern = /^\d{10}$/;
+            // ปรับ regex ให้รองรับหมายเลข 9-10 ตัว
+            const telephonePattern = /^\d{9,10}$/; // หมายเลขโทรศัพท์ต้องเป็นตัวเลข 9-10 ตัว
 
             if (telephone) {
                 if (!telephonePattern.test(telephone)) {
                     telephoneInput.style.border = "1px solid red"; // รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง
-                    telephoneMessage.textContent = "หมายเลขโทรศัพท์ต้องเป็นตัวเลขและมีความยาว 10 ตัว";
+                    telephoneMessage.textContent = "หมายเลขโทรศัพท์ต้องเป็นตัวเลขและมีความยาว 9-10 ตัว";
                     telephoneMessage.style.display = 'block';
                     return; // ออกจากฟังก์ชันหากรูปแบบไม่ถูกต้อง
                 }
@@ -312,6 +313,7 @@ if (isset($_SESSION['addaccount'])) {
                 telephoneMessage.textContent = ""; // ลบข้อความเตือน
             }
         });
+
     });
 
 

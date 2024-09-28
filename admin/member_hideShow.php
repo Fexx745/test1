@@ -41,20 +41,18 @@ if (!isset($_SESSION['username'])) {
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        จัดการข้อมูลลูกค้า
+                        ข้อมูลลูกค้าที่ถูกซ่อน
                     </div>
                     <div class="card-body">
                         <div class="alert" style="background: linear-gradient(195deg, #f8f9fa 0%, #f8f9fa 100%); color: #333; border: none; outline: none;">
                             <div class="d-flex">
                                 <img src="../assets/images/other/customer3.png" alt="Line Notify Logo" style="height: 60px; margin-right: 5px;">
                                 <h3 style="font-weight: 1000; margin-top: 10px;">
-                                    จัดการข้อมูลลูกค้า
+                                    ข้อมูลลูกค้าที่ถูกซ่อน
                                 </h3>
                             </div>
                         </div>
                         <a href="member_add.php" class="btn btn-success mb-3"><i class='bx bxs-plus-circle'></i> เพิ่มผู้ใช้งาน</a>
-                        <a href="member_hideShow.php" class="btn btn-danger mb-3"><i class='bx bxs-show'></i> แสดงข้อมูลผู้ใช้ที่ถูกซ่อน</a>
-
                         <table id="datatablesSimple" class="table table-striped">
                             <thead>
                                 <tr>
@@ -72,16 +70,16 @@ if (!isset($_SESSION['username'])) {
                                 function confirmHide(id) {
                                     Swal.fire({
                                         title: "คุณแน่ใจหรือไม่?",
-                                        text: "คุณต้องการซ่อนสมาชิกนี้หรือไม่?",
+                                        text: "คุณต้องการแสดงข้อมูลสมาชิกนี้หรือไม่?",
                                         icon: "warning",
                                         showCancelButton: true,
                                         confirmButtonColor: "#0d6efd",
                                         cancelButtonColor: "#d33",
-                                        confirmButtonText: "ซ่อน",
+                                        confirmButtonText: "แสดง",
                                         cancelButtonText: "ยกเลิก"
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            window.location.href = `member_hide.php?id=${id}`;
+                                            window.location.href = `member_show.php?id=${id}`;
                                         }
                                     });
                                 }
@@ -89,7 +87,7 @@ if (!isset($_SESSION['username'])) {
 
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM tb_member WHERE status = 0";
+                                $sql = "SELECT * FROM tb_member WHERE status = 3";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($result)) {
                                 ?>
@@ -102,9 +100,8 @@ if (!isset($_SESSION['username'])) {
                                         <td><?= $row['status'] == 1 ? 'ผู้ดูแลระบบ' : 'ลูกค้า' ?></td>
                                         <td><?= $row['reg_date'] ?></td>
                                         <td>
-                                            <a class="btn btn-warning" href="member_edit.php?id=<?= $row['id'] ?>"><i class='bx bx-pencil'></i></a>
-                                            <a class="btn btn-danger" href="javascript:void(0);"
-                                                onclick="confirmHide('<?= $row['id'] ?>')"><i class='bx bx-low-vision'></i>
+                                            <a class="btn btn-primary" href="javascript:void(0);"
+                                                onclick="confirmHide('<?= $row['id'] ?>')"><i class='bx bxs-show'></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -117,7 +114,7 @@ if (!isset($_SESSION['username'])) {
 
                         </table>
                         <div class="mt-4" class="mb-2">
-                            <a href="index.php" class="btn btn-dark">ย้อนกลับ</a>
+                            <a href="member_List.php" class="btn btn-dark">ย้อนกลับ</a>
                         </div>
                     </div> <!-- card-body -->
                 </div>
@@ -140,51 +137,18 @@ if (!isset($_SESSION['username'])) {
 <script src="js/datatables-simple-demo.js"></script>
 
 <?php
-if (isset($_SESSION['editaccount'])) {
-?>
-    <script>
-        Swal.fire({
-            icon: "success",
-            title: "แก้ไขผู้ใช้สำเร็จ!",
-            footer: "<span style='color: #30b566'>แก้ไขข้อมูลผู้ใช้สำเร็จ</span>",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    </script>
-<?php
-    unset($_SESSION['editaccount']);
-}
-?>
-
-<?php
 if (isset($_SESSION['hideaccount'])) {
 ?>
     <script>
         Swal.fire({
             icon: "success",
-            title: "ซ่อนผู้ใช้สำเร็จ!",
-            footer: "<span style='color: #30b566'>ซ่อนข้อมูลผู้ใช้สำเร็จ</span>",
+            title: "แสดงผู้ใช้สำเร็จ!",
+            footer: "<span style='color: #30b566'>แสดงผู้ใช้งาน</span>",
             showConfirmButton: false,
             timer: 1500
         });
     </script>
 <?php
     unset($_SESSION['hideaccount']);
-}
-?>
-<?php
-if (isset($_SESSION['showaccount'])) {
-?>
-    <script>
-        Swal.fire({
-            icon: "success",
-            title: "แสดงผู้ใช้สำเร็จ!",
-            footer: "<span style='color: #30b566'>แสดงข้อมูลผู้ใช้สำเร็จ</span>",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    </script>
-<?php
-    unset($_SESSION['showaccount']);
 }
 ?>

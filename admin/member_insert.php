@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if telephone number is valid
     if (strlen($telephone) > 10) {
-        $_SESSION['Error'] = "หมายเลขโทรศัพท์ต้องไม่เกิน 10 ตัวอักษร";
+        $_SESSION['Error'] = "หมายเลขโทรศัพท์ต้องไม่เกิน 9-10 ตัว";
         header('Location: member_List.php');
         exit();
     }

@@ -17,22 +17,9 @@
         <div class="row mt-1">
             <div class="col-lg-4 bg-white m-auto rounded-top wrapper-reg" style="padding: 25px;">
                 <h2 class="text-center pt-3">สมัครสมาชิก</h2>
-                <p class="text-center text-muted lead mb-3">
-                    <?php
-                    if (!empty($_SESSION["Error"])) {
-                        echo "<h5 id='errorMessage' class='alert alert-danger'>" . $_SESSION["Error"] . "</h5>";
-                        echo "<script>
-                        setTimeout(function() {
-                            var errorMessage = document.getElementById('errorMessage');
-                            if (errorMessage) {
-                                errorMessage.style.display = 'none';
-                            }
-                        }, 5000); // Hide the error message after 5 seconds
-                    </script>";
-                        unset($_SESSION["Error"]); // Clear the error session variable
-                    }
-                    ?>
-                </p>
+                <?php
+                session_start();
+                ?>
 
                 <form action="reg_insert.php" method="POST">
                     <div class="input-group mb-3">
@@ -74,8 +61,10 @@
                     </div>
 
 
-                    <label id="username_error_label" class="text-danger" style="display:none;"><i
-                            class="fas fa-exclamation-circle"></i> ชื่อผู้ใช้นี้ถูกใช้แล้ว</label>
+                    <!-- Username Error Message -->
+                    <label id="username_error_label" class="text-danger" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i> ชื่อผู้ใช้นี้ถูกใช้แล้ว
+                    </label>
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-user-circle'></i></span>
                         <input type="text" id="username_field"
@@ -86,8 +75,10 @@
                             style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
                     </div>
 
-                    <label id="email_error_label" class="text-danger" style="display:none;"><i
-                            class="fas fa-exclamation-circle"></i> อีเมลนี้ถูกใช้แล้ว</label>
+                    <!-- Email Error Message -->
+                    <label id="email_error_label" class="text-danger" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i> อีเมลนี้ถูกใช้แล้ว
+                    </label>
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-envelope'></i></span>
                         <input type="email" id="email_field"
@@ -98,9 +89,9 @@
                             style="right: 10px; top: 50%; transform: translateY(-50%); display: none;"></i>
                     </div>
 
-                    <label id="phone_error_label" class="text-danger" style="display:none;">
-                        <i class="fas fa-exclamation-circle"></i>
-                        กรุณาใส่เบอร์โทรศัพท์เป็นตัวเลขเท่านั้น
+                    <!-- Phone Error Message -->
+                    <label id="phone_error_label" class="text-danger" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i> กรุณาใส่เบอร์โทรศัพท์เป็นตัวเลขเท่านั้น
                     </label>
                     <div class="input-group mb-3 position-relative">
                         <span class="input-group-text"><i class='bx bx-phone'></i></span>
@@ -161,22 +152,6 @@
 
 </html>
 
-<?php
-session_start(); // เริ่มต้น session
-
-if (isset($_SESSION['error'])) {
-    echo "<script>
-        Swal.fire({
-            icon: 'error',
-            title: 'ข้อผิดพลาด',
-            text: '" . $_SESSION['error'] . "',
-            confirmButtonText: 'ตกลง'
-        });
-    </script>";
-    unset($_SESSION['error']); // ลบค่า error ออกจาก session หลังจากแสดงผล
-}
-?>
-
 <script>
     $(document).ready(function() {
         function validateField(inputField, successIcon, errorLabel, inputValue, inputName) {
@@ -226,13 +201,13 @@ if (isset($_SESSION['error'])) {
                     inputField.css('border-color', 'red');
                     errorLabel.text('กรุณาใส่เบอร์โทรศัพท์เป็นตัวเลขเท่านั้น').show();
                     successIcon.hide();
-                } else if (inputValue.length < 10) { // ตรวจสอบความยาวของเบอร์โทรศัพท์
+                } else if (inputValue.length < 9) { // ตรวจสอบความยาวของเบอร์โทรศัพท์
                     inputField.css('border-color', 'red');
-                    errorLabel.text('กรุณาใส่เบอร์โทรศัพท์ให้ครบ 10 ตัว').show();
+                    errorLabel.text('กรุณาใส่เบอร์โทรศัพท์ให้ครบ 9-10 ตัว').show();
                     successIcon.hide();
                 } else if (inputValue.length > 10) { // ตรวจสอบว่ามีความยาวมากกว่า 10 ตัว
                     inputField.css('border-color', 'red');
-                    errorLabel.text('เบอร์โทรศัพท์ต้องมี 10 ตัว').show();
+                    errorLabel.text('เบอร์โทรศัพท์ต้องมี 9-10 ตัว').show();
                     successIcon.hide();
                 } else {
                     inputField.css('border-color', 'green');
