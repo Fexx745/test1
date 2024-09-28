@@ -160,6 +160,23 @@
 </body>
 
 </html>
+
+<?php
+session_start(); // เริ่มต้น session
+
+if (isset($_SESSION['error'])) {
+    echo "<script>
+        Swal.fire({
+            icon: 'error',
+            title: 'ข้อผิดพลาด',
+            text: '" . $_SESSION['error'] . "',
+            confirmButtonText: 'ตกลง'
+        });
+    </script>";
+    unset($_SESSION['error']); // ลบค่า error ออกจาก session หลังจากแสดงผล
+}
+?>
+
 <script>
     $(document).ready(function() {
         function validateField(inputField, successIcon, errorLabel, inputValue, inputName) {

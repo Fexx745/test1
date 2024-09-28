@@ -45,10 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username_check_query = "SELECT * FROM tb_member WHERE username='$username' LIMIT 1";
     $result_username_check = mysqli_query($conn, $username_check_query);
     if (mysqli_num_rows($result_username_check) > 0) {
-        $_SESSION['Error'] = "ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว!!";
-        $_SESSION['Error_field'] = 'username'; // กำหนดฟิลด์ที่มีปัญหา
-        unset($_SESSION['form_data']['username']); // เคลียร์ข้อมูล username ใน session
-        header('Location: reg.php');
+        $_SESSION['error'] = 'ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว!! กรุณาเลือกชื่อผู้ใช้อื่น';
+        header("Location: reg.php"); // เปลี่ยนเส้นทางไปยัง reg.php
         exit();
     }
 
@@ -56,10 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_check_query = "SELECT * FROM tb_member WHERE email='$email' LIMIT 1";
     $result_email_check = mysqli_query($conn, $email_check_query);
     if (mysqli_num_rows($result_email_check) > 0) {
-        $_SESSION['Error'] = "อีเมลล์ถูกใช้ไปแล้ว!!";
-        $_SESSION['Error_field'] = 'email'; // กำหนดฟิลด์ที่มีปัญหา
-        unset($_SESSION['form_data']['email']); // เคลียร์ข้อมูล email ใน session
-        header('Location: reg.php');
+        $_SESSION['error'] = 'อีเมลล์ถูกใช้ไปแล้ว!! กรุณาใช้อีเมลล์อื่น';
+        header("Location: reg.php"); // เปลี่ยนเส้นทางไปยัง reg.php
         exit();
     }
 
@@ -67,10 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone_check_query = "SELECT * FROM tb_member WHERE telephone='$phone' LIMIT 1";
     $result_phone_check = mysqli_query($conn, $phone_check_query);
     if (mysqli_num_rows($result_phone_check) > 0) {
-        $_SESSION['Error'] = "เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว!!";
-        $_SESSION['Error_field'] = 'phone'; // กำหนดฟิลด์ที่มีปัญหา
-        unset($_SESSION['form_data']['phone']); // เคลียร์ข้อมูล phone ใน session
-        header('Location: reg.php');
+        $_SESSION['error'] = 'เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว!! กรุณาใช้เบอร์โทรศัพท์อื่น';
+        header("Location: reg.php"); // เปลี่ยนเส้นทางไปยัง reg.php
         exit();
     }
 
@@ -122,4 +116,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header('Location: index.php');
     exit();
 }
-?>
