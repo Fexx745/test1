@@ -134,6 +134,38 @@ include 'condb.php';
                                     <button class="btn-me btn-out-of-stock me-2" disabled>สินค้าหมด</button>
                                 <?php } ?>
                             </div>
+
+                            <script>
+                                function addToCart(productId) {
+                                    const quantity = document.getElementById('quantity').value;
+                                    const maxQuantity = <?= $row['amount'] ?>;
+                                    if (quantity > maxQuantity) {
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'ไม่มีสินค้าเพียงพอในสต็อก',
+                                            text: 'โปรดเลือกจำนวนที่น้อยกว่าหรือเท่ากับ ' + maxQuantity,
+                                            confirmButtonText: 'ตกลง'
+                                        });
+                                    } else {
+                                        window.location.href = `order.php?id=${productId}&quantity=${quantity}`;
+                                    }
+                                }
+
+                                function buyNow(productId) {
+                                    const quantity = document.getElementById('quantity').value;
+                                    const maxQuantity = <?= $row['amount'] ?>;
+                                    if (quantity > maxQuantity) {
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'ไม่มีสินค้าเพียงพอในสต็อก',
+                                            text: 'โปรดเลือกจำนวนที่น้อยกว่าหรือเท่ากับ ' + maxQuantity,
+                                            confirmButtonText: 'ตกลง'
+                                        });
+                                    } else {
+                                        window.location.href = `order.php?id=${productId}&quantity=${quantity}`;
+                                    }
+                                }
+                            </script>
                         </div>
 
                     </div> <!-- bc-showDetail-top -->
@@ -269,36 +301,6 @@ include 'condb.php';
                     review.style.display = 'none';
                 }
             });
-        }
-
-        function addToCart(productId) {
-            const quantity = document.getElementById('quantity').value;
-            const maxQuantity = <?= $row['amount'] ?>;
-            if (quantity > maxQuantity) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'ไม่มีสินค้าเพียงพอในสต็อก',
-                    text: 'โปรดเลือกจำนวนที่น้อยกว่าหรือเท่ากับ ' + maxQuantity,
-                    confirmButtonText: 'ตกลง'
-                });
-            } else {
-                window.location.href = `order.php?id=${productId}&quantity=${quantity}`;
-            }
-        }
-
-        function buyNow(productId) {
-            const quantity = document.getElementById('quantity').value;
-            const maxQuantity = <?= $row['amount'] ?>;
-            if (quantity > maxQuantity) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'ไม่มีสินค้าเพียงพอในสต็อก',
-                    text: 'โปรดเลือกจำนวนที่น้อยกว่าหรือเท่ากับ ' + maxQuantity,
-                    confirmButtonText: 'ตกลง'
-                });
-            } else {
-                window.location.href = `order.php?id=${productId}&quantity=${quantity}`;
-            }
         }
 
         // เพิ่มเหตุการณ์สำหรับปุ่ม increment และ decrement

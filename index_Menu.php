@@ -35,7 +35,7 @@
             $count = 0;
             mysqli_data_seek($result, 0);
             while ($row = mysqli_fetch_array($result)) {
-                if ($count < 8) {
+                if ($count < 10) {
             ?>
                     <li><a href="index_search_type.php?type_id=<?= $row['type_id'] ?>">
                             <img src="assets/images/type_product/<?= $row['type_image'] ?>" alt=""

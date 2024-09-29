@@ -111,9 +111,10 @@ while ($detail = mysqli_fetch_assoc($result_details)) {
 
 // Generate PDF
 $pdf = new PDF();
-$pdf->AddFont('THSarabun Italic', '', 'THSarabun Italic.php');
-$pdf->AddFont('THSarabun Bold', '', 'THSarabun Bold.php');
-$pdf->AddFont('THSarabun', '', 'THSarabun.php');
+// Using __DIR__ to get the absolute path
+$pdf->AddFont('THSarabun', '', __DIR__ . '/assets/pdf/font/THSarabun.php');
+$pdf->AddFont('THSarabun', 'B', __DIR__ . '/assets/pdf/font/THSarabun Bold.php');
+$pdf->AddFont('THSarabun', 'I', __DIR__ . '/assets/pdf/font/THSarabun Italic.php');
 $pdf->AddPage();
 $pdf->ReceiptBody($row, $orderDetails);
 $pdf->Output();

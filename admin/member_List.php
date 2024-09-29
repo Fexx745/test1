@@ -53,7 +53,10 @@ if (!isset($_SESSION['username'])) {
                             </div>
                         </div>
                         <a href="member_add.php" class="btn btn-success mb-3"><i class='bx bxs-plus-circle'></i> เพิ่มผู้ใช้งาน</a>
-                        <a href="member_hideShow.php" class="btn btn-danger mb-3"><i class='bx bxs-show'></i> แสดงข้อมูลผู้ใช้ที่ถูกซ่อน</a>
+                        <a href="member_hideShow.php" class="btn btn-danger mb-3">
+                            <i class='bx bxs-show'></i> แสดงผู้ใช้ที่ถูกซ่อน
+                        </a>
+
 
                         <table id="datatablesSimple" class="table table-striped">
                             <thead>

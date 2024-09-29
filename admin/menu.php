@@ -74,6 +74,18 @@ $row5 = mysqli_fetch_assoc($result5);
                             หน้าหลัก
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
+                        <!-- ลูกค้า -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#customer" aria-expanded="false" aria-controls="customer">
+                            <div class="sb-nav-link-icon"><i class='bx bxs-user-detail'></i></div>
+                            จัดการข้อมูลผู้ใช้
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="customer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="member_add.php"><i class='bx bxs-user-plus'></i>&nbsp;เพิ่มบัญชีผู้ใช้</a>
+                                <a class="nav-link" href="member_List.php"><i class='bx bx-edit'></i>&nbsp;จัดการข้อมูลผู้ใช้</a>
+                            </nav>
+                        </div>
 
                         <!-- จัดการสินค้า -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#edit-product" aria-expanded="false" aria-controls="edit-product">
@@ -90,19 +102,6 @@ $row5 = mysqli_fetch_assoc($result5);
                             </nav>
                         </div>
 
-                        <!-- ลูกค้า -->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#customer" aria-expanded="false" aria-controls="customer">
-                            <div class="sb-nav-link-icon"><i class='bx bxs-user-detail'></i></div>
-                            ลูกค้า
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="customer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="member_add.php"><i class='bx bxs-user-plus'></i>&nbsp;เพิ่มบัญชีลูกค้า</a>
-                                <a class="nav-link" href="member_List.php"><i class='bx bx-edit'></i>&nbsp;จัดการข้อมูลลูกค้า</a>
-                            </nav>
-                        </div>
-
                         <!-- การตั้งค่าต่างๆ -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#setting" aria-expanded="false" aria-controls="setting">
                             <div class="sb-nav-link-icon"><i class='bx bx-cog'></i></div>
@@ -111,7 +110,7 @@ $row5 = mysqli_fetch_assoc($result5);
                         </a>
                         <div class="collapse" id="setting" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="Line_notify.php"><i class='bx bxs-bell-ring' ></i>&nbsp;Line Nottify</a>
+                                <a class="nav-link" href="Line_notify.php"><i class='bx bxs-bell-ring'></i>&nbsp;Line Nottify</a>
                                 <a class="nav-link" href="banner_add.php"><i class='bx bx-image-alt'></i>&nbsp;แก้ไขรูปภาพ Banner</a>
                             </nav>
                         </div>
