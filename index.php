@@ -41,7 +41,8 @@ if (isset($_SESSION['status']) && $_SESSION['status'] === '1') {
         LEFT JOIN unit_type u ON p.unit_id = u.unit_id
         LEFT JOIN brand_type b ON p.brand_id = b.brand_id
         LEFT JOIN product_type pt ON p.type_id = pt.type_id
-        ORDER BY p.p_id LIMIT $start, $limit";
+        ORDER BY pt.type_id ASC
+        LIMIT $start, $limit";
         $result = mysqli_query($conn, $sql);
 
         while ($row = mysqli_fetch_array($result)) {

@@ -6,11 +6,11 @@ class PDF extends FPDF
     function Header()
     {
         // เพิ่มพื้นหลังจาง
-        $this->Image('assets/background/bg.jpg', 0, 0, 208, 297); // กำหนดขนาดให้ครอบคลุมทั้งหน้า A4
-        
+        $this->Image('assets/background/bg1.png', 0, 0, 208, 297); // กำหนดขนาดให้ครอบคลุมทั้งหน้า A4
+
         // Company Logo (optional)
         $this->Image('assets/logo/logo3.jpg', 25, 5, 40);
-        
+
         // Title
         $this->SetFont('THSarabun Bold', '', 24);
         $this->Cell(0, 10, iconv('UTF-8', 'TIS-620//IGNORE', 'ใบเสร็จรับเงิน'), 0, 1, 'C');
@@ -33,7 +33,8 @@ class PDF extends FPDF
         $this->Ln(5);
         $this->SetFont('THSarabun Bold', '', 16);
         $this->SetX(25);
-        $this->Cell(0, 10, 'Order ID: ' . $row['orderID'], 0, 1, 'L');
+        $Customer = iconv('UTF-8', 'TIS-620//IGNORE', 'รหัสคำสั่งซื้อ: ' . $row['orderID']);
+        $this->Cell(0, 10, $Customer, 0, 1, 'L');
 
         // Customer Details
         $this->SetFont('THSarabun Bold', '', 14);
@@ -111,11 +112,9 @@ while ($detail = mysqli_fetch_assoc($result_details)) {
 
 // Generate PDF
 $pdf = new PDF();
-// Using __DIR__ to get the absolute path
-$pdf->AddFont('THSarabun', '', __DIR__ . '/assets/pdf/font/THSarabun.php');
-$pdf->AddFont('THSarabun', 'B', __DIR__ . '/assets/pdf/font/THSarabun Bold.php');
-$pdf->AddFont('THSarabun', 'I', __DIR__ . '/assets/pdf/font/THSarabun Italic.php');
+$pdf->AddFont('THSarabun Italic', '', 'THSarabun Italic.php');
+$pdf->AddFont('THSarabun Bold', '', 'THSarabun Bold.php');
+$pdf->AddFont('THSarabun', '', 'THSarabun.php');
 $pdf->AddPage();
 $pdf->ReceiptBody($row, $orderDetails);
 $pdf->Output();
-?>

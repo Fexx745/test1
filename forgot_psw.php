@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
         <div style="font-family: \'Roboto\', sans-serif; background-color: #f4f4f4; padding: 20px; border-radius: 5px;">
             <h2 style="font-size: 20px; color: #333333; margin-bottom: 15px;">สวัสดี, คุณ ' . $row['username'] . '</h2>
             <p style="font-size: 16px; color: #555555; line-height: 1.5; margin-bottom: 25px;">
-                คุณได้ทำการร้องขอการรีเซ็ตรหัสผ่าน กรุณาคลิกที่ปุ่มด้านล่างเพื่อดำเนินการต่อ:
+                คุณได้ทำการร้องขอการรีเซ็ตรหัสผ่าน กรุณาคลิกที่ปุ่มด้านล่างเพื่อดำเนินการต่อ เมื่อผู้ใช้คลิกลิงก์ในอีเมล ระบบจะนำผู้ใช้ไปยังหน้ารีเซ็ตรหัสผ่าน ซึ่งพวกเขาสามารถตั้งรหัสผ่านใหม่ได้ตามที่ต้องการ
             </p>
             <a href="http://103.216.158.180/test1/forgot_reset.php?email=' . urlencode($email) . '&token=' . $token . '" 
                style="display: inline-block; background-color: #00C300; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; 
